@@ -7,16 +7,16 @@ export default authenticate(async (req, res) => {
 
   if (userId) {
     if (req.method == "GET") {
-      const products = await findOne(
-        "products",
+      const articles = await findOne(
+        "articles",
         { _id: ObjectId(userId) },
-        { projection: { products: 1 } }
+        { projection: { articles: 1 } }
       );
 
-      if (products?._id) {
-        res.status(200).json(products);
+      if (articles?._id) {
+        res.status(200).json(articles);
       } else {
-        res.status(400).json({ msg: "There are no products" });
+        res.status(400).json({ msg: "There are no articles" });
       }
     }
   } else {

@@ -8,7 +8,7 @@ export default authenticate(async (req, res) => {
   //verify user
   const { userId } = await verifyUser(req);
 
-  const collection = "products";
+  const collection = "articles";
 
   const method = req.method;
 
@@ -24,13 +24,13 @@ export default authenticate(async (req, res) => {
 
     const date = new Date();
 
-    const product = {
+    const article = {
       ...body,
       createdAt: moment(date).format("lll"),
     };
 
     const data = {
-      $push: { products: product },
+      $push: { articles: article },
     };
 
     //5. insert data into company collection
@@ -42,9 +42,9 @@ export default authenticate(async (req, res) => {
     );
 
     if (response.matchedCount === 1) {
-      res.status(201).json({ msg: "Product added successfully" });
+      res.status(201).json({ msg: "article added successfully" });
     } else {
-      res.status(401).json({ msg: "Adding product failed" });
+      res.status(401).json({ msg: "Adding article failed" });
     }
   } catch (error) {
     res.status(500).json({ msg: error.message });

@@ -9,15 +9,15 @@ export default async (req, res) => {
   const { id } = req.query;
 
   if (req.method == "GET") {
-    const product = await findOne("products", {
+    const article = await findOne("articles", {
       _id: ObjectId(userId),
-      "products.id": id,
+      "articles.id": id,
     });
 
-    if (product?.id) {
-      res.status(200).json(product);
+    if (article?.id) {
+      res.status(200).json(article);
     } else {
-      res.status(400).json({ msg: "There is no products" });
+      res.status(400).json({ msg: "There is no articles" });
     }
   }
 
@@ -25,11 +25,11 @@ export default async (req, res) => {
     const { name, price, description, main, sub } = JSON.parse(req.body);
     const data = {
       $set: {
-        "products.$[elem].name": name,
-        "products.$[elem].description": description,
-        "products.$[elem].price": price,
-        "products.$[elem].main": main,
-        "products.$[elem].sub": sub,
+        "articles.$[elem].name": name,
+        "articles.$[elem].description": description,
+        "articles.$[elem].price": price,
+        "articles.$[elem].main": main,
+        "articles.$[elem].sub": sub,
       },
     };
 
@@ -44,14 +44,14 @@ export default async (req, res) => {
     );
 
     if (results.matchedCount === 1) {
-      res.status(200).json({ msg: "Product updated successfully" });
+      res.status(200).json({ msg: "article updated successfully" });
     } else {
       statusCode404(res);
     }
   }
 
   if (method == "DELETE") {
-    const set = { $pull: { products: { id: id } } };
+    const set = { $pull: { articles: { id: id } } };
 
     //delete account
     const response = await removeFromArray(
@@ -62,9 +62,9 @@ export default async (req, res) => {
       set
     );
     if (response.matchedCount === 1) {
-      res.status(200).json({ msg: "Product was successfully deleted" });
+      res.status(200).json({ msg: "article was successfully deleted" });
     } else {
-      res.status(400).json({ msg: "Product was not deleted" });
+      res.status(400).json({ msg: "article was not deleted" });
     }
   }
 };
