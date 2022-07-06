@@ -23,7 +23,7 @@ A website for a research organization with stripe payment system
 
 ## APIS
 
-- /api/v1/paper/create
+- /api/v1/papers/create
 - /api/v1/papers
 - /api/v1/papers/:id
 
