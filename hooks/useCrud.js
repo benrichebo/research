@@ -4,26 +4,25 @@ import { POST } from "../functions/POST";
 import { PUT } from "../functions/PUT";
 import { useStorage } from "./useStorage";
 
-export const useCategories = (type) => {
+export const useCrud = (type) => {
   const { sessionStorage } = useStorage("session");
 
-  const [categories, setCategories] = useState(null);
-  const [categoryData, setCategoryData] = useState(null);
+  const [allData, setAllData] = useState(null);
+  const [oneData, setOneData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [addCatError, setAddCatError] = useState(false);
   const [message, setMessage] = useState(null);
 
-  const category = {
-    async getCategories() {
+  const data = {
+    async getAllData(type, url) {
       setLoading(true);
       try {
-        const data = await GET("/api/categories");
+        const data = await GET(url);
         if (data?.msg) {
           setError(data.msg);
         } else {
-          sessionStorage.setItem("categories", data);
-          setCategories(data);
+          sessionStorage.setItem(type, data);
+          setAllData(data);
         }
       } catch (error) {
         setError(error.message);
@@ -32,14 +31,14 @@ export const useCategories = (type) => {
       }
     },
 
-    async getCategory(id) {
+    async getOneData(url) {
       setLoading(true);
       try {
-        const data = await GET(`/api/categories/${id}`);
+        const data = await GET(url);
         if (data.msg) {
           setError(data.msg);
         } else {
-          setCategoryData(data);
+          setOneData(data);
         }
       } catch (error) {
         setError(error.message);
@@ -48,14 +47,14 @@ export const useCategories = (type) => {
       }
     },
 
-    async addCategory(credentials) {
+    async addData(body, url) {
       setError("");
       setLoading(true);
       try {
-        const data = await POST(credentials, "/api/categories/create");
+        const data = await POST(body, url);
         if (data.msg.includes("successfully")) {
           setMessage(data.msg);
-          this.getCategories();
+          this.getAllData();
         } else {
           setAddCatError(data.msg);
         }
@@ -66,10 +65,10 @@ export const useCategories = (type) => {
       }
     },
 
-    async updateCategory(id, credentials) {
+    async updateData(body, url) {
       setLoading(true);
       try {
-        const data = await PUT(credentials, `/api/categories/${id}`);
+        const data = await PUT(body, url);
         if (data.msg.includes("successfully")) {
           setMessage(data.msg);
         } else {
@@ -82,9 +81,9 @@ export const useCategories = (type) => {
       }
     },
 
-    async deleteCategory(id) {
+    async deleteData(url) {
       setLoading(true);
-      const data = await DELETE(`/api/categories/${id}`);
+      const data = await DELETE(url);
       if (data.msg.includes("successfully")) {
         setMessage(data.msg);
       } else {
@@ -101,27 +100,26 @@ export const useCategories = (type) => {
   };
 
   useEffect(() => {
-    if (type == "categories") {
-      const data = sessionStorage.getItem("categories");
+    if (type.includes("all")) {
+      const data = sessionStorage.getItem(type);
       if (!data) {
-        category.getCategories();
+        data.getAllData();
       } else {
-        setCategories(data);
+        setAllData(data);
       }
     }
 
-    if (type == "category") {
-      category.getCategory();
+    if (type == "one") {
+      data.getData();
     }
   }, []);
 
   return {
-    category,
+    data,
     loading,
-    categories,
-    categoryData,
+    allData,
+    oneData,
     error,
-    addCatError,
     message,
     clear,
   };
