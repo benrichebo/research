@@ -1,0 +1,15 @@
+{
+  "name": "research-organisation",
+  "version": "1.0.0",
+  "description": "website for a research organisation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "stripe",
+    "react"
+  ],
+  "author": "Richard Bentil",
+  "license": "MIT"
+}

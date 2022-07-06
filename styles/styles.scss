@@ -1,0 +1,55 @@
+@import "variables";
+@import "base";
+
+@import "bootstrap/scss/bootstrap";
+
+.rounded {
+  border-radius: 1rem !important;
+}
+
+.sticky-sidebar {
+  position: sticky;
+  top: 0;
+}
+
+.avatar-list-item {
+  margin-right: -7px !important;
+}
+
+.avatar-img {
+  border: 3px solid #ffe083 !important;
+}
+
+.uploadedImage {
+  height: 180px !important;
+}
+
+@media (max-width: 1240px) {
+  .display-4 {
+    font-size: calc(1.175rem + 2.7vw) !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .uploadedImage {
+    height: 100px !important;
+    padding-bottom: 10px;
+  }
+}
+
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #ced4da;
+  outline: 0 !important;
+  box-shadow: 0 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-size: medium;
+}
+
+ input[type="radio"]:checked+label {
+  border: 1px solid #fbd666 !important;
+}
