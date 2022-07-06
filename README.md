@@ -43,6 +43,10 @@ A website for a research organization with stripe payment system
 - /api/v1/articles
 - /api/v1/articles/:id
 
+- /api/v1/payments/create
+- /api/v1/payments
+- /api/v1/payments/:id
+
 
 ## Technology
 
