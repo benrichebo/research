@@ -21,9 +21,7 @@ function Payments() {
       {error && !loading && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <div className="text-center">
-            <h6 className="text-muted">
-              There was an error loading Payments
-            </h6>
+            <h6 className="text-muted">There was an error loading Payments</h6>
             <button
               className="btn btn-primary my-3"
               onClick={() => data.getAllData("/api/Payments")}>

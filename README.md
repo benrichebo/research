@@ -8,6 +8,7 @@ A website for a research organization with stripe payment system
 - Login
 - Register as a member
 - Publish research papers
+- Subscribe as a member
 
 ## Functional features
 
@@ -54,5 +55,6 @@ A website for a research organization with stripe payment system
 - Framework - React(NextJS)
 - Libraries (packages) - uuid, jsonwebtoken, bcrypt, react-icons, moment.js, stripe
 - Server - NodeJS, ExpressJS
+- Dev OPS - Vercel or Azure
 - Database - MongoDB
 - Tools - webpack, sass
