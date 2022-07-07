@@ -4,7 +4,8 @@ import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 
 function Categories() {
-  const { data, loading, allData, error, postError, message } = useCrud("all-categories");
+  const { data, loading, allData, error, postError, message } =
+    useCrud("all-categories");
 
   const [name, setName] = useState("");
   const [type, setType] = useState("");
@@ -81,16 +82,16 @@ function Categories() {
       )}
       {!error && (
         <div className="row my-3">
-          {allData?.map(
+          {allData?.map((data) => (
             <div className="col-6 col-md-3">
               <div className="card">
                 <div className="card-body py-2">
-                  <h6 className="card-title">Albania</h6>
-                  <h6 className="text-muted card-subtitle">Main</h6>
+                  <h6 className="card-title">{data?.name}</h6>
+                  <h6 className="text-muted card-subtitle">{data?.type}</h6>
                 </div>
               </div>
             </div>
-          )}
+          ))}
         </div>
       )}
     </>
