@@ -4,7 +4,7 @@ import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 
 function Categories() {
-  const { data, loading, allData, error, message } = useCrud("all-categories");
+  const { data, loading, allData, error, postError, message } = useCrud("all-categories");
 
   const [name, setName] = useState("");
   const [type, setType] = useState("");
@@ -35,12 +35,14 @@ function Categories() {
         )}
       </div>
       <div className="collapse px-0" id="contentId">
+        {message && <p className="text-success">{message}</p>}
+        {postError && <p className="text-danger">{postError}</p>}
         <form className="row" onSubmit={handleSubmit}>
-          <div className="col-md-6">
+          <div className="col-md-5">
             <label className="form-label">Name</label>
             <Name setName={setName} />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-5">
             <label className="form-label">Type</label>
             <select
               className="form-select"
@@ -50,6 +52,11 @@ function Categories() {
               </option>
               <option value="sub-category">Sub</option>
             </select>
+          </div>
+          <div className="col-md-2">
+            <button type="submit" className="btn btn-primary">
+              Add catgeory
+            </button>
           </div>
         </form>
       </div>

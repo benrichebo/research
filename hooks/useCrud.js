@@ -11,6 +11,7 @@ export const useCrud = (type) => {
   const [oneData, setOneData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [postError, setPostError] = useState(false);
   const [message, setMessage] = useState(null);
 
   const data = {
@@ -56,10 +57,10 @@ export const useCrud = (type) => {
           setMessage(data.msg);
           this.getAllData();
         } else {
-          setAddCatError(data.msg);
+          setPostError(data.msg);
         }
       } catch (error) {
-        setAddCatError(error.message);
+        setPostError(error.message);
       } finally {
         setLoading(false);
       }
@@ -120,6 +121,7 @@ export const useCrud = (type) => {
     allData,
     oneData,
     error,
+    postError,
     message,
     clear,
   };
