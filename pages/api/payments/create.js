@@ -3,6 +3,7 @@ import moment from "moment";
 import { verifyUser } from "../verification";
 import { ObjectId } from "mongodb";
 import { insertToArray } from "../db/update";
+//import stripe from "stripe"
 
 export default authenticate(async (req, res) => {
   //verify user
@@ -12,8 +13,6 @@ export default authenticate(async (req, res) => {
 
   const method = req.method;
 
-  const body = JSON.parse(req.body);
-
   try {
     //1. check for method
     //if method does not exist
@@ -22,7 +21,37 @@ export default authenticate(async (req, res) => {
       return;
     }
 
+    const body = JSON.parse(req.body)
+
+    //organization items
+    const organizationItems = new Map([
+      ["#875m2", {priceCents: 15000, name: "membership"}],
+      ["#875s2", {priceCents: 15000, name: "subscription"}]
+    ])
+
     //2. stripe payment integration
+    const session = await stripe?.checkout?.create({
+      payment_method_types: ["card"],
+      mode: "payment", //it can be "subscription"
+      line_items: body?.map(item => {
+        const checkOutItem = organizationItems.get(item?.id)
+
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: checkOutItem?.name
+            },
+            unit_amount: checkOutItem?.priceCents
+          },
+          quantity: item?.quantity,
+        };
+      }),
+      success_url: `${process.env.SERVER_URL}/successful-payment`,
+      cancel_url: `${process.env.SERVER_URL}/cancelled-payment`,
+    });
+
+    //session.url
 
     //3. insert data into company collection
     const date = new Date();

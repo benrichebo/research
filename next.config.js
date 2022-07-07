@@ -20,6 +20,8 @@ module.exports = {
     STRIPE_SECRET:
       "sk_test_51KJ2r6GNtASg30ngmbe3bP0ddONCOvMUBWwhr5j7PDWPE9xVFeMxPxtyMS7F4ZYrLBCU09HFq1LK64IZqE448Zpy00LZdvXeNC",
 
+    SERVER_URL: "http://localhost:3000",
+
     SMS_API_KEY: "V1ZNVExweWp5em9qdGJRRG1rYmY=",
   },
   images: {

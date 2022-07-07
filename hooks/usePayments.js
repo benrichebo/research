@@ -53,11 +53,9 @@ export const usePayments = (dataToFetch) => {
       setLoading(true);
       try {
         const data = await POST(credentials, "/api/payments/create");
-        if (data.msg.includes("successfully")) {
-          setMessage(data.msg);
-
+        if (data?.url) {
           //redirect to success
-          router.push("/dashboard/payments")
+          router.push(data?.url);
         } else {
           setError(data.msg);
         }
