@@ -1,26 +1,25 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Home from "../screens/home";
+import Home from "../routes/home";
 import Layout from "../../components/Layout";
 import Aside from "../../components/Aside";
-import Orders from "../screens/orders";
-import Products from "../screens/products";
-import Payments from "../screens/payments";
-import Settings from "../screens/settings";
-import Canvas from "../../components/Canvas";
-import AddProduct from "../screens/add-product";
-import Categories from "../screens/categories";
-import YourProducts from "../screens/dashboard-products";
+import Papers from "../routes/papers";
+import Conferences from "../routes/conferences";
+import Articles from "../routes/articles";
+import Settings from "../routes/settings";
+import AddConference from "../routes/add-conference";
+import AddPaper from "../routes/add-paper";
+import AddArticle from "../routes/add-article";
 
 const routes = [
   { name: "home", page: <Home /> },
-  { name: "orders", page: <Orders /> },
-  { name: "products", page: <Products /> },
-  { name: "payments", page: <Payments /> },
+  { name: "papers", page: <Papers /> },
+  { name: "conferences", page: <Conferences /> },
+  { name: "articles", page: <Articles /> },
   { name: "settings", page: <Settings /> },
-  { name: "add-your-products", page: <AddProduct /> },
-  { name: "your-products", page: <YourProducts /> },
-  { name: "add-category", page: <Categories /> },
+  { name: "add-conference", page: <AddConference /> },
+  { name: "add-paper", page: <AddPaper /> },
+  { name: "add-article", page: <AddArticle /> },
 ];
 
 function DashBoard() {
