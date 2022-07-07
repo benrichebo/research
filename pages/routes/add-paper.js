@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Spinner from "../../components/ui/Spinner";
 
 function AddPaper() {
@@ -8,6 +8,8 @@ function AddPaper() {
   const [publisher, setPublisher] = useState("");
   const [file, setFile] = useState("");
   const [description, setDescription] = useState("");
+
+  const fileRef = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
