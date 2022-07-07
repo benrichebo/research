@@ -10,6 +10,7 @@ import Settings from "../routes/settings";
 import AddConference from "../routes/add-conference";
 import AddPaper from "../routes/add-paper";
 import AddArticle from "../routes/add-article";
+import Canvas from "../../components/Canvas";
 
 const routes = [
   { name: "home", page: <Home /> },
