@@ -18,7 +18,7 @@ function Categories() {
       name,
       type,
     };
-    await category.addCategory(body, "/api/categories/create");
+    await data.addData(body, "/api/categories/create");
   };
 
   return (
@@ -57,8 +57,15 @@ function Categories() {
             </select>
           </div>
           <div className="col-md-2">
-            <button type="submit" className="btn btn-primary">
-              Add catgeory
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={!loading || !name || !type}>
+              {loading ? (
+                <Spinner className="ms-2" />
+              ) : (
+                <span className="">Submit</span>
+              )}
             </button>
           </div>
         </form>

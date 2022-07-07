@@ -1,40 +1,87 @@
 import React from "react";
+import Spinner from "../../components/ui/Spinner";
 
 function AddPaper() {
+  const { data, loading, postError, message } = useCrud();
+
+  const [title, setTitle] = useState("");
+  const [publisher, setPublisher] = useState("");
+  const [file, setFile] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const body = {
+      title,
+      publisher,
+      file,
+      description,
+    };
+    await data.addData(body, "/api/papers/create");
+  };
   return (
     <>
       <h5>Add paper</h5>
-      <div class="row mb-4">
-        <div class="col">
-          <div class="col-12 mb-4">
-            <label class="form-label">Title</label>
-            <input type="text" class="form-control" />
+
+      <div className="mb-4">
+        {message && <p className="text-success">{message}</p>}
+        {postError && <p className="text-danger">{postError}</p>}
+        <form className="row" onSubmit={handleSubmit}>
+          <div className="col-12 mb-4">
+            <label className="form-label" htmlFor="title">
+              Title
+            </label>
+            <Text setText={setTitle} id="title" />
           </div>
-          <div class="mb-3">
-            <h5 class="fw-normal text-muted my-4"></h5>
-            <div class="row">
-              <div class="col-12 col-md-6 mb-4">
-                <label class="form-label">Publisher</label>
-                <input type="text" class="form-control" />
+          <div className="mb-3">
+            <h5 className="fw-normal text-muted my-4"></h5>
+            <div className="row">
+              <div className="col-12 col-md-6 mb-4">
+                <label className="form-label" htmlFor="publisher">
+                  Publisher
+                </label>
+                <Text setText={setPublisher} id="publisher" />
               </div>
-              <div class="col-12 col-md-6 mb-4">
-                <label class="form-label">File</label>
+              <div className="col-12 col-md-6 mb-4">
+                <label className="form-label" htmlFor="file">
+                  File
+                </label>
                 <div>
-                  <input type="file" />
+                  <input
+                    id="file"
+                    type="file"
+                    ref={fileRef}
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
                 </div>
               </div>
-              <div class="col-12 mb-4">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" rows="4"></textarea>
+              <div className="col-12 mb-4">
+                <label className="form-label" htmlFor="description">
+                  Description
+                </label>
+                <textarea
+                  className="form-control"
+                  rows="4"
+                  id="description"
+                  onChange={(e) => setDescription(e.target.value)}></textarea>
               </div>
-              <div class="my-3 d-grid">
-                <button class="btn btn-primary" type="button">
-                  Add conference
+              <div className="my-3 d-grid">
+                <button
+                  className="btn btn-primary"
+                  type="button"
+                  disabled={
+                    loading || !title || !publisher || !description || !file
+                  }>
+                  {loading ? (
+                    <Spinner className="ms-2" />
+                  ) : (
+                    <span className="">Submit</span>
+                  )}
                 </button>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
