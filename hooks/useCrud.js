@@ -14,7 +14,7 @@ export const useCrud = (type) => {
   const [message, setMessage] = useState(null);
 
   const data = {
-    async getAllData(type, url) {
+    async getAllData(url) {
       setLoading(true);
       try {
         const data = await GET(url);

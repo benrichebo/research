@@ -1,21 +1,21 @@
 import React from "react";
 import Name from "../../components/ui/Name";
 import Spinner from "../../components/ui/Spinner";
+import { useCrud } from "../../hooks/useCrud";
 
 function Categories() {
-  const { categories, category, loading, error, addCatError, message } =
-    useCategories("categories");
+  const { data, loading, allData, error, message } = useCrud("all-categories");
 
   const [name, setName] = useState("");
   const [type, setType] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {
+    const body = {
       name,
       type,
     };
-    await category.addCategory(data);
+    await category.addCategory(body, "/api/categories/create");
   };
 
   return (
@@ -42,7 +42,9 @@ function Categories() {
           </div>
           <div className="col-md-6">
             <label className="form-label">Type</label>
-            <select className="form-select">
+            <select
+              className="form-select"
+              onChange={(e) => setType(e.target.value)}>
               <option value="main-category" selected="">
                 Main
               </option>
@@ -64,7 +66,7 @@ function Categories() {
             </h6>
             <button
               className="btn btn-primary my-3"
-              onClick={() => category.getCategories()}>
+              onClick={() => data.getAllData("/api/categories")}>
               Reload
             </button>
           </div>
@@ -72,7 +74,7 @@ function Categories() {
       )}
       {!error && (
         <div className="row my-3">
-          {categories?.map(
+          {allData?.map(
             <div className="col-6 col-md-3">
               <div className="card">
                 <div className="card-body py-2">
