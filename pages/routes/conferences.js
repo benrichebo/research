@@ -2,7 +2,10 @@ import React from "react";
 import Spinner from "../../components/ui/Spinner";
 
 function Conferences() {
-  const { data, loading, allData, error } = useCrud("all-conferences");
+  const { data, loading, allData, error } = useCrud(
+    "all-conferences",
+    "/api/conferences"
+  );
   return (
     <>
       {loading && !error && (
@@ -18,7 +21,7 @@ function Conferences() {
             </h6>
             <button
               className="btn btn-primary my-3"
-              onClick={() => data.getAllData("/api/categories")}>
+              onClick={() => data.getAllData("/api/conferences")}>
               Reload
             </button>
           </div>

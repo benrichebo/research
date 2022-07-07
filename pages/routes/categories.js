@@ -4,8 +4,10 @@ import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 
 function Categories() {
-  const { data, loading, allData, error, postError, message } =
-    useCrud("all-categories");
+  const { data, loading, allData, error, postError, message } = useCrud(
+    "all-categories",
+    "/api/categories"
+  );
 
   const [name, setName] = useState("");
   const [type, setType] = useState("");

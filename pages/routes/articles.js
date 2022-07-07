@@ -1,32 +1,59 @@
 import React from "react";
+import { useCrud } from "../../hooks/useCrud";
 
 function Articles() {
+  const { data, loading, allData, error } = useCrud(
+    "all-articles",
+    "/api/articles"
+  );
   return (
     <>
-      <h5>Articles</h5>
-      <div class="row my-4">
-        <div class="col-sm-6 col-lg-4">
-          <div class="d-flex justify-content-start">
-            <div>
-              <img
-                class="img-fluid"
-                width="250"
-                height="250"
-                src="assets/img/139855119_1100169067091999_8429686186357152647_n.jpg"
-                alt="image"
-              />
-            </div>
-            <div class="ms-3">
-              <h6>ESG Investment and private real estate returns</h6>
-              <h6 class="text-muted mb-2">Date: 24th July, 2022</h6>
-              <a class="fs-6 text-decoration-none" href="#">
-                Read more...
-              </a>
-            </div>
+      {loading && !error && (
+        <div className="d-flex justify-content-center align-items-center my-5">
+          <Spinner />
+        </div>
+      )}
+      {error && !loading && (
+        <div className="d-flex justify-content-center align-items-center my-5">
+          <div className="text-center">
+            <h6 className="text-muted">
+              There was an error loading categories
+            </h6>
+            <button
+              className="btn btn-primary my-3"
+              onClick={() => data.getAllData("/api/articles")}>
+              Reload
+            </button>
           </div>
         </div>
-      </div>
-
+      )}
+      <h5>Articles</h5>
+      {!error && (
+        <div class="row my-4">
+          {allData?.map((data) => (
+            <div class="col-sm-6 col-lg-4">
+              <div class="d-flex justify-content-start">
+                <div>
+                  <img
+                    class="img-fluid"
+                    width="250"
+                    height="250"
+                    src={data?.image?.url}
+                    alt={data?.image?.name}
+                  />
+                </div>
+                <div class="ms-3">
+                  <h6>{data?.title}</h6>
+                  <h6 class="text-muted mb-2">Date: {data?.createdAt}</h6>
+                  <a class="fs-6 text-decoration-none" href="#">
+                    Read more...
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div class="row mb-4">
         <div

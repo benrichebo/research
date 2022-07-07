@@ -4,7 +4,7 @@ import { POST } from "../functions/POST";
 import { PUT } from "../functions/PUT";
 import { useStorage } from "./useStorage";
 
-export const useCrud = (type) => {
+export const useCrud = (type, url) => {
   const { sessionStorage } = useStorage("session");
 
   const [allData, setAllData] = useState(null);
@@ -15,7 +15,7 @@ export const useCrud = (type) => {
   const [message, setMessage] = useState(null);
 
   const data = {
-    async getAllData(url) {
+    async getAllData() {
       setLoading(true);
       try {
         const data = await GET(url);
