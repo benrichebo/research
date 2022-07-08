@@ -3,21 +3,9 @@ const stripe = new Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx", {
   apiVersion: "2020-08-27",
 });
 
-export default async (req, res) => {
-  //verify user
-
-  const method = req.method;
-
+export const stripePayment = async () => {
+  const items = { id: "#875m2", quantity: 1 };
   try {
-    //1. check for method
-    //if method does not exist
-    if (method !== "POST") {
-      res.status(400).json({ msg: "Invalid method" });
-      return;
-    }
-
-    const body = JSON.parse(req.body);
-
     //organization items
     const organizationItems = new Map([
       ["#875m2", { priceCents: 15000, name: "membership" }],
@@ -28,7 +16,7 @@ export default async (req, res) => {
     const session = await stripe?.checkout?.create({
       payment_method_types: ["card"],
       mode: "payment", //it can be "subscription" for recurring payments only
-      line_items: body?.map((item) => {
+      line_items: items?.map((item) => {
         const checkOutItem = organizationItems.get(item?.id);
 
         return {
@@ -42,15 +30,13 @@ export default async (req, res) => {
           quantity: item?.quantity,
         };
       }),
-      success_url: `${process.env.SERVER_URL}/successful-payment`,
-      cancel_url: `${process.env.SERVER_URL}/cancelled-payment`,
+      success_url: `${process.env.SERVER_URL}/dashboard/payments`,
+      cancel_url: `${process.env.SERVER_URL}/dashboard/payments`,
     });
 
     //send url to client for payment
-    res.status(201).json({ url: session.url });
+    return { url: session.url };
   } catch (error) {
-    res.status(500).json({ msg: error.message });
-  } finally {
-    res.end();
+    return error.message;
   }
 };

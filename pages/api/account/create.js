@@ -8,22 +8,22 @@ import { genSalt, hash } from "bcrypt";
 import moment from "moment";
 import { findOne } from "../db/find";
 import { insertOne } from "../db/insert";
+import { stripePayment } from "../functions/stripe";
 import { createJwt } from "../jwt";
 
 export default async (req, res) => {
-  const { storeName, city, businessType, email, password } = JSON.parse(req.body);
+  const { name, email, city, password } = JSON.parse(req.body);
 
   //1. check for method
   //if method does not exist
   if (req.method !== "POST") {
     res.status(400).json({ msg: "Invalid method" });
-    return
+    return;
   }
 
-  //2. find if user exist in db using email address
   const results = await findOne(
     res,
-    "stores",
+    "members",
     { email },
     {
       projection: { email: 1 },
@@ -39,16 +39,15 @@ export default async (req, res) => {
     const date = new Date();
 
     const userData = {
-      storeName,
+      name,
       city,
-      businessType,
       email,
       password: hashedPassword,
       createdAt: moment(date).format("lll"),
       verifiedEmail: false,
     };
 
-    const response = await insertOne(res, "stores", userData);
+    const response = await insertOne(res, "mem", userData);
     //fetch user after signup
     if (response.acknowledged === true) {
       const { _id } = response;
@@ -60,11 +59,17 @@ export default async (req, res) => {
         authToken: jwt,
       };
 
-      res.status(200).json(data);
+      const stripe = await stripePayment();
+
+      if (stripe?.url) {
+        res.status(201).json({ url: stripe?.url, ...data });
+      } else {
+        res.status(201).json(data);
+      }
     } else {
       res.status(404).json({ msg: "Signing up failed" });
     }
   } else {
-    res.status(404).json({ msg: "Store with email already exist" });
+    res.status(404).json({ msg: "User with email already exist" });
   }
 };

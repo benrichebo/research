@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { GET } from "../functions/GET";
 import { LOGIN } from "../functions/LOGIN";
@@ -6,6 +7,7 @@ import { REGISTER } from "../functions/REGISTER";
 import { useStorage } from "./useStorage";
 
 export const useUser = (type) => {
+  const router = useRouter();
   const { sessionStorage } = useStorage();
 
   const [userData, setUserData] = useState(null);
@@ -36,12 +38,18 @@ export const useUser = (type) => {
       setLoading(true);
       try {
         const data = await REGISTER(credentials, "/api/account/create");
-        if (data?.authToken) {
+        if (data?.url) {
           sessionStorage.setItem("authToken", data?.authToken);
           this.getCurrentUser();
           setMessage("success");
+          router?.push(response?.url);
+        } else if (data?.authToken) {
+          sessionStorage.setItem("authToken", data?.authToken);
+          this.getCurrentUser();
+          setMessage("payment failed but you can make payment again");
+          router?.push("/dashboard/payments");
         } else {
-          setError(data.msg);
+          return { msg: data.msg };
         }
       } catch (error) {
         setError(error.message);
@@ -58,6 +66,7 @@ export const useUser = (type) => {
           sessionStorage.setItem("authToken", data?.authToken);
           this.getCurrentUser();
           setMessage("success");
+          router?.push("/dashboard/home");
         } else {
           setError(data.msg);
         }

@@ -1,15 +1,15 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Home from "../routes/home";
+import Home from "../dashboard-routes/home";
 import Layout from "../../components/Layout";
 import Aside from "../../components/Aside";
-import Papers from "../routes/papers";
-import Conferences from "../routes/conferences";
-import Articles from "../routes/articles";
-import Settings from "../routes/settings";
-import AddConference from "../routes/add-conference";
-import AddPaper from "../routes/add-paper";
-import AddArticle from "../routes/add-article";
+import Papers from "../dashboard-routes/papers";
+import Conferences from "../dashboard-routes/conferences";
+import Articles from "../dashboard-routes/articles";
+import Settings from "../dashboard-routes/settings";
+import AddConference from "../dashboard-routes/add-conference";
+import AddPaper from "../dashboard-routes/add-paper";
+import AddArticle from "../dashboard-routes/add-article";
 import Canvas from "../../components/Canvas";
 import SecondaryHeader from "../../components/SecondaryHeader";
 

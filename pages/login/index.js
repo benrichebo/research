@@ -1,10 +1,10 @@
-import React from "react";
-import Layout from "../components/Layout";
+import React, { useState } from "react";
+import Layout from "../../components/Layout";
 import TertiaryHeader from "../../components/TertiaryHeader";
-import Email from "../components/ui/Email";
-import Password from "../components/ui/Password";
-import Spinner from "../components/ui/Spinner";
-import { useUser } from "../hooks/useUser";
+import Email from "../../components/ui/Email";
+import Password from "../../components/ui/Password";
+import Spinner from "../../components/ui/Spinner";
+import { useUser } from "../../hooks/useUser";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,8 +15,8 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await user.loginWithEmailAndPassword({ email, password });
-    message && router.push("/dashboard/products");
   };
+  
   return (
     <Layout>
       <TertiaryHeader />
@@ -44,7 +44,7 @@ function Login() {
                 {error && <p className="text-danger my-2">{error}</p>}
                 <div className="my-3 d-grid">
                   <button
-                    className="btn btn-primary btn-lg border rounded-pill"
+                    className="btn btn-primary"
                     type="submit"
                     disabled={loading || !email || !password}>
                     {loading ? (

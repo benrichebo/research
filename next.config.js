@@ -23,7 +23,9 @@ module.exports = {
     SERVER_URL: "http://localhost:3000",
 
     SMS_API_KEY: "V1ZNVExweWp5em9qdGJRRG1rYmY=",
-  },
+  },/* 
+  basePath: "/home",
+  rewrites: [{source: "/", destination: "/home"}], */
   images: {
     domains: ["res.cloudinary.com"],
   },

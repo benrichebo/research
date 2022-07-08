@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import Link from "next/link";
 
 function TertiaryHeader() {
   return (
@@ -18,29 +19,34 @@ function TertiaryHeader() {
           <div className="collapse navbar-collapse" id="navcol-1">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a className="nav-link active" href="#">
-                  About
-                </a>
+                <Link href="/">
+                  <a className="nav-link active">About</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Conferences
-                </a>
+                <Link href="/conferences">
+                  <a className="nav-link">Conferences</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Publications
-                </a>
+                <Link href="/papers">
+                  <a className="nav-link">Papers</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Articles
-                </a>
+                <Link href="/articles">
+                  <a className="nav-link">Articles</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Register as a member
-                </a>
+                <Link href="/register">
+                  <a className="nav-link">Register as a member</a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/login">
+                  <a className="nav-link px-3">Login</a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -50,4 +56,4 @@ function TertiaryHeader() {
   );
 }
 
-export default TertiaryHeader
+export default TertiaryHeader;

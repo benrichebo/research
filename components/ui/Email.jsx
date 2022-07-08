@@ -6,7 +6,7 @@ function Email({setEmail}) {
       className="bg-light form-control"
       type="text"
       name="title"
-      placeholder="Enter email"
+      placeholder=""
       autoComplete="on"
       required=""
       onChange={(e) => setEmail(e.target.value)}

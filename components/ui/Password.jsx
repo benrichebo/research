@@ -6,7 +6,7 @@ function Password({ setPassword }) {
       className="bg-light form-control"
       type="password"
       name="password"
-      placeholder="Enter password"
+      placeholder=""
       autoComplete="on"
       required=""
       onChange={(e) => setPassword(e.target.value)}
