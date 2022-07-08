@@ -38,18 +38,12 @@ export const useUser = (type) => {
       setLoading(true);
       try {
         const data = await REGISTER(credentials, "/api/account/create");
-        if (data?.url) {
+        if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
           this.getCurrentUser();
-          setMessage("success");
-          router?.push(response?.url);
-        } else if (data?.authToken) {
-          sessionStorage.setItem("authToken", data?.authToken);
-          this.getCurrentUser();
-          setMessage("payment failed but you can make payment again");
-          router?.push("/dashboard/payments");
+          router?.push("/make-payment");
         } else {
-          return { msg: data.msg };
+          setError(data.msg);
         }
       } catch (error) {
         setError(error.message);

@@ -10,13 +10,13 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loading, message, user, error } = useUser();
+  const { loading, user, error } = useUser();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await user.loginWithEmailAndPassword({ email, password });
   };
-  
+
   return (
     <Layout>
       <TertiaryHeader />

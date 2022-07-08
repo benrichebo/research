@@ -1,19 +1,19 @@
 import Stripe from "stripe";
-const stripe = new Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx", {
+const stripe = new Stripe(process.env.STRIPE_SECRET, {
   apiVersion: "2020-08-27",
 });
 
 export const stripePayment = async () => {
-  const items = { id: "#875m2", quantity: 1 };
+  const items = [{ id: 1, quantity: 1 }];
   try {
     //organization items
     const organizationItems = new Map([
-      ["#875m2", { priceCents: 15000, name: "membership" }],
-      ["#875s2", { priceCents: 15000, name: "subscription" }],
+      [1, { priceInCents: 15000, name: "membership" }],
+      [2, { priceInCents: 15000, name: "subscription" }],
     ]);
 
     //2. stripe payment integration
-    const session = await stripe?.checkout?.create({
+    const session = await stripe?.checkout?.sessions?.create({
       payment_method_types: ["card"],
       mode: "payment", //it can be "subscription" for recurring payments only
       line_items: items?.map((item) => {
@@ -25,7 +25,7 @@ export const stripePayment = async () => {
             product_data: {
               name: checkOutItem?.name,
             },
-            unit_amount: checkOutItem?.priceCents,
+            unit_amount: checkOutItem?.priceInCents,
           },
           quantity: item?.quantity,
         };
@@ -35,7 +35,7 @@ export const stripePayment = async () => {
     });
 
     //send url to client for payment
-    return { url: session.url };
+    return { url: session?.url };
   } catch (error) {
     return error.message;
   }

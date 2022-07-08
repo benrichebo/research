@@ -6,13 +6,12 @@
  */
 import { genSalt, hash } from "bcrypt";
 import moment from "moment";
-import { findOne } from "../db/find";
-import { insertOne } from "../db/insert";
+import { connectToDatabase } from "../../../lib/mongodb";
 import { stripePayment } from "../functions/stripe";
 import { createJwt } from "../jwt";
 
 export default async (req, res) => {
-  const { name, email, city, password } = JSON.parse(req.body);
+  const { name, email, city, password, agree } = JSON.parse(req.body);
 
   //1. check for method
   //if method does not exist
@@ -21,55 +20,59 @@ export default async (req, res) => {
     return;
   }
 
-  const results = await findOne(
-    res,
-    "members",
-    { email },
-    {
-      projection: { email: 1 },
-    }
-  );
+  try {
+    const { db } = await connectToDatabase();
 
-  //3. compare the results password to the req password
-  if (!results?.email) {
-    //hash password
-    const salt = await genSalt(10);
-    const hashedPassword = await hash(password, salt);
+    const results = await db
+      .collection("members")
+      .findOne({ email }, { projection: { email: 1 } });
 
-    const date = new Date();
+    //3. compare the results password to the req password
+    if (!results?.email) {
+      //hash password
+      const salt = await genSalt(10);
+      const hashedPassword = await hash(password, salt);
 
-    const userData = {
-      name,
-      city,
-      email,
-      password: hashedPassword,
-      createdAt: moment(date).format("lll"),
-      verifiedEmail: false,
-    };
+      const date = new Date();
 
-    const response = await insertOne(res, "mem", userData);
-    //fetch user after signup
-    if (response.acknowledged === true) {
-      const { _id } = response;
-      const jwt = createJwt({
-        userId: _id,
-      });
-
-      const data = {
-        authToken: jwt,
+      const userData = {
+        name,
+        city,
+        email,
+        agree,
+        role: "member",
+        password: hashedPassword,
+        createdAt: moment(date).format("lll"),
+        verifiedEmail: false,
       };
 
-      const stripe = await stripePayment();
+      const response = await db.collection("members").insertOne(userData);
+      //fetch user after signup
+      if (response.acknowledged === true) {
+        const { _id } = response;
+        const jwt = createJwt({
+          userId: _id,
+        });
 
-      if (stripe?.url) {
-        res.status(201).json({ url: stripe?.url, ...data });
+        const data = {
+          authToken: jwt,
+        };
+
+        const stripe = await stripePayment();
+        console.log(stripe)
+
+         if (stripe?.url) {
+          res.status(201).json({ url: stripe?.url, ...data });
+        } else {
+          res.status(201).json(data);
+        } 
       } else {
-        res.status(201).json(data);
+        res.status(400).json({ msg: "Creating user failed" });
       }
     } else {
-      res.status(404).json({ msg: "Signing up failed" });
+      res.status(404).json({ msg: "User with email already exist" });
     }
-  } else {
-    res.status(404).json({ msg: "User with email already exist" });
+  } catch (error) {
+    res.status(500).json({ msg: "Internal server error" });
   }
 };

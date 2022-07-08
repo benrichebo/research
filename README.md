@@ -58,3 +58,7 @@ A website for a research organization with stripe payment system
 - Dev OPS - Vercel or Azure
 - Database - MongoDB
 - Tools - webpack, sass
+
+
+# Register user
+- register-make-payment-dashboard

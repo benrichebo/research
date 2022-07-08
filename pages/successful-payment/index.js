@@ -1,25 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import TertiaryHeader from "../../components/TertiaryHeader";
 import { useStorage } from "../../hooks/useStorage";
-import { useUser } from "../../hooks/useUser";
 import { MdCheckCircle } from "react-icons/md";
 import Spinner from "../../components/ui/Spinner";
+import { useCrud } from "../../hooks/useCrud";
 
 function Register() {
-  const { sessionStorage } = useStorage("session");
-  const { user, error, loading } = useUser();
+  const { sessionStorage } = useStorage();
+  const result = sessionStorage.getItem("payment-success");
+  const { data, loading, error, message } = useCrud();
 
-  const handleSubmit = async () => {
-    //put user data in storage
-    const data = sessionStorage.getItem("form-data");
-    user.signUpWithCredentials(data);
+  const [navigate, setNavigate] = useState(false);
+
+  const router = useRouter();
+
+  const handleNavigation = async () => {
+    await data.addData(result, "/api/payments/create");
   };
 
   useEffect(() => {
-    handleSubmit();
-  }, []);
+    if (result) {
+      handleNavigation();
+      message && router.push("/dashboard/payments");
+    }
+  }, [navigate]);
 
   return (
     <Layout>
@@ -29,15 +35,20 @@ function Register() {
           <div className="my-3 text-center">
             <MdCheckCircle size={200} className="text-success" />
             <div className="my-5">
-              <h4 className="">You have successfully made payment</h4>
+              <h4 className="">
+                You have successfully registered and made payment
+              </h4>
+              <h5 className="text-muted">Write this code down</h5>
               <h5 className="text-muted">You will be redirected soon</h5>
             </div>
-            {error && <p className="text-danger my-2">{error}</p>}
-            {loading && <Spinner className="my-3" />}
+            {error && <p>{error}</p>}
             <div className="my-3">
-              <button className="btn btn-primary" type="button">
-                Redirect
-              </button>
+              <a
+                className="btn btn-primary"
+                type="button"
+                onClick={() => setNavigate(true)}>
+                {loading ? <Spinner /> : "Go to dashboard"}
+              </a>
             </div>
           </div>
         </div>

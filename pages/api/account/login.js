@@ -5,7 +5,7 @@
  * send response with {authToken: {email: string, role: string, userId: string, apiKey: string}}
  */
 import { compare } from "bcrypt";
-import { findOne } from "../db/find";
+import { connectToDatabase } from "../../../lib/mongodb";
 import { createJwt } from "../jwt";
 
 export default async (req, res) => {
@@ -17,30 +17,35 @@ export default async (req, res) => {
     res.status(400).json({ msg: "Invalid credentials" });
   }
 
-  //2. find if user exist in db using email address
-  const results = await findOne(res, "stores", { email });
+  try {
+    const { db } = await connectToDatabase();
 
-  //3. compare the results password to the req password
-  if (results?.password) {
-    const match = await compare(password, results?.password);
-    //4. if user exist, create jwt
-    if (match) {
-      const { _id } = results;
+    const results = await db.collection("members").findOne({ email });
 
-      const jwt = createJwt({
-        userId: _id,
-      });
+    //3. compare the results password to the req password
+    if (results?.password) {
+      const match = await compare(password, results?.password);
+      //4. if user exist, create jwt
+      if (match) {
+        const { _id } = results;
 
-      const data = {
-        authToken: jwt,
-      };
+        const jwt = createJwt({
+          userId: _id,
+        });
 
-      res.status(200).json(data);
+        const data = {
+          authToken: jwt,
+        };
+
+        res.status(200).json(data);
+      } else {
+        //5. if user doesn't exist, send error
+        res.status(400).json({ msg: "Invalid credentials" });
+      }
     } else {
-      //5. if user doesn't exist, send error
-      res.status(400).json({ msg: "Invalid credentials" });
+      res.status(404).json({ msg: "Email does not exist" });
     }
-  } else {
-    res.status(404).json({ msg: "Email does not exist" });
+  } catch (error) {
+    res.status(500).json({ msg: "Internal server error" });
   }
 };

@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     MONGODB_URI:
-      "mongodb+srv://admin-palo:cOqHZo8Osm0bSGzN@cluster-pos.j3b6f.mongodb.net/pos?retryWrites=true&w=majority",
+      "mongodb+srv://freelancing:XG9tbcK8FbtxyTQW@cluster0.3ndms.mongodb.net/?retryWrites=true&w=majority",
     MONGODB_DB: "research",
 
     NEXT_SECRET: "683caef9-86dd-4d69-bf0f-d152f0049d94",
@@ -23,9 +23,9 @@ module.exports = {
     SERVER_URL: "http://localhost:3000",
 
     SMS_API_KEY: "V1ZNVExweWp5em9qdGJRRG1rYmY=",
-  },/* 
+  } /* 
   basePath: "/home",
-  rewrites: [{source: "/", destination: "/home"}], */
+  rewrites: [{source: "/", destination: "/home"}], */,
   images: {
     domains: ["res.cloudinary.com"],
   },

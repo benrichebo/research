@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import TertiaryHeader from "../../components/TertiaryHeader";
 import Email from "../../components/ui/Email";
 import Text from "../../components/ui/Text";
+import Spinner from "../../components/ui/Spinner";
 import { useUser } from "../../hooks/useUser";
 
 function Register() {
@@ -14,7 +15,7 @@ function Register() {
   const [agree, setAgree] = useState("");
   const { user, loading, error } = useUser();
 
-  const router = useRouter();
+  //const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ function Register() {
       email,
       city,
       password,
+      agree
     };
 
     //go to stripe
@@ -88,7 +90,11 @@ function Register() {
                   disabled={
                     loading || !name || !email || !password || !city || !agree
                   }>
-                  Submit
+                  {loading ? (
+                    <Spinner className="ms-2" />
+                  ) : (
+                    <span className="">Submit</span>
+                  )}
                 </button>
               </div>
             </form>

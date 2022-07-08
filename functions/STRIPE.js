@@ -4,14 +4,13 @@
  * 3. Parameters: url, data
  **/
 
-export const STRIPE = async (data, url) => {
+export const STRIPE = async (url) => {
 
   const config = {
     method: "POST",
     headers: {
       ContentType: "application/json",
     },
-    body: JSON.stringify(data),
     timeout: 5000,
   };
 

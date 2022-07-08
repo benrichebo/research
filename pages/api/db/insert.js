@@ -6,7 +6,6 @@ export const insertOne = async (res, collection, query) => {
     const result = await db.collection(collection).insertOne(query);
     return result;
   } catch (error) {
-    res.status(500).json({ msg: "Internal server error" });
-    return
+    return { msg: "Internal server error" };
   }
 };
