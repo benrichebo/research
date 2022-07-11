@@ -1,5 +1,5 @@
 import React from "react";
-import { MdArrowUpward, MdArrowForward, MdArrowDownward, MdInsertDriveFile } from "react-icons/md";
+import { MdArrowForward, MdArrowDownward } from "react-icons/md";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
