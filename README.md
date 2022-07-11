@@ -62,3 +62,6 @@ A website for a research organization with stripe payment system
 
 # Register user
 - register-make-payment-dashboard
+
+# Stripe checkout
+- make-payment-StripePay-useStripe-/api/payments/stripe/checkOutSession-

@@ -1,52 +1,45 @@
 import React from "react";
-import Menu from "./Menu";
+import Link from "next/link";
+import {
+  MdDashboard,
+  MdReceiptLong,
+  MdLibraryBooks,
+  MdPerson,
+  MdPictureAsPdf,
+  MdPayments
+} from "react-icons/md";
+
+const routes = [
+  { name: "Home", icon: <MdDashboard className="fs-5" /> },
+  { name: "Papers", icon: <MdPictureAsPdf className="fs-5" /> },
+  { name: "Articles", icon: <MdLibraryBooks className="fs-5" /> },
+  { name: "Conferences", icon: <MdReceiptLong className="fs-5" /> },
+  { name: "Payments", icon: <MdPayments className="fs-5" /> },
+  { name: "Settings", icon: <MdPerson className="fs-5" /> },
+];
 
 const Aside = ({ router }) => {
   return (
     <>
       <h1></h1>
-      <div class="d-flex align-items-center ms-lg-3 h-75">
-        <ul class="list-unstyled">
-          <li class="fs-6 mb-4">
-            <a
-              class="text-white text-decoration-none d-flex justify-content-start align-items-center fw-bold"
-              href="#">
-              <i class="material-icons">dashboard</i>
-              <span class="ms-3">Dashboard</span>
-            </a>
-          </li>
-          <li class="fs-6 mb-4">
-            <a
-              class="text-white text-decoration-none d-flex justify-content-start align-items-center"
-              href="#">
-              <i class="material-icons">picture_as_pdf</i>
-              <span class="ms-3">Papers</span>
-            </a>
-          </li>
-          <li class="fs-5 mb-4">
-            <a
-              class="fs-6 text-white text-decoration-none d-flex justify-content-start align-items-center"
-              href="#">
-              <i class="material-icons">library_books</i>
-              <span class="ms-3">Articles</span>
-            </a>
-          </li>
-          <li class="fs-6 mb-4">
-            <a
-              class="text-white text-decoration-none d-flex justify-content-start align-items-center"
-              href="#">
-              <i class="material-icons">store_mall_directory</i>
-              <span class="ms-3">Conferences</span>
-            </a>
-          </li>
-          <li class="fs-6 mb-4">
-            <a
-              class="text-white text-decoration-none d-flex justify-content-start align-items-center"
-              href="#">
-              <i class="material-icons">person</i>
-              <span class="ms-3">Setttings</span>
-            </a>
-          </li>
+      <div className="d-flex align-items-center ms-lg-3 h-75">
+        <ul className="list-unstyled">
+          {routes?.map((route) => (
+            <li className="fs-6 mb-4" key={route.name}>
+              <Link href={`/dashboard/${route?.name?.toLocaleLowerCase()}`}>
+                <a
+                  className={`text-white text-decoration-none d-flex justify-content-start align-items-center ${
+                    router?.query?.page == route.name.toLocaleLowerCase() && "fw-bold"
+                  }`}
+                  href="#">
+                  {route?.icon}
+                  <span className="ms-3">
+                    {route?.name}
+                  </span>
+                </a>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </>

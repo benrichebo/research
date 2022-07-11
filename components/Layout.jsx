@@ -6,7 +6,7 @@ function Layout({children, title}) {
   return (
     <>
       <Head>
-        <title>{title || "Palo POS"}</title>
+        <title>{title || "Research Institute"}</title>
         <meta
           name="description"
           content="An online POS system for retailers, shop owners and restaurants"

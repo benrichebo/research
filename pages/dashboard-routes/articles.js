@@ -1,5 +1,8 @@
 import React from "react";
+import Link from "next/link";
+import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
+import { MdPictureAsPdf } from "react-icons/md";
 
 function Articles() {
   const { data, loading, allData, error } = useCrud(
@@ -8,6 +11,12 @@ function Articles() {
   );
   return (
     <>
+      <div className="d-flex justify-content-between align-items-center">
+        <h5>Articles</h5>
+        <Link href="/dashboard/add-article">
+          <a className="btn btn-primary">Add article</a>
+        </Link>
+      </div>
       {loading && !error && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
@@ -27,25 +36,24 @@ function Articles() {
           </div>
         </div>
       )}
-      <h5>Articles</h5>
       {!error && (
-        <div class="row my-4">
+        <div className="row my-4">
           {allData?.map((data) => (
-            <div class="col-sm-6 col-lg-4">
-              <div class="d-flex justify-content-start">
+            <div className="col-sm-6 col-lg-4">
+              <div className="d-flex justify-content-start">
                 <div>
                   <img
-                    class="img-fluid"
+                    className="img-fluid"
                     width="250"
                     height="250"
                     src={data?.image?.url}
                     alt={data?.image?.name}
                   />
                 </div>
-                <div class="ms-3">
+                <div className="ms-3">
                   <h6>{data?.title}</h6>
-                  <h6 class="text-muted mb-2">Date: {data?.createdAt}</h6>
-                  <a class="fs-6 text-decoration-none" href="#">
+                  <h6 className="text-muted mb-2">Date: {data?.createdAt}</h6>
+                  <a className="fs-6 text-decoration-none" href="#">
                     Read more...
                   </a>
                 </div>
@@ -54,19 +62,18 @@ function Articles() {
           ))}
         </div>
       )}
-
-      <div class="row mb-4">
-        <div
-          class="col d-flex justify-content-center align-items-center bg-light"
-          style={{ height: 300 }}>
-          <div class="text-center">
-            <i class="material-icons fs-1 text-muted text-muted">
-              picture_as_pdf
-            </i>
-            <p>There is no article</p>
+      {allData?.length == 0 && (
+        <div className="row mb-4">
+          <div
+            className="col d-flex justify-content-center align-items-center bg-light"
+            style={{ height: 300 }}>
+            <div className="text-center">
+              <MdPictureAsPdf className="fs-1 text-muted" />
+              <p>There is no article</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

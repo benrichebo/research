@@ -12,7 +12,7 @@ export const useUser = (type) => {
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  let [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
   let user = {
@@ -79,7 +79,7 @@ export const useUser = (type) => {
     async updateUser(credentials) {
       setLoading(true);
       try {
-        const data = await PUT(credentials, "/api/account");
+        const data = await PUT(credentials, `/api/account`);
         if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
           this.getCurrentUser();

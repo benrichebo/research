@@ -1,24 +1,27 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import Text from "../../components/ui/Text";
 import { useCrud } from "../../hooks/useCrud";
+import { MdOutlineInsertPhoto } from "react-icons/md";
+import UploadModal from "../../components/media/UploadModal";
+import Spinner from "../../components/ui/Spinner";
 
 function AddArticle() {
   const { data, loading, postError, message } = useCrud();
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [file, setFile] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
 
-  const fileRef = useRef();
+  const [image, setImage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
       title,
       author,
-      file,
+      image,
       content,
       category,
       status,
@@ -51,13 +54,13 @@ function AddArticle() {
                 <div className="col-12 mb-4">
                   <label className="form-label">Content</label>
                   <textarea
-                    className="form-control"
+                    className="form-control form-control-lg rounded-0"
                     rows="4"
                     onChange={(e) => setContent(e.target.value)}></textarea>
                 </div>
                 <div className="my-3 d-grid">
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary btn-lg"
                     type="submit"
                     disabled={
                       loading ||
@@ -68,7 +71,11 @@ function AddArticle() {
                       !file ||
                       !author
                     }>
-                    Add article
+                    {loading ? (
+                      <Spinner className="ms-2" />
+                    ) : (
+                      <span className="">Add article</span>
+                    )}
                   </button>
                 </div>
               </div>
@@ -78,7 +85,7 @@ function AddArticle() {
             <div className="col-12 mb-4">
               <label className="form-label">Category</label>
               <select
-                className="form-select"
+                className="form-select form-select-lg rounded-0"
                 onChange={(e) => setCategory(e.target.value)}>
                 <option value="12" selected="">
                   This is item 1
@@ -88,9 +95,9 @@ function AddArticle() {
               </select>
             </div>
             <div className="col-12 mb-4">
-              <label className="form-label" htmlFor="draft">
+              <p className="form-label" htmlFor="draft">
                 Make available
-              </label>
+              </p>
               <div className="form-check mb-3">
                 <input
                   className="form-check-input"
@@ -100,7 +107,7 @@ function AddArticle() {
                   value="draft"
                   onChange={(e) => setStatus(e.target.checked)}
                 />
-                <label className="form-check-label" htmlFor="publish">
+                <label className="form-check-label" htmlFor="draft">
                   As Draft
                 </label>
               </div>
@@ -113,29 +120,39 @@ function AddArticle() {
                   value="publish"
                   onChange={(e) => setStatus(e.target.checked)}
                 />
-                <label className="form-check-label" for="formCheck-2">
-                  Publish
+                <label className="form-check-label" htmlFor="publish">
+                  or publish
                 </label>
               </div>
             </div>
             <p>Pick a photo</p>
-            <label className="form-label" htmlFor="file">
+            <a
+              className="form-label w-100"
+              data-bs-target="#mediaModal"
+              data-bs-toggle="modal"
+              type="button">
               <div
                 className="card d-flex justify-content-center align-items-center bg-light"
                 style={{ height: 200, border: "1px dashed #b5b4b4" }}>
-                <i className="material-icons fs-1 text-muted">insert_photo</i>
-                <input
-                  type="file"
-                  hidden
-                  ref={fileRef}
-                  value="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                />
+                {image?.name && (
+                  <img
+                    src={image?.url}
+                    alt={image?.name}
+                    width="100"
+                    height="100"
+                    className="img-fluid"
+                    style={{ objectFit: "contain" }}
+                  />
+                )}
+                {!image?.name && (
+                  <MdOutlineInsertPhoto className="fs-1 text-muted" />
+                )}
               </div>
-            </label>
+            </a>
           </div>
         </form>
       </div>
+      <UploadModal selectedImage={image} setSelectedImage={setImage} />
     </>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import Spinner from "../../components/ui/Spinner";
+import Text from "../../components/ui/Text";
+import { useCrud } from "../../hooks/useCrud";
 
 function AddPaper() {
   const { data, loading, postError, message } = useCrud();
@@ -53,6 +55,7 @@ function AddPaper() {
                     id="file"
                     type="file"
                     ref={fileRef}
+                    className="form-control form-control-lg rounded-0"
                     onChange={(e) => setFile(e.target.files[0])}
                   />
                 </div>
@@ -62,15 +65,15 @@ function AddPaper() {
                   Description
                 </label>
                 <textarea
-                  className="form-control"
+                  className="form-control form-control-lg  rounded-0"
                   rows="4"
                   id="description"
                   onChange={(e) => setDescription(e.target.value)}></textarea>
               </div>
               <div className="my-3 d-grid">
                 <button
-                  className="btn btn-primary"
-                  type="button"
+                  className="btn btn-primary btn-lg"
+                  type="submit"
                   disabled={
                     loading || !title || !publisher || !description || !file
                   }>

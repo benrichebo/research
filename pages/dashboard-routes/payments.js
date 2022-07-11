@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 
@@ -12,6 +13,9 @@ function Payments() {
     <>
       <div className="d-flex justify-content-between align-items-center">
         <h5>Payments</h5>
+        <Link href="/dashboard/add-payment">
+          <a className="btn btn-primary">Make payment</a>
+        </Link>
       </div>
       {loading && !error && (
         <div className="d-flex justify-content-center align-items-center my-5">

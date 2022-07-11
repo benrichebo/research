@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
@@ -9,6 +10,12 @@ function Papers() {
   );
   return (
     <>
+      <div className="d-flex justify-content-between align-items-center">
+        <h5>Papers</h5>
+        <Link href="/dashboard/add-paper">
+          <a className="btn btn-primary">Add paper</a>
+        </Link>
+      </div>
       {loading && !error && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
@@ -28,9 +35,7 @@ function Papers() {
           </div>
         </div>
       )}
-      <div>
-        <h5>Papers</h5>
-      </div>
+
       {!error && (
         <div className="row my-4">
           {allData?.map((data) => (

@@ -12,6 +12,7 @@ import AddPaper from "../dashboard-routes/add-paper";
 import AddArticle from "../dashboard-routes/add-article";
 import Canvas from "../../components/Canvas";
 import SecondaryHeader from "../../components/SecondaryHeader";
+import Payments from "../dashboard-routes/payments";
 
 const routes = [
   { name: "home", page: <Home /> },
@@ -19,6 +20,7 @@ const routes = [
   { name: "conferences", page: <Conferences /> },
   { name: "articles", page: <Articles /> },
   { name: "settings", page: <Settings /> },
+  { name: "payments", page: <Payments /> },
   { name: "add-conference", page: <AddConference /> },
   { name: "add-paper", page: <AddPaper /> },
   { name: "add-article", page: <AddArticle /> },
@@ -32,7 +34,7 @@ function DashBoard() {
       <div className="container-fluid">
         <div className="row">
           <div
-            className="col-md-3 col-lg-2 d-none d-md-block vh-100 bg-primary"
+            className="col-md-3 col-lg-2 d-none d-md-block vh-100 bg-dark"
             style={{ position: "sticky", top: 0 }}>
             <Aside router={router} />
           </div>

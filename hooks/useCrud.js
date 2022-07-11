@@ -101,16 +101,16 @@ export const useCrud = (type, url) => {
   };
 
   useEffect(() => {
-    if (type.includes("all")) {
-      const data = sessionStorage.getItem(type);
-      if (!data) {
+    if (type?.includes("all")) {
+      const fetched = sessionStorage.getItem(type);
+      if (!fetched) {
         data.getAllData();
       } else {
-        setAllData(data);
+        setAllData(fetched);
       }
     }
 
-    if (type == "one") {
+    if (type?.includes("one")) {
       data.getData();
     }
   }, []);

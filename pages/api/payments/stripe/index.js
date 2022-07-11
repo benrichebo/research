@@ -1,20 +1,13 @@
-import { createPaymentIntent } from "./createPaymentIntent";
+import { getStripeId } from "./getStripeId";
 
 export default async (req, res) => {
-  try {
-    //fetch client secret from stripe
-    const response = await createPaymentIntent();
+  //fetch client secret from stripe
+  const response = await getStripeId(req);
+  console.log(response)
 
-    if (response?.clientSecret) {
-      res.status(201).json({ clientSecret: response?.clientSecret });
-    } else {
-      res
-        .status(400)
-        .json({ msg: "There was an error creating payment intent" });
-    }
-  } catch (error) {
-    res.status(500).json({
-      msg: "Internal server error",
-    });
+  if (!response?.msg) {
+    res.status(201).json({ id: response });
+  } else {
+    res.status(400).json({ msg: response?.msg });
   }
 };

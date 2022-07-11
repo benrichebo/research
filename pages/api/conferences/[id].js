@@ -1,9 +1,10 @@
 import { ObjectId } from "mongodb";
 import { findOne } from "../db/find";
+import { authenticate } from "../authentication";
 import { insertToArray, removeFromArray } from "../db/update";
 import { verifyUser } from "../verification";
 
-export default async (req, res) => {
+export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
 
   const { id } = req.query;
@@ -67,4 +68,4 @@ export default async (req, res) => {
       res.status(400).json({ msg: "conference was not deleted" });
     }
   }
-};
+});
