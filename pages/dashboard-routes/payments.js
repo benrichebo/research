@@ -9,6 +9,8 @@ function Payments() {
     "/api/payments"
   );
 
+  console.log(loading, allData, error);
+
   return (
     <>
       <div className="d-flex justify-content-between align-items-center">
@@ -34,9 +36,9 @@ function Payments() {
           </div>
         </div>
       )}
-      {!error && (
+    {/*   {!error && (
         <div className="row my-3">
-          {allData?.map((data) => (
+          {allData?.length > 0 && allData?.map((data) => (
             <div className="my-2">
               <div className="card">
                 <div className="card-body py-2">
@@ -47,7 +49,7 @@ function Payments() {
             </div>
           ))}
         </div>
-      )}
+      )} */}
     </>
   );
 }

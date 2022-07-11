@@ -21,7 +21,9 @@ const MakePayment = () => {
                 </h4>
               </div>
               <div className="col-md-8 d-flex justify-content-center align-items-center pt-3 pt-lg-5 px-lg-5">
-                <CheckoutForm />
+                <div>
+                  <CheckoutForm />
+                </div>
               </div>
             </div>
           </div>

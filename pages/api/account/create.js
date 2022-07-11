@@ -7,13 +7,11 @@
 import { genSalt, hash } from "bcrypt";
 import moment from "moment";
 import { connectToDatabase } from "../../../lib/mongodb";
-import { stripePayment } from "../functions/stripe";
 import { createJwt } from "../jwt";
 
 export default async (req, res) => {
   const { name, email, city, password, agree } = JSON.parse(req.body);
-
- 
+  console.log(name, email, city, password, agree);
 
   //1. check for method
   //if method does not exist
@@ -49,26 +47,25 @@ export default async (req, res) => {
       };
 
       const response = await db.collection("members").insertOne(userData);
+
+      console.log("response", response);
       //fetch user after signup
       if (response.acknowledged === true) {
-        const { _id, role } = response;
+        const results = await db
+          .collection("members")
+          .findOne({ email }, { projection: { password: 0 } });
+
         const jwt = createJwt({
-          userId: _id,
-          role
+          userId: results?._id,
+          role: results?.role,
+          email: results?.email,
         });
 
         const data = {
           authToken: jwt,
         };
 
-        const stripe = await stripePayment();
-        console.log(stripe)
-
-         if (stripe?.url) {
-          res.status(201).json({ url: stripe?.url, ...data });
-        } else {
-          res.status(201).json(data);
-        } 
+        res.status(201).json(data);
       } else {
         res.status(400).json({ msg: "Creating user failed" });
       }
@@ -76,6 +73,6 @@ export default async (req, res) => {
       res.status(404).json({ msg: "User with email already exist" });
     }
   } catch (error) {
-    res.status(500).json({ msg: "Internal server error" });
+    res.status(500).json({ msg: error.message });
   }
 };

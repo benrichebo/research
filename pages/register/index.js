@@ -50,26 +50,26 @@ function Register() {
               <form
                 className="pulse animated mt-md-4 mt-lg-5 row col-md-10"
                 onSubmit={handleSubmit}>
-                <div className="col-md-6 mb-3">
+                <div className="col-lg-6 mb-3">
                   <label className="form-label" htmlFor="name">
                     Name
                   </label>
-                  <Text setName={setName} id="name" />
+                  <Text setText={setName} id="name" />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="col-lg-6 mb-3">
                   <label className="form-label" htmlFor="email">
                     Email
                   </label>
                   <Email setEmail={setEmail} />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="col-xl-6 mb-3">
                   <label className="form-label" htmlFor="city">
                     City
                   </label>
 
                   <Text setText={setCity} id="city" />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="col-xl-6 mb-3">
                   <label className="form-label" htmlFor="password">
                     Password
                   </label>
@@ -99,7 +99,7 @@ function Register() {
                       You agree to our terms and conditions
                     </label>
                   </div>
-                  <a
+                  <button
                     className="btn btn-outline-primary rounded-0 btn-lg"
                     type="submit"
                     disabled={
@@ -108,12 +108,12 @@ function Register() {
                     {loading ? (
                       <Spinner className="ms-2" />
                     ) : (
-                      <span className="d-flex justify-content-between align-items-center h-auto">
+                      <span className="d-flex justify-content-between align-items-center h-100">
                         <span>Register</span>
                         <MdArrowForward className="ms-3" />
                       </span>
                     )}
-                  </a>
+                  </button>
                 </div>
               </form>
             </div>

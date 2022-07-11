@@ -5,15 +5,14 @@
  **/
 
 export const STRIPE = async (url) => {
-  const sessionData = sessionStorage.getItem("user");
-  const user = JSON.parse(sessionData);
-  const authToken = user?.authToken;
+  const sessionData = sessionStorage.getItem("authToken");
+  const authToken = JSON.parse(sessionData);
 
   const config = {
     method: "POST",
     headers: {
       ContentType: "application/json",
-      //Authorization: `Bearer ${sessionData && authToken}`,
+      Authorization: `Bearer ${sessionData && authToken}`,
     },
     timeout: 5000,
   };

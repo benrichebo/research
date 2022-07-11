@@ -27,10 +27,11 @@ export default async (req, res) => {
       const match = await compare(password, results?.password);
       //4. if user exist, create jwt
       if (match) {
-        const { _id } = results;
-
+        const { _id, role, email } = results;
         const jwt = createJwt({
           userId: _id,
+          role,
+          email,
         });
 
         const data = {

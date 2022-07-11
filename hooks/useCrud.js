@@ -19,6 +19,7 @@ export const useCrud = (type, url) => {
       setLoading(true);
       try {
         const data = await GET(url);
+        console.log("data", data)
         if (data?.msg) {
           setError(data.msg);
         } else {

@@ -1,29 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { STRIPE } from "../functions/STRIPE";
 import { getStripe } from "../lib/get-stripe";
+import Spinner from "./ui/Spinner";
 
 const CheckoutForm = () => {
-  let message, id;
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState(null);
+   const [error, setError] = useState(null);
+  const [id, setId] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await STRIPE("/api/payments/stripe");
-    console.log("response", response);
-    if (response?.id) {
-      id = response?.id;
-    } else {
-      message = response.msg;
-    }
-
-    const stripe = await getStripe();
-    /* 
-    if (stripe?.includes("error")) {
-      message = "There was an error loading stripe";
-      return;
-    } */
-
     try {
+      setLoading(true);
+
+      const response = await STRIPE("/api/payments/stripe");
+      console.log("response", response);
+      if (response?.id) {
+        setId(response?.id);
+      } else {
+        setMessage(response.msg);
+      }
+      setLoading(false);
+
+      const stripe = await getStripe();
+
       // Redirect to Checkout.
       const { error } = await stripe?.redirectToCheckout({
         // Make the id field from the Checkout Session creation API response
@@ -32,34 +34,20 @@ const CheckoutForm = () => {
         sessionId: id,
       });
 
-      console.warn(error.message);
+      setError(error.message);
     } catch (err) {
-      console.warn(err);
+      setMessage(err.message);
     }
   };
 
   return (
     <>
-     {/*  {loading && <Spinner />}
-      {error && "there was an error loading stripe payments"}
-      {message && "there was an error"} */}
+      {message && <p className="my-3 text-info">{message.includes("stripe") ? "there was an error, try again": message}</p>}
+      {error && <p className="my-3 text-danger">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div className="test-card-notice">
-          Use any of the{" "}
-          <a
-            href="https://stripe.com/docs/testing#cards"
-            target="_blank"
-            rel="noopener noreferrer">
-            Stripe test cards
-          </a>{" "}
-          for this demo, e.g.{" "}
-          <div className="card-number">
-            4242<span></span>4242<span></span>4242<span></span>4242
-          </div>
-          .
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Pay membership fee
+        <h3>Members are suppose to pay a 150 USD membership fee</h3>
+        <button type="submit" className="btn btn-primary btn-lg my-4">
+          {loading ? <Spinner /> : " Pay membership fee"}
         </button>
       </form>
     </>

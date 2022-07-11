@@ -10,13 +10,11 @@ export const verifyUser = async (req) => {
   const { data } = verify(auth, secret_key);
   //console.log("data", data);
 
-  const { userId, apiKey, email, role } = data;
-  //console.log("data", userId, apiKey, email, role);
+  const { userId, role, email } = data;
 
   return {
-    email,
     userId,
-    apiKey,
     role,
+    email
   };
 };

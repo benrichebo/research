@@ -5,10 +5,14 @@
  **/
 
 export const DELETE = async (data, url) => {
+  const sessionData = sessionStorage.getItem("authToken");
+  const authToken = JSON.parse(sessionData);
+
   const config = {
     method: "DELETE",
     headers: {
       ContentType: "application/json",
+      Authorization: `Bearer ${sessionData && authToken}`,
     },
     body: JSON.stringify(data),
     timeout: 5000,

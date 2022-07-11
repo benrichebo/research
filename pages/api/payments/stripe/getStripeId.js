@@ -1,9 +1,15 @@
 import Stripe from "stripe";
+import { ObjectId } from "mongodb";
+import moment from "moment";
+import { verifyUser } from "../../verification";
+import { insertToArray } from "../../db/update";
+import { connectToDatabase } from "../../../../lib/mongodb";
 const stripe = new Stripe(process.env.STRIPE_SECRET, {
   apiVersion: "2020-08-27",
 });
 
 export const getStripeId = async (req) => {
+  const { userId } = await verifyUser(req);
   try {
     //2. stripe payment integration
     const session = await stripe?.checkout?.sessions?.create({
@@ -12,7 +18,7 @@ export const getStripeId = async (req) => {
       submit_type: "donate",
       payment_method_types: ["card"], //pm_card_us,
       //payment_method_options: ["pm_card_amex"],
-      
+
       mode: "payment", //it can be "subscription" for recurring payments only
       line_items: [
         {
@@ -22,15 +28,38 @@ export const getStripeId = async (req) => {
           quantity: 1,
         },
       ],
-      success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${req.headers.origin}/dashboard/payments`,
       cancel_url: `${req.headers.origin}/make-payment`,
     });
 
-    console.log("session", session);
+    const date = new Date();
 
-    //send url to client for payment
-    return session?.id;
+    const payment = {
+      userId,
+      paymentId: session?.id,
+      createdAt: moment(date).format("lll"),
+    };
+
+    const data = {
+      $push: { payments: payment },
+    };
+
+    const { db } = await connectToDatabase();
+
+    const result = await db
+      .collection("payments")
+      .updateOne({ _id: ObjectId(userId) }, data, {
+        upsert: true,
+      });
+
+    console.log("results payment", result);
+
+    if (result.acknowledged) {
+      return session?.id;
+    } else {
+      return { msg: "Getting session id failed" };
+    }
   } catch (error) {
-    return {msg: error.message};
+    return { msg: error.message };
   }
 };

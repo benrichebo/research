@@ -3,50 +3,51 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import TertiaryHeader from "../../components/TertiaryHeader";
 import { useStorage } from "../../hooks/useStorage";
-import { MdCheckCircle } from "react-icons/md";
+import { MdCheckCircle, MdCopyAll } from "react-icons/md";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 
 function Register() {
-  const { sessionStorage } = useStorage();
-  const result = sessionStorage.getItem("payment-success");
-  const { data, loading, error, message } = useCrud();
-
-  const [navigate, setNavigate] = useState(false);
+  const { data, loading, postError, message } = useCrud();
 
   const router = useRouter();
 
+  console.log(router?.query);
+
   const handleNavigation = async () => {
+    const result = { id: router?.query?.id };
     await data.addData(result, "/api/payments/create");
+    message && router.push("/dashboard/payments");
   };
 
-  useEffect(() => {
-    if (result) {
-      handleNavigation();
-      message && router.push("/dashboard/payments");
-    }
-  }, [navigate]);
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(router?.query?.id);
+    console.log(router?.query?.id);
+  };
 
   return (
     <Layout>
       <TertiaryHeader />
       <div className="d-flex justify-content-center align-items-center vh-100">
-        <div className="col-md-7 col-lg-6">
+        <div className="">
           <div className="my-3 text-center">
             <MdCheckCircle size={200} className="text-success" />
             <div className="my-5">
               <h4 className="">
                 You have successfully registered and made payment
               </h4>
-              <h5 className="text-muted">Write this code down</h5>
-              <h5 className="text-muted">You will be redirected soon</h5>
+              <h5 className="text-muted my-3">Copy this code</h5>
+              <pre className="d-flex justify-content-between bg-light p-3 rounded-2 h5">
+                <code>{router?.query?.id}</code>
+                <a type="button" className="ms-3" title="copy to clipboard" onClick={copyToClipboard}><MdCopyAll /></a>
+              </pre>
             </div>
-            {error && <p>{error}</p>}
+            {postError && <p>{postError}</p>}
             <div className="my-3">
               <a
                 className="btn btn-primary"
                 type="button"
-                onClick={() => setNavigate(true)}>
+                onClick={handleNavigation}>
                 {loading ? <Spinner /> : "Go to dashboard"}
               </a>
             </div>

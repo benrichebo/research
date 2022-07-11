@@ -1,19 +1,26 @@
 import { ObjectId } from "mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
+import { authenticate } from "../authentication";
 import { findOne } from "../db/find";
 import { createJwt } from "../jwt";
 import { verifyUser } from "../verification";
 
-export default async (req, res) => {
+export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
 
   const method = req.method;
+  
   try {
     const { db } = await connectToDatabase();
+
+    console.log(method, userId);
 
     if (userId && method == "GET") {
       const user = await db
         .collection("members")
         .findOne({ _id: ObjectId(userId) }, { projection: { password: 0 } });
+
+      console.log(user);
 
       res.status(200).json(user);
     }
@@ -54,6 +61,6 @@ export default async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(500).json({ msg: "Internal server error" });
+    res.status(500).json({ msg: error.message });
   }
-};
+});

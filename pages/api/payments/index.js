@@ -1,5 +1,6 @@
 import { authenticate } from "../authentication";
 import { findOne } from "../db/find";
+import { ObjectId } from "mongodb";
 import { verifyUser } from "../verification";
 
 export default authenticate(async (req, res) => {
@@ -7,16 +8,16 @@ export default authenticate(async (req, res) => {
 
   if (userId) {
     if (req.method == "GET") {
-      const publications = await findOne(
-        "publications",
+      const payments = await findOne(
+        "payments",
         { _id: ObjectId(userId) },
-        { projection: { publications: 1 } }
+        { projection: { payments: 1 } }
       );
 
-      if (publications?._id) {
-        res.status(200).json(publications);
+      if (payments?._id) {
+        res.status(200).json(payments);
       } else {
-        res.status(400).json({ msg: "There are no publications" });
+        res.status(400).json({ msg: "There are no payments" });
       }
     }
   } else {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Email from "../../components/ui/Email";
 import Spinner from "../../components/ui/Spinner";
 import Text from "../../components/ui/Text";
-import Name from "../../components/ui/";
+import Name from "../../components/ui/Name";
 import { useUser } from "../../hooks/useUser";
 
 function Settings() {
@@ -54,7 +54,7 @@ function Settings() {
               <label className="form-label" htmlFor="name">
                 Full name
               </label>
-              <Name setText={setName} id="name" />
+              <Name setName={setName} id="name" />
             </div>
             <div className="mb-3">
               <h5 className="fw-normal text-muted my-4"></h5>

@@ -20,6 +20,7 @@ export const useUser = (type) => {
       setLoading(true);
       try {
         const data = await GET("/api/account");
+        console.log("user", data);
         if (data.msg) {
           setError(data.msg);
         } else {
@@ -40,14 +41,14 @@ export const useUser = (type) => {
         const data = await REGISTER(credentials, "/api/account/create");
         if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
-          this.getCurrentUser();
+          await this.getCurrentUser();
           router?.push("/make-payment");
         } else {
           setError(data.msg);
+          setLoading(false);
         }
       } catch (error) {
         setError(error.message);
-      } finally {
         setLoading(false);
       }
     },
@@ -63,10 +64,10 @@ export const useUser = (type) => {
           router?.push("/dashboard/home");
         } else {
           setError(data.msg);
+          setLoading(false);
         }
       } catch (error) {
         setError(error.message);
-      } finally {
         setLoading(false);
       }
     },
@@ -86,10 +87,10 @@ export const useUser = (type) => {
           setMessage("success");
         } else {
           setError(data.msg);
+          setLoading(false);
         }
       } catch (error) {
         setError(error.message);
-      } finally {
         setLoading(false);
       }
     },
@@ -104,10 +105,10 @@ export const useUser = (type) => {
           setMessage("success");
         } else {
           setError(data.msg);
+          setLoading(false);
         }
       } catch (error) {
         setError(error.message);
-      } finally {
         setLoading(false);
       }
     },

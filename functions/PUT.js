@@ -5,9 +5,8 @@
  **/
 
 export const PUT = async (data, url) => {
-  const sessionData = sessionStorage.getItem("user");
-  const token = JSON.parse(sessionData);
-  const authToken = token?.authToken;
+  const sessionData = sessionStorage.getItem("authToken");
+  const authToken = JSON.parse(sessionData);
 
   const config = {
     method: "POST",
