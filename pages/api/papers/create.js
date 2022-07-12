@@ -1,8 +1,6 @@
 import { authenticate } from "../authentication";
 import moment from "moment";
 import { verifyUser } from "../verification";
-import { ObjectId } from "mongodb";
-import { insertToArray } from "../db/update";
 
 export default authenticate(async (req, res) => {
   //verify user
@@ -24,18 +22,12 @@ export default authenticate(async (req, res) => {
 
     const paper = {
       ...body,
+      userId,
+      status: "pending approval",
       createdAt: moment(date).format("lll"),
     };
 
-    const data = {
-      $push: { papers: paper },
-    };
-
-    const result = await db
-      .collection("papers")
-      .updateOne({ _id: ObjectId(userId) }, data, {
-        upsert: true,
-      });
+    const result = await db.collection("papers").insertOne(paper);
 
     if (result.acknowledged) {
       res.status(201).json({ msg: "papers added successfully" });

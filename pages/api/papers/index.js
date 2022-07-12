@@ -15,9 +15,7 @@ export default authenticate(async (req, res) => {
         if (role == "admin") {
           papers = await db.collection("papers").find().toArray();
         } else {
-          papers = await db
-            .collection("papers")
-            .findOne({ _id: ObjectId(userId) }, { projection: { papers: 1 } });
+          papers = await db.collection("papers").find({ userId });
         }
 
         if (papers?._id || papers?.length >= 0) {

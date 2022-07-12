@@ -1,6 +1,5 @@
 import { authenticate } from "../authentication";
 import { verifyUser } from "../verification";
-import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../../../lib/mongodb";
 
 export default authenticate(async (req, res) => {
