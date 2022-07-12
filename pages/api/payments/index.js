@@ -15,9 +15,7 @@ export default authenticate(async (req, res) => {
         if (role == "admin") {
           payments = await db.collection("payments").find().toArray();
         } else {
-          payments = await db
-            .collection("payments")
-            .findOne({ _id: ObjectId(userId) }, { projection: { payments: 1 } });
+          payments = await db.collection("payments").find({ userId });
         }
 
         if (payments?._id || payments?.length >= 0) {

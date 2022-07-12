@@ -2,9 +2,12 @@ import { ObjectId } from "mongodb";
 import { insertToArray, removeFromArray } from "../db/update";
 import { authenticate } from "../authentication";
 import { verifyUser } from "../verification";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
+
+  const { db } = await connectToDatabase();
 
   const { id } = req.query;
 

@@ -1,16 +1,17 @@
 import { ObjectId } from "mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 import { authenticate } from "../authentication";
 import { verifyUser } from "../verification";
 
 export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
 
+  const { db } = await connectToDatabase();
+
   const { id } = req.query;
 
   if (req.method == "GET") {
-    const paper = await db
-      .collection("papers")
-      .findOne({ _id: ObjectId(id) });
+    const paper = await db.collection("papers").findOne({ _id: ObjectId(id) });
 
     if (paper?._id) {
       res.status(200).json(paper);

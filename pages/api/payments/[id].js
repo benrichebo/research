@@ -1,29 +1,47 @@
 import { ObjectId } from "mongodb";
-import { verifyUser } from "../verification";
+import { connectToDatabase } from "../../../lib/mongodb";
+import { authenticate } from "../authentication";
 
 export default authenticate(async (req, res) => {
-  const { userId, role } = await verifyUser(req);
+  const { db } = await connectToDatabase();
 
   const { id } = req.query;
 
   if (req.method == "GET") {
-    try {
-      let payments = [];
-      if (role == "admin") {
-        payments = await db.collection("payments").find().toArray();
-      } else {
-        payments = await db
-          .collection("payments")
-          .findOne({ _id: ObjectId(userId) }, { projection: { payments: 1 } });
-      }
+    const payment = await db
+      .collection("payments")
+      .findOne({ _id: ObjectId(id) });
 
-      if (payments?._id || payments?.length >= 0) {
-        res.status(200).json(payments);
-      } else {
-        res.status(400).json({ msg: "There are no payments" });
-      }
-    } catch (error) {
-      res.status(500).json({ msg: error.message });
+    if (payment?._id) {
+      res.status(200).json(payment);
+    } else {
+      res.status(400).json({ msg: "There is no payments" });
+    }
+  }
+
+  if (req.method == "PUT") {
+    const body = JSON.parse(req.body);
+
+    const response = await db
+      .collection("payments")
+      .findOneAndUpdate({ _id: ObjectId(id) }, body);
+
+    if (response?.upsertedCount == 1) {
+      res.status(200).json({ msg: "payment updated successfully" });
+    } else {
+      statusCode404(res);
+    }
+  }
+
+  if (method == "DELETE") {
+    const response = await db
+      .collection("payments")
+      .deleteOne({ _id: ObjectId(id) });
+
+    if (response.deletedCount === 1) {
+      res.status(200).json({ msg: "payment was successfully deleted" });
+    } else {
+      res.status(400).json({ msg: "payment was not deleted" });
     }
   }
 });
