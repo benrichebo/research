@@ -6,6 +6,7 @@ import Password from "../../components/ui/Password";
 import Spinner from "../../components/ui/Spinner";
 import { useUser } from "../../hooks/useUser";
 import { MdArrowForward } from "react-icons/md";
+import Footer from "../../components/Footer";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -32,7 +33,7 @@ function Login() {
             </div>
             <div className="col-md-7 col-lg-6 pulse animated d-flex align-items-center pt-3 pt-lg-5 px-lg-5 mx-auto">
               <form
-                className="row mt-md-4 mt-lg-5 w-100"
+                className="row mt-md-4 mt-lg-5"
                 onSubmit={handleSubmit}>
                 <div className="col-md-12 mb-3">
                   <label className="form-label" htmlFor="email">
@@ -67,6 +68,7 @@ function Login() {
           </div>
         </div>
       </section>
+      <Footer />
     </Layout>
   );
 }
