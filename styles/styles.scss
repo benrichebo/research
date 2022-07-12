@@ -24,19 +24,28 @@
   height: 180px !important;
 }
 
+.hero-image {
+  object-fit: "cover";
+  height: 500px;
+}
+
 @media (max-width: 1240px) {
   .display-4 {
     font-size: calc(1.175rem + 2.7vw) !important;
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 560px) {
   .uploadedImage {
     height: 100px !important;
     padding-bottom: 10px;
   }
-  .heading{
+  .heading {
     width: 100%;
+  }
+  .hero-image {
+    object-fit: "cover" !important;
+    height: 350 !important;
   }
 }
 
@@ -59,8 +68,8 @@ input[type="radio"]:checked + label {
 
 .about {
   background: linear-gradient(rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.2)),
-    url("/images/151778155_1117320482043524_2277621920688018616_n.jpg")
-      center / cover,
+    url("/images/151778155_1117320482043524_2277621920688018616_n.jpg") center /
+      cover,
     #7521cf;
   height: 299px;
 }

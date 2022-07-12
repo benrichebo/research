@@ -7,36 +7,36 @@ function Footer() {
       <div class="container-fluid pt-4 pt-xl-5">
         <div class="card-group row">
           <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div class="card-body p-md-2 p-xl-3 p-xxl-5">
-              <h6 class="text-primary card-title pb-4">ABOUT</h6>
+            <div class="card-body p-md-1 p-xl-2 p-xxl-3">
+              <h6 class="text-primary card-title pb-3">ABOUT</h6>
               <div class="d-flex justify-content-between align-items-center">
-                <h5>More about our company</h5>
+                <h6>More about our company</h6>
                 <MdArrowForward size={24} className="ms-3" />
               </div>
             </div>
           </div>
           <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div class="card-body p-md-2 p-xl-3 p-xxl-5">
-              <h6 class="text-primary card-title pb-4">PAPERS</h6>
+            <div class="card-body p-md-1 p-xl-2 p-xxl-3">
+              <h6 class="text-primary card-title pb-3">PAPERS</h6>
               <div class="d-flex justify-content-between align-items-center">
-                <h5>Papers we have published</h5>
+                <h6>Papers we have published</h6>
                 <MdArrowForward size={24} className="ms-3" />
               </div>
             </div>
           </div>
           <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div class="card-body p-md-2 p-xl-3 p-xxl-5">
-              <h6 class="text-primary card-title pb-4">CONTACT</h6>
+            <div class="card-body p-md-1 p-xl-2 p-xxl-3">
+              <h6 class="text-primary card-title pb-3">CONTACT</h6>
               <div class="d-flex justify-content-between align-items-center">
-                <h5>Get in touch with us</h5>
+                <h6>Get in touch with us</h6>
                 <MdArrowForward size={24} className="ms-3" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <footer className="text-white bg-dark py-5">
-        <div className="container py-4 py-lg-5 mt-5">
+      <footer className="text-white bg-dark py-lg-5">
+        <div className="container py-3 py-lg-5 mt-4 mt-mlg-5">
           <div className="row justify-content-center">
             <div className="col-6 col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item mb-3">
               <h3 className="fs-6 text-white-50">Services</h3>

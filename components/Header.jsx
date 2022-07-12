@@ -6,7 +6,7 @@ function Header() {
     <nav className="navbar navbar-light bg-white py-3 border-bottom">
       <div className="container">
         <Link href="/">
-          <a className="navbar-brand fs-5" href="#">
+          <a className="navbar-brand fs-6" href="#">
             Mason Research Institute
           </a>
         </Link>
@@ -18,32 +18,32 @@ function Header() {
           <span className="navbar-toggler-icon text-white"></span>
         </button>
         <div className="collapse navbar-collapse" id="navcol-1">
-          <ul className="navbar-nav d-flex mx-auto ms-auto list-group-horizontal">
+          <ul className="navbar-nav d-flex mx-auto ms-auto list-group-horizontal-md">
             <li className="nav-item">
               <Link href="/register">
-                <a className="nav-link fs-5">Register as a member</a>
+                <a className="nav-link fs-6">Register as a member</a>
               </Link>
             </li>
-            <li className="nav-item ms-4">
+            <li className="nav-item ms-md-4">
               <Link href="/login">
-                <a className="nav-link fs-5">Login</a>
+                <a className="nav-link fs-6">Login</a>
               </Link>
             </li>
-            <li className="nav-item ms-4">
+            <li className="nav-item ms-md-4">
               <Link href="/papers">
-                <a className="nav-link fs-5">Papers</a>
+                <a className="nav-link fs-6">Papers</a>
               </Link>
             </li>
-            <li className="nav-item ms-4">
+            <li className="nav-item ms-md-4">
               <Link href="/conferences">
-                <a className="nav-link fs-5" href="#">
+                <a className="nav-link fs-6" href="#">
                   Conferences
                 </a>
               </Link>
             </li>
-            <li className="nav-item ms-4">
+            <li className="nav-item ms-md-4">
               <Link href="/articles">
-                <a className="nav-link fs-5" href="#">
+                <a className="nav-link fs-6" href="#">
                   Articles
                 </a>
               </Link>
