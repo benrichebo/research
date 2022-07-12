@@ -12,10 +12,10 @@ function Papers() {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-7 d-flex align-items-center pt-5 pb-3 pb-md-5">
-              <div className="col-md-12 col-lg-10 col-xl-9 mx-auto">
-                <h6 className="mb-4">CONFERENCES</h6>
+              <div className="col-sm-10 col-xl-9 mx-sm-auto">
+                <h6 className="mb-4">PAPERS</h6>
                 <h1
-                  className="display-5 pulse animated"
+                  className="display-6 pulse animated"
                   data-bss-disabled-mobile="true">
                   Research Papers&nbsp;
                 </h1>
@@ -28,16 +28,16 @@ function Papers() {
             </div>
           </div>
         </div>
-        <div className="container-fluid py-4 py-xl-5">
+        <div className="container-fluid py-5">
           <div className="row gy-4 gy-md-0">
             <div className="col px-0">
               <div className="card rounded-0 border-0"></div>
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container mb-5 pb-5">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">
                 <div className="card-body p-md-2 p-xl-3 p-xxl-5">
                   <MdInsertDriveFile className="text-muted mb-2" />
@@ -50,7 +50,7 @@ function Papers() {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">
                 <div className="card-body p-md-2 p-xl-3 p-xxl-5">
                   <MdInsertDriveFile className="text-muted mb-2" />
@@ -63,7 +63,7 @@ function Papers() {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">
                 <div className="card-body p-md-2 p-xl-3 p-xxl-5">
                   <MdInsertDriveFile className="text-muted mb-2" />
@@ -76,7 +76,7 @@ function Papers() {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">
                 <div className="card-body p-md-2 p-xl-3 p-xxl-5">
                   <MdInsertDriveFile className="text-muted mb-2" />

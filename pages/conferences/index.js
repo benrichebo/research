@@ -13,9 +13,7 @@ function Conferences() {
             <div className="col-md-7 d-flex align-items-center pt-5 pb-3 pb-md-5">
               <div className="col-md-12 col-lg-10 col-xl-9 mx-auto">
                 <h6 className="mb-4">CONFERENCES</h6>
-                <h1
-                  className="display-5 pulse animated"
-                  data-bss-disabled-mobile="true">
+                <h1 className="display-6 pulse animated">
                   Monthly and yearly conferences organized for our members
                 </h1>
               </div>

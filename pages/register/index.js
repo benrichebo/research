@@ -34,8 +34,8 @@ function Register() {
   return (
     <Layout>
       <Header />
-      <section>
-        <div className="container px-md-0 py-3 py-md-5">
+      <section className="py-5">
+        <div className="container px-md-0 py-5">
           <div className="row">
             <div className="col-md-4">
               <h1 className="display-5 pulse animated border-top border-3 border-primary pt-5">

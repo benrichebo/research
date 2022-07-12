@@ -198,7 +198,7 @@ function Home() {
                     className="img-fluid pulse animated"
                     src="/images/annie-spratt-vGgn0xLdy8s-unsplash.jpg"
                   />
-                  <h5 className="fw-light text-white-50 swing animated border-top border-3 border-primary pt-5 text-white mt-5">
+                  <h5 className="fw-light text-white-50 swing animated border-top border-3 border-primary pt-5 text-white mt-5 px-3 px-md-0">
                     Members are of different expertise in architecture, real
                     estate, interior design, surveying who contribute to the
                     built environment

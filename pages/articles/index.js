@@ -8,13 +8,13 @@ function Articles() {
     <>
       <Layout title="Articles">
         <Header />
-        <div className="container-fluid">
+        <div className="container-fluid mb-4">
           <div className="row">
             <div className="col-md-7 d-flex align-items-center pt-5 pb-3 pb-md-5">
               <div className="col-md-12 col-lg-10 col-xl-9 mx-auto">
                 <h6 className="mb-4">ARTICLES</h6>
                 <h1
-                  className="display-5 pulse animated"
+                  className="display-6 pulse animated"
                   data-bss-disabled-mobile="true">
                   Published articles or great authors
                 </h1>
@@ -38,9 +38,9 @@ function Articles() {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container mb-5 pb-5">
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-6 col-md-4 mb-3">
               <div className="card rounded-0">
                 <img
                   className="img-fluid card-img-top w-100 d-block w-100"
@@ -48,10 +48,10 @@ function Articles() {
                   style={{ objectFit: "scale-down" }}
                 />
                 <div className="card-body">
-                  <div className="p-3">
+                  <div className="p-2 p-lg-3">
                     <span className="fs-6 my-3 my-lg-0">ARCHITECTURE</span>
                     <div className="d-lg-flex justify-content-lg-between">
-                      <h4 className="my-2">Built environment conference</h4>
+                      <h5 className="my-2">Built environment conference</h5>
                     </div>
                     <span className="fs-6 text-muted my-3 my-lg-0">
                       24th July 2022
@@ -60,7 +60,7 @@ function Articles() {
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-6 col-md-4 mb-3">
               <div className="card rounded-0">
                 <img
                   className="img-fluid card-img-top w-100 d-block w-100"
@@ -68,10 +68,10 @@ function Articles() {
                   style={{ objectFit: "scale-down" }}
                 />
                 <div className="card-body">
-                  <div className="p-3">
+                  <div className="p-2 p-lg-3">
                     <span className="fs-6 my-3 my-lg-0">ARCHITECTURE</span>
                     <div className="d-lg-flex justify-content-lg-between">
-                      <h4 className="my-2">Built environment conference</h4>
+                      <h5 className="my-2">Built environment conference</h5>
                     </div>
                     <span className="fs-6 text-muted my-3 my-lg-0">
                       24th July 2022
@@ -80,7 +80,7 @@ function Articles() {
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-6 col-md-4 mb-3">
               <div className="card rounded-0">
                 <img
                   className="img-fluid card-img-top w-100 d-block w-100"
@@ -88,10 +88,10 @@ function Articles() {
                   style={{ objectFit: "scale-down" }}
                 />
                 <div className="card-body">
-                  <div className="p-3">
+                  <div className="p-2 p-lg-3">
                     <span className="fs-6 my-3 my-lg-0">ARCHITECTURE</span>
                     <div className="d-lg-flex justify-content-lg-between">
-                      <h4 className="my-2">Built environment conference</h4>
+                      <h5 className="my-2">Built environment conference</h5>
                     </div>
                     <span className="fs-6 text-muted my-3 my-lg-0">
                       24th July 2022

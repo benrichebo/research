@@ -35,7 +35,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <footer className="text-white bg-dark py-lg-5">
+      <footer className="text-white bg-dark py-2 py-lg-5">
         <div className="container py-3 py-lg-5 mt-4 mt-mlg-5">
           <div className="row justify-content-center">
             <div className="col-6 col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item mb-3">
@@ -147,12 +147,12 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-between align-items-center my-5">
-            <p className="mb-0">Copyright © 2022 Brand</p>
+          <div className="d-flex justify-content-between align-items-center my-4 my-md-5">
+            <p className="mb-0 text-white-50">Copyright © 2022 Brand</p>
           </div>
           <div className="d-flex justify-content-end" style={{ right: 20 }}>
             <a
-              className="border rounded-circle p-3 border-2 border-light"
+              className="border rounded-circle p-1 p-md-3 border-2 border-light"
               href="#"
               target="_top">
               <MdArrowUpward className="fs-3 text-white-50" />
