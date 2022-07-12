@@ -9,10 +9,12 @@ export default authenticate(async (req, res) => {
   const { id } = req.query;
 
   if (req.method == "GET") {
-    const articles = await db.collection("articles").findOne().toArray();
+    const article = await db
+      .collection("articles")
+      .findOne({ _id: ObjectId(id) });
 
-    if (articles >= 0) {
-      res.status(200).json(articles);
+    if (article?._id) {
+      res.status(200).json(article);
     } else {
       res.status(400).json({ msg: "There is no articles" });
     }

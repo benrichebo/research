@@ -9,10 +9,12 @@ export default authenticate(async (req, res) => {
   const { id } = req.query;
 
   if (req.method == "GET") {
-    const conferences = await db.collection("conferences").findOne().toArray();
+    const conference = await db
+      .collection("conferences")
+      .findOne({ _id: ObjectId(id) });
 
-    if (conferences >= 0) {
-      res.status(200).json(conferences);
+    if (conference?._id) {
+      res.status(200).json(conference);
     } else {
       res.status(400).json({ msg: "There is no conferences" });
     }

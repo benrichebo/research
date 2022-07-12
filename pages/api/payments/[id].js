@@ -1,23 +1,29 @@
 import { ObjectId } from "mongodb";
-import { findOne } from "../db/find";
-import { insertToArray, removeFromArray } from "../db/update";
 import { verifyUser } from "../verification";
 
-export default async (req, res) => {
-  const { userId } = await verifyUser(req);
+export default authenticate(async (req, res) => {
+  const { userId, role } = await verifyUser(req);
 
   const { id } = req.query;
 
   if (req.method == "GET") {
-    const payment = await findOne("payments", {
-      _id: ObjectId(userId),
-      "payments.id": id,
-    });
+    try {
+      let payments = [];
+      if (role == "admin") {
+        payments = await db.collection("payments").find().toArray();
+      } else {
+        payments = await db
+          .collection("payments")
+          .findOne({ _id: ObjectId(userId) }, { projection: { payments: 1 } });
+      }
 
-    if (payment?.id) {
-      res.status(200).json(payment);
-    } else {
-      res.status(400).json({ msg: "There is no payments" });
+      if (payments?._id || payments?.length >= 0) {
+        res.status(200).json(payments);
+      } else {
+        res.status(400).json({ msg: "There are no payments" });
+      }
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
     }
   }
-};
+});
