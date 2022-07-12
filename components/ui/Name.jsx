@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Name({setName}) {
+function Name({setName,}) {
   return (
     <input
       className="form-control-lg form-control rounded-0"

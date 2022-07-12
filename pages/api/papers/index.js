@@ -1,27 +1,32 @@
 import { authenticate } from "../authentication";
-import { findAll, findOne } from "../db/find";
 import { verifyUser } from "../verification";
+import { ObjectId } from "mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default authenticate(async (req, res) => {
   const { userId, role } = await verifyUser(req);
 
   if (userId) {
     if (req.method == "GET") {
-      let papers = [];
-      if (role == "admin") {
-        papers = await findAll("papers", {});
-      } else {
-        papers = await findOne(
-          "papers",
-          { _id: ObjectId(userId) },
-          { projection: { papers: 1 } }
-        );
-      }
+      try {
+        const { db } = await connectToDatabase();
 
-      if (papers?._id || papers?.length >= 0) {
-        res.status(200).json(papers);
-      } else {
-        res.status(400).json({ msg: "There are no papers" });
+        let papers = [];
+        if (role == "admin") {
+          papers = await db.collection("papers").find().toArray();
+        } else {
+          papers = await db
+            .collection("papers")
+            .findOne({ _id: ObjectId(userId) }, { projection: { papers: 1 } });
+        }
+
+        if (papers?._id || papers?.length >= 0) {
+          res.status(200).json(papers);
+        } else {
+          res.status(400).json({ msg: "There are no papers" });
+        }
+      } catch (error) {
+        res.status(500).json({ msg: "Internal server error" });
       }
     }
   } else {

@@ -6,24 +6,24 @@ import Name from "../../components/ui/Name";
 import { useUser } from "../../hooks/useUser";
 
 function Settings() {
+  const { userData, user, loading, error } = useUser("user");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
-  const { user, loading, error } = useUser();
   const [page, setPage] = useState("account");
 
-   const handleSubmit = async (e) => {
-     e.preventDefault();
-     //put user data in storage
-     const data = {
-       name,
-       email,
-       city
-     };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //put user data in storage
+    const data = {
+      name,
+      email,
+      city,
+    };
 
-     //go to stripe
-     await user.updateUser(data);
-   };
+    //go to stripe
+    await user.updateUser(data);
+  };
 
   return (
     <>
@@ -49,12 +49,12 @@ function Settings() {
 
       <div className="row mb-4">
         {page == "account" ? (
-          <form className="col-md-6" onSubmit={handleSubmit}>
+          <form className="col-md-8" onSubmit={handleSubmit}>
             <div className="col-12 mb-4">
               <label className="form-label" htmlFor="name">
                 Full name
               </label>
-              <Name setName={setName} id="name" />
+              <Name setName={setName} name={name} />
             </div>
             <div className="mb-3">
               <h5 className="fw-normal text-muted my-4"></h5>
@@ -63,14 +63,18 @@ function Settings() {
                   <label className="form-label" htmlFor="email">
                     Email
                   </label>
-                  <Email setEmail={setEmail} id="email" />
+                  <Email
+                    setEmail={setEmail}
+                    id="email"
+                    email={email}
+                  />
                 </div>
                 <div className="col-12 col-md-6 mb-4">
                   <label className="form-label" htmlFor="city">
                     City
                   </label>
 
-                  <Text setText={setCity} id="city" />
+                  <Text setText={setCity} id="city" text={city} />
                 </div>
                 {error && <p className="text-danger my-2">{error}</p>}
                 <div className="my-3 d-grid">

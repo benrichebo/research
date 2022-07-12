@@ -25,9 +25,7 @@ function Login() {
         <div className="container px-md-0 py-3 py-md-5">
           <div className="row">
             <div className="col-md-4">
-              <h1
-                className="display-5 pulse animated border-top border-3 border-primary pt-5"
-                style="width: 100%;">
+              <h1 className="display-5 pulse animated border-top border-3 border-primary pt-5 heading">
                 Welcome back
               </h1>
               <h4 className="fw-normal">Login</h4>
@@ -49,8 +47,7 @@ function Login() {
                   <Password setPassword={setPassword} id="password" />
                 </div>
                 {error && <p className="text-danger my-2">{error}</p>}
-                <div className="py-3 d-md-flex justify-content-md-between d-grid">
-                  <p className="text-danger">There was an internal error</p>
+                <div className="py-3 d-md-flex justify-content-md-end d-grid">
                   <button
                     className="btn btn-outline-primary rounded-0 btn-lg px-4"
                     type="submit"

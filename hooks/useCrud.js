@@ -20,12 +20,12 @@ export const useCrud = (type, url) => {
       try {
         const data = await GET(url);
         console.log("data", data)
-        if (data?.msg) {
+       if (data?.msg) {
           setError(data.msg);
         } else {
           sessionStorage.setItem(type, data);
           setAllData(data);
-        }
+        } 
       } catch (error) {
         setError(error.message);
       } finally {

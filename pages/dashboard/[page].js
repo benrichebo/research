@@ -13,6 +13,7 @@ import AddArticle from "../dashboard-routes/add-article";
 import Canvas from "../../components/Canvas";
 import SecondaryHeader from "../../components/SecondaryHeader";
 import Payments from "../dashboard-routes/payments";
+import { useUser } from "../../hooks/useUser";
 
 const routes = [
   { name: "home", page: <Home /> },
@@ -28,15 +29,19 @@ const routes = [
 
 function DashBoard() {
   const router = useRouter();
-
+  const { userData } = useUser("user");
   return (
     <Layout>
       <div className="container-fluid">
         <div className="row">
           <div
-            className="col-md-3 col-lg-2 d-none d-md-block vh-100 bg-dark"
+            className="col-md-3 col-lg-2 d-none d-md-block vh-100 bg-dark "
             style={{ position: "sticky", top: 0 }}>
-            <Aside router={router} />
+            <div className="text-white-50 my-3 ms-lg-3">
+              <h6>{userData?.name}</h6>
+              <h6>{userData?.role}</h6>
+            </div>
+            <Aside router={router} user={userData} />
           </div>
           <div className="col-md-9 col-lg-10 px-0">
             <SecondaryHeader />

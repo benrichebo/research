@@ -25,7 +25,7 @@ function Papers() {
         <div className="d-flex justify-content-center align-items-center my-5">
           <div className="text-center">
             <h6 className="text-muted">
-              There was an error loading categories
+              There was an error loading papers
             </h6>
             <button
               className="btn btn-primary my-3"

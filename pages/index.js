@@ -239,7 +239,7 @@ function Home() {
                   <div class="carousel-inner">
                     <div class="carousel-item active">
                       <div class="bg-light">
-                        <div class="card bg-light">
+                        <div class="card bg-light border-0 rounded-0">
                           <img
                             class="img-fluid card-img-top w-100 d-block w-100"
                             src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
@@ -262,7 +262,7 @@ function Home() {
                     </div>
                     <div class="carousel-item">
                       <div class="bg-light">
-                        <div class="card bg-light">
+                        <div class="card bg-light  border-0 rounded-0">
                           <img
                             class="img-fluid card-img-top w-100 d-block w-100"
                             src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
@@ -285,7 +285,7 @@ function Home() {
                     </div>
                     <div class="carousel-item">
                       <div class="bg-light">
-                        <div class="card bg-light">
+                        <div class="card bg-light border-0 rounded-0">
                           <img
                             class="img-fluid card-img-top w-100 d-block w-100"
                             src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"

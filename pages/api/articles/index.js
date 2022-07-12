@@ -1,22 +1,24 @@
 import { authenticate } from "../authentication";
-import { findOne } from "../db/find";
 import { verifyUser } from "../verification";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default authenticate(async (req, res) => {
-  const { userId } = await verifyUser(req);
+  const { userId, role } = await verifyUser(req);
 
-  if (userId) {
+  if (userId && role == "admin") {
     if (req.method == "GET") {
-      const articles = await findOne(
-        "articles",
-        { _id: ObjectId(userId) },
-        { projection: { articles: 1 } }
-      );
+      try {
+        const { db } = await connectToDatabase();
 
-      if (articles?._id) {
-        res.status(200).json(articles);
-      } else {
-        res.status(400).json({ msg: "There are no articles" });
+        const articles = await db.collection("articles").find().toArray();
+
+        if (articles?.length >= 0) {
+          res.status(200).json(articles);
+        } else {
+          res.status(400).json({ msg: "There are no articles" });
+        }
+      } catch (error) {
+        res.status(500).json({ msg: "Internal server error" });
       }
     }
   } else {
