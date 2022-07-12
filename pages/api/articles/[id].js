@@ -1,5 +1,4 @@
 import { ObjectId } from "mongodb";
-import { findOne } from "../db/find";
 import { insertToArray, removeFromArray } from "../db/update";
 import { authenticate } from "../authentication";
 import { verifyUser } from "../verification";
@@ -10,41 +9,23 @@ export default authenticate(async (req, res) => {
   const { id } = req.query;
 
   if (req.method == "GET") {
-    const article = await findOne("articles", {
-      _id: ObjectId(userId),
-      "articles.id": id,
-    });
+    const articles = await db.collection("articles").findOne().toArray();
 
-    if (article?.id) {
-      res.status(200).json(article);
+    if (articles >= 0) {
+      res.status(200).json(articles);
     } else {
       res.status(400).json({ msg: "There is no articles" });
     }
   }
 
   if (req.method == "PUT") {
-    const { name, price, description, main, sub } = JSON.parse(req.body);
-    const data = {
-      $set: {
-        "articles.$[elem].name": name,
-        "articles.$[elem].description": description,
-        "articles.$[elem].price": price,
-        "articles.$[elem].main": main,
-        "articles.$[elem].sub": sub,
-      },
-    };
+    const body = JSON.parse(req.body);
 
-    const results = await insertToArray(
-      collection,
-      { _id: ObjectId(userId) },
-      data,
-      { arrayFilters: [{ "elem.id": id }] },
-      {
-        upsert: true,
-      }
-    );
+    const response = await db
+      .collection("articles")
+      .findOneAndUpdate({ _id: ObjectId(id) }, body);
 
-    if (results.matchedCount === 1) {
+    if (response?.upsertedCount == 1) {
       res.status(200).json({ msg: "article updated successfully" });
     } else {
       statusCode404(res);
@@ -52,20 +33,14 @@ export default authenticate(async (req, res) => {
   }
 
   if (method == "DELETE") {
-    const set = { $pull: { articles: { id: id } } };
+    const response = await db
+      .collection("articles")
+      .deleteOne({ _id: ObjectId(id) });
 
-    //delete account
-    const response = await removeFromArray(
-      collection,
-      {
-        _id: ObjectId(userId),
-      },
-      set
-    );
-    if (response.matchedCount === 1) {
-      res.status(200).json({ msg: "article was successfully deleted" });
+    if (response.deletedCount === 1) {
+      res.status(200).json({ msg: "Article was successfully deleted" });
     } else {
-      res.status(400).json({ msg: "article was not deleted" });
+      res.status(400).json({ msg: "Article was not deleted" });
     }
   }
 });

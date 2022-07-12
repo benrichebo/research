@@ -1,15 +1,8 @@
 import { authenticate } from "../authentication";
 import moment from "moment";
-import { verifyUser } from "../verification";
-import { ObjectId } from "mongodb";
-import { insertToArray } from "../db/update";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default authenticate(async (req, res) => {
-  //verify user
-  const { userId } = await verifyUser(req);
-
-  const collection = "articles";
-
   const method = req.method;
 
   const body = JSON.parse(req.body);
@@ -22,6 +15,8 @@ export default authenticate(async (req, res) => {
       return;
     }
 
+    const { db } = await connectToDatabase();
+
     const date = new Date();
 
     const article = {
@@ -29,22 +24,12 @@ export default authenticate(async (req, res) => {
       createdAt: moment(date).format("lll"),
     };
 
-    const data = {
-      $push: { articles: article },
-    };
+    const result = await db.collection("articles").insertOne(article);
 
-    //5. insert data into company collection
-    const response = await insertToArray(
-      collection,
-      { _id: ObjectId(userId) },
-      data,
-      { upsert: true }
-    );
-
-    if (response.matchedCount === 1) {
+    if (result.acknowledged) {
       res.status(201).json({ msg: "article added successfully" });
     } else {
-      res.status(401).json({ msg: "Adding article failed" });
+      res.status(201).json({ msg: "adding article failed" });
     }
   } catch (error) {
     res.status(500).json({ msg: error.message });

@@ -8,8 +8,6 @@ export default authenticate(async (req, res) => {
   //verify user
   const { userId } = await verifyUser(req);
 
-  const collection = "papers";
-
   const method = req.method;
 
   const body = JSON.parse(req.body);
@@ -33,18 +31,16 @@ export default authenticate(async (req, res) => {
       $push: { papers: paper },
     };
 
-    //5. insert data into company collection
-    const response = await insertToArray(
-      collection,
-      { _id: ObjectId(userId) },
-      data,
-      { upsert: true }
-    );
+    const result = await db
+      .collection("papers")
+      .updateOne({ _id: ObjectId(userId) }, data, {
+        upsert: true,
+      });
 
-    if (response.matchedCount === 1) {
-      res.status(201).json({ msg: "paper added successfully" });
+    if (result.acknowledged) {
+      res.status(201).json({ msg: "papers added successfully" });
     } else {
-      res.status(401).json({ msg: "Adding paper failed" });
+      res.status(201).json({ msg: "adding papers failed" });
     }
   } catch (error) {
     res.status(500).json({ msg: error.message });

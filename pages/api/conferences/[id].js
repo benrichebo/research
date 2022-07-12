@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
-import { findOne } from "../db/find";
-import { authenticate } from "../authentication";
 import { insertToArray, removeFromArray } from "../db/update";
+import { authenticate } from "../authentication";
 import { verifyUser } from "../verification";
 
 export default authenticate(async (req, res) => {
@@ -10,62 +9,38 @@ export default authenticate(async (req, res) => {
   const { id } = req.query;
 
   if (req.method == "GET") {
-    const conference = await findOne("conferences", {
-      _id: ObjectId(userId),
-      "conferences.id": id,
-    });
+    const conferences = await db.collection("conferences").findOne().toArray();
 
-    if (conference?.id) {
-      res.status(200).json(conference);
+    if (conferences >= 0) {
+      res.status(200).json(conferences);
     } else {
       res.status(400).json({ msg: "There is no conferences" });
     }
   }
 
   if (req.method == "PUT") {
-    const { name, price, description, main, sub } = JSON.parse(req.body);
-    const data = {
-      $set: {
-        "conferences.$[elem].name": name,
-        "conferences.$[elem].description": description,
-        "conferences.$[elem].price": price,
-        "conferences.$[elem].main": main,
-        "conferences.$[elem].sub": sub,
-      },
-    };
+    const body = JSON.parse(req.body);
 
-    const results = await insertToArray(
-      collection,
-      { _id: ObjectId(userId) },
-      data,
-      { arrayFilters: [{ "elem.id": id }] },
-      {
-        upsert: true,
-      }
-    );
+    const response = await db
+      .collection("conferences")
+      .findOneAndUpdate({ _id: ObjectId(id) }, body);
 
-    if (results.matchedCount === 1) {
-      res.status(200).json({ msg: "conference updated successfully" });
+    if (response?.upsertedCount == 1) {
+      res.status(200).json({ msg: "article updated successfully" });
     } else {
       statusCode404(res);
     }
   }
 
   if (method == "DELETE") {
-    const set = { $pull: { conferences: { id: id } } };
+    const response = await db
+      .collection("conferences")
+      .deleteOne({ _id: ObjectId(id) });
 
-    //delete account
-    const response = await removeFromArray(
-      collection,
-      {
-        _id: ObjectId(userId),
-      },
-      set
-    );
-    if (response.matchedCount === 1) {
-      res.status(200).json({ msg: "conference was successfully deleted" });
+    if (response.deletedCount === 1) {
+      res.status(200).json({ msg: "Article was successfully deleted" });
     } else {
-      res.status(400).json({ msg: "conference was not deleted" });
+      res.status(400).json({ msg: "Article was not deleted" });
     }
   }
 });
