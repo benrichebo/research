@@ -41,10 +41,10 @@ function Login() {
                   <Email setEmail={setEmail} id="email" />
                 </div>
                 <div className="col-md-12 mb-4">
-                  <label className="form-label" htmlFor="email">
+                  <label className="form-label" htmlFor="password">
                     Password
                   </label>
-                  <Password setPassword={setPassword} id="password" />
+                  <Password setPassword={setPassword} />
                 </div>
                 {error && <p className="text-danger my-2">{error}</p>}
                 <div className="py-3 d-md-flex justify-content-md-end d-grid">

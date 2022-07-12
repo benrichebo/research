@@ -24,7 +24,7 @@ const memberRoutes = [
   { name: "Payments", icon: <MdPayments className="fs-5" /> },
   { name: "Settings", icon: <MdPerson className="fs-5" /> },
 ];
-const Aside = ({ router, user }) => {
+const Aside = ({ router, user, signOut }) => {
   return (
     <>
       <div className="d-flex align-items-center ms-lg-3 h-75">
@@ -57,8 +57,9 @@ const Aside = ({ router, user }) => {
                   <Link href={`/dashboard/${route?.name?.toLocaleLowerCase()}`}>
                     <a
                       className={`text-white text-decoration-none d-flex justify-content-start align-items-center text-white-50 ${
-                        router?.query?.page == route.name.toLocaleLowerCase() ?
-                        "fw-bold text-white" :  "text-white-50" 
+                        router?.query?.page == route.name.toLocaleLowerCase()
+                          ? "fw-bold text-white"
+                          : "text-white-50"
                       }`}
                       href="#">
                       {route?.icon}
@@ -69,6 +70,14 @@ const Aside = ({ router, user }) => {
               ))}
             </>
           )}
+          <li className="fs-6 mb-4">
+            <a
+              className="text-white text-decoration-none d-flex justify-content-start align-items-center text-white-50 text-white-50"
+              type="button"
+              onClick={() => signOut()}>
+              Logout
+            </a>
+          </li>
         </ul>
       </div>
     </>

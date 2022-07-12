@@ -61,7 +61,7 @@ function MediaList({ mediaUploaded, setSelectedImage }) {
                 />
               </div>
               <div className="card-body pb-2 mt-2 d-none d-md-block">
-                <h5 className="mb-0">{media?.name}</h5>
+                <h5 className="mb-0 text-truncate">{media?.name}</h5>
                 <h6 className="mb-0">
                   {media?.width} X {media?.width}
                 </h6>

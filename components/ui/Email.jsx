@@ -4,8 +4,8 @@ function Email({setEmail}) {
   return (
     <input
       className="form-control-lg form-control rounded-0"
-      type="text"
-      name="title"
+      type="email"
+      id="email"
       placeholder=""
       autoComplete="on"
       required=""

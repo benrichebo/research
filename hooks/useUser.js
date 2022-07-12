@@ -73,8 +73,8 @@ export const useUser = (type) => {
     },
 
     signOut() {
-      sessionStorage.setItem("authToken", data?.authToken);
-      this.getCurrentUser();
+      sessionStorage.clearItem();
+      router?.push("/login");
     },
 
     async updateUser(credentials) {

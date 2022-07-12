@@ -22,6 +22,8 @@ export default async (req, res) => {
 
     const results = await db.collection("members").findOne({ email });
 
+    console.log(results);
+
     //3. compare the results password to the req password
     if (results?.password) {
       const match = await compare(password, results?.password);
@@ -47,6 +49,6 @@ export default async (req, res) => {
       res.status(404).json({ msg: "Email does not exist" });
     }
   } catch (error) {
-    res.status(500).json({ msg: "Internal server error" });
+    res.status(500).json({ msg: error.message});
   }
 };

@@ -68,7 +68,7 @@ function AddArticle() {
                       !content ||
                       !category ||
                       !status ||
-                      !file ||
+                      !image ||
                       !author
                     }>
                     {loading ? (

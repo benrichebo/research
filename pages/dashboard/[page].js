@@ -29,7 +29,7 @@ const routes = [
 
 function DashBoard() {
   const router = useRouter();
-  const { userData } = useUser("user");
+  const { userData, user } = useUser("user");
   return (
     <Layout>
       <div className="container-fluid">
@@ -41,7 +41,7 @@ function DashBoard() {
               <h6>{userData?.name}</h6>
               <h6>{userData?.role}</h6>
             </div>
-            <Aside router={router} user={userData} />
+            <Aside router={router} user={userData} signOut={user?.signOut} />
           </div>
           <div className="col-md-9 col-lg-10 px-0">
             <SecondaryHeader />

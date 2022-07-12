@@ -1,5 +1,6 @@
+import { connectToDatabase } from "../../../../lib/mongodb";
+import { ObjectId } from "mongodb";
 import { authenticate } from "../../authentication";
-import { findOne } from "../../db/find";
 import { verifyUser } from "../../verification";
 
 export default authenticate(async (req, res) => {
@@ -7,16 +8,20 @@ export default authenticate(async (req, res) => {
 
   if (userId) {
     if (req.method == "GET") {
-      const media = await findOne(
-        "media",
-        { _id: ObjectId(userId) },
-        { projection: { media: 1 } }
-      );
+      try {
+        const { db } = await connectToDatabase();
 
-      if (media?._id) {
-        res.status(200).json(media);
-      } else {
-        res.status(400).json({ msg: "There are no media" });
+        const media = await db.collection("media").find().toArray();
+
+        console.log("media", media);
+
+        if (media?.length >= 0) {
+          res.status(200).json(media);
+        } else {
+          res.status(400).json({ msg: "There are no media" });
+        }
+      } catch (error) {
+        res.status(500).json({ msg: error.message });
       }
     }
   } else {

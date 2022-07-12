@@ -19,11 +19,13 @@ export const useMedia = (type) => {
       setLoading(true);
       try {
         const data = await GET("/api/media/images");
-        if (!data?.media) {
+        if (data?.msg) {
           setError(data.msg);
         } else {
-          sessionStorage.setItem("medias", data?.media);
-          setMedias(data?.media);
+          if (data?.length > 0) {
+            sessionStorage.setItem("medias", data);
+            setMedias(data);
+          }
         }
       } catch (error) {
         setError(error.message);
@@ -113,6 +115,7 @@ export const useMedia = (type) => {
       const data = sessionStorage.getItem("media");
       if (!data) {
         media.getMedia();
+        console.log("still");
       } else {
         setMedias(data);
       }

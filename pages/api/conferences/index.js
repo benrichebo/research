@@ -12,6 +12,8 @@ export default authenticate(async (req, res) => {
 
         const conferences = await db.collection("conferences").find().toArray();
 
+        console.log("conferences", conferences)
+
         if (conferences?.length >= 0) {
           res.status(200).json(conferences);
         } else {

@@ -10,8 +10,8 @@ export const useStorage = () => {
       this.getItem(key);
     },
 
-    clearItem(key) {
-      sessionStorage.clear(key);
+    clearItem() {
+      window.sessionStorage.clear();
       this.setItem(null);
     },
   };

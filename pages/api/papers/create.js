@@ -1,12 +1,14 @@
 import { authenticate } from "../authentication";
 import moment from "moment";
 import { verifyUser } from "../verification";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default authenticate(async (req, res) => {
   //verify user
   const { userId } = await verifyUser(req);
 
   const method = req.method;
+  const { db } = await connectToDatabase();
 
   const body = JSON.parse(req.body);
 
@@ -35,7 +37,7 @@ export default authenticate(async (req, res) => {
       res.status(201).json({ msg: "adding papers failed" });
     }
   } catch (error) {
-    res.status(500).json({ msg: error.message });
+    res.status(500).json({ msg: "Internal server error" });
   } finally {
     res.end();
   }

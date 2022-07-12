@@ -38,7 +38,7 @@ function Conferences() {
 
       {!error && (
         <div className="row my-4">
-          {allData?.map((data) => (
+          {allData?.length > 0 ? allData?.map((data) => (
             <div className="col-sm-6 col-lg-4">
               <div className="card">
                 <div className="card-body">
@@ -53,7 +53,7 @@ function Conferences() {
                 </div>
               </div>
             </div>
-          ))}
+          )) : "There is no conference"}
         </div>
       )}
     </>

@@ -34,7 +34,7 @@ function Payments() {
           </div>
         </div>
       )}
-    {!error && (
+      {!error && (
         <div className="row my-3">
           {allData?.map((data) => (
             <div className="my-2">
@@ -46,6 +46,7 @@ function Payments() {
               </div>
             </div>
           ))}
+          {allData?.length == 0 && "There is no data"}
         </div>
       )}
     </>

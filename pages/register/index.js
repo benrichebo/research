@@ -73,7 +73,7 @@ function Register() {
                   <label className="form-label" htmlFor="password">
                     Password
                   </label>
-                  <Text setText={setPassword} id="password" />
+                  <Text setText={setPassword} />
                 </div>
                 <div className="my-4">
                   <div className="card bg-light border-0">

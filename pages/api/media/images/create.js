@@ -1,11 +1,14 @@
 import cloudinary from "cloudinary";
-import { insertToArray } from "../../db/update";
+import { ObjectId } from "mongodb";
 import { authenticate } from "../../authentication";
 import { verifyUser } from "../../verification";
+import { connectToDatabase } from "../../../../lib/mongodb";
 
 export default authenticate(async (req, res) => {
   //verify user
   const { userId } = await verifyUser(req);
+
+  const { db } = await connectToDatabase();
 
   //1. get method
   const method = req.method;
@@ -35,20 +38,22 @@ export default authenticate(async (req, res) => {
 
     if (public_id) {
       const data = {
-        $push: { media: { name, width, height, public_id, url } },
+        name,
+        width,
+        height,
+        public_id,
+        url,
       };
 
       //push to media
       //5. insert data into company collection
-      const response = await insertToArray(
-        res,
-        "media",
-        { _id: ObjectId(userId) },
-        data,
-        { upsert: true }
-      );
+      const response = await db
+        .collection("media")
+        .insertOne(data);
 
-      if (response.matchedCount === 1) {
+        console.log("media-response", response);
+
+      if (response.acknowledged) {
         res.status(200).json({ name, width, height, public_id, url });
       } else {
         res.status(400).json({ msg: "Uploading to your media folder failed" });
@@ -57,8 +62,6 @@ export default authenticate(async (req, res) => {
       res.status(401).json({ msg: "Uploading to your media folder failed" });
     }
   } catch (error) {
-    res.status(500).json({ msg: "Internal server error" });
-  } finally {
-    req.end();
-  }
+    res.status(500).json({ msg: error.message });
+  } 
 });

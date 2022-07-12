@@ -54,6 +54,7 @@ function Papers() {
               </div>
             </div>
           ))}
+           {allData?.length == 0 && "There are no papers"}
         </div>
       )}
     </>

@@ -16,7 +16,6 @@ function AddConference() {
 
   const [image, setImage] = useState("");
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
@@ -90,7 +89,7 @@ function AddConference() {
                     !startDate ||
                     !endDate ||
                     !description ||
-                    !file ||
+                    !image ||
                     !country
                   }>
                   {loading ? (
