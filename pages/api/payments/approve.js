@@ -1,5 +1,4 @@
 import { authenticate } from "../authentication";
-import moment from "moment";
 import { connectToDatabase } from "../../../lib/mongodb";
 import { verifyUser } from "../verification";
 
@@ -19,21 +18,17 @@ export default authenticate(async (req, res) => {
     }
     const { db } = await connectToDatabase();
 
-    const date = new Date();
-
-    const payment = {
-      ...body,
-      userId,
-      status: "pending approval",
-      createdAt: moment(date).format("lll"),
-    };
-
-    const result = await db.collection("payments").insertOne(payment);
+    const result = await db
+      .collection("users")
+      .findOneAndUpdate(
+        { _id: ObjectId(userId) },
+        { verified: body?.verified }
+      );
 
     if (result.acknowledged) {
-      res.status(201).json({ msg: "payment added successfully" });
+      res.status(201).json({ msg: "account verified successfully" });
     } else {
-      res.status(201).json({ msg: "adding payment failed" });
+      res.status(201).json({ msg: "account verification failed" });
     }
   } catch (error) {
     res.status(500).json({ msg: error.message });

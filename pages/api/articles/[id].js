@@ -1,5 +1,4 @@
 import { ObjectId } from "mongodb";
-import { insertToArray, removeFromArray } from "../db/update";
 import { authenticate } from "../authentication";
 import { verifyUser } from "../verification";
 import { connectToDatabase } from "../../../lib/mongodb";
@@ -7,45 +6,52 @@ import { connectToDatabase } from "../../../lib/mongodb";
 export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
 
-  const { db } = await connectToDatabase();
+  try {
+    const { db } = await connectToDatabase();
 
-  const { id } = req.query;
+    const { id } = req.query;
+    console.log("id", id);
 
-  if (req.method == "GET") {
-    const article = await db
-      .collection("articles")
-      .findOne({ _id: ObjectId(id) });
+    if (req.method == "GET") {
+      const article = await db
+        .collection("articles")
+        .findOne({ _id: ObjectId(id) });
 
-    if (article?._id) {
-      res.status(200).json(article);
-    } else {
-      res.status(400).json({ msg: "There is no articles" });
+      if (article?._id) {
+        res.status(200).json(article);
+      } else {
+        res.status(400).json({ msg: "There is no article" });
+      }
     }
-  }
 
-  if (req.method == "PUT") {
-    const body = JSON.parse(req.body);
+    if (req.method == "PUT") {
+      const body = JSON.parse(req.body);
+      console.log("put body", body);
 
-    const response = await db
-      .collection("articles")
-      .findOneAndUpdate({ _id: ObjectId(id) }, body);
-
-    if (response?.upsertedCount == 1) {
-      res.status(200).json({ msg: "article updated successfully" });
-    } else {
-      statusCode404(res);
+      const response = await db
+        .collection("articles")
+        .updateOne({ _id: ObjectId(id) }, { $set: { ...body } });
+      console.log("response", response);
+      if (response?.acknowledged) {
+        res.status(200).json({ msg: "article updated successfully" });
+      } else {
+        res.status(400).json({ msg: "article update failed" });
+      }
     }
-  }
 
-  if (method == "DELETE") {
-    const response = await db
-      .collection("articles")
-      .deleteOne({ _id: ObjectId(id) });
+    if (req.method == "DELETE") {
+      console.log("delete body", req.body);
+      const response = await db
+        .collection("articles")
+        .deleteOne({ _id: ObjectId(id) });
 
-    if (response.deletedCount === 1) {
-      res.status(200).json({ msg: "Article was successfully deleted" });
-    } else {
-      res.status(400).json({ msg: "Article was not deleted" });
+      if (response.deletedCount === 1) {
+        res.status(200).json({ msg: "Article was successfully deleted" });
+      } else {
+        res.status(400).json({ msg: "Article was not deleted" });
+      }
     }
+  } catch (error) {
+     res.status(500).json({ msg: "Internal server error" });
   }
 });

@@ -9,7 +9,7 @@ export const PUT = async (data, url) => {
   const authToken = JSON.parse(sessionData);
 
   const config = {
-    method: "POST",
+    method: "PUT",
     headers: {
       ContentType: "application/json",
       Authorization: `Bearer ${sessionData && authToken}`,

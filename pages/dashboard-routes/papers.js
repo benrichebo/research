@@ -41,7 +41,7 @@ function Papers() {
           </div>
         </div>
       )}
-      {!error && (
+      {!error && allData?.length > 0 && (
         <div class="row">
           <div class="col-12 d-flex justify-content-end align-items-center mb-3">
             <input
@@ -130,7 +130,7 @@ function Papers() {
           </div>
         </div>
       )}
-      {allData?.length == 0 && (
+      {allData?.length == 0 && !error && (
         <div className="row mb-4">
           <div
             className="col d-flex justify-content-center align-items-center bg-light"

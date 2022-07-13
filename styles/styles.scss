@@ -84,10 +84,11 @@ input[type="radio"]:checked + label {
   background: url("/images/manager.jpg") center / cover;
 }
 
-.post:hover{
-  background-color: #d2d8de!important;
+.actions {
+  display: none;
 }
 
-.post:hover + .actions{
- display: "block"!important;
+.post:hover > .actions {
+  display: block;
+  color: red;
 }

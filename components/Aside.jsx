@@ -74,7 +74,7 @@ const Aside = ({ router, user, signOut }) => {
             <a
               className="text-white text-decoration-none d-flex justify-content-start align-items-center text-white-50 text-white-50"
               type="button"
-              onClick={() => signOut()}>
+              onClick={signOut}>
               Logout
             </a>
           </li>

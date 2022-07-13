@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { DELETE } from "../functions/DELETE";
 import { GET } from "../functions/GET";
 import { POST } from "../functions/POST";
 import { PUT } from "../functions/PUT";
@@ -7,7 +8,7 @@ import { useStorage } from "./useStorage";
 export const useCrud = (type, url) => {
   const { sessionStorage } = useStorage("session");
 
-  const [allData, setAllData] = useState(null);
+  const [allData, setAllData] = useState([]);
   const [oneData, setOneData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -19,17 +20,20 @@ export const useCrud = (type, url) => {
       setLoading(true);
       try {
         const data = await GET(url);
+        setLoading(false);
         console.log("data", data);
         if (data?.msg) {
           setError(data.msg);
         } else {
-          if (data?.length > 0) sessionStorage.setItem(type, data);
-          setAllData(data);
+          sessionStorage.clearItem(type);
+          if (data?.length > 0) {
+            console.log("data2", data);
+            sessionStorage.setItem(type, data);
+            setAllData(data);
+          }
         }
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     },
 
@@ -37,6 +41,7 @@ export const useCrud = (type, url) => {
       setLoading(true);
       try {
         const data = await GET(url);
+        setLoading(false);
         if (data.msg) {
           setError(data.msg);
         } else {
@@ -44,8 +49,6 @@ export const useCrud = (type, url) => {
         }
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     },
 
@@ -54,6 +57,7 @@ export const useCrud = (type, url) => {
       setLoading(true);
       try {
         const data = await POST(body, url);
+        setLoading(false);
         if (data.msg.includes("successfully")) {
           setMessage(data.msg);
           this.getAllData();
@@ -62,8 +66,6 @@ export const useCrud = (type, url) => {
         }
       } catch (error) {
         setPostError(error.message);
-      } finally {
-        setLoading(false);
       }
     },
 
@@ -71,23 +73,25 @@ export const useCrud = (type, url) => {
       setLoading(true);
       try {
         const data = await PUT(body, url);
+        setLoading(false);
         if (data.msg.includes("successfully")) {
           setMessage(data.msg);
+          this.getAllData();
         } else {
           setError(data.msg);
         }
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     },
 
     async deleteData(url) {
+      console.log(url);
       setLoading(true);
       const data = await DELETE(url);
       if (data.msg.includes("successfully")) {
         setMessage(data.msg);
+        this.getAllData();
       } else {
         setError(data.msg);
       }
@@ -112,7 +116,7 @@ export const useCrud = (type, url) => {
     }
 
     if (type?.includes("one")) {
-      data.getData();
+      data.getOneData(url);
     }
   }, []);
 

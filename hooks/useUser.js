@@ -73,7 +73,7 @@ export const useUser = (type) => {
     },
 
     signOut() {
-      sessionStorage.clearItem();
+      sessionStorage.clearSession();
       router?.push("/login");
     },
 

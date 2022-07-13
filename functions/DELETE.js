@@ -4,7 +4,7 @@
  * 3. Parameters: url, data
  **/
 
-export const DELETE = async (data, url) => {
+export const DELETE = async (url) => {
   const sessionData = sessionStorage.getItem("authToken");
   const authToken = JSON.parse(sessionData);
 
@@ -14,7 +14,6 @@ export const DELETE = async (data, url) => {
       ContentType: "application/json",
       Authorization: `Bearer ${sessionData && authToken}`,
     },
-    body: JSON.stringify(data),
     timeout: 5000,
   };
 

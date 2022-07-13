@@ -5,16 +5,19 @@ import { MdOutlineInsertPhoto } from "react-icons/md";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
 
-function AddConference() {
-  const { data, loading, postError, message } = useCrud();
+function AddConference({conference}) {
+  const { data, loading, postError, message } = useCrud(
+    "all-conferences",
+    "/api/conferences"
+  );
 
-  const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [country, setCountry] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(conference?.title || "");
+  const [startDate, setStartDate] = useState(conference?.startDate || "");
+  const [endDate, setEndDate] = useState(conference?.endDate || "");
+  const [country, setCountry] = useState(conference?.country || "");
+  const [description, setDescription] = useState(conference?.description || "");
 
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(conference?.image || "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,11 +29,13 @@ function AddConference() {
       startDate,
       endDate,
     };
-    await data.addData(body, "/api/conferences/create");
+    article?.title
+      ? await data.updateData(body, `/api/conferences/${article?._id}`)
+      : await data.addData(body, "/api/conferences/create");
   };
   return (
     <>
-      <h5>Add conference</h5>
+      <h5>{article?.title ? "Edit conference" : "Add conference"}</h5>
       {message && <p className="text-success">{message}</p>}
       {postError && <p className="text-danger">{postError}</p>}
       <form className="row mb-4" onSubmit={handleSubmit}>
@@ -95,7 +100,10 @@ function AddConference() {
                   {loading ? (
                     <Spinner className="ms-2" />
                   ) : (
-                    <span className="">Add conference</span>
+                    <span className="">
+                      {" "}
+                      {article?.title ? "Save conference" : "Add conference"}
+                    </span>
                   )}
                 </button>
               </div>

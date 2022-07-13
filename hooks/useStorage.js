@@ -10,7 +10,12 @@ export const useStorage = () => {
       this.getItem(key);
     },
 
-    clearItem() {
+    clearItem(key) {
+      window.sessionStorage.removeItem(key);
+      this.setItem(null);
+    },
+
+    clearSession() {
       window.sessionStorage.clear();
       this.setItem(null);
     },

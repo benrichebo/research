@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
-import {  MdEdit, MdDelete, MdArticle, MdGroup } from "react-icons/md";
+import { MdEdit, MdDelete, MdGroup, MdRefresh } from "react-icons/md";
+import { useStorage } from "../../hooks/useStorage";
 
 function Conferences() {
   const { data, loading, allData, error } = useCrud(
@@ -16,13 +18,37 @@ function Conferences() {
     data.deleteData(`/api/conferences/${id}`);
   };
 
+  const { sessionStorage } = useStorage();
+
+  const router = useRouter();
+
+  //clear detail data
+  useEffect(() => {
+    sessionStorage.clearItem("url");
+  }, []);
+
+  const editConference = (url) => {
+    console.log(url);
+    sessionStorage.setItem("url", url);
+
+    const dataUrl = sessionStorage.getItem("url");
+    if (dataUrl) router?.push("/dashboard/edit-conference");
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h5>Conferences</h5>
-        <Link href="/dashboard/add-conference">
-          <a className="btn btn-primary">Add conference</a>
-        </Link>
+        <div>
+          <Link href="/dashboard/add-conference">
+            <a className="btn btn-primary">Add conference</a>
+          </Link>
+          <button
+            className="btn btn-light my-3 ms-3"
+            onClick={() => data.getAllData("/api/conferences")}>
+            <MdRefresh />
+          </button>
+        </div>
       </div>
       {loading && !error && (
         <div className="d-flex justify-content-center align-items-center my-5">
@@ -43,7 +69,7 @@ function Conferences() {
           </div>
         </div>
       )}
-      {!error && (
+      {!error && allData?.length > 0 && (
         <div class="row">
           <div class="col-12 d-flex justify-content-end align-items-center mb-3">
             <input
@@ -93,11 +119,18 @@ function Conferences() {
                                 width="70"
                                 height="50"
                                 style={{ objectFit: "cover" }}
-                                src="/images/151778155_1117320482043524_2277621920688018616_n.jpg"
+                                src={data?.image?.url}
                               />
                             </label>
                             <span className="ms-3">
-                              <a className="" type="button">
+                              <a
+                                className=""
+                                type="button"
+                                onClick={() =>
+                                  editConference(
+                                    `/api/conferences/${data?._id}`
+                                  )
+                                }>
                                 <MdEdit size={20} className="text-muted" />
                               </a>
                               <a

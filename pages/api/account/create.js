@@ -44,6 +44,7 @@ export default async (req, res) => {
         password: hashedPassword,
         createdAt: moment(date).format("lll"),
         verifiedEmail: false,
+        verified
       };
 
       const response = await db.collection("members").insertOne(userData);
@@ -59,6 +60,7 @@ export default async (req, res) => {
           userId: results?._id,
           role: results?.role,
           email: results?.email,
+          verified: results?.verified
         });
 
         const data = {

@@ -5,16 +5,16 @@ import { MdOutlineInsertPhoto } from "react-icons/md";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
 
-function AddArticle() {
-  const { data, loading, postError, message } = useCrud();
+function AddArticle({ article }) {
+  const { data, loading, postError, message } = useCrud("all-articles", "/api/articles");
 
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
-  const [status, setStatus] = useState("");
+  const [title, setTitle] = useState(article?.title || "");
+  const [author, setAuthor] = useState(article?.author || "");
+  const [content, setContent] = useState(article?.content || "");
+  const [category, setCategory] = useState(article?.category || "");
+  const [status, setStatus] = useState(article?.status || "");
 
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(article?.image);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,11 +26,15 @@ function AddArticle() {
       category,
       status,
     };
-    await data.addData(body, "/api/articles/create");
+
+    article?.title
+      ? await data.updateData(body, `/api/articles/${article?._id}`)
+      : await data.addData(body, "/api/articles/create");
   };
+
   return (
     <>
-      <h5>Add article</h5>
+      <h5>{article?.title ? "Edit article" : "Add article"}</h5>
       <div className="mb-4">
         {message && <p className="text-success">{message}</p>}
         {postError && <p className="text-danger">{postError}</p>}
@@ -40,7 +44,13 @@ function AddArticle() {
               <label className="form-label" htmlFor="title">
                 Title
               </label>
-              <Text setText={setTitle} id="title" />
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                id="title"
+                className="form-control form-control-lg rounded-0"
+              />
             </div>
             <div className="mb-3">
               <h5 className="fw-normal text-muted my-4"></h5>
@@ -49,13 +59,20 @@ function AddArticle() {
                   <label className="form-label" htmlFor="author">
                     Author
                   </label>
-                  <Text setText={setAuthor} id="author" />
+                  <input
+                    type="text"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                    id="author"
+                    className="form-control form-control-lg rounded-0"
+                  />
                 </div>
                 <div className="col-12 mb-4">
                   <label className="form-label">Content</label>
                   <textarea
                     className="form-control form-control-lg rounded-0"
                     rows="4"
+                    value={content}
                     onChange={(e) => setContent(e.target.value)}></textarea>
                 </div>
                 <div className="my-3 d-grid">
@@ -74,7 +91,9 @@ function AddArticle() {
                     {loading ? (
                       <Spinner className="ms-2" />
                     ) : (
-                      <span className="">Add article</span>
+                      <span className="">
+                        {article?.title ? "Save article" : "Add article"}
+                      </span>
                     )}
                   </button>
                 </div>
@@ -83,13 +102,15 @@ function AddArticle() {
           </div>
           <div className="col col-md-4 col-lg-3">
             <div className="col-12 mb-4">
-              <label className="form-label">Category</label>
+              <label className="form-label" htmlFor="category">Category</label>
               <select
                 className="form-select form-select-lg rounded-0"
-                onChange={(e) => setCategory(e.target.value)}>
-                <option value="12" selected="">
-                  This is item 1
-                </option>
+                onChange={(e) => setCategory(e.target.value)} id="category">
+                {category && (
+                  <option value={category} selected="">
+                    {category}
+                  </option>
+                )}
                 <option value="13">This is item 2</option>
                 <option value="14">This is item 3</option>
               </select>
@@ -105,7 +126,8 @@ function AddArticle() {
                   id="draft"
                   name="status"
                   value="draft"
-                  onChange={(e) => setStatus(e.target.checked)}
+                  onChange={(e) => setStatus(e.target.value)}
+                  checked={status == "draft"}
                 />
                 <label className="form-check-label" htmlFor="draft">
                   As Draft
@@ -118,7 +140,8 @@ function AddArticle() {
                   id="publish"
                   name="status"
                   value="publish"
-                  onChange={(e) => setStatus(e.target.checked)}
+                  checked={status == "publish"}
+                  onChange={(e) => setStatus(e.target.value)}
                 />
                 <label className="form-check-label" htmlFor="publish">
                   or publish
@@ -138,10 +161,10 @@ function AddArticle() {
                   <img
                     src={image?.url}
                     alt={image?.name}
-                    width="100"
-                    height="100"
+                    width="150"
+                    height="150"
                     className="img-fluid"
-                    style={{ objectFit: "contain" }}
+                    style={{ objectFit: "fill" }}
                   />
                 )}
                 {!image?.name && (

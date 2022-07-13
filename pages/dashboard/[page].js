@@ -10,10 +10,12 @@ import Settings from "../dashboard-routes/settings";
 import AddConference from "../dashboard-routes/add-conference";
 import AddPaper from "../dashboard-routes/add-paper";
 import AddArticle from "../dashboard-routes/add-article";
+import EditArticle from "../dashboard-routes/edit-article";
 import Canvas from "../../components/Canvas";
 import SecondaryHeader from "../../components/SecondaryHeader";
 import Payments from "../dashboard-routes/payments";
 import { useUser } from "../../hooks/useUser";
+import EditConference from "../dashboard-routes/edit-conference";
 
 const routes = [
   { name: "home", page: <Home /> },
@@ -23,8 +25,10 @@ const routes = [
   { name: "settings", page: <Settings /> },
   { name: "payments", page: <Payments /> },
   { name: "add-conference", page: <AddConference /> },
+  { name: "edit-conference", page: <EditConference /> },
   { name: "add-paper", page: <AddPaper /> },
   { name: "add-article", page: <AddArticle /> },
+  { name: "edit-article", page: <EditArticle /> },
 ];
 
 function DashBoard() {
