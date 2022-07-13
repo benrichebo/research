@@ -24,10 +24,8 @@ export default async (req, res) => {
 
     console.log(results);
 
-    //3. compare the results password to the req password
     if (results?.password) {
       const match = await compare(password, results?.password);
-      //4. if user exist, create jwt
       if (match) {
         const { _id, role, email } = results;
         const jwt = createJwt({
@@ -49,6 +47,6 @@ export default async (req, res) => {
       res.status(404).json({ msg: "Email does not exist" });
     }
   } catch (error) {
-    res.status(500).json({ msg: error.message});
+    res.status(500).json({ msg: "Internal server error"});
   }
 };

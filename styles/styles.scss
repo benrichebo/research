@@ -83,3 +83,11 @@ input[type="radio"]:checked + label {
   height: 300px;
   background: url("/images/manager.jpg") center / cover;
 }
+
+.post:hover{
+  background-color: #d2d8de!important;
+}
+
+.post:hover + .actions{
+ display: "block"!important;
+}

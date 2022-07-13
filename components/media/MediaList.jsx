@@ -9,6 +9,7 @@ function MediaList({ mediaUploaded, setSelectedImage }) {
   useEffect(() => {
     if (mediaUploaded) {
       medias.push(mediaUploaded);
+      console.log("mediaUploaded", mediaUploaded);
     }
   }, [mediaUploaded]);
 
