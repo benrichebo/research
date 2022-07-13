@@ -110,11 +110,11 @@ function Articles() {
                           </div>
                           {show && (
                             <div class="mt-3">
-                              <a href="#" onClick={() => setShow(false)}>
+                              <a className="btn" href="#" onClick={() => setShow(false)}>
                                 Edit
                               </a>
                               <a
-                                class="ms-4"
+                                className="ms-4 btn"
                                 href="#"
                                 onClick={() => deleteArticle(data?._id)}>
                                 Delete
