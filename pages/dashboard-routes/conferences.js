@@ -11,7 +11,7 @@ function Conferences() {
     "/api/conferences"
   );
 
-  const [routeId, setRouteId] = useState();
+  const [routeId, setRouteId] = useState(null);
 
   const [show, setShow] = useState();
 
@@ -19,7 +19,7 @@ function Conferences() {
 
   useEffect(() => {
     if (router.isReady) {
-      setRouteId(router?.query?.slug[0]);
+      setRouteId(router?.query && router?.query?.slug[0]);
     }
   }, [router.isReady]);
 

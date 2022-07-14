@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { useRouter } from "next/router";
 import AddArticle from "./add-article";
 
 function EditArticle() {
-  const router = useRouter()
+  const router = useRouter();
+
+  const [routeId, setRouteId] = useState(null);
+
   const { data, loading, error, oneData } = useCrud(
     "one-article",
-    `/api/articles/${router?.query?.slug[1]}`
+    `/api/articles/${(router?.query && routeId) || null}`
   );
+
+  useEffect(() => {
+    if (router.isReady) {
+      setRouteId(router?.query && router?.query?.slug[0]);
+    }
+  }, [router.isReady]);
 
   return (
     <>
@@ -25,7 +34,11 @@ function EditArticle() {
             <button
               className="btn btn-primary my-3"
               onClick={() =>
-                data.getOneData(`/api/articles/${router?.query?.slug[1]}`)
+                data.getOneData(
+                  `/api/articles/${
+                    (router?.query && router?.query?.slug[1]) || null
+                  }`
+                )
               }>
               Reload
             </button>

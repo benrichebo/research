@@ -12,13 +12,13 @@ function Papers() {
   );
   const [show, setShow] = useState();
 
-  const [routeId, setRouteId] = useState();
+  const [routeId, setRouteId] = useState(null);
 
   const router = useRouter();
 
   useEffect(() => {
     if (router.isReady) {
-      setRouteId(router?.query?.slug[0]);
+      setRouteId(router?.query && router?.query?.slug[0]);
     }
   }, [router.isReady]);
 
