@@ -1,129 +1,93 @@
-import React, { useState } from "react";
-import Email from "../../components/ui/Email";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../components/ui/Spinner";
-import Text from "../../components/ui/Text";
-import Name from "../../components/ui/Name";
+import { useStorage } from "../../hooks/useStorage";
 import { useUser } from "../../hooks/useUser";
 
 function Settings() {
-  const { userData, user, loading, error } = useUser("user");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [city, setCity] = useState("");
-  const [page, setPage] = useState("account");
+  //1. get user
+  const { user, loading, error, postError, postLoading, message } = useUser("user");
 
+  const { sessionStorage } = useStorage();
+
+  //2.fetch user in session
+  const userData = sessionStorage.getItem("user");
+
+  const [name, setName] = useState(userData?.name || "");
+
+  const [email, setEmail] = useState(userData?.email || "");
+
+  const [city, setCity] = useState(userData?.city || "");
+
+  //3. update user
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //put user data in storage
-    const data = {
-      name,
-      email,
-      city,
-    };
-
-    //go to stripe
-    await user.updateUser(data);
+    await user.updateUser({name, email, city})
   };
 
+  if (loading) return "loading...";
+
+  if (error) return "There is an error";
+
   return (
-    <>
-      <h5>Settings</h5>
-      <div className="d-flex justify-content-start my-3">
-        <a
-          type="button"
-          className={`fs-6 text-decoration-none text-black ${
-            page != "account" && "text-muted"
-          }`}
-          onClick={() => setPage("account")}>
-          Account
-        </a>
-        <a
-          type="button"
-          className={`ms-4 fs-6 text-decoration-none text-black ${
-            page != "payment" && "text-muted"
-          }`}
-          onClick={() => setPage("payment")}>
-          Subscription
-        </a>
-      </div>
-
-      <div className="row mb-4">
-        {page == "account" ? (
-          <form className="col-md-8" onSubmit={handleSubmit}>
-            <div className="col-12 mb-4">
-              <label className="form-label" htmlFor="name">
-                Full name
-              </label>
-              <Name setName={setName} name={name} />
-            </div>
-            <div className="mb-3">
-              <h5 className="fw-normal text-muted my-4"></h5>
-              <div className="row">
-                <div className="col-12 col-md-6 mb-4">
-                  <label className="form-label" htmlFor="email">
-                    Email
-                  </label>
-                  <Email
-                    setEmail={setEmail}
-                    id="email"
-                    email={email}
-                  />
-                </div>
-                <div className="col-12 col-md-6 mb-4">
-                  <label className="form-label" htmlFor="city">
-                    City
-                  </label>
-
-                  <Text setText={setCity} id="city" text={city} />
-                </div>
-                {error && <p className="text-danger my-2">{error}</p>}
-                <div className="my-3 d-grid">
-                  <button className="btn btn-primary btn-lg" type="submit">
-                    {loading ? <Spinner /> : <span className="">Save</span>}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        ) : (
-          <>
-            <div className="col-sm-6 col-lg-4">
-              <div className="card rounded-0">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <h6 className="card-title">Membership</h6>
-                    <h6 className="card-title text-muted">July 26, 2022</h6>
-                  </div>
-                  <h6>Amount: USD 150</h6>
-                  <h6 className="text-muted card-subtitle mb-2">
-                    Method: Card
-                  </h6>
-                  <span className="badge rounded-pill bg-primary">Pending</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-lg-4">
-              <div className="card rounded-0">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <h6 className="card-title">Membership</h6>
-                    <h6 className="card-title text-muted">July 26, 2022</h6>
-                  </div>
-
-                  <h6>Amount: USD 150</h6>
-                  <h6 className="text-muted card-subtitle mb-2">
-                    Method: Card
-                  </h6>
-                  <span className="badge rounded-pill bg-success">
-                    Approved
-                  </span>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    </>
+    <div className="col-md-9 col-lg-7">
+      {postError && <p className="text-danger">{postError}</p>}
+      {message && <p className="text-danger">{message}</p>}
+      <form className="row" onSubmit={handleSubmit}>
+        <div class="form-group mb-4">
+          <label htmlFor="name" className="mb-2">
+            Name
+          </label>
+          <input
+            type="text"
+            class="form-control rounded-0"
+            name="email"
+            id="email"
+            aria-describedby="helpId"
+            placeholder=""
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div class="form-group mb-4">
+          <label htmlFor="email" className="mb-2">
+            Email
+          </label>
+          <input
+            type="email"
+            class="form-control rounded-0"
+            name="email"
+            id="email"
+            aria-describedby="helpId"
+            placeholder=""
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div class="form-group mb-4">
+          <label htmlFor="city" className="mb-2">
+            City
+          </label>
+          <input
+            type="text"
+            class="form-control rounded-0"
+            name="city"
+            id="city"
+            aria-describedby="helpId"
+            placeholder=""
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </div>
+        <div className="d-grid my-3">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={postLoading || !email || !name || !city}>
+            {postLoading ? <Spinner /> : <span className="ms-3">Save</span>}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 

@@ -21,39 +21,39 @@ export default authenticate(async (req, res) => {
 
       console.log(user);
 
-      res.status(200).json({...user, id: user?._id});
+      res.status(200).json({ ...user, id: user?._id });
     }
 
     if (userId && method == "PUT") {
       const response = await db
         .collection("members")
-        .findOneAndUpdate({ _id: ObjectId(userId) }, req.body);
+        .updateOne({ _id: ObjectId(userId) }, { $set: { ...req.body } });
 
-      if (response?.upsertedCount == 1) {
-        const results = await db
-          .collection("members")
-          .findOne({ email }, { projection: { password: 0 } });
+       if (response?.acknowledged) {
+         const results = await db
+           .collection("members")
+           .findOne({ email }, { projection: { password: 0 } });
 
-        const jwt = createJwt({
-          userId: results?._id,
-          role: results?.role,
-          email: results?.email,
-          verified: results?.verified,
-        });
+         const jwt = createJwt({
+           userId: results?._id,
+           role: results?.role,
+           email: results?.email,
+           verified: results?.verified,
+         });
 
-        const data = {
-          authToken: jwt,
-          role: results?.role,
-          email: results?.email,
-          name: results?.name,
-          verified: results?.verified,
-          id: results?._id,
-        };
+         const data = {
+           authToken: jwt,
+           role: results?.role,
+           email: results?.email,
+           name: results?.name,
+           verified: results?.verified,
+           id: results?._id,
+         };
 
-        res.status(201).json(data);
-      } else {
-        res.status(404).json({ msg: "Update failed" });
-      }
+         res.status(201).json(data);
+       } else {
+         res.status(404).json({ msg: "Update failed" });
+       }
     }
 
     if (userId && method == "DELETE") {
@@ -68,6 +68,6 @@ export default authenticate(async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(500).json({ msg: error.message });
+    res.status(500).json({ msg: "Internal server error" });
   }
 });

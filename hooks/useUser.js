@@ -12,36 +12,45 @@ export const useUser = (type) => {
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [postError, setPostError] = useState(false);
+  const [postLoading, setPostLoading] = useState(false);
   let [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
   let user = {
     async getUserInSession() {
+      setLoading(true);
       const initializedUser = sessionStorage.getItem("initialized-user");
       const user = sessionStorage.getItem("user");
 
       if (user?.email || initializedUser?.email) {
         setUserData(user || initializedUser);
+        setLoading(false);
+      } else {
+        this.getCurrentUser();
       }
     },
+
     async getCurrentUser() {
       setLoading(true);
       try {
         const data = await GET("/api/account");
         console.log("user", data);
         if (data.msg) {
+          setLoading(false);
           setError(data.msg);
         } else {
           if (data?._id) {
+            setLoading(false);
             sessionStorage.setItem("user", data);
             setUserData(data);
             setMessage("success");
+            this.getUserInSession();
           }
         }
       } catch (error) {
-        setError(error.message);
-      } finally {
         setLoading(false);
+        setError(error.message);
       }
     },
 
@@ -53,7 +62,7 @@ export const useUser = (type) => {
           sessionStorage.setItem("authToken", data?.authToken);
           sessionStorage.setItem("initial-user", data);
           await this.getCurrentUser();
-          console.log("route to dashboard")
+          console.log("route to dashboard");
           router?.push("/make-payment");
         } else {
           setError(data.msg);
@@ -69,7 +78,7 @@ export const useUser = (type) => {
       setLoading(true);
       try {
         const data = await LOGIN(credentials, "/api/account/login");
-        console.log("login-data", data)
+        console.log("login-data", data);
         if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
           sessionStorage.setItem("initial-user", data);
@@ -92,7 +101,7 @@ export const useUser = (type) => {
     },
 
     async updateUser(credentials) {
-      setLoading(true);
+      setPostLoading(true);
       try {
         const data = await PUT(credentials, `/api/account`);
         if (data?.authToken) {
@@ -101,12 +110,12 @@ export const useUser = (type) => {
           this.getCurrentUser();
           setMessage("success");
         } else {
-          setError(data.msg);
-          setLoading(false);
+          setPostError(data.msg);
+          setPostLoading(false);
         }
       } catch (error) {
-        setError(error.message);
-        setLoading(false);
+        setPostError(error.message);
+        setPostLoading(false);
       }
     },
 
@@ -138,12 +147,17 @@ export const useUser = (type) => {
   useEffect(() => {
     if (type == "user") {
       user.getUserInSession();
-
-      if (!userData?.email) {
-        user.getCurrentUser();
-      }
     }
   }, []);
 
-  return { user, userData, message, loading, error, clear };
+  return {
+    user,
+    userData,
+    message,
+    loading,
+    postLoading,
+    error,
+    postError,
+    clear,
+  };
 };
