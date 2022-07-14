@@ -60,8 +60,8 @@ function DashBoard() {
             <Aside router={router} user={userData} signOut={user?.signOut} />
           </div>
           <div className="col-md-9 col-lg-10 px-0">
-            <SecondaryHeader />
-            <div className="px-4">
+            <SecondaryHeader user={userData} />
+            <div className="px-4 mt-3">
               {routes.map((route) => (
                 <div key={route?.name}>
                   {router?.query.page == route?.name && route?.page}

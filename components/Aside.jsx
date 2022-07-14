@@ -27,6 +27,7 @@ const memberRoutes = [
   { name: "Settings", icon: <MdPerson className="fs-5" /> },
 ];
 const Aside = ({ router, user, signOut }) => {
+  
   return (
     <>
       <div className="d-flex align-items-center ms-lg-3 h-75">
