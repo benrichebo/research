@@ -11,8 +11,6 @@ function EditArticle() {
     sessionStorage.getItem("url")
   );
 
-  console.log("one", oneData);
-
   return (
     <>
       {loading && (

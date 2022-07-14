@@ -11,8 +11,6 @@ function EditConference() {
     sessionStorage.getItem("url")
   );
 
-  console.log("one", oneData);
-
   return (
     <>
       {loading && !error && !oneData?.title && (
