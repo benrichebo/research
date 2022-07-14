@@ -53,6 +53,7 @@ export const useUser = (type) => {
           sessionStorage.setItem("authToken", data?.authToken);
           sessionStorage.setItem("initial-user", data);
           await this.getCurrentUser();
+          console.log("route to dashboard")
           router?.push("/make-payment");
         } else {
           setError(data.msg);
@@ -68,12 +69,13 @@ export const useUser = (type) => {
       setLoading(true);
       try {
         const data = await LOGIN(credentials, "/api/account/login");
+        console.log("login-data", data)
         if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
           sessionStorage.setItem("initial-user", data);
-          this.getCurrentUser();
+          await this.getCurrentUser();
           setMessage("success");
-          router?.push(`/dashboard/home/${data?._id}`);
+          router?.push(`/dashboard/home/${data?.id}`);
         } else {
           setError(data.msg);
           setLoading(false);

@@ -38,7 +38,8 @@ export default async (req, res) => {
           authToken: jwt,
           role,
           email,
-          name
+          name,
+          id: _id,
         };
 
         res.status(200).json(data);

@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Spinner from "../../components/ui/Spinner";
 import { MdDelete, MdGroup, MdRefresh } from "react-icons/md";
 import { useMedia } from "../../hooks/useMedia";
+import { useRouter } from "next/router";
+import { MdInsertDriveFile } from "react-icons/md";
 
 function Media() {
-  const { loading, medias, media, uploadError, error, uploadLoading } = useMedia("medias");
+  const { loading, medias, media, uploadError, error, uploadLoading } =
+    useMedia("medias");
   const [show, setShow] = useState();
+  const [routeId, setRouteId] = useState();
+
+  console.log(loading, medias, error);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.isReady) {
+      setRouteId(router?.query?.slug[0]);
+    }
+  }, [router.isReady]);
 
   const deleteMedia = async (id) => {
     console.log(id);
@@ -85,13 +99,21 @@ function Media() {
                             <label
                               className="form-check-label"
                               htmlFor={data?.name}>
-                              <img
-                                className="ms-4"
-                                width="70"
-                                height="50"
-                                style={{ objectFit: "cover" }}
-                                src={data?.image?.url}
-                              />
+                              {data?.type == "document" ? (
+                                <MdInsertDriveFile
+                                  size={30}
+                                  className="ms-3"
+                                />
+                              ) : (
+                                <img
+                                  className="img-fluid ms-4"
+                                  src={data?.url}
+                                  width="70"
+                                  height="50"
+                                  style={{ objectFit: "cover" }}
+                                  alt={data?.name}
+                                />
+                              )}
                             </label>
                             <span className="ms-3">
                               <a

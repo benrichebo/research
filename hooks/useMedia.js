@@ -26,9 +26,12 @@ export const useMedia = (type) => {
         if (data?.msg) {
           setError(data.msg);
         } else {
+          sessionStorage.clearItem("medias");
           if (data?.length > 0) {
             sessionStorage.setItem("medias", data);
             setMedias(data);
+          } else {
+            setMedias([])
           }
         }
       } catch (error) {
@@ -103,6 +106,9 @@ export const useMedia = (type) => {
         if (data.msg.includes("successfully")) {
           setMessage(data.msg);
           this.getMedias();
+          if (medias?.length == 0) {
+            sessionStorage.clearItem("medias");
+          }
         } else if (data.msg) {
           setUploadError(data.msg);
         } else {

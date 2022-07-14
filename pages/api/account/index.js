@@ -21,7 +21,7 @@ export default authenticate(async (req, res) => {
 
       console.log(user);
 
-      res.status(200).json(user);
+      res.status(200).json({...user, id: user?._id});
     }
 
     if (userId && method == "PUT") {
@@ -47,6 +47,7 @@ export default authenticate(async (req, res) => {
           email: results?.email,
           name: results?.name,
           verified: results?.verified,
+          id: results?._id,
         };
 
         res.status(201).json(data);

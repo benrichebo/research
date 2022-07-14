@@ -4,37 +4,34 @@ import { useRouter } from "next/router";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdEdit, MdDelete, MdArticle, MdRefresh } from "react-icons/md";
-import { useStorage } from "../../hooks/useStorage";
-//import {useUser} from "../../hooks/useUser"
 
 function Articles() {
   const { data, loading, allData, error } = useCrud(
     "all-articles",
     "/api/articles"
   );
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState();
 
-  const { sessionStorage } = useStorage();
+  const [routeId, setRouteId] = useState();
 
   const router = useRouter();
 
-  //clear detail data
   useEffect(() => {
-    sessionStorage.clearItem("url");
-  }, []);
+    if (router.isReady) {
+      setRouteId(router?.query?.slug[0]);
+    }
+  }, [router.isReady]);
 
   const deleteArticle = async (id) => {
     await data.deleteData(`/api/articles/${id}`);
   };
-
-  console.log(router);
 
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h5>Articles</h5>
         <div>
-          <Link href={`/dashboard/add-article/${router?.query?.slug[0]}`}>
+          <Link href={`/dashboard/add-article/${routeId}`}>
             <a className="btn btn-primary">Add article</a>
           </Link>
           <button
@@ -118,7 +115,7 @@ function Articles() {
                             </label>
                             <span className="ms-3">
                               <Link
-                                href={`/dashboard/edit-article/${router?.query?.slug[0]}/${data?._id}`}>
+                                href={`/dashboard/edit-article/${routeId}/${data?._id}`}>
                                 <a className="">
                                   <MdEdit size={20} className="text-muted" />
                                 </a>
@@ -126,7 +123,7 @@ function Articles() {
                               <a
                                 className="ms-4"
                                 type="button"
-                                onClick={() => setShow(true)}>
+                                onClick={() => setShow(data?._id)}>
                                 <MdDelete size={20} className="text-muted" />
                               </a>
                             </span>
@@ -134,13 +131,13 @@ function Articles() {
                           {show && (
                             <div className="mt-3">
                               <a
-                                className="btn"
+                                className="btn btn-light btn-sm"
                                 href="#"
-                                onClick={() => setShow(false)}>
+                                onClick={() => setShow()}>
                                 Edit
                               </a>
                               <a
-                                className="ms-4 btn"
+                                className="ms-4 btn btn-light btn-sm"
                                 href="#"
                                 onClick={() => deleteArticle(data?._id)}>
                                 Delete

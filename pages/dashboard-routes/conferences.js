@@ -4,29 +4,36 @@ import { useRouter } from "next/router";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdEdit, MdDelete, MdGroup, MdRefresh } from "react-icons/md";
-import { useStorage } from "../../hooks/useStorage";
 
 function Conferences() {
   const { data, loading, allData, error } = useCrud(
     "all-conferences",
     "/api/conferences"
   );
-  const [show, setShow] = useState(false);
+
+  const [routeId, setRouteId] = useState();
+
+  const [show, setShow] = useState();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.isReady) {
+      setRouteId(router?.query?.slug[0]);
+    }
+  }, [router.isReady]);
 
   const deleteConference = (id) => {
     console.log(id);
     data.deleteData(`/api/conferences/${id}`);
   };
 
-  const router = useRouter();
-
-
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h5>Conferences</h5>
         <div>
-          <Link href={`/dashboard/add-conference/${router?.query?.slug[0]}`}>
+          <Link href={`/dashboard/add-conference/${routeId}`}>
             <a className="btn btn-primary">Add conference</a>
           </Link>
           <button
@@ -110,7 +117,7 @@ function Conferences() {
                             </label>
                             <span className="ms-3">
                               <Link
-                                href={`/dashboard/edit-conference/${router?.query?.slug[0]}/${data?._id}`}>
+                                href={`/dashboard/edit-conference/${routeId}/${data?._id}`}>
                                 {" "}
                                 <a className="">
                                   <MdEdit size={20} className="text-muted" />
@@ -120,18 +127,21 @@ function Conferences() {
                               <a
                                 className="ms-4"
                                 type="button"
-                                onClick={() => setShow(true)}>
+                                onClick={() => setShow(data?._id)}>
                                 <MdDelete size={20} className="text-muted" />
                               </a>
                             </span>
                           </div>
                           {show && (
                             <div class="mt-3">
-                              <a href="#" onClick={() => setShow(false)}>
+                              <a
+                                href="#"
+                                onClick={() => setShow()}
+                                className="btn btn-light btn-sm">
                                 Edit
                               </a>
                               <a
-                                class="ms-4"
+                                className="btn btn-light btn-sm"
                                 href="#"
                                 onClick={() => deleteConference(data?._id)}>
                                 Delete
@@ -140,7 +150,7 @@ function Conferences() {
                           )}
                         </td>
                         <td className="text-nowrap">{data?.title}</td>
-                        <td className="text-nowrap">{data?.cointry}</td>
+                        <td className="text-nowrap">{data?.country}</td>
                         <td className="text-nowrap">
                           {data?.startDate} - {data?.endDate}
                         </td>

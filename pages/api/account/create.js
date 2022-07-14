@@ -69,6 +69,7 @@ export default async (req, res) => {
           email: results?.email,
           name: results?.name,
           verified: results?.verified,
+          id: results?._id,
         };
 
         res.status(201).json(data);

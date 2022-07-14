@@ -40,8 +40,9 @@ function DashBoard() {
   const { userData, user } = useUser("user");
 
   useEffect(() => {
-    if (!userData?.name) {
-      router.push("/login");
+    if (!userData?.email) {
+      //router.push("/login");
+      console.log(userData)
     }
   }, []);
 

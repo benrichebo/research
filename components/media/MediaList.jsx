@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { MdInsertDriveFile, MdPictureAsPdf } from "react-icons/md";
+import { MdInsertDriveFile } from "react-icons/md";
 import { useMedia } from "../../hooks/useMedia";
 import Spinner from "../ui/Spinner";
 

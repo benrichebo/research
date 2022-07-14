@@ -4,23 +4,23 @@ import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdPictureAsPdf, MdEdit, MdDelete } from "react-icons/md";
 import { useRouter } from "next/router";
-import { useStorage } from "../../hooks/useStorage";
 
 function Papers() {
   const { data, loading, allData, error } = useCrud(
     "all-papers",
     "/api/papers"
   );
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState();
 
-  const { sessionStorage } = useStorage();
+  const [routeId, setRouteId] = useState();
 
   const router = useRouter();
 
-  //clear detail data
   useEffect(() => {
-    sessionStorage.clearItem("url");
-  }, []);
+    if (router.isReady) {
+      setRouteId(router?.query?.slug[0]);
+    }
+  }, [router.isReady]);
 
   const deletePaper = async (id) => {
     console.log(id);
@@ -31,7 +31,7 @@ function Papers() {
     <>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h5>Papers</h5>
-        <Link href={`/dashboard/add-paper/${router?.query?.slug[0]}`}>
+        <Link href={`/dashboard/add-paper/${routeId}`}>
           <a className="btn btn-primary">Add paper</a>
         </Link>
       </div>
@@ -100,7 +100,7 @@ function Papers() {
                             </label>
                             <span className="ms-3">
                               <Link
-                                href={`/dashboard/edit-paper/${router?.query?.slug[0]}/${data?._id}`}>
+                                href={`/dashboard/edit-paper/${routeId}/${data?._id}`}>
                                 <a className="">
                                   <MdEdit size={20} className="text-muted" />
                                 </a>
@@ -108,18 +108,21 @@ function Papers() {
                               <a
                                 className="ms-4"
                                 type="button"
-                                onClick={() => setShow(true)}>
+                                onClick={() => setShow(data?._id)}>
                                 <MdDelete size={20} className="text-muted" />
                               </a>
                             </span>
                           </div>
                           {show && (
                             <div class="mt-3">
-                              <a href="#" onClick={() => setShow(false)}>
+                              <a
+                                href="#"
+                                onClick={() => setShow()}
+                                className="btn btn-light btn-sm">
                                 Edit
                               </a>
                               <a
-                                class="ms-4"
+                                className="ms-4 btn btn-light btn-sm"
                                 href="#"
                                 onClick={() => deletePaper(data?._id)}>
                                 Delete
