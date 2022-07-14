@@ -7,7 +7,7 @@ function Header() {
       <div className="container">
         <Link href="/">
           <a className="navbar-brand fs-6" href="#">
-            Mason Research Institute
+            Association of researches and planners
           </a>
         </Link>
         <button

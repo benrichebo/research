@@ -51,7 +51,7 @@ function DashBoard() {
             <SecondaryHeader />
             <div className="px-4">
               {routes.map((route) => (
-                <>{router?.query.page == route?.name && route?.page}</>
+                <div key={route?.name}>{router?.query.page == route?.name && route?.page}</div>
               ))}
             </div>
           </div>

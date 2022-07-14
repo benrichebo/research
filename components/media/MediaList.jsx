@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { MdInsertDriveFile, MdPictureAsPdf } from "react-icons/md";
 import { useMedia } from "../../hooks/useMedia";
 import Spinner from "../ui/Spinner";
 
@@ -7,7 +8,7 @@ function MediaList({ mediaUploaded, setSelectedImage }) {
 
   //push media uploaded to media
   useEffect(() => {
-    if (mediaUploaded) {
+    if (mediaUploaded?.url) {
       medias.push(mediaUploaded);
       console.log("mediaUploaded", mediaUploaded);
     }
@@ -54,12 +55,16 @@ function MediaList({ mediaUploaded, setSelectedImage }) {
               htmlFor={media?.name}
               onClick={() => setSelectedImage(media)}>
               <div className="px-2 uploadedImage">
-                <img
-                  className="img-fluid h-100 my-3"
-                  src={media?.url}
-                  style={{ objectFit: "contain" }}
-                  alt={media?.name}
-                />
+                {media?.type == "document" ? (
+                  <MdInsertDriveFile />
+                ) : (
+                  <img
+                    className="img-fluid h-100 my-3"
+                    src={media?.url}
+                    style={{ objectFit: "contain" }}
+                    alt={media?.name}
+                  />
+                )}
               </div>
               <div className="card-body pb-2 mt-2 d-none d-md-block">
                 <h5 className="mb-0 text-truncate">{media?.name}</h5>

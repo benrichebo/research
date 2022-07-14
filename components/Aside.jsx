@@ -35,10 +35,9 @@ const Aside = ({ router, user, signOut }) => {
                 <li className="fs-6 mb-4" key={route.name}>
                   <Link href={`/dashboard/${route?.name?.toLocaleLowerCase()}`}>
                     <a
-                      className={`text-white text-decoration-none d-flex justify-content-start align-items-center${
-                        router?.query?.page == route.name.toLocaleLowerCase()
-                          ? "fw-bold text-white"
-                          : " text-white-50 "
+                      className={`text-white-50 text-decoration-none d-flex justify-content-start align-items-center${
+                        router?.query?.page == route.name.toLocaleLowerCase() &&
+                        "fw-bold text-white"
                       }`}
                       href="#">
                       {route?.icon}

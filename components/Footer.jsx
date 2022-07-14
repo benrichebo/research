@@ -4,30 +4,30 @@ import { MdArrowUpward, MdArrowForward } from "react-icons/md";
 function Footer() {
   return (
     <>
-      <div class="container-fluid pt-4 pt-xl-5">
-        <div class="card-group row">
-          <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div class="card-body p-md-1 p-xl-2 p-xxl-3">
-              <h6 class="text-primary card-title pb-3">ABOUT</h6>
-              <div class="d-flex justify-content-between align-items-center">
+      <div className="container-fluid pt-4 pt-xl-5">
+        <div className="card-group row">
+          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
+            <div className="card-body p-md-1 p-xl-2 p-xxl-3">
+              <h6 className="text-primary card-title pb-3">ABOUT</h6>
+              <div className="d-flex justify-content-between align-items-center">
                 <h6>More about our company</h6>
                 <MdArrowForward size={24} className="ms-3" />
               </div>
             </div>
           </div>
-          <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div class="card-body p-md-1 p-xl-2 p-xxl-3">
-              <h6 class="text-primary card-title pb-3">PAPERS</h6>
-              <div class="d-flex justify-content-between align-items-center">
+          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
+            <div className="card-body p-md-1 p-xl-2 p-xxl-3">
+              <h6 className="text-primary card-title pb-3">PAPERS</h6>
+              <div className="d-flex justify-content-between align-items-center">
                 <h6>Papers we have published</h6>
                 <MdArrowForward size={24} className="ms-3" />
               </div>
             </div>
           </div>
-          <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div class="card-body p-md-1 p-xl-2 p-xxl-3">
-              <h6 class="text-primary card-title pb-3">CONTACT</h6>
-              <div class="d-flex justify-content-between align-items-center">
+          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
+            <div className="card-body p-md-1 p-xl-2 p-xxl-3">
+              <h6 className="text-primary card-title pb-3">CONTACT</h6>
+              <div className="d-flex justify-content-between align-items-center">
                 <h6>Get in touch with us</h6>
                 <MdArrowForward size={24} className="ms-3" />
               </div>

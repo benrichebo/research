@@ -3,7 +3,7 @@ import React from "react";
 
 function Canvas({ router }) {
   return (
-    <div className="offcanvas offcanvas-start w-auto" tabindex="-1" id="menu">
+    <div className="offcanvas offcanvas-start w-auto" tabIndex="-1" id="menu">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title">
           <img className="img-fluid" src="/images/logo.png" width="60" />

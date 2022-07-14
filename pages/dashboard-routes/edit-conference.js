@@ -7,7 +7,7 @@ import AddConference from "./add-conference";
 function EditConference() {
   const { sessionStorage } = useStorage();
   const { data, loading, error, oneData } = useCrud(
-    "one-data",
+    "one-conference",
     sessionStorage.getItem("url")
   );
 

@@ -8,16 +8,18 @@ import { useStorage } from "./useStorage";
 export const useCrud = (type, url) => {
   const { sessionStorage } = useStorage("session");
 
-  const [allData, setAllData] = useState([]);
+  const [allData, setAllData] = useState(null);
   const [oneData, setOneData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [postError, setPostError] = useState(false);
+  const [postLoading, setPostLoading] = useState(false);
   const [message, setMessage] = useState(null);
 
   const data = {
     async getAllData() {
       setLoading(true);
+      setError(null);
       try {
         const data = await GET(url);
         setLoading(false);
@@ -30,6 +32,8 @@ export const useCrud = (type, url) => {
             console.log("data2", data);
             sessionStorage.setItem(type, data);
             setAllData(data);
+          } else {
+            setAllData([]);
           }
         }
       } catch (error) {
@@ -39,6 +43,7 @@ export const useCrud = (type, url) => {
 
     async getOneData(url) {
       setLoading(true);
+      setError(null);
       try {
         const data = await GET(url);
         setLoading(false);
@@ -54,10 +59,10 @@ export const useCrud = (type, url) => {
 
     async addData(body, url) {
       setError("");
-      setLoading(true);
+      setPostLoading(true);
       try {
         const data = await POST(body, url);
-        setLoading(false);
+        setPostLoading(false);
         if (data.msg.includes("successfully")) {
           setMessage(data.msg);
           this.getAllData();
@@ -70,32 +75,34 @@ export const useCrud = (type, url) => {
     },
 
     async updateData(body, url) {
-      setLoading(true);
+      setPostLoading(true);
+      setError(null);
       try {
         const data = await PUT(body, url);
-        setLoading(false);
+        setPostLoading(false);
         if (data.msg.includes("successfully")) {
           setMessage(data.msg);
           this.getAllData();
         } else {
-          setError(data.msg);
+          setPostError(data.msg);
         }
       } catch (error) {
-        setError(error.message);
+        setPostError(error.message);
       }
     },
 
     async deleteData(url) {
       console.log(url);
-      setLoading(true);
+      setPostLoading(true);
+      setError(null);
       const data = await DELETE(url);
+      setPostLoading(false);
       if (data.msg.includes("successfully")) {
         setMessage(data.msg);
         this.getAllData();
       } else {
-        setError(data.msg);
+        setPostError(data.msg);
       }
-      setLoading(false);
     },
   };
 
@@ -108,10 +115,12 @@ export const useCrud = (type, url) => {
   useEffect(() => {
     if (type?.includes("all")) {
       const fetched = sessionStorage.getItem(type);
-      if (!fetched) {
-        data.getAllData();
-      } else {
+      console.log("fetched", fetched);
+
+      if (typeof fetched == "object" && fetched?.length > 0) {
         setAllData(fetched);
+      } else {
+        data.getAllData();
       }
     }
 
@@ -127,6 +136,7 @@ export const useCrud = (type, url) => {
     oneData,
     error,
     postError,
+    postLoading,
     message,
     clear,
   };

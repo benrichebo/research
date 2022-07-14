@@ -7,7 +7,7 @@ import AddArticle from "./add-article";
 function EditArticle() {
   const { sessionStorage } = useStorage();
   const { data, loading, error, oneData } = useCrud(
-    "one-data",
+    "one-article",
     sessionStorage.getItem("url")
   );
 
@@ -15,12 +15,12 @@ function EditArticle() {
 
   return (
     <>
-      {loading && !error && !oneData?.title && (
+      {loading && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
         </div>
       )}
-      {error && !loading && !oneData?.title && (
+      {error && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <div className="text-center">
             <h6 className="text-muted">There was an error loading papers</h6>

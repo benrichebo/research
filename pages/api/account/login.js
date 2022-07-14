@@ -27,7 +27,7 @@ export default async (req, res) => {
     if (results?.password) {
       const match = await compare(password, results?.password);
       if (match) {
-        const { _id, role, email } = results;
+        const { _id, role, email, name } = results;
         const jwt = createJwt({
           userId: _id,
           role,
@@ -36,6 +36,9 @@ export default async (req, res) => {
 
         const data = {
           authToken: jwt,
+          role,
+          email,
+          name
         };
 
         res.status(200).json(data);

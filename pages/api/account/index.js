@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../../../lib/mongodb";
 import { authenticate } from "../authentication";
-import { findOne } from "../db/find";
 import { createJwt } from "../jwt";
 import { verifyUser } from "../verification";
 
@@ -9,7 +8,7 @@ export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
 
   const method = req.method;
-  
+
   try {
     const { db } = await connectToDatabase();
 
@@ -31,19 +30,26 @@ export default authenticate(async (req, res) => {
         .findOneAndUpdate({ _id: ObjectId(userId) }, req.body);
 
       if (response?.upsertedCount == 1) {
-        const user = await findOne("members", { _id: ObjectId(userId) });
-
-        const { _id } = user;
+        const results = await db
+          .collection("members")
+          .findOne({ email }, { projection: { password: 0 } });
 
         const jwt = createJwt({
-          userId: _id,
+          userId: results?._id,
+          role: results?.role,
+          email: results?.email,
+          verified: results?.verified,
         });
 
         const data = {
           authToken: jwt,
+          role: results?.role,
+          email: results?.email,
+          name: results?.name,
+          verified: results?.verified,
         };
 
-        res.status(200).json(data);
+        res.status(201).json(data);
       } else {
         res.status(404).json({ msg: "Update failed" });
       }

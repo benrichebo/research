@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Text from "../../components/ui/Text";
 import { useCrud } from "../../hooks/useCrud";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
 
-function AddConference({conference}) {
-  const { data, loading, postError, message } = useCrud(
+function AddConference({ conference }) {
+  const { data, postLoading, postError, message } = useCrud(
     "all-conferences",
     "/api/conferences"
   );
@@ -29,20 +28,28 @@ function AddConference({conference}) {
       startDate,
       endDate,
     };
-    article?.title
-      ? await data.updateData(body, `/api/conferences/${article?._id}`)
+    conference?.title
+      ? await data.updateData(body, `/api/conferences/${conference?._id}`)
       : await data.addData(body, "/api/conferences/create");
   };
   return (
     <>
-      <h5>{article?.title ? "Edit conference" : "Add conference"}</h5>
+      <h5>{conference?.title ? "Edit conference" : "Add conference"}</h5>
       {message && <p className="text-success">{message}</p>}
       {postError && <p className="text-danger">{postError}</p>}
       <form className="row mb-4" onSubmit={handleSubmit}>
         <div className="col-12 col-md-7">
           <div className="col-12 mb-4">
-            <label className="form-label">Title</label>
-            <Text setText={setTitle} id="title" />
+            <label className="form-label" htmlFor="title">
+              Title
+            </label>
+            <input
+              className="form-control form-control-lg rounded-0"
+              type="text"
+              id="title"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+            />
           </div>
           <div className="mb-3">
             <h5 className="fw-normal text-muted my-4"></h5>
@@ -56,6 +63,7 @@ function AddConference({conference}) {
                   type="date"
                   id="startDate"
                   onChange={(e) => setStartDate(e.target.value)}
+                  value={startDate}
                 />
               </div>
               <div className="col-12 col-md-6 mb-4">
@@ -66,6 +74,7 @@ function AddConference({conference}) {
                   className="form-control form-control-lg rounded-0"
                   type="date"
                   id="endDate"
+                  value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
                 />
               </div>
@@ -73,7 +82,13 @@ function AddConference({conference}) {
                 <label className="form-label" htmlFor="country">
                   Country
                 </label>
-                <Text setText={setCountry} id="country" />
+                <input
+                  className="form-control form-control-lg rounded-0"
+                  type="text"
+                  id="country"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                />
               </div>
               <div className="col-12 mb-4">
                 <label className="form-label" htmlFor="description">
@@ -82,6 +97,7 @@ function AddConference({conference}) {
                 <textarea
                   className="form-control form-control-lg rounded-0"
                   rows="4"
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}></textarea>
               </div>
               <div className="my-3 d-grid">
@@ -89,7 +105,7 @@ function AddConference({conference}) {
                   className="btn btn-primary btn-lg"
                   type="submit"
                   disabled={
-                    loading ||
+                    postLoading ||
                     !title ||
                     !startDate ||
                     !endDate ||
@@ -97,12 +113,14 @@ function AddConference({conference}) {
                     !image ||
                     !country
                   }>
-                  {loading ? (
+                  {postLoading ? (
                     <Spinner className="ms-2" />
                   ) : (
                     <span className="">
                       {" "}
-                      {article?.title ? "Save conference" : "Add conference"}
+                      {conference?.title
+                        ? "Save conference"
+                        : "Add conference"}
                     </span>
                   )}
                 </button>
@@ -112,7 +130,6 @@ function AddConference({conference}) {
         </div>
         <div className="col-12 col-md-5">
           <p>Pick a photo</p>
-
           <a
             className="form-label w-100"
             htmlFor="file"

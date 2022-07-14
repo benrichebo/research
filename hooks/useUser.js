@@ -16,6 +16,14 @@ export const useUser = (type) => {
   const [message, setMessage] = useState("");
 
   let user = {
+    async getUserInSession() {
+      const initializedUser = sessionStorage.getItem("initialized-user");
+      const user = sessionStorage.getItem("user");
+
+      if (typeof user == "object" || typeof initializedUser == "object") {
+        setUserData(user || initializedUser);
+      }
+    },
     async getCurrentUser() {
       setLoading(true);
       try {
@@ -24,9 +32,11 @@ export const useUser = (type) => {
         if (data.msg) {
           setError(data.msg);
         } else {
-          sessionStorage.setItem("user", data);
-          setUserData(data);
-          setMessage("success");
+          if (data?.id) {
+            sessionStorage.setItem("user", data);
+            setUserData(data);
+            setMessage("success");
+          }
         }
       } catch (error) {
         setError(error.message);
@@ -41,6 +51,7 @@ export const useUser = (type) => {
         const data = await REGISTER(credentials, "/api/account/create");
         if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
+          sessionStorage.setItem("initial-user", data);
           await this.getCurrentUser();
           router?.push("/make-payment");
         } else {
@@ -59,6 +70,7 @@ export const useUser = (type) => {
         const data = await LOGIN(credentials, "/api/account/login");
         if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
+          sessionStorage.setItem("initial-user", data);
           this.getCurrentUser();
           setMessage("success");
           router?.push("/dashboard/home");
@@ -83,6 +95,7 @@ export const useUser = (type) => {
         const data = await PUT(credentials, `/api/account`);
         if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
+          sessionStorage.setItem("initial-user", data);
           this.getCurrentUser();
           setMessage("success");
         } else {
@@ -123,10 +136,11 @@ export const useUser = (type) => {
   useEffect(() => {
     if (type == "user") {
       const data = sessionStorage.getItem("user");
-      if (!data) {
-        user.getCurrentUser();
-      } else {
+
+      if (typeof data == "object") {
         setUserData(data);
+      } else {
+        user.getCurrentUser();
       }
     }
   }, []);

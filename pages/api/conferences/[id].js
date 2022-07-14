@@ -8,6 +8,8 @@ export default authenticate(async (req, res) => {
 
   const { id } = req.query;
 
+  const method = req.method;
+
   try {
     const { db } = await connectToDatabase();
 
@@ -40,6 +42,7 @@ export default authenticate(async (req, res) => {
     }
 
     if (method == "DELETE") {
+      console.log("delete conference");
       const response = await db
         .collection("conferences")
         .deleteOne({ _id: ObjectId(id) });
@@ -51,6 +54,6 @@ export default authenticate(async (req, res) => {
       }
     }
   } catch (error) {
-     res.status(500).json({ msg: "Internal server error" });
+    res.status(500).json({ msg: error.message });
   }
 });

@@ -7,20 +7,36 @@ import Spinner from "../ui/Spinner";
 function Uploader({ setMediaUploaded }) {
   const [file, setFile] = useState("");
   const fileInputRef = useRef();
-  const [size, setSize] = useState("")
-  const { media, loading, uploadError, medias } = useMedia("medias");
+  const [size, setSize] = useState("");
+  const { media, uploadLoading, uploadError, medias } = useMedia("medias");
 
   const [msg, setMsg] = useState("");
 
-  const handleSubmit = async (uri) => {
+  const handleImageUpload = async (uri) => {
     const data = {
       name: file?.name,
       uri,
       width: size.width,
       height: size.height,
+      type: "image",
     };
 
     const response = await media.addMedia(data);
+
+    if (response?.url) {
+      //push the image to medias
+      setMediaUploaded(response);
+    }
+  };
+
+  const handleDocumentUpload = async (uri) => {
+    const fileData = {
+      name: file?.name,
+      uri,
+      type: "document",
+    };
+
+    const response = await media.addMedia(fileData);
 
     if (response?.url) {
       //push the image to medias
@@ -33,16 +49,16 @@ function Uploader({ setMediaUploaded }) {
       console.log("file", file);
       const reader = new FileReader();
       reader.onloadstart = () => {
-        //setMsg("loading start...");
+        //setMsg("uploadLoading start...");
       };
       reader.onprogress = () => {
-        //setMsg("loading in progress...");
+        //setMsg("uploadLoading in progress...");
       };
       reader.onerror = () => {
-        setMsg("error uploading image");
+        setMsg("error upuploadLoading image");
       };
-      reader.onloadend = () => {
-        //setMsg("loading done");
+      reader.onloadend = async () => {
+        //setMsg("uploadLoading done");
 
         if (file.type.substr(0, 5) === "image") {
           var image = new Image();
@@ -58,11 +74,13 @@ function Uploader({ setMediaUploaded }) {
               0,
               (uri) => {
                 //setImage(uri);
-                handleSubmit(uri);
+                handleImageUpload(uri);
               },
               "base64"
             );
           };
+        } else {
+          await handleDocumentUpload(reader.result);
         }
       };
 
@@ -89,7 +107,7 @@ function Uploader({ setMediaUploaded }) {
             onChange={(e) => setFile(e.target?.files[0])}
             hidden
           />
-          {loading ? (
+          {uploadLoading ? (
             <Spinner className="ms-2" />
           ) : (
             <span className="">Import image</span>

@@ -10,6 +10,7 @@ export const useMedia = (type) => {
   const [medias, setMedias] = useState(null);
   const [mediaData, setMediaData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState(false);
   const [error, setError] = useState(false);
   const [uploadError, setUploadError] = useState(false);
   const [message, setMessage] = useState(null);
@@ -19,6 +20,7 @@ export const useMedia = (type) => {
       setLoading(true);
       try {
         const data = await GET("/api/media/images");
+        setLoading(false);
         if (data?.msg) {
           setError(data.msg);
         } else {
@@ -29,8 +31,6 @@ export const useMedia = (type) => {
         }
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     },
 
@@ -38,6 +38,7 @@ export const useMedia = (type) => {
       setLoading(true);
       try {
         const data = await GET(`/api/media/images/${id}`);
+        setLoading(false);
         if (!data.url) {
           setError(data.msg);
         } else {
@@ -45,32 +46,31 @@ export const useMedia = (type) => {
         }
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     },
 
     async addMedia(credentials) {
       setUploadError("");
-      setLoading(true);
+      setUploadLoading(true);
       try {
         const data = await POST(credentials, "/api/media/images/create");
+        setUploadLoading(false);
         if (data.url) {
+          this.getMedias();
           return data?.url;
         } else {
           setUploadError(data.msg);
         }
       } catch (error) {
         setUploadError(error.message);
-      } finally {
-        setLoading(false);
       }
     },
 
     async updateMedia(id, credentials) {
-      setLoading(true);
+      setUploadLoading(true);
       try {
         const data = await PUT(credentials, `/api/media/images/${id}`);
+        setUploadLoading(false);
         if (data.msg.includes("successfully")) {
           setMessage(data.msg);
         } else {
@@ -78,20 +78,18 @@ export const useMedia = (type) => {
         }
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     },
 
     async deleteMedia(id) {
-      setLoading(true);
+      setUploadLoading(true);
       const data = await DELETE(`/api/media/images/${id}`);
+      setUploadLoading(false);
       if (data.msg.includes("successfully")) {
         setMessage(data.msg);
       } else {
         setError(data.msg);
       }
-      setLoading(false);
     },
   };
 
@@ -104,20 +102,23 @@ export const useMedia = (type) => {
   useEffect(() => {
     if (type == "medias") {
       const data = sessionStorage.getItem("medias");
-      if (!data) {
-        media.getMedias();
-      } else {
+
+      console.log("data", data);
+
+      if (typeof data == "object" && data?.length > 0) {
         setMedias(data);
+      } else {
+        media.getMedias();
       }
     }
 
     if (type == "media") {
       const data = sessionStorage.getItem("media");
-      if (!data) {
+      if (!data?.url) {
         media.getMedia();
         console.log("still");
       } else {
-        setMedias(data);
+        setMediaData(data);
       }
     }
   }, []);
@@ -129,6 +130,7 @@ export const useMedia = (type) => {
     mediaData,
     error,
     uploadError,
+    uploadLoading,
     message,
     clear,
   };

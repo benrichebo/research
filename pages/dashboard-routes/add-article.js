@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Text from "../../components/ui/Text";
 import { useCrud } from "../../hooks/useCrud";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
 
 function AddArticle({ article }) {
-  const { data, loading, postError, message } = useCrud("all-articles", "/api/articles");
+  const { data, loading, postLoading, postError, message } = useCrud("all-articles", "/api/articles");
 
   const [title, setTitle] = useState(article?.title || "");
   const [author, setAuthor] = useState(article?.author || "");
@@ -80,7 +79,7 @@ function AddArticle({ article }) {
                     className="btn btn-primary btn-lg"
                     type="submit"
                     disabled={
-                      loading ||
+                      postLoading ||
                       !title ||
                       !content ||
                       !category ||
@@ -88,7 +87,7 @@ function AddArticle({ article }) {
                       !image ||
                       !author
                     }>
-                    {loading ? (
+                    {postLoading ? (
                       <Spinner className="ms-2" />
                     ) : (
                       <span className="">
@@ -102,10 +101,13 @@ function AddArticle({ article }) {
           </div>
           <div className="col col-md-4 col-lg-3">
             <div className="col-12 mb-4">
-              <label className="form-label" htmlFor="category">Category</label>
+              <label className="form-label" htmlFor="category">
+                Category
+              </label>
               <select
                 className="form-select form-select-lg rounded-0"
-                onChange={(e) => setCategory(e.target.value)} id="category">
+                onChange={(e) => setCategory(e.target.value)}
+                id="category">
                 {category && (
                   <option value={category} selected="">
                     {category}

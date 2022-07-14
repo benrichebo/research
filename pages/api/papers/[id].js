@@ -22,15 +22,16 @@ export default authenticate(async (req, res) => {
 
   if (req.method == "PUT") {
     const body = JSON.parse(req.body);
+    console.log("put body", body);
 
     const response = await db
       .collection("papers")
-      .findOneAndUpdate({ _id: ObjectId(id) }, body);
-
-    if (response?.upsertedCount == 1) {
-      res.status(200).json({ msg: "article updated successfully" });
+      .updateOne({ _id: ObjectId(id) }, { $set: { ...body } });
+    console.log("response", response);
+    if (response?.acknowledged) {
+      res.status(200).json({ msg: "paper updated successfully" });
     } else {
-      statusCode404(res);
+      res.status(400).json({ msg: "paper update failed" });
     }
   }
 
@@ -40,9 +41,9 @@ export default authenticate(async (req, res) => {
       .deleteOne({ _id: ObjectId(id) });
 
     if (response.deletedCount === 1) {
-      res.status(200).json({ msg: "Article was successfully deleted" });
+      res.status(200).json({ msg: "paper was successfully deleted" });
     } else {
-      res.status(400).json({ msg: "Article was not deleted" });
+      res.status(400).json({ msg: "paper was not deleted" });
     }
   }
 });

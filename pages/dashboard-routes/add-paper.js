@@ -1,28 +1,40 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
-import Text from "../../components/ui/Text";
 import { useCrud } from "../../hooks/useCrud";
 
-function AddPaper() {
-  const { data, loading, postError, message } = useCrud();
+function AddPaper({ paper }) {
+  const { data, postLoading, postError, message } = useCrud();
 
-  const [title, setTitle] = useState("");
-  const [publisher, setPublisher] = useState("");
-  const [file, setFile] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(paper?.title || "");
+  const [publisher, setPublisher] = useState(paper?.publisher || "");
+  const [fileToUpload, setFileToUpload] = useState(paper?.file || "");
+  const [description, setDescription] = useState(paper?.description || "");
 
-  const fileRef = useRef();
+  const [fileTypeError, setFileTypeError] = useState(null);
+
+  useEffect(() => {
+    if (fileToUpload?.type != "document") {
+      setFileTypeError("Pick a word/pdf document rather");
+    } else {
+      setFileTypeError(null);
+    }
+  }, [fileToUpload]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
       title,
       publisher,
-      file,
+      fileToUpload,
       description,
     };
-    await data.addData(body, "/api/papers/create");
+
+    paper?.title
+      ? await data.updateData(body, `/api/papers/${paper?._id}`)
+      : await data.addData(body, "/api/papers/create");
   };
+
   return (
     <>
       <h5>Add paper</h5>
@@ -30,12 +42,19 @@ function AddPaper() {
       <div className="mb-4">
         {message && <p className="text-success">{message}</p>}
         {postError && <p className="text-danger">{postError}</p>}
+        {fileTypeError && <p className="text-danger">{fileTypeError}</p>}
         <form className="row" onSubmit={handleSubmit}>
           <div className="col-12 mb-4">
             <label className="form-label" htmlFor="title">
               Title
             </label>
-            <Text setText={setTitle} id="title" />
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              id="title"
+              className="form-control form-control-lg rounded-0"
+            />
           </div>
           <div className="mb-3">
             <h5 className="fw-normal text-muted my-4"></h5>
@@ -44,20 +63,27 @@ function AddPaper() {
                 <label className="form-label" htmlFor="publisher">
                   Publisher
                 </label>
-                <Text setText={setPublisher} id="publisher" />
+                <input
+                  type="text"
+                  value={publisher}
+                  onChange={(e) => setPublisher(e.target.value)}
+                  id="publisher"
+                  className="form-control form-control-lg rounded-0"
+                />
               </div>
               <div className="col-12 col-md-6 mb-4">
-                <label className="form-label" htmlFor="file">
-                  File
-                </label>
+                <label className="form-label">File</label>
                 <div>
-                  <input
-                    id="file"
-                    type="file"
-                    ref={fileRef}
-                    className="form-control form-control-lg rounded-0"
-                    onChange={(e) => setFile(e.target.files[0])}
-                  />
+                  <a
+                    type="button"
+                    data-bs-target="#mediaModal"
+                    data-bs-toggle="modal"
+                    className="btn btn-light btn-lg rounded-0">
+                    Upload file
+                  </a>
+                  {fileToUpload?.type == "document" && (
+                    <span>{fileToUpload?.name}</span>
+                  )}
                 </div>
               </div>
               <div className="col-12 mb-4">
@@ -68,6 +94,7 @@ function AddPaper() {
                   className="form-control form-control-lg  rounded-0"
                   rows="4"
                   id="description"
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}></textarea>
               </div>
               <div className="my-3 d-grid">
@@ -75,9 +102,14 @@ function AddPaper() {
                   className="btn btn-primary btn-lg"
                   type="submit"
                   disabled={
-                    loading || !title || !publisher || !description || !file
+                    postLoading ||
+                    !title ||
+                    !publisher ||
+                    !description ||
+                    !fileToUpload ||
+                    fileTypeError
                   }>
-                  {loading ? (
+                  {postLoading ? (
                     <Spinner className="ms-2" />
                   ) : (
                     <span className="">Submit</span>
@@ -88,6 +120,10 @@ function AddPaper() {
           </div>
         </form>
       </div>
+      <UploadModal
+        selectedImage={fileToUpload}
+        setSelectedImage={setFileToUpload}
+      />
     </>
   );
 }
