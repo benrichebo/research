@@ -22,16 +22,16 @@ function Login() {
   return (
     <Layout>
       <Header />
-      <section className="py-5">
-        <div className="container px-md-0 py-5">
+      <section className="py-3">
+        <div className="container px-md-0 py-md-3">
           <div className="row">
             <div className="col-md-4">
-              <h1 className="display-5 pulse animated border-top border-3 border-primary pt-5 heading">
+              <h1 className="display-6 fs-3 pulse animated border-top border-3 border-primary pt-3 heading">
                 Welcome back
               </h1>
-              <h4 className="fw-normal">Login</h4>
+              <h5 className="fw-normal">Login</h5>
             </div>
-            <div className="col-md-7 col-lg-6 pulse animated d-flex align-items-center pt-3 pt-lg-5 px-lg-5 mx-auto">
+            <div className="col-md-6 col-lg-5 pulse animated d-flex align-items-center pt-3 pt-lg-5 px-lg-5 mx-auto">
               <form
                 className="row mt-md-4 mt-lg-5"
                 onSubmit={handleSubmit}>
@@ -50,7 +50,7 @@ function Login() {
                 {error && <p className="text-danger my-2">{error}</p>}
                 <div className="py-3 d-md-flex justify-content-md-end d-grid">
                   <button
-                    className="btn btn-outline-primary rounded-0 btn-lg px-4"
+                    className="btn btn-outline-primary rounded-0 px-4"
                     type="submit"
                     disabled={loading || !email || !password}>
                     {loading ? (

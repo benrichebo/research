@@ -1,32 +1,33 @@
+import Link from "next/link";
 import React from "react";
 import { MdArrowUpward, MdArrowForward } from "react-icons/md";
 
 function Footer() {
   return (
     <>
-      <div className="container-fluid pt-4 pt-xl-5">
+      <div className="container-fluid pt-2 pt-xl-3">
         <div className="card-group row">
-          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div className="card-body p-md-1 p-xl-2 p-xxl-3">
-              <h6 className="text-primary card-title pb-3">ABOUT</h6>
+          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-1 py-xl-2">
+            <div className="card-body p-md-1 p-xxl-2">
+              <p className="text-primary card-title pb-1">ABOUT</p>
               <div className="d-flex justify-content-between align-items-center">
                 <h6>More about our company</h6>
                 <MdArrowForward size={24} className="ms-3" />
               </div>
             </div>
           </div>
-          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div className="card-body p-md-1 p-xl-2 p-xxl-3">
-              <h6 className="text-primary card-title pb-3">PAPERS</h6>
+          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-1 py-xl-2">
+            <div className="card-body p-md-1 p-xxl-2">
+              <p className="text-primary card-title pb-1">PAPERS</p>
               <div className="d-flex justify-content-between align-items-center">
                 <h6>Papers we have published</h6>
                 <MdArrowForward size={24} className="ms-3" />
               </div>
             </div>
           </div>
-          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-            <div className="card-body p-md-1 p-xl-2 p-xxl-3">
-              <h6 className="text-primary card-title pb-3">CONTACT</h6>
+          <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-1 py-xl-2">
+            <div className="card-body p-md-1 p-xxl-2">
+              <p className="text-primary card-title pb-1">CONTACT</p>
               <div className="d-flex justify-content-between align-items-center">
                 <h6>Get in touch with us</h6>
                 <MdArrowForward size={24} className="ms-3" />
@@ -35,26 +36,30 @@ function Footer() {
           </div>
         </div>
       </div>
-      <footer className="text-white bg-dark py-2 py-lg-5">
-        <div className="container py-3 py-lg-5 mt-4 mt-mlg-5">
+      <footer className="text-white bg-dark py-1 py-lg-3">
+        <div className="container py-1 py-lg-3 mt-4 mt-mlg-3">
           <div className="row justify-content-center">
             <div className="col-6 col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item mb-3">
               <h3 className="fs-6 text-white-50">Services</h3>
               <ul className="list-unstyled">
                 <li className="mb-1">
-                  <a className="text-decoration-none text-white-50" href="#">
-                    Conferences
-                  </a>
+                  <Link href="/conferences">
+                    <a className="text-decoration-none text-white-50">
+                      Conferences
+                    </a>
+                  </Link>
                 </li>
                 <li className="mb-1">
-                  <a className="text-decoration-none text-white-50" href="#">
-                    Papers
-                  </a>
+                  <Link href="/papers">
+                    <a className="text-decoration-none text-white-50">Papers</a>
+                  </Link>
                 </li>
                 <li className="mb-1">
-                  <a className="text-decoration-none text-white-50" href="#">
-                    Articles
-                  </a>
+                  <Link href="/articles">
+                    <a className="text-decoration-none text-white-50">
+                      Articles
+                    </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -147,12 +152,12 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-between align-items-center my-4 my-md-5">
+          <div className="d-flex justify-content-between align-items-center my-2 my-md-3">
             <p className="mb-0 text-white-50">Copyright © 2022 Brand</p>
           </div>
           <div className="d-flex justify-content-end" style={{ right: 20 }}>
             <a
-              className="border rounded-circle p-1 p-md-3 border-2 border-light"
+              className="border rounded-circle p-1 p-md-2 border-2 border-light"
               href="#"
               target="_top">
               <MdArrowUpward className="fs-3 text-white-50" />

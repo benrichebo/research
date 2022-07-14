@@ -34,17 +34,17 @@ function Register() {
   return (
     <Layout>
       <Header />
-      <section className="py-5">
-        <div className="container px-md-0 py-5">
+      <section className="py-3">
+        <div className="container px-md-0 py-3">
           <div className="row">
             <div className="col-md-4">
-              <h1 className="display-5 pulse animated border-top border-3 border-primary pt-5">
+              <h1 className="display-5 fs-3 pulse animated border-top border-3 border-primary pt-3">
                 Join us
               </h1>
-              <h4 className="fw-normal">
+              <h5 className="fw-normal">
                 Be a member and be part of professionals in the filled of built
                 environment
-              </h4>
+              </h5>
             </div>
             <div className="col-md-8 d-flex justify-content-center align-items-center pt-3 pt-lg-5 px-lg-5">
               <form
@@ -78,8 +78,8 @@ function Register() {
                 <div className="my-4">
                   <div className="card bg-light border-0">
                     <div className="card-body">
-                      <h4 className="fw-normal card-title">Payment</h4>
-                      <p className="lead card-text">
+                      <h5 className="fw-normal card-title">Payment</h5>
+                      <p className="card-text">
                         You need to make payment of $150 to become a member
                       </p>
                     </div>
@@ -95,12 +95,12 @@ function Register() {
                       value="yes"
                       onChange={(e) => setAgree(e.target.value)}
                     />
-                    <label className="form-check-label" htmlFor="agree">
+                    <label className="form-check-label small" htmlFor="agree">
                       You agree to our terms and conditions
                     </label>
                   </div>
                   <button
-                    className="btn btn-outline-primary rounded-0 btn-lg"
+                    className="btn btn-outline-primary rounded-0"
                     type="submit"
                     disabled={
                       loading || !name || !email || !password || !city || !agree

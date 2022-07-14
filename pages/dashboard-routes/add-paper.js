@@ -37,7 +37,7 @@ function AddPaper({ paper }) {
 
   return (
     <>
-      <h5>Add paper</h5>
+      <h5>{paper?.title ? "Edit paper" : "Add paper"}</h5>
 
       <div className="mb-4">
         {message && <p className="text-success">{message}</p>}
@@ -112,7 +112,10 @@ function AddPaper({ paper }) {
                   {postLoading ? (
                     <Spinner className="ms-2" />
                   ) : (
-                    <span className="">Submit</span>
+                    <span className="">
+                      {" "}
+                      {paper?.title ? "Save paper" : "Add paper"}
+                    </span>
                   )}
                 </button>
               </div>

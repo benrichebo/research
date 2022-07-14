@@ -10,11 +10,11 @@ function Articles() {
         <Header />
         <div className="container-fluid mb-4">
           <div className="row">
-            <div className="col-md-7 d-flex align-items-center pt-5 pb-3 pb-md-5">
+            <div className="col-md-7 d-flex align-items-center pt-3 pb-1 pb-md-3">
               <div className="col-md-12 col-lg-10 col-xl-9 mx-auto">
-                <h6 className="mb-4">ARTICLES</h6>
+                <p className="mb-4 small">ARTICLES</p>
                 <h1
-                  className="display-6 pulse animated"
+                  className="display-6 fs-3 pulse animated"
                   data-bss-disabled-mobile="true">
                   Published articles or great authors
                 </h1>
@@ -31,14 +31,14 @@ function Articles() {
             </div>
           </div>
         </div>
-        <div className="container-fluid py-4 py-xl-5">
+        <div className="container-fluid py-2 py-xl-3">
           <div className="row gy-4 gy-md-0">
             <div className="col px-0">
               <div className="card rounded-0 border-0"></div>
             </div>
           </div>
         </div>
-        <div className="container mb-5 pb-5">
+        <div className="container mb-3 pb-3">
           <div className="row">
             <div className="col-6 col-md-4 mb-3">
               <div className="card rounded-0">
@@ -48,12 +48,14 @@ function Articles() {
                   style={{ objectFit: "scale-down" }}
                 />
                 <div className="card-body">
-                  <div className="p-2 p-lg-3">
-                    <span className="fs-6 my-3 my-lg-0">ARCHITECTURE</span>
+                  <div className="p-1 p-lg-2">
+                    <span className="fs-6 my-3 my-lg-0 small">
+                      ARCHITECTURE
+                    </span>
                     <div className="d-lg-flex justify-content-lg-between">
                       <h5 className="my-2">Built environment conference</h5>
                     </div>
-                    <span className="fs-6 text-muted my-3 my-lg-0">
+                    <span className="fs-6 text-muted my-3 my-lg-0 small">
                       24th July 2022
                     </span>
                   </div>
@@ -68,12 +70,14 @@ function Articles() {
                   style={{ objectFit: "scale-down" }}
                 />
                 <div className="card-body">
-                  <div className="p-2 p-lg-3">
-                    <span className="fs-6 my-3 my-lg-0">ARCHITECTURE</span>
+                  <div className="p-1 p-lg-2">
+                    <span className="fs-6 my-3 my-lg-0 small">
+                      ARCHITECTURE
+                    </span>
                     <div className="d-lg-flex justify-content-lg-between">
                       <h5 className="my-2">Built environment conference</h5>
                     </div>
-                    <span className="fs-6 text-muted my-3 my-lg-0">
+                    <span className="fs-6 text-muted my-3 my-lg-0 small">
                       24th July 2022
                     </span>
                   </div>
@@ -88,12 +92,14 @@ function Articles() {
                   style={{ objectFit: "scale-down" }}
                 />
                 <div className="card-body">
-                  <div className="p-2 p-lg-3">
-                    <span className="fs-6 my-3 my-lg-0">ARCHITECTURE</span>
+                  <div className="p-1 p-lg-2">
+                    <span className="fs-6 my-3 my-lg-0 small">
+                      ARCHITECTURE
+                    </span>
                     <div className="d-lg-flex justify-content-lg-between">
                       <h5 className="my-2">Built environment conference</h5>
                     </div>
-                    <span className="fs-6 text-muted my-3 my-lg-0">
+                    <span className="fs-6 text-muted my-3 my-lg-0 small">
                       24th July 2022
                     </span>
                   </div>

@@ -7,7 +7,12 @@ function Header() {
       <div className="container">
         <Link href="/">
           <a className="navbar-brand fs-6" href="#">
-            Association of researches and planners
+            <span className="d-none d-md-block">
+              Association of researches and planners
+            </span>
+            <span className="d-md-none">
+              Logo
+            </span>
           </a>
         </Link>
         <button

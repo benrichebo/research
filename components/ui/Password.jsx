@@ -3,7 +3,7 @@ import React from "react";
 function Password({ setPassword }) {
   return (
     <input
-      className="form-control-lg form-control rounded-0"
+      className="form-control rounded-0"
       type="password"
       id="password"
       placeholder=""

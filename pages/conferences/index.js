@@ -10,10 +10,10 @@ function Conferences() {
         <Header />
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-7 d-flex align-items-center pt-5 pb-3 pb-md-5">
+            <div className="col-md-7 d-flex align-items-center pt-3 pb-1 pb-md-3">
               <div className="col-md-12 col-lg-10 col-xl-9 mx-auto">
-                <h6 className="mb-4">CONFERENCES</h6>
-                <h1 className="display-6 pulse animated">
+                <p className="mb-4 small">CONFERENCES</p>
+                <h1 className="display-6 fs-3 pulse animated">
                   Monthly and yearly conferences organized for our members
                 </h1>
               </div>
@@ -35,12 +35,12 @@ function Conferences() {
         <div className="container">
           <div className="card-group row my-5">
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-4">01</h6>
+              <div className="card-body p-md-1 p-xl-2 p-xxl-3">
+                <h6 className="text-primary card-title pb-2">01</h6>
                 <h5 className="card-title">
                   ESG Investment and private real estate returns
                 </h5>
-                <h6 className="text-muted card-subtitle my-3">
+                <h6 className="text-muted card-subtitle my-2 small">
                   Publisher: Michael Gates
                 </h6>
                 <p className="card-text d-none d-lg-block">
@@ -50,12 +50,12 @@ function Conferences() {
               </div>
             </div>
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-4">02</h6>
+              <div className="card-body p-md-1 p-xl-2 p-xxl-3">
+                <h6 className="text-primary card-title pb-2">02</h6>
                 <h5 className="card-title">
                   ESG Investment and private real estate returns
                 </h5>
-                <h6 className="text-muted card-subtitle my-3">
+                <h6 className="text-muted card-subtitle my-2 small">
                   Publisher: Michael Gates
                 </h6>
                 <p className="card-text d-none d-lg-block">
@@ -65,12 +65,12 @@ function Conferences() {
               </div>
             </div>
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-4">03</h6>
+              <div className="card-body p-md-1 p-xl-2 p-xxl-3">
+                <h6 className="text-primary card-title pb-2">03</h6>
                 <h5 className="card-title">
                   ESG Investment and private real estate returns
                 </h5>
-                <h6 className="text-muted card-subtitle my-3">
+                <h6 className="text-muted card-subtitle my-2 small">
                   Publisher: Michael Gates
                 </h6>
                 <p className="card-text d-none d-lg-block">
@@ -80,12 +80,12 @@ function Conferences() {
               </div>
             </div>
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-4">04</h6>
+              <div className="card-body p-md-1 p-xl-2 p-xxl-3">
+                <h6 className="text-primary card-title pb-2">04</h6>
                 <h5 className="card-title">
                   ESG Investment and private real estate returns
                 </h5>
-                <h6 className="text-muted card-subtitle my-3">
+                <h6 className="text-muted card-subtitle my-2 small">
                   Publisher: Michael Gates
                 </h6>
                 <p className="card-text d-none d-lg-block">

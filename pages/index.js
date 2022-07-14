@@ -11,15 +11,15 @@ function Home() {
         <Header />
         <div className="container">
           <div className="row">
-            <div className="col-md-11 col-lg-8 col-xl-7 d-flex align-items-center pt-5 pb-3 pb-md-5">
+            <div className="col-md-11 col-lg-8 col-xl-7 d-flex align-items-center py-3">
               <div className="col-md-12 col-lg-10">
-                <p className="mb-4 fs-6">RESEARCH INSTITUTE</p>
-                <h1
-                  className="display-6 pulse animated"
+                <p className="mb-2 small">RESEARCH INSTITUTE</p>
+                <h3
+                  className="display-6 fs-3 pulse animated"
                   data-bss-disabled-mobile="true">
                   Home to research prospect individuals from various
                   backgrounds. Weekly publications and articles
-                </h1>
+                </h3>
               </div>
             </div>
             <div className="col-md-4 d-none d-lg-block">
@@ -47,32 +47,33 @@ function Home() {
         </div>
         <div class="card bg-primary rounded-0 border-0">
           <img
-            className="img-fluid card-img w-100 d-block"
+            className="img-fluid card-img w-100 d-block hero-image"
             src="/images/arlington-research-Kz8nHVg_tGI-unsplash.jpg"
+            style={{ objectFit: "cover" }}
             loading="lazy"
           />
           <div class="card-img-overlay container">
             <a
-              type="button"
-              className="d-flex justify-content-start align-items-center mt-3 text-decoration-none">
-              <span className="border rounded-circle p-2 p-md-3 border-2 border-dark">
+              href="#fields"
+              className="d-flex justify-content-start align-items-center mt-2 text-decoration-none">
+              <span className="border rounded-circle p-1 p-md-2 border-2 border-dark">
                 <MdArrowDownward className="fs-3 text-dark" />
               </span>
-              <h6 className="ms-3 mb-0 text-dark">LEARN MORE</h6>
+              <h6 className="ms-2 mb-0 text-dark">LEARN MORE</h6>
             </a>
           </div>
         </div>
-      
+
         <section>
           <div className="container px-md-0 py-3 py-md-5">
             <div className="row">
               <div className="col-md-5">
-                <h1 className="display-6 pulse animated border-top border-3 border-primary w-50 pt-5 heading">
+                <h1 className="display-6 fs-3 pulse animated border-top border-3 border-primary w-50 pt-3 heading">
                   About us
                 </h1>
               </div>
-              <div className="col-md-7 d-flex align-items-center pt-3 pt-lg-5">
-                <div className="mt-md-3 mt-lg-4">
+              <div className="col-md-7 d-flex align-items-center pt-1 pt-lg-3">
+                <div className="mt-md-1 mt-lg-2">
                   <p className="fs-5 fw-light pulse animated">
                     We are a research real estate agency&nbsp; who are made of
                     professionals from the build environment, specifically,
@@ -83,32 +84,41 @@ function Home() {
             </div>
           </div>
         </section>
-        <div className="container-fluid py-4 py-xl-5 mb-5">
+        <div className="container-fluid py-4 py-xl-5 mb-5" id="articles">
           <div className="card-group row my-5">
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary pb-4">01</h6>
+              <div className="card-body p-md-1 p-xxl-3">
+                <h6 className="text-primary py-2">01</h6>
                 <h6 className="">
                   ESG Investment and private real estate returns
                 </h6>
-                <h6 className="text-muted my-3">
-                  Publisher: Michael Gates
-                </h6>
-                <p className="card-text d-none d-lg-block">
+                <h6 className="text-muted my-2 small">Publisher: Michael Gates</h6>
+                <p className="card-text d-none d-lg-block pb-2">
                   International conference on business management and social
                   innovation
                 </p>
               </div>
             </div>
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary pb-3">02</h6>
+              <div className="card-body p-md-1 p-xxl-3">
+                <h6 className="text-primary py-2">01</h6>
                 <h6 className="">
                   ESG Investment and private real estate returns
                 </h6>
-                <h6 className="text-muted my-3">
-                  Publisher: Michael Gates
+                <h6 className="text-muted my-2 small">Publisher: Michael Gates</h6>
+                <p className="card-text d-none d-lg-block pb-2">
+                  International conference on business management and social
+                  innovation
+                </p>
+              </div>
+            </div>
+            <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
+              <div className="card-body p-md-1 p-xxl-3">
+                <h6 className="text-primary py-2">01</h6>
+                <h6 className="">
+                  ESG Investment and private real estate returns
                 </h6>
+                <h6 className="text-muted my-2 small">Publisher: Michael Gates</h6>
                 <p className="card-text d-none d-lg-block">
                   International conference on business management and social
                   innovation
@@ -116,29 +126,12 @@ function Home() {
               </div>
             </div>
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-3">03</h6>
-                <h6 className="card-title">
+              <div className="card-body p-md-1 p-xxl-3">
+                <h6 className="text-primary py-2">01</h6>
+                <h6 className="">
                   ESG Investment and private real estate returns
                 </h6>
-                <h6 className="text-muted my-3">
-                  Publisher: Michael Gates
-                </h6>
-                <p className="card-text d-none d-lg-block">
-                  International conference on business management and social
-                  innovation
-                </p>
-              </div>
-            </div>
-            <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-4">04</h6>
-                <h6 className="card-title">
-                  ESG Investment and private real estate returns
-                </h6>
-                <h6 className="text-muted my-3">
-                  Publisher: Michael Gates
-                </h6>
+                <h6 className="text-muted my-2 small">Publisher: Michael Gates</h6>
                 <p className="card-text d-none d-lg-block">
                   International conference on business management and social
                   innovation
@@ -147,11 +140,11 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="container mb-5">
+        <div className="container mb-5" id="fields">
           <div className="mt-5">
             <a
               data-bss-hover-animate="pulse"
-              className="btn btn-outline-primary rounded-0 btn-lg"
+              className="btn btn-outline-primary rounded-0"
               href="#">
               <span className="d-flex align-items-center">
                 <span>Various research fields</span>
@@ -168,22 +161,22 @@ function Home() {
                   <h6 className="text-white my-4">OUR EXPERTISE</h6>
                   <ul className="list-unstyled">
                     <li
-                      className="fs-2 fw-light text-white-50 mb-3"
+                      className="fs-4 fw-light text-white-50 mb-2"
                       data-bss-hover-animate="pulse">
                       Architecture
                     </li>
                     <li
-                      className="fs-2 fw-light text-white-50 mb-3"
+                      className="fs-4 fw-light text-white-50 mb-2"
                       data-bss-hover-animate="pulse">
                       Real Estate
                     </li>
                     <li
-                      className="fs-2 fw-light text-white-50 mb-3"
+                      className="fs-4 fw-light text-white-50 mb-2"
                       data-bss-hover-animate="pulse">
                       Interior design
                     </li>
                     <li
-                      className="fs-2 fw-light text-white-50 mb-3"
+                      className="fs-4 fw-light text-white-50 mb-2"
                       data-bss-hover-animate="pulse">
                       Surveying
                     </li>
@@ -193,32 +186,32 @@ function Home() {
               <div className="col-md-7 order-first order-sm-first order-md-last d-flex justify-content-center px-0 px-md-3">
                 <div
                   className="col-md-8 col-lg-7 col-xl-6"
-                  style={{ marginTop: -150 }}>
+                  style={{ marginTop: -120 }}>
                   <img
                     className="img-fluid pulse animated"
                     src="/images/annie-spratt-vGgn0xLdy8s-unsplash.jpg"
                   />
-                  <h5 className="fw-light text-white-50 swing animated border-top border-3 border-primary pt-5 text-white mt-5 px-3 px-md-0">
+                  <h6 className="fw-light text-white-50 swing animated border-top border-3 border-primary pt-3 text-white mt-3 px-3 px-md-0">
                     Members are of different expertise in architecture, real
                     estate, interior design, surveying who contribute to the
                     built environment
-                  </h5>
+                  </h6>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <section className="py-5">
-          <div className="container px-md-0 py-3 py-md-5">
-            <div className="row py-3 py-lg-5">
+        <section className="py-3">
+          <div className="container px-md-0 py-1 py-md-3">
+            <div className="row py-1 py-lg-3">
               <div className="col-md-5">
                 <div className="mb-4">
-                  <h1 className="display-6 pulse animated border-top border-3 border-primary w-50 pt-5 heading">
+                  <h1 className="display-6 fs-3 pulse animated border-top border-3 border-primary w-50 pt-3 heading">
                     Upcoming conferences
                   </h1>
                   <a
                     data-bss-hover-animate="pulse"
-                    className="btn btn-outline-primary rounded-0 btn-lg my-3 mt-lg-5"
+                    className="btn btn-outline-primary rounded-0 my-1 mt-lg-3"
                     href="#">
                     <span className="d-flex align-items-center">
                       <span>View all conferences</span>
@@ -240,17 +233,17 @@ function Home() {
                             className="img-fluid card-img-top w-100 d-block w-100"
                             src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
                           />
-                          <div className="p-4">
+                          <div className="p-3">
                             <div className="d-lg-flex justify-content-lg-between">
-                              <h5 className="mb-0">
+                              <h6 className="mb-0">
                                 Built environment conference
-                              </h5>
-                              <span className="fs-6 text-muted my-3 my-lg-0">
+                              </h6>
+                              <span className="fs-6 text-muted my-2 my-lg-0 small">
                                 24th July 2022
                               </span>
                             </div>
-                            <p className="d-none d-lg-block my-2">Albania</p>
-                            <p className="fs-6 d-none d-lg-block mb-4">
+                            <p className="d-none d-lg-block my-2 small">Albania</p>
+                            <p className="fs-6 d-none d-lg-block mb-2">
                               International conference on business management
                               and social innovation
                             </p>
@@ -339,14 +332,14 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="container px-md-0 py-3 py-md-5">
+          <div className="container px-md-0 py-1 py-md-3">
             <div className="d-md-flex justify-content-md-between align-items-baseline">
-              <h1 className="display-6 pulse animated border-top border-3 border-primary w-25 pt-5 heading">
+              <h1 className="display-6 fs-3 pulse animated border-top border-3 border-primary w-25 pt-3 heading">
                 Latest Articles
               </h1>
               <a
                 data-bss-hover-animate="pulse"
-                className="btn btn-outline-primary rounded-0 btn-lg h-100 my-3 my-lg-0"
+                className="btn btn-outline-primary rounded-0 h-100 my-3 my-lg-0"
                 href="#">
                 <span className="d-flex align-items-center">
                   <span>View all articles</span>
@@ -354,8 +347,8 @@ function Home() {
                 </span>
               </a>
             </div>
-            <div className="row py-3 py-lg-5">
-              <div className="col-md-6">
+            <div className="row py-1 py-lg-3">
+              <div className="col-md-4">
                 <div className="bg-light">
                   <div>
                     <img
@@ -364,12 +357,12 @@ function Home() {
                       style={{ objectFit: "scale-down" }}
                     />
                   </div>
-                  <div className="p-4 p-lg-5">
+                  <div className="p-2 p-lg-3">
                     <span className="fs-6 my-3 my-lg-0">ARCHITECTURE</span>
                     <div className="d-lg-flex justify-content-lg-between">
                       <h4 className="my-2">Built environment conference</h4>
                     </div>
-                    <span className="fs-6 text-muted my-3 my-lg-0">
+                    <span className="fs-6 text-muted my-1 my-lg-0">
                       24th July 2022
                     </span>
                   </div>

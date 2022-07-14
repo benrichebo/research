@@ -11,14 +11,14 @@ function Papers() {
         <Header />
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-7 d-flex align-items-center pt-5 pb-3 pb-md-5">
+            <div className="col-md-7 d-flex align-items-center pt-3 pb-1 pb-md-3">
               <div className="col-sm-10 col-xl-9 mx-sm-auto">
-                <h6 className="mb-4">PAPERS</h6>
-                <h1
-                  className="display-6 pulse animated"
+                <p className="mb-4 small">PAPERS</p>
+                <h3
+                  className="display-6 fs-3 pulse animated"
                   data-bss-disabled-mobile="true">
                   Research Papers&nbsp;
-                </h1>
+                </h3>
               </div>
             </div>
             <div className="col-md-5 px-0">
@@ -39,7 +39,7 @@ function Papers() {
           <div className="row">
             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">
-                <div className="card-body p-md-2 p-xl-3 p-xxl-5">
+                <div className="card-body p-md-2 p-xl-1 p-xxl-3">
                   <MdInsertDriveFile className="text-muted mb-2" />
                   <h5 className="card-title">
                     ESG Investment and private real estate returns
@@ -52,7 +52,7 @@ function Papers() {
             </div>
             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">
-                <div className="card-body p-md-2 p-xl-3 p-xxl-5">
+                <div className="card-body p-md-2 p-xl-1 p-xxl-3">
                   <MdInsertDriveFile className="text-muted mb-2" />
                   <h5 className="card-title">
                     ESG Investment and private real estate returns
@@ -65,7 +65,7 @@ function Papers() {
             </div>
             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">
-                <div className="card-body p-md-2 p-xl-3 p-xxl-5">
+                <div className="card-body p-md-2 p-xl-1 p-xxl-3">
                   <MdInsertDriveFile className="text-muted mb-2" />
                   <h5 className="card-title">
                     ESG Investment and private real estate returns
@@ -78,7 +78,7 @@ function Papers() {
             </div>
             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">
-                <div className="card-body p-md-2 p-xl-3 p-xxl-5">
+                <div className="card-body p-md-2 p-xl-1 p-xxl-3">
                   <MdInsertDriveFile className="text-muted mb-2" />
                   <h5 className="card-title">
                     ESG Investment and private real estate returns
