@@ -73,7 +73,7 @@ export const useUser = (type) => {
           sessionStorage.setItem("initial-user", data);
           this.getCurrentUser();
           setMessage("success");
-          router?.push("/dashboard/home");
+          router?.push(`/dashboard/home/${data?._id}`);
         } else {
           setError(data.msg);
           setLoading(false);

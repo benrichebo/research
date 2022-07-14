@@ -1,12 +1,11 @@
-import Stripe from "stripe";
 import { verifyUser } from "../../verification";
-import { insertToArray } from "../../db/update";
-import { connectToDatabase } from "../../../../lib/mongodb";
+import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET, {
   apiVersion: "2020-08-27",
 });
 
 export const getStripeId = async (req) => {
+  const { userId } = await verifyUser(req);
   try {
     //2. stripe payment integration
     const session = await stripe?.checkout?.sessions?.create({
@@ -25,7 +24,7 @@ export const getStripeId = async (req) => {
           quantity: 1,
         },
       ],
-      success_url: `${req.headers.origin}/dashboard/payments`,
+      success_url: `${req.headers.origin}/dashboard/payments/${userId}`,
       cancel_url: `${req.headers.origin}/make-payment`,
     });
 

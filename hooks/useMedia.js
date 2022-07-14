@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { DELETE } from "../functions/DELETE";
 import { GET } from "../functions/GET";
 import { POST } from "../functions/POST";
 import { PUT } from "../functions/PUT";
@@ -7,7 +8,7 @@ import { useStorage } from "./useStorage";
 export const useMedia = (type) => {
   const { sessionStorage } = useStorage("session");
 
-  const [medias, setMedias] = useState(null);
+  let [medias, setMedias] = useState(null);
   const [mediaData, setMediaData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [uploadLoading, setUploadLoading] = useState(false);
@@ -17,6 +18,7 @@ export const useMedia = (type) => {
 
   const media = {
     async getMedias() {
+      setError(false);
       setLoading(true);
       try {
         const data = await GET("/api/media/images");
@@ -30,12 +32,14 @@ export const useMedia = (type) => {
           }
         }
       } catch (error) {
-        setError(error.message);
+        setLoading(false);
+        setError("there was an error");
       }
     },
 
     async getMedia(id) {
       setLoading(true);
+      setError(false);
       try {
         const data = await GET(`/api/media/images/${id}`);
         setLoading(false);
@@ -45,7 +49,8 @@ export const useMedia = (type) => {
           setMediaData(data);
         }
       } catch (error) {
-        setError(error.message);
+        setLoading(false);
+        setError("there was an error");
       }
     },
 
@@ -66,11 +71,13 @@ export const useMedia = (type) => {
           setUploadError(data.msg);
         }
       } catch (error) {
-        setUploadError(error.message);
+        setUploadLoading(false);
+        setUploadError("there was an error");
       }
     },
 
     async updateMedia(id, credentials) {
+      setUploadError("");
       setUploadLoading(true);
       try {
         const data = await PUT(credentials, `/api/media/images/${id}`);
@@ -81,18 +88,29 @@ export const useMedia = (type) => {
           setError(data.msg);
         }
       } catch (error) {
-        setError(error.message);
+        setUploadLoading(false);
+        setUploadError("there was an error");
       }
     },
 
     async deleteMedia(id) {
       setUploadLoading(true);
-      const data = await DELETE(`/api/media/images/${id}`);
-      setUploadLoading(false);
-      if (data.msg.includes("successfully")) {
-        setMessage(data.msg);
-      } else {
-        setError(data.msg);
+      setUploadError("");
+      try {
+        const data = await DELETE(`/api/media/images/${id}`);
+        console.log("delete-data", data);
+        setUploadLoading(false);
+        if (data.msg.includes("successfully")) {
+          setMessage(data.msg);
+          this.getMedias();
+        } else if (data.msg) {
+          setUploadError(data.msg);
+        } else {
+          setUploadError("there was an error");
+        }
+      } catch (error) {
+        setUploadLoading(false);
+        setUploadError("There was an error");
       }
     },
   };

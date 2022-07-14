@@ -7,6 +7,7 @@ import {
   MdPerson,
   MdPictureAsPdf,
   MdPayments,
+  MdOutlinePermMedia,
 } from "react-icons/md";
 
 const routes = [
@@ -16,6 +17,7 @@ const routes = [
   { name: "Conferences", icon: <MdReceiptLong className="fs-5" /> },
   { name: "Payments", icon: <MdPayments className="fs-5" /> },
   { name: "Settings", icon: <MdPerson className="fs-5" /> },
+  { name: "Media", icon: <MdOutlinePermMedia className="fs-5" /> },
 ];
 
 const memberRoutes = [
@@ -33,7 +35,10 @@ const Aside = ({ router, user, signOut }) => {
             <>
               {memberRoutes?.map((route) => (
                 <li className="fs-6 mb-4" key={route.name}>
-                  <Link href={`/dashboard/${route?.name?.toLocaleLowerCase()}`}>
+                  <Link
+                    href={`/dashboard/${route?.name?.toLocaleLowerCase()}/${
+                      user?._id
+                    }`}>
                     <a
                       className={`text-white-50 text-decoration-none d-flex justify-content-start align-items-center${
                         router?.query?.page == route.name.toLocaleLowerCase() &&
@@ -53,7 +58,10 @@ const Aside = ({ router, user, signOut }) => {
             <>
               {routes?.map((route) => (
                 <li className="fs-6 mb-4" key={route.name}>
-                  <Link href={`/dashboard/${route?.name?.toLocaleLowerCase()}`}>
+                  <Link
+                    href={`/dashboard/${route?.name?.toLocaleLowerCase()}/${
+                      user?._id
+                    }`}>
                     <a
                       className={`text-white text-decoration-none d-flex justify-content-start align-items-center text-white-50 ${
                         router?.query?.page == route.name.toLocaleLowerCase()

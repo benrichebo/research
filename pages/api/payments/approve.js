@@ -20,7 +20,7 @@ export default authenticate(async (req, res) => {
 
     const result = await db
       .collection("users")
-      .findOneAndUpdate(
+      .updateOne(
         { _id: ObjectId(userId) },
         { verified: body?.verified }
       );

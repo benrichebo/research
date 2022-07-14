@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import Home from "../dashboard-routes/home";
-import Layout from "../../components/Layout";
-import Aside from "../../components/Aside";
-import Papers from "../dashboard-routes/papers";
-import Conferences from "../dashboard-routes/conferences";
-import Articles from "../dashboard-routes/articles";
-import Settings from "../dashboard-routes/settings";
-import AddConference from "../dashboard-routes/add-conference";
-import AddPaper from "../dashboard-routes/add-paper";
-import AddArticle from "../dashboard-routes/add-article";
-import EditArticle from "../dashboard-routes/edit-article";
-import Canvas from "../../components/Canvas";
-import SecondaryHeader from "../../components/SecondaryHeader";
-import Payments from "../dashboard-routes/payments";
-import { useUser } from "../../hooks/useUser";
-import EditConference from "../dashboard-routes/edit-conference";
-import EditPaper from "../dashboard-routes/edit-paper";
+import Home from "../../../dashboard-routes/home";
+import Layout from "../../../../components/Layout";
+import Aside from "../../../../components/Aside";
+import Papers from "../../../dashboard-routes/papers";
+import Conferences from "../../../dashboard-routes/conferences";
+import Articles from "../../../dashboard-routes/articles";
+import Settings from "../../../dashboard-routes/settings";
+import AddConference from "../../../dashboard-routes/add-conference";
+import AddPaper from "../../../dashboard-routes/add-paper";
+import AddArticle from "../../../dashboard-routes/add-article";
+import EditArticle from "../../../dashboard-routes/edit-article";
+import Canvas from "../../../../components/Canvas";
+import SecondaryHeader from "../../../../components/SecondaryHeader";
+import Payments from "../../../dashboard-routes/payments";
+import { useUser } from "../../../../hooks/useUser";
+import EditConference from "../../../dashboard-routes/edit-conference";
+import EditPaper from "../../../dashboard-routes/edit-paper";
+import Media from "../../../dashboard-routes/media";
 
 const routes = [
   { name: "home", page: <Home /> },
@@ -31,11 +32,19 @@ const routes = [
   { name: "edit-paper", page: <EditPaper /> },
   { name: "add-article", page: <AddArticle /> },
   { name: "edit-article", page: <EditArticle /> },
+  { name: "media", page: <Media /> },
 ];
 
 function DashBoard() {
   const router = useRouter();
   const { userData, user } = useUser("user");
+
+  useEffect(() => {
+    if (!userData?.name) {
+      router.push("/login");
+    }
+  }, []);
+
   return (
     <Layout>
       <div className="container-fluid">
@@ -53,7 +62,9 @@ function DashBoard() {
             <SecondaryHeader />
             <div className="px-4">
               {routes.map((route) => (
-                <div key={route?.name}>{router?.query.page == route?.name && route?.page}</div>
+                <div key={route?.name}>
+                  {router?.query.page == route?.name && route?.page}
+                </div>
               ))}
             </div>
           </div>

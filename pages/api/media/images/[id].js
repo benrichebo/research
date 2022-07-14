@@ -1,29 +1,26 @@
 import { ObjectId } from "mongodb";
-import { findOne } from "../../db/find";
-import { removeFromArray } from "../../db/update";
+import cloudinary from "cloudinary";
 import { verifyUser } from "../../verification";
+import { connectToDatabase } from "../../../../lib/mongodb";
 
 export default async (req, res) => {
   const { userId } = await verifyUser(req);
 
   const { id } = req.query;
 
-  const collection = "media";
+  const { db } = await connectToDatabase();
 
   if (req.method == "GET") {
-    const media = await findOne(res, collection, {
-      _id: ObjectId(userId),
-      "media.public_id": id,
-    });
+    const media = await db.collection("media").findOne({ _id: ObjectId(id) });
 
-    if (media?.id) {
+    if (media?._id) {
       res.status(200).json(media);
     } else {
       res.status(400).json({ msg: "There is no media" });
     }
   }
 
-  if (method == "DELETE") {
+  if (req.method == "DELETE") {
     cloudinary.config({
       cloud_name: process.env.CLOUDINARY_NAME,
       api_key: process.env.CLOUDINARY_API_KEY,
@@ -31,19 +28,11 @@ export default async (req, res) => {
     });
 
     await cloudinary.uploader.destroy(id, async (err, result) => {
-      //remove to media
-      const set = { $pull: { media: { public_id: id } } };
+      const response = await db
+        .collection("media")
+        .deleteOne({ _id: ObjectId(id) });
 
-      //delete account
-      const response = await removeFromArray(
-        res,
-        collection,
-        {
-          _id: ObjectId(userId),
-        },
-        set
-      );
-      if (response.matchedCount === 1) {
+      if (response.deletedCount === 1) {
         res.status(200).json({ msg: "media was successfully deleted" });
       } else {
         res.status(400).json({ msg: "media was not deleted" });

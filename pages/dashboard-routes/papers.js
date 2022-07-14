@@ -27,19 +27,11 @@ function Papers() {
     await data.deleteData(`/api/papers/${id}`);
   };
 
-  const editPaper = (url) => {
-    console.log(url);
-    sessionStorage.setItem("url", url);
-
-    const dataUrl = sessionStorage.getItem("url");
-    if (dataUrl) router?.push("/dashboard/edit-paper");
-  };
-
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h5>Papers</h5>
-        <Link href="/dashboard/add-paper">
+        <Link href={`/dashboard/add-paper/${router?.query?.slug[0]}`}>
           <a className="btn btn-primary">Add paper</a>
         </Link>
       </div>
@@ -107,14 +99,12 @@ function Papers() {
                               {data?.title}
                             </label>
                             <span className="ms-3">
-                              <a
-                                className=""
-                                type="button"
-                                onClick={() =>
-                                  editPaper(`/api/papers/${data?._id}`)
-                                }>
-                                <MdEdit size={20} className="text-muted" />
-                              </a>
+                              <Link
+                                href={`/dashboard/edit-paper/${router?.query?.slug[0]}/${data?._id}`}>
+                                <a className="">
+                                  <MdEdit size={20} className="text-muted" />
+                                </a>
+                              </Link>
                               <a
                                 className="ms-4"
                                 type="button"

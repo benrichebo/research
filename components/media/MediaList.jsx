@@ -40,7 +40,7 @@ function MediaList({ mediaUploaded, setSelectedImage }) {
       )}
       {medias?.length > 0 &&
         medias?.map((media) => (
-          <div className="col-6 col-md-4 col-lg-3 mb-3" key={media?.url}>
+          <div className="col-4 col-md-3 col-lg-2 mb-3" key={media?.url}>
             <input
               className="form-check-input"
               type="radio"

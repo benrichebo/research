@@ -1,45 +1,25 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
 import Spinner from "../../components/ui/Spinner";
-import { useCrud } from "../../hooks/useCrud";
-import { MdEdit, MdDelete, MdArticle, MdRefresh } from "react-icons/md";
-import { useStorage } from "../../hooks/useStorage";
-//import {useUser} from "../../hooks/useUser"
+import { MdDelete, MdGroup, MdRefresh } from "react-icons/md";
+import { useMedia } from "../../hooks/useMedia";
 
-function Articles() {
-  const { data, loading, allData, error } = useCrud(
-    "all-articles",
-    "/api/articles"
-  );
-  const [show, setShow] = useState(false);
+function Media() {
+  const { loading, medias, media, uploadError, error, uploadLoading } = useMedia("medias");
+  const [show, setShow] = useState();
 
-  const { sessionStorage } = useStorage();
-
-  const router = useRouter();
-
-  //clear detail data
-  useEffect(() => {
-    sessionStorage.clearItem("url");
-  }, []);
-
-  const deleteArticle = async (id) => {
-    await data.deleteData(`/api/articles/${id}`);
+  const deleteMedia = async (id) => {
+    console.log(id);
+    await media.deleteMedia(id);
   };
-
-  console.log(router);
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h5>Articles</h5>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h5>Media</h5>
         <div>
-          <Link href={`/dashboard/add-article/${router?.query?.slug[0]}`}>
-            <a className="btn btn-primary">Add article</a>
-          </Link>
           <button
             className="btn btn-light my-3 ms-3"
-            onClick={() => data.getAllData("/api/articles")}>
+            onClick={() => media.getMedias()}>
             <MdRefresh />
           </button>
         </div>
@@ -52,18 +32,17 @@ function Articles() {
       {error && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <div className="text-center">
-            <h6 className="text-muted">
-              There was an error loading categories
-            </h6>
+            <h6 className="text-muted">There was an error loading medias</h6>
             <button
               className="btn btn-primary my-3"
-              onClick={() => data.getAllData("/api/articles")}>
+              onClick={() => media.getMedias()}>
               Reload
             </button>
           </div>
         </div>
       )}
-      {allData?.length > 0 && (
+      {uploadError && <p className="text-danger">{uploadError}</p>}
+      {medias?.length > 0 && (
         <div className="row">
           <div className="col-12 d-flex justify-content-end align-items-center mb-3">
             <input
@@ -87,27 +66,25 @@ function Articles() {
                         </option>
                       </select>
                     </th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Date</th>
+                    <th>Name</th>
                     <th>Url</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {allData?.map((data) => (
+                  {medias?.map((data) => (
                     <>
-                      <tr className="post" key={data?._id}>
+                      <tr>
                         <td className="text-nowrap">
-                          <div className="form-check d-flex align-items-center">
+                          <div className="form-check">
                             <input
                               className="form-check-input"
                               type="checkbox"
-                              id={data?.title}
+                              id={data?.name}
                               value={data?._id}
                             />
                             <label
                               className="form-check-label"
-                              htmlFor={data?.title}>
+                              htmlFor={data?.name}>
                               <img
                                 className="ms-4"
                                 width="70"
@@ -117,51 +94,37 @@ function Articles() {
                               />
                             </label>
                             <span className="ms-3">
-                              <Link
-                                href={`/dashboard/edit-article/${router?.query?.slug[0]}/${data?._id}`}>
-                                <a className="">
-                                  <MdEdit size={20} className="text-muted" />
-                                </a>
-                              </Link>
                               <a
                                 className="ms-4"
                                 type="button"
-                                onClick={() => setShow(true)}>
+                                onClick={() => setShow(data?._id)}>
                                 <MdDelete size={20} className="text-muted" />
                               </a>
                             </span>
                           </div>
-                          {show && (
+                          {show == data?._id && (
                             <div className="mt-3">
                               <a
-                                className="btn"
+                                className="btn btn-light btn-sm"
                                 href="#"
-                                onClick={() => setShow(false)}>
-                                Edit
+                                onClick={() => setShow()}>
+                                Cancel
                               </a>
                               <a
-                                className="ms-4 btn"
-                                href="#"
-                                onClick={() => deleteArticle(data?._id)}>
-                                Delete
+                                className="ms-4 btn btn-light btn-sm"
+                                onClick={() => deleteMedia(data?._id)}>
+                                {uploadLoading ? (
+                                  <Spinner className="ms-2" />
+                                ) : (
+                                  <span className="">Delete</span>
+                                )}
                               </a>
                             </div>
                           )}
                         </td>
-                        <td className="text-nowrap align-middle">
-                          {data?.title}
-                        </td>
-                        <td className="text-nowrap align-middle">
-                          Architecture
-                        </td>
-                        <td className="text-nowrap align-middle">
-                          {data?.createdAt}
-                        </td>
-                        <td className="text-nowrap align-middle">
-                          <a
-                            href={`https://localhost:3000/articles/${data?._id}`}>
-                            https://localhost:3000/articles/{data?._id}
-                          </a>
+                        <td className="text-nowrap">{data?.name}</td>
+                        <td className="text-nowrap">
+                          <a href="#">{data?.url}</a>
                         </td>
                       </tr>
                     </>
@@ -172,14 +135,14 @@ function Articles() {
           </div>
         </div>
       )}
-      {allData?.length == 0 && (
+      {medias?.length == 0 && (
         <div className="row mb-4">
           <div
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>
             <div className="text-center">
-              <MdArticle className="fs-1 text-muted" />
-              <p>There is no article</p>
+              <MdGroup className="fs-1 text-muted" />
+              <p>There is no media</p>
             </div>
           </div>
         </div>
@@ -188,4 +151,4 @@ function Articles() {
   );
 }
 
-export default Articles;
+export default Media;

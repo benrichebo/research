@@ -1,5 +1,4 @@
 import { connectToDatabase } from "../../../../lib/mongodb";
-import { ObjectId } from "mongodb";
 import { authenticate } from "../../authentication";
 import { verifyUser } from "../../verification";
 

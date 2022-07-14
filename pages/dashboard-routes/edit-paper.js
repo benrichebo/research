@@ -1,14 +1,14 @@
 import React from "react";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
-import { useStorage } from "../../hooks/useStorage";
+import { useRouter } from "next/router";
 import AddPaper from "./add-paper";
 
 function EditPaper() {
-  const { sessionStorage } = useStorage();
+  const router = useRouter();
   const { data, loading, error, oneData } = useCrud(
     "one-paper",
-    sessionStorage.getItem("url")
+    `/api/papers/${router?.query?.slug[1]}`
   );
 
   return (
@@ -24,7 +24,11 @@ function EditPaper() {
             <h6 className="text-muted">There was an error loading paper</h6>
             <button
               className="btn btn-primary my-3"
-              onClick={() => data.getAllData(sessionStorage.getItem("url"))}>
+              onClick={() =>
+                data.getOneData(
+                  `/api/papers/${router?.query?.slug[1]}`
+                )
+              }>
               Reload
             </button>
           </div>

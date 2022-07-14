@@ -37,6 +37,7 @@ export const useCrud = (type, url) => {
           }
         }
       } catch (error) {
+        setLoading(false);
         setError(error.message);
       }
     },
@@ -50,9 +51,35 @@ export const useCrud = (type, url) => {
         if (data.msg) {
           setError(data.msg);
         } else {
-          setOneData(data);
+          if (data?._id) {
+            setOneData(data);
+            sessionStorage.setItem(type, data);
+          }
         }
       } catch (error) {
+        setLoading(false);
+        setError(error.message);
+      }
+    },
+
+    //use it to get item for url in session
+    async getOneUrlInSessionData() {
+      setLoading(true);
+      setError(null);
+      try {
+        let url = sessionStorage.getItem("url");
+        const data = await GET(url);
+        console.log("session-data", data);
+        setLoading(false);
+        if (data?.msg) {
+          setError(data.msg);
+        } else {
+          if (data?._id) {
+            setOneData(data);
+          }
+        }
+      } catch (error) {
+        setLoading(false);
         setError(error.message);
       }
     },
@@ -70,6 +97,7 @@ export const useCrud = (type, url) => {
           setPostError(data.msg);
         }
       } catch (error) {
+        setLoading(false);
         setPostError(error.message);
       }
     },
@@ -87,6 +115,7 @@ export const useCrud = (type, url) => {
           setPostError(data.msg);
         }
       } catch (error) {
+        setPostLoading(false);
         setPostError(error.message);
       }
     },
@@ -95,13 +124,18 @@ export const useCrud = (type, url) => {
       console.log(url);
       setPostLoading(true);
       setError(null);
-      const data = await DELETE(url);
-      setPostLoading(false);
-      if (data.msg.includes("successfully")) {
-        setMessage(data.msg);
-        this.getAllData();
-      } else {
-        setPostError(data.msg);
+      try {
+        const data = await DELETE(url);
+        setPostLoading(false);
+        if (data.msg.includes("successfully")) {
+          setMessage(data.msg);
+          this.getAllData();
+        } else {
+          setPostError(data.msg);
+        }
+      } catch {
+        setLoading(false);
+        setPostError(error.message);
       }
     },
   };
@@ -126,6 +160,10 @@ export const useCrud = (type, url) => {
 
     if (type?.includes("one")) {
       data.getOneData(url);
+    }
+
+    if (type?.includes("one-in-session")) {
+      data.getOneUrlInSessionData();
     }
   }, []);
 
