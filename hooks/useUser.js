@@ -20,7 +20,7 @@ export const useUser = (type) => {
       const initializedUser = sessionStorage.getItem("initialized-user");
       const user = sessionStorage.getItem("user");
 
-      if (typeof user == "object" || typeof initializedUser == "object") {
+      if (user?.email || initializedUser?.email) {
         setUserData(user || initializedUser);
       }
     },
@@ -32,7 +32,7 @@ export const useUser = (type) => {
         if (data.msg) {
           setError(data.msg);
         } else {
-          if (data?.id) {
+          if (data?._id) {
             sessionStorage.setItem("user", data);
             setUserData(data);
             setMessage("success");
@@ -135,11 +135,9 @@ export const useUser = (type) => {
 
   useEffect(() => {
     if (type == "user") {
-      const data = sessionStorage.getItem("user");
+      user.getUserInSession();
 
-      if (typeof data == "object") {
-        setUserData(data);
-      } else {
+      if (!userData?.email) {
         user.getCurrentUser();
       }
     }

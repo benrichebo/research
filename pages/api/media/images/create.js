@@ -13,7 +13,7 @@ export default authenticate(async (req, res) => {
   //1. get method
   const method = req.method;
 
-  const { name, width, height, uri } = JSON.parse(req.body);
+  const { name, width, height, uri, type } = JSON.parse(req.body);
 
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
@@ -43,6 +43,7 @@ export default authenticate(async (req, res) => {
         height,
         public_id,
         url,
+        type
       };
 
       //push to media
@@ -54,7 +55,7 @@ export default authenticate(async (req, res) => {
         console.log("media-response", response);
 
       if (response.acknowledged) {
-        res.status(200).json({ name, width, height, public_id, url });
+        res.status(200).json({ name, width, height, public_id, url, type });
       } else {
         res.status(400).json({ msg: "Uploading to your media folder failed" });
       }

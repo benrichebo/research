@@ -21,7 +21,7 @@ function EditArticle() {
       {error && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <div className="text-center">
-            <h6 className="text-muted">There was an error loading papers</h6>
+            <h6 className="text-muted">There was an error loading articles</h6>
             <button
               className="btn btn-primary my-3"
               onClick={() => data.getAllData(sessionStorage.getItem("url"))}>

@@ -4,7 +4,10 @@ import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 
 function AddPaper({ paper }) {
-  const { data, postLoading, postError, message } = useCrud();
+  const { data, postLoading, postError, message } = useCrud(
+    "all-papers",
+    "/api/papers"
+  );
 
   const [title, setTitle] = useState(paper?.title || "");
   const [publisher, setPublisher] = useState(paper?.publisher || "");
@@ -14,7 +17,8 @@ function AddPaper({ paper }) {
   const [fileTypeError, setFileTypeError] = useState(null);
 
   useEffect(() => {
-    if (fileToUpload?.type != "document") {
+    console.log(fileToUpload);
+    if (fileToUpload && fileToUpload?.type != "document") {
       setFileTypeError("Pick a word/pdf document rather");
     } else {
       setFileTypeError(null);
@@ -26,7 +30,7 @@ function AddPaper({ paper }) {
     const body = {
       title,
       publisher,
-      fileToUpload,
+      file: fileToUpload,
       description,
     };
 

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdPictureAsPdf, MdEdit, MdDelete } from "react-icons/md";
+import { useRouter } from "next/router";
+import { useStorage } from "../../hooks/useStorage";
 
 function Papers() {
   const { data, loading, allData, error } = useCrud(
@@ -11,9 +13,26 @@ function Papers() {
   );
   const [show, setShow] = useState(false);
 
-  const deletePaper = (id) => {
+  const { sessionStorage } = useStorage();
+
+  const router = useRouter();
+
+  //clear detail data
+  useEffect(() => {
+    sessionStorage.clearItem("url");
+  }, []);
+
+  const deletePaper = async (id) => {
     console.log(id);
-    data.deleteData(`/api/papers/${id}`);
+    await data.deleteData(`/api/papers/${id}`);
+  };
+
+  const editPaper = (url) => {
+    console.log(url);
+    sessionStorage.setItem("url", url);
+
+    const dataUrl = sessionStorage.getItem("url");
+    if (dataUrl) router?.push("/dashboard/edit-paper");
   };
 
   return (
@@ -88,7 +107,12 @@ function Papers() {
                               {data?.title}
                             </label>
                             <span className="ms-3">
-                              <a className="" type="button">
+                              <a
+                                className=""
+                                type="button"
+                                onClick={() =>
+                                  editPaper(`/api/papers/${data?._id}`)
+                                }>
                                 <MdEdit size={20} className="text-muted" />
                               </a>
                               <a

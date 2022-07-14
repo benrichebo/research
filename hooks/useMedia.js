@@ -56,8 +56,12 @@ export const useMedia = (type) => {
         const data = await POST(credentials, "/api/media/images/create");
         setUploadLoading(false);
         if (data.url) {
-          this.getMedias();
-          return data?.url;
+          sessionStorage.clearItem(type);
+
+          if (data?.length > 0) {
+            this.getMedias();
+            return data?.url;
+          }
         } else {
           setUploadError(data.msg);
         }

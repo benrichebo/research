@@ -35,7 +35,7 @@ export default authenticate(async (req, res) => {
     }
   }
 
-  if (method == "DELETE") {
+  if (req.method == "DELETE") {
     const response = await db
       .collection("papers")
       .deleteOne({ _id: ObjectId(id) });

@@ -1,34 +1,34 @@
 export const useStorage = () => {
   const sessionStorage = {
     getItem(key) {
-      const storage = sessionStorage.getItem(key);
+      const storage = window.sessionStorage.getItem(key);
       return JSON.parse(storage);
     },
 
     setItem(key, value) {
-      if (value) sessionStorage.setItem(key, JSON.stringify(value));
+      if (value) window.sessionStorage.setItem(key, JSON.stringify(value));
       this.getItem(key);
     },
 
     clearItem(key) {
-      sessionStorage.removeItem(key);
+      window.sessionStorage.removeItem(key);
       this.setItem(null);
     },
 
     clearSession() {
-      sessionStorage.clear();
+      window.sessionStorage.clear();
       this.setItem(null);
     },
   };
 
   const localStorage = {
     getItem(key) {
-      const storage = localStorage.getItem(key);
+      const storage = window.localStorage.getItem(key);
       return JSON.parse(storage);
     },
 
     setItem(key, value) {
-      if (value) localStorage.setItem(key, JSON.stringify(value));
+      if (value) window.localStorage.setItem(key, JSON.stringify(value));
       this.getItem(key);
     },
 

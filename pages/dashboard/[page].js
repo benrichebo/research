@@ -16,6 +16,7 @@ import SecondaryHeader from "../../components/SecondaryHeader";
 import Payments from "../dashboard-routes/payments";
 import { useUser } from "../../hooks/useUser";
 import EditConference from "../dashboard-routes/edit-conference";
+import EditPaper from "../dashboard-routes/edit-paper";
 
 const routes = [
   { name: "home", page: <Home /> },
@@ -27,6 +28,7 @@ const routes = [
   { name: "add-conference", page: <AddConference /> },
   { name: "edit-conference", page: <EditConference /> },
   { name: "add-paper", page: <AddPaper /> },
+  { name: "edit-paper", page: <EditPaper /> },
   { name: "add-article", page: <AddArticle /> },
   { name: "edit-article", page: <EditArticle /> },
 ];
