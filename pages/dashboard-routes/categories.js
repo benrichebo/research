@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useCrud } from "../../hooks/useCrud";
 import Spinner from "../../components/ui/Spinner";
 
-function Categories({ category }) {
+function Categories() {
   const { data, allData, postLoading, postError, error, loading, message } =
     useCrud("all-categories", "/api/categories");
+
+    const [category, setCategory] = useState()
 
   const [name, setName] = useState(category?.name || "");
   const [type, setType] = useState(category?.type || "");
@@ -22,17 +24,22 @@ function Categories({ category }) {
       : await data.addData(body, "/api/categories/create");
   };
 
+  const deleteCategory = async (id) => {
+    console.log(id);
+    await data.deleteData(`/api/papers/${id}`);
+  };
+
   return (
     <>
       <h5>{category?.title ? "Edit category" : "Add category"}</h5>
       {message && <p className="text-success">{message}</p>}
       {postError && <p className="text-danger">{postError}</p>}
       <div className="row">
-        <div className="col-md-7">
+        <div className="col-md-6">
           <form className="row mb-4" onSubmit={handleSubmit}>
             <div className="">
               <div className="form-group mb-4">
-                <label htmlFor="name" className="mb-2">
+                <label htmlFor="name" className="mb-2" id="email">
                   Name
                 </label>
                 <input
@@ -47,9 +54,11 @@ function Categories({ category }) {
                 />
               </div>
               <div className="form-group mb-4">
-                <label htmlFor="type">Type</label>
+                <label htmlFor="type" className="mb-2" id="type">
+                  Type
+                </label>
                 <select
-                  className="form-control rounded-0"
+                  className="form-select rounded-0"
                   name="type"
                   id="type"
                   value={type}
@@ -59,7 +68,9 @@ function Categories({ category }) {
                 </select>
               </div>
               <div className="form-group mb-4">
-                <label htmlFor="">Parent</label>
+                <label htmlFor="parent" className="mb-2">
+                  Parent
+                </label>
                 <select
                   className="form-control rounded-0"
                   name="parent"
@@ -74,7 +85,7 @@ function Categories({ category }) {
                     ))}
                 </select>
               </div>
-              <div className="my-3 d-grid">
+              <div className="my-3 d-grid mt-4">
                 <button
                   className="btn btn-primary"
                   type="submit"
@@ -83,7 +94,6 @@ function Categories({ category }) {
                     <Spinner className="ms-2" />
                   ) : (
                     <span className="">
-                      {" "}
                       {category?.title ? "Save category" : "Add category"}
                     </span>
                   )}
@@ -92,28 +102,64 @@ function Categories({ category }) {
             </div>
           </form>
         </div>
-        <div className="col-md-5">
+        <div className="col-md-6">
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">Categories</h4>
               <p class="card-text">Added categories</p>
               {allData?.length == 0 && (
-                <p className="my-3">There are no published categories</p>
+                <p className="my-3">There are no categories</p>
               )}
               {allData?.length > 0 && (
-                <ul class="list-unstyled mt-3">
-                  <li class="list-item d-flex justify-content-between fw-bold mb-2">
-                    <span>Category</span>
-                    <span>Type</span>
-                  </li>
-                  {allData?.length > 0 &&
-                    allData.map((category) => (
-                      <li class="list-item d-flex justify-content-between mb-2">
-                        <span>{category?.name}</span>
-                        <span>{category?.type}</span>
-                      </li>
-                    ))}
-                </ul>
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-end align-items-center mb-3">
+                    <input
+                      type="search"
+                      class="form-control w-auto"
+                      placeholder="Search for an item"
+                      autocomplete="on"
+                    />
+                  </div>
+                  <div class="col">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Parent</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {allData?.map((data) => (
+                            <>
+                              <tr>
+                                <td className="text-nowrap">{data?.name}</td>
+                                <td className="text-nowrap">{data?.type}</td>
+                                <td className="text-nowrap">{data?.parent}</td>
+                                <td>
+                                  <a
+                                    href="#"
+                                    onClick={() => setCategory(data)}
+                                    className="btn btn-light btn-sm">
+                                    Edit
+                                  </a>
+                                  <a
+                                    className=""
+                                    href="#"
+                                    onClick={() => deleteCategory(data?._id)}>
+                                    <MdDelete className="text-muted" />
+                                  </a>
+                                </td>
+                              </tr>
+                            </>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           </div>
