@@ -1,38 +1,39 @@
 import React from "react";
-import { useCrud } from "../../hooks/useCrud";
+import { useCount } from "../../hooks/useCount";
 
 const Members = () => {
-  const { allData, error, loading, message } = useCrud(
-    "all-members",
-    "/api/members"
+  const { oneData, error, loading, message } = useCount(
+    "one-count-members",
+    "/api/count/members"
   );
+  console.log("members", oneData)
   return (
     <>
-      <h1 className="display-5 mt-3">{allData?.length || 0}</h1>
+      <h1 className="display-5 mt-3">{oneData?.count || 0}</h1>
     </>
   );
 };
 
 const Conferences = () => {
-  const { allData, error, loading, message } = useCrud(
-    "all-conferences",
-    "/api/conferences"
+  const { oneData, error, loading, message } = useCount(
+    "one-count-conferences",
+    "/api/count/conferences"
   );
   return (
     <>
-      <h1 className="display-5 mt-3">{allData?.length || 0}</h1>
+      <h1 className="display-5 mt-3">{oneData?.length || 0}</h1>
     </>
   );
 };
 
 const Papers = () => {
-  const { allData, error, loading, message } = useCrud(
-    "all-papers",
-    "/api/papers"
+  const { oneData, error, loading, message } = useCount(
+    "one-count-conferences",
+    "/api/count/conferences"
   );
   return (
     <>
-      <h1 className="display-5 mt-3">{allData?.length || 0}</h1>
+      <h1 className="display-5 mt-3">{oneData?.count || 0}</h1>
     </>
   );
 };

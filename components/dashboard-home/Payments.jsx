@@ -19,7 +19,7 @@ function Payments() {
             {allData &&
               allData?.length > 0 &&
               allData.slice(0, 3).map((payment) => (
-                <li class="list-item d-flex justify-content-between mb-2">
+                <li class="list-item d-flex justify-content-between mb-2" key={payment?.email}>
                   <span>{payment?.email}</span>
                   <span>{payment?.status}</span>
                 </li>

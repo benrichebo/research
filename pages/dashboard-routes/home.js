@@ -53,15 +53,15 @@ function Home() {
             <AllData />
           </div>
         )}
-        <div className="col-sm-12 col-md-6">
+        <div className="col-sm-12 col-md-6 mb-4">
           <Payments />
         </div>
         {userData?.role == "admin" && (
-          <div className="col-sm-12 col-md-6">
+          <div className="col-sm-12 col-md-6 mb-4">
             <Categories id={routeId} />
           </div>
         )}
-        <div className="col-sm-12 col-md-6">
+        <div className="col-sm-12 col-md-6 mb-4">
           <Papers id={routeId} />
         </div>
       </div>

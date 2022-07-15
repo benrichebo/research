@@ -20,9 +20,9 @@ function Categories({ id }) {
               </a>
             </Link>
           </div>
-          <p className="card-text mb-3">Added categories</p>
+          <p className="card-text mb-3 text-muted">Added categories</p>
           {allData?.length == 0 && (
-            <p className="my-3">There are no published papers</p>
+            <p className="my-3">There are no published categories</p>
           )}
           {allData?.length > 0 && (
             <ul class="list-unstyled">
@@ -33,7 +33,9 @@ function Categories({ id }) {
               {allData &&
                 allData?.length > 0 &&
                 allData.slice(0, 3).map((category) => (
-                  <li class="list-item d-flex justify-content-between mb-2">
+                  <li
+                    class="list-item d-flex justify-content-between mb-2"
+                    key={category?.name}>
                     <span>{category?.name}</span>
                     <span>{category?.type}</span>
                   </li>
