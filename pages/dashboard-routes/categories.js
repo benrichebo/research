@@ -6,7 +6,7 @@ function Categories({ category }) {
   const { data, allData, postLoading, postError, error, loading, message } =
     useCrud("all-categories", "/api/categories");
 
-  const [name, setName] = useState(userData?.name || "");
+  const [name, setName] = useState(category?.name || "");
   const [type, setType] = useState(category?.type || "");
   const [parent, setParent] = useState(category?.parent || "");
 
@@ -27,10 +27,10 @@ function Categories({ category }) {
       <h5>{category?.title ? "Edit category" : "Add category"}</h5>
       {message && <p className="text-success">{message}</p>}
       {postError && <p className="text-danger">{postError}</p>}
-      <div>
+      <div className="row">
         <div className="col-md-7">
           <form className="row mb-4" onSubmit={handleSubmit}>
-            <div className="col-12 col-md-7">
+            <div className="">
               <div className="form-group mb-4">
                 <label htmlFor="name" className="mb-2">
                   Name
@@ -49,7 +49,7 @@ function Categories({ category }) {
               <div className="form-group mb-4">
                 <label htmlFor="type">Type</label>
                 <select
-                  className="form-control"
+                  className="form-control rounded-0"
                   name="type"
                   id="type"
                   value={type}
@@ -61,7 +61,7 @@ function Categories({ category }) {
               <div className="form-group mb-4">
                 <label htmlFor="">Parent</label>
                 <select
-                  className="form-control"
+                  className="form-control rounded-0"
                   name="parent"
                   id="parent"
                   value={parent}
@@ -76,7 +76,7 @@ function Categories({ category }) {
               </div>
               <div className="my-3 d-grid">
                 <button
-                  className="btn btn-primary btn-lg"
+                  className="btn btn-primary"
                   type="submit"
                   disabled={postLoading || !name || !type || !parent}>
                   {postLoading ? (
@@ -97,19 +97,24 @@ function Categories({ category }) {
             <div class="card-body">
               <h4 class="card-title">Categories</h4>
               <p class="card-text">Added categories</p>
-              <ul class="list-unstyled mt-3">
-                <li class="list-item d-flex justify-content-between fw-bold mb-2">
-                  <span>Category</span>
-                  <span>Type</span>
-                </li>
-                {allData?.length > 0 &&
-                  allData.map((category) => (
-                    <li class="list-item d-flex justify-content-between mb-2">
-                      <span>{category?.name}</span>
-                      <span>{category?.type}</span>
-                    </li>
-                  ))}
-              </ul>
+              {allData?.length == 0 && (
+                <p className="my-3">There are no published categories</p>
+              )}
+              {allData?.length > 0 && (
+                <ul class="list-unstyled mt-3">
+                  <li class="list-item d-flex justify-content-between fw-bold mb-2">
+                    <span>Category</span>
+                    <span>Type</span>
+                  </li>
+                  {allData?.length > 0 &&
+                    allData.map((category) => (
+                      <li class="list-item d-flex justify-content-between mb-2">
+                        <span>{category?.name}</span>
+                        <span>{category?.type}</span>
+                      </li>
+                    ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>

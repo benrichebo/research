@@ -16,6 +16,7 @@ export const useCount = (type, url) => {
       try {
         const data = await GET(url);
         setLoading(false);
+        console.log(data);
         if (data.msg) {
           setError(data.msg);
         } else {
@@ -35,7 +36,7 @@ export const useCount = (type, url) => {
     if (type?.includes("one")) {
       const fetched = sessionStorage.getItem(type);
       if (fetched?.count) {
-        setOneData(fetched?.count);
+        setOneData(fetched);
       } else {
         count.getOneData();
       }

@@ -14,7 +14,7 @@ function Categories({ id }) {
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <h6 className="card-title">Categories</h6>
-            <Link href={`/dashboard/add-category/${id}`}>
+            <Link href={`/dashboard/categories/${id}`}>
               <a className="text-decoration-none" href="#">
                 <MdAdd /> Add category
               </a>
