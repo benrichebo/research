@@ -20,12 +20,16 @@ export default authenticate(async (req, res) => {
             let allData = [];
             for (let i = 0; i < sessions?.data.length; i++) {
               const session = sessions?.data[i];
+              const { id, customer_details, payment_status, amount_total } =
+                session;
+
               const data = {
-                id: session?.id,
-                paymentStatus: session?.payment_status,
-                email: session?.customer_email,
-                amount:  session?.amount_total
+                id,
+                customer_details,
+                payment_status,
+                amount_total,
               };
+              
               allData.push(data);
             }
             res.status(200).json(allData);

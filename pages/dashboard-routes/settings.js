@@ -33,13 +33,13 @@ function Settings() {
       {postError && <p className="text-danger">{postError}</p>}
       {message && <p className="text-danger">{message}</p>}
       <form className="row" onSubmit={handleSubmit}>
-        <div class="form-group mb-4">
+        <div className="form-group mb-4">
           <label htmlFor="name" className="mb-2">
             Name
           </label>
           <input
             type="text"
-            class="form-control rounded-0"
+            className="form-control rounded-0"
             name="email"
             id="email"
             aria-describedby="helpId"
@@ -48,13 +48,13 @@ function Settings() {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div class="form-group mb-4">
+        <div className="form-group mb-4">
           <label htmlFor="email" className="mb-2">
             Email
           </label>
           <input
             type="email"
-            class="form-control rounded-0"
+            className="form-control rounded-0"
             name="email"
             id="email"
             aria-describedby="helpId"
@@ -63,13 +63,13 @@ function Settings() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div class="form-group mb-4">
+        <div className="form-group mb-4">
           <label htmlFor="city" className="mb-2">
             City
           </label>
           <input
             type="text"
-            class="form-control rounded-0"
+            className="form-control rounded-0"
             name="city"
             id="city"
             aria-describedby="helpId"

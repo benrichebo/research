@@ -18,11 +18,14 @@ import { useUser } from "../../../../hooks/useUser";
 import EditConference from "../../../dashboard-routes/edit-conference";
 import EditPaper from "../../../dashboard-routes/edit-paper";
 import Media from "../../../dashboard-routes/media";
+import Categories from "../../../dashboard-routes/categories";
+import { useStorage } from "../../../../hooks/useStorage";
 
 const routes = [
   { name: "home", page: <Home /> },
   { name: "papers", page: <Papers /> },
   { name: "conferences", page: <Conferences /> },
+  { name: "categories", page: <Categories /> },
   { name: "articles", page: <Articles /> },
   { name: "settings", page: <Settings /> },
   { name: "payments", page: <Payments /> },
@@ -37,12 +40,14 @@ const routes = [
 
 function DashBoard() {
   const router = useRouter();
+  const { sessionStorage } = useStorage();
   const { userData, user } = useUser("user");
 
   useEffect(() => {
-    if (!userData?.email) {
+    const user = sessionStorage.getItem("user");
+    if (user?.email) {
       //router.push("/login");
-      console.log(userData)
+      console.log(userData);
     }
   }, []);
 

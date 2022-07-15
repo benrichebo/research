@@ -1,108 +1,119 @@
 import React, { useState } from "react";
-import Name from "../../components/ui/Name";
-import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
+import Spinner from "../../components/ui/Spinner";
 
-function Categories() {
-  const { data, loading, allData, error, postError, message } = useCrud(
-    "all-categories",
-    "/api/categories"
-  );
+function Categories({ category }) {
+  const { data, allData, postLoading, postError, error, loading, message } =
+    useCrud("all-categories", "/api/categories");
 
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
+  const [name, setName] = useState(userData?.name || "");
+  const [type, setType] = useState(category?.type || "");
+  const [parent, setParent] = useState(category?.parent || "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
       name,
       type,
+      parent,
     };
-    await data.addData(body, "/api/categories/create");
+    category?.title
+      ? await data.updateData(body, `/api/categories/${category?._id}`)
+      : await data.addData(body, "/api/categories/create");
   };
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center">
-        <h5>Categories</h5>
-        {!error && (
-          <button
-            className="btn btn-primary"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#contentId"
-            aria-expanded="false"
-            aria-controls="contentId">
-            Add category
-          </button>
-        )}
-      </div>
-      <div className="collapse px-0" id="contentId">
-        {message && <p className="text-success">{message}</p>}
-        {postError && <p className="text-danger">{postError}</p>}
-        <form className="row" onSubmit={handleSubmit}>
-          <div className="col-md-5">
-            <label className="form-label">Name</label>
-            <Name setName={setName} />
-          </div>
-          <div className="col-md-5">
-            <label className="form-label">Type</label>
-            <select
-              className="form-select"
-              onChange={(e) => setType(e.target.value)}>
-              <option value="main-category" selected="">
-                Main
-              </option>
-              <option value="sub-category">Sub</option>
-            </select>
-          </div>
-          <div className="col-md-2">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={!loading || !name || !type}>
-              {loading ? (
-                <Spinner className="ms-2" />
-              ) : (
-                <span className="">Submit</span>
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-      {loading && !error && (
-        <div className="d-flex justify-content-center align-items-center my-5">
-          <Spinner />
-        </div>
-      )}
-      {error && !loading && (
-        <div className="d-flex justify-content-center align-items-center my-5">
-          <div className="text-center">
-            <h6 className="text-muted">
-              There was an error loading categories
-            </h6>
-            <button
-              className="btn btn-primary my-3"
-              onClick={() => data.getAllData("/api/categories")}>
-              Reload
-            </button>
-          </div>
-        </div>
-      )}
-      {!error && (
-        <div className="row my-3">
-          {allData?.map((data) => (
-            <div className="col-6 col-md-3">
-              <div className="card">
-                <div className="card-body py-2">
-                  <h6 className="card-title">{data?.name}</h6>
-                  <h6 className="text-muted card-subtitle">{data?.type}</h6>
-                </div>
+      <h5>{category?.title ? "Edit category" : "Add category"}</h5>
+      {message && <p className="text-success">{message}</p>}
+      {postError && <p className="text-danger">{postError}</p>}
+      <div>
+        <div className="col-md-7">
+          <form className="row mb-4" onSubmit={handleSubmit}>
+            <div className="col-12 col-md-7">
+              <div className="form-group mb-4">
+                <label htmlFor="name" className="mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control rounded-0"
+                  name="email"
+                  id="email"
+                  aria-describedBy="helpId"
+                  placeholder=""
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label htmlFor="type">Type</label>
+                <select
+                  className="form-control"
+                  name="type"
+                  id="type"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}>
+                  <option value="main">Main</option>
+                  <option value="sub">Sub</option>
+                </select>
+              </div>
+              <div className="form-group mb-4">
+                <label htmlFor="">Parent</label>
+                <select
+                  className="form-control"
+                  name="parent"
+                  id="parent"
+                  value={parent}
+                  onChange={(e) => setParent(e.target.value)}>
+                  <option value="">--Select category--</option>
+                  {allData &&
+                    allData.length > 0 &&
+                    allData?.map((category) => (
+                      <option value={category?.name}>{category?.name}</option>
+                    ))}
+                </select>
+              </div>
+              <div className="my-3 d-grid">
+                <button
+                  className="btn btn-primary btn-lg"
+                  type="submit"
+                  disabled={postLoading || !name || !type || !parent}>
+                  {postLoading ? (
+                    <Spinner className="ms-2" />
+                  ) : (
+                    <span className="">
+                      {" "}
+                      {category?.title ? "Save category" : "Add category"}
+                    </span>
+                  )}
+                </button>
               </div>
             </div>
-          ))}
+          </form>
         </div>
-      )}
+        <div className="col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Categories</h4>
+              <p class="card-text">Added categories</p>
+              <ul class="list-unstyled mt-3">
+                <li class="list-item d-flex justify-content-between fw-bold mb-2">
+                  <span>Category</span>
+                  <span>Type</span>
+                </li>
+                {allData?.length > 0 &&
+                  allData.map((category) => (
+                    <li class="list-item d-flex justify-content-between mb-2">
+                      <span>{category?.name}</span>
+                      <span>{category?.type}</span>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

@@ -53,29 +53,19 @@ function PayedCheckout() {
               <table class="table">
                 <thead>
                   <tr>
-                    <th>
-                      # ID
-                    </th>
-                    <th>Date</th>
+                    <th># ID</th>
                     <th>Status</th>
                     <th>Amount</th>
-                    <th>User ID</th>
+                    <th>Email</th>
                   </tr>
                 </thead>
                 <tbody>
                   {allData?.map((data) => (
                     <tr>
-                      <td>
-                      {data?.paymentId}
-                      </td>
-                      <td>{data?.createdAt}</td>
+                      <td>{data?.id}</td>
                       <td>{data?.status}</td>
-                      <td>150 usd</td>
-                      <td>
-                        <a class="text-decoration-none" href="#">
-                          {data?.userId}
-                        </a>
-                      </td>
+                      <td>${data?.amount / 100}</td>
+                      <td>{data?.email}</td>
                     </tr>
                   ))}
                 </tbody>

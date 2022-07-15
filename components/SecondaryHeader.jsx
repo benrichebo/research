@@ -52,7 +52,7 @@ function SecondaryHeader({user}) {
               {user?.role == "member" && (
                 <>
                   {memberRoutes?.map((route) => (
-                    <li className="nav-item">
+                    <li className="nav-item" key={route.name}>
                       <Link
                         href={`/dashboard/${route?.name?.toLocaleLowerCase()}/${
                           user?.id
@@ -66,7 +66,7 @@ function SecondaryHeader({user}) {
               {user?.role == "admin" && (
                 <>
                   {routes?.map((route) => (
-                    <li className="nav-item">
+                    <li className="nav-item" key={route.name}>
                       <Link
                         href={`/dashboard/${route?.name?.toLocaleLowerCase()}/${
                           user?.id

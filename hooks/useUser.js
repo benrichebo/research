@@ -27,6 +27,7 @@ export const useUser = (type) => {
         setUserData(user || initializedUser);
         setLoading(false);
       } else {
+        router?.push("/login")
         this.getCurrentUser();
       }
     },

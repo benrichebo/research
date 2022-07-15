@@ -42,7 +42,7 @@ const CheckoutForm = () => {
 
   return (
     <>
-      {message && <p className="my-3 text-info">{message.includes("stripe") ? "there was an error, try again": message}</p>}
+      {message && <p className="my-3 text-info">{message.includes("stripe") ? "There was an error, try again": message}</p>}
       {error && <p className="my-3 text-danger">{error}</p>}
       <form onSubmit={handleSubmit}>
         <h3>Members are suppose to pay a 150 USD membership fee</h3>

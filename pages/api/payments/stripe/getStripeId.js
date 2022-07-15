@@ -5,30 +5,34 @@ const stripe = new Stripe(process.env.STRIPE_SECRET, {
 });
 
 export const getStripeId = async (req) => {
-  const { userId } = await verifyUser(req);
+  const { userId, email } = await verifyUser(req);
   try {
     //2. stripe payment integration
     const session = await stripe?.checkout?.sessions?.create({
       //client_reference_id: "userId",
       billing_address_collection: "required",
-      submit_type: "donate",
+      submit_type: "auto",
       payment_method_types: ["card"], //pm_card_us,
       //payment_method_options: ["pm_card_amex"],
-
-      mode: "payment", //it can be "subscription" for recurring payments only
       line_items: [
         {
-          name: "Membership signup",
-          amount: 15000,
-          currency: "usd",
+          price_data: {
+            // The currency parameter determines which
+            // payment methods are used in the Checkout Session.
+            currency: "usd",
+            product_data: {
+              name: "Association of researches and planners membership fee payment",
+            },
+            unit_amount: 15000,
+          },
           quantity: 1,
         },
       ],
+      customer_email: email,
+      mode: "payment", //it can be "subscription" for recurring payments only
       success_url: `${req.headers.origin}/dashboard/payments/${userId}`,
       cancel_url: `${req.headers.origin}/make-payment`,
     });
-
-    console.log("results payment", result);
 
     if (session?.id) {
       return session?.id;

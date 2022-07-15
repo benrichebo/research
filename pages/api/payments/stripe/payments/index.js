@@ -14,43 +14,73 @@ export default authenticate(async (req, res) => {
   if (userId) {
     if (req.method == "GET") {
       try {
-        let users = [];
+        let members = [];
         if (role == "admin") {
           //fetch customers from stripe api
-          let payments = await stripe.customers.list({
-            limit: 50,
+          let payments = await stripe.checkout.sessions.list({
+            limit: 5,
           });
+
+          console.log("stripe payment list", payments)
 
           for (let i = 0; i < payments?.data?.length; i++) {
             const payment = payments?.data[i];
-            //fetch users with data?.email
+
+            const { id, customer_details, payment_status, amount_total } =
+              payment;
+            //fetch members with data?.email
             let user = await db
-              .collection("users")
-              .findOne({ email: payment?.email });
+              .collection("members")
+              .findOne({ email: customer_details?.email });
 
             if (user?.email) {
-              users.push({
-                user,
-                customer: {
-                  id: payment?.id,
-                  email: payment?.email,
-                  address: payment?.address,
-                },
-              });
+              if (payment_status == "paid") {
+                members.push({
+                  userId,
+                  id,
+                  email: customer_details?.email,
+                  status: payment_status,
+                  amount: amount_total,
+                });
+              }
             }
           }
 
-          if (users?.length >= 0) {
-            res.status(200).json(users);
+          console.log("database user list", payments);
+
+          if (members?.length >= 0) {
+            res.status(200).json(members);
           } else {
             res.status(400).json({ msg: "There are no payments" });
           }
         } else {
-          const payments = await stripe.customers.search({
-            query: `email: ${email} AND status:"succeeded"`,
+          let sessions = await stripe.checkout.sessions.list({
+            limit: 50,
           });
 
-          if (payments?.data) {
+          const filteredPayments = sessions?.data?.filter(
+            (payload) => payload?.customer_details?.email === email
+          );
+
+          const payments = [];
+
+          for (let i = 0; i < filteredPayments.length; i++) {
+            const payment = filteredPayments[i];
+
+            const { id, customer_details, payment_status, amount_total } =
+              payment;
+            if (payment_status == "paid") {
+              payments.push({
+                userId,
+                id,
+                email: customer_details?.email,
+                status: payment_status,
+                amount: amount_total,
+              });
+            }
+          }
+
+          if (payments?.length > 0) {
             res.status(200).json(payments);
           } else {
             res.status(400).json({ msg: "There is no payments" });
