@@ -100,10 +100,7 @@ function Media() {
                               className="form-check-label"
                               htmlFor={data?.name}>
                               {data?.type == "document" ? (
-                                <MdInsertDriveFile
-                                  size={30}
-                                  className="ms-3"
-                                />
+                                <MdInsertDriveFile size={30} className="ms-3" />
                               ) : (
                                 <img
                                   className="img-fluid ms-4"
@@ -124,31 +121,33 @@ function Media() {
                               </a>
                             </span>
                           </div>
-                          {show == data?._id && (
-                            <div className="mt-3">
-                              <a
-                                className="btn btn-light btn-sm"
-                                href="#"
-                                onClick={() => setShow()}>
-                                Cancel
-                              </a>
-                              <a
-                                className="ms-4 btn btn-light btn-sm"
-                                onClick={() => deleteMedia(data?._id)}>
-                                {uploadLoading ? (
-                                  <Spinner className="ms-2" />
-                                ) : (
-                                  <span className="">Delete</span>
-                                )}
-                              </a>
-                            </div>
-                          )}
                         </td>
                         <td className="text-nowrap">{data?.name}</td>
                         <td className="text-nowrap">
                           <a href="#">{data?.url}</a>
                         </td>
                       </tr>
+                      {show == data?._id && (
+                        <tr className="mt-3 bg-light">
+                          <td className="text-nowrap">
+                            <span>Are you sure</span>
+                            <a
+                              className="text-decoration-none ms-3"
+                              type="button"
+                              onClick={() => setShow()}>
+                              Cancel
+                            </a>
+                            <a
+                              className="ms-3 text-decoration-none text-danger"
+                              type="button"
+                              onClick={() => deleteMedia(data?._id)}>
+                              Delete
+                            </a>
+                          </td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      )}
                     </>
                   ))}
                 </tbody>

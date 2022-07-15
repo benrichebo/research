@@ -97,8 +97,8 @@ export const useCrud = (type, url) => {
           setPostError(data.msg);
         }
       } catch (error) {
-        setLoading(false);
-        setPostError(error.message);
+        setPostLoading(false);
+        setPostError("There was an error");
       }
     },
 
@@ -123,7 +123,7 @@ export const useCrud = (type, url) => {
     async deleteData(url) {
       console.log(url);
       setPostLoading(true);
-      setError(null);
+      setPostError(null);
       try {
         const data = await DELETE(url);
         setPostLoading(false);
@@ -133,8 +133,8 @@ export const useCrud = (type, url) => {
         } else {
           setPostError(data.msg);
         }
-      } catch {
-        setLoading(false);
+      } catch(error) {
+        setPostLoading(false);
         setPostError(error.message);
       }
     },

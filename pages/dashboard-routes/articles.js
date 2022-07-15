@@ -128,22 +128,6 @@ function Articles() {
                               </a>
                             </span>
                           </div>
-                          {show && (
-                            <div className="mt-3">
-                              <a
-                                className="btn btn-light btn-sm"
-                                href="#"
-                                onClick={() => setShow()}>
-                                Edit
-                              </a>
-                              <a
-                                className="ms-4 btn btn-light btn-sm"
-                                href="#"
-                                onClick={() => deleteArticle(data?._id)}>
-                                Delete
-                              </a>
-                            </div>
-                          )}
                         </td>
                         <td className="text-nowrap align-middle">
                           {data?.title}
@@ -161,6 +145,29 @@ function Articles() {
                           </a>
                         </td>
                       </tr>
+                      {show == data?._id && (
+                        <tr className="mt-3 bg-light">
+                          <td className="text-nowrap">
+                            <span>Are you sure</span>
+                            <a
+                              className="text-decoration-none ms-3"
+                              type="button"
+                              onClick={() => setShow()}>
+                              Cancel
+                            </a>
+                            <a
+                              className="ms-3 text-decoration-none text-danger"
+                              type="button"
+                              onClick={() => deleteArticle(data?._id)}>
+                              Delete
+                            </a>
+                          </td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      )}
                     </>
                   ))}
                 </tbody>

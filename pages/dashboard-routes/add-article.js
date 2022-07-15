@@ -3,9 +3,13 @@ import { useCrud } from "../../hooks/useCrud";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
+import CategorySelect from "../../components/ui/CategorySelect";
 
 function AddArticle({ article }) {
-  const { data, loading, postLoading, postError, message } = useCrud("all-articles", "/api/articles");
+  const { data, loading, postLoading, postError, message } = useCrud(
+    "all-articles",
+    "/api/articles"
+  );
 
   const [title, setTitle] = useState(article?.title || "");
   const [author, setAuthor] = useState(article?.author || "");
@@ -104,18 +108,7 @@ function AddArticle({ article }) {
               <label className="form-label" htmlFor="category">
                 Category
               </label>
-              <select
-                className="form-select form-select-lg rounded-0"
-                onChange={(e) => setCategory(e.target.value)}
-                id="category">
-                {category && (
-                  <option value={category} selected="">
-                    {category}
-                  </option>
-                )}
-                <option value="13">This is item 2</option>
-                <option value="14">This is item 3</option>
-              </select>
+              <CategorySelect setCategory={setCategory} category={category} />
             </div>
             <div className="col-12 mb-4">
               <p className="form-label" htmlFor="draft">
