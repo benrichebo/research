@@ -34,14 +34,21 @@ function Home() {
                 conference
               </p>
               {userData?.role == "admin" && (
-                <Link href={`/dashboard/add-article/${routeId}`}>
-                  <a className="btn btn-primary me-3" href="#">
-                    Post an article
-                  </a>
-                </Link>
+                <>
+                  <Link href={`/dashboard/add-article/${routeId}`}>
+                    <a className="btn btn-secondary me-3" href="#">
+                      Post an article
+                    </a>
+                  </Link>
+                  <Link href={`/dashboard/add-conference/${routeId}`}>
+                    <a className="btn btn-info me-3" href="#">
+                      Add a conference
+                    </a>
+                  </Link>
+                </>
               )}
               <Link href={`/dashboard/add-paper/${routeId}`}>
-                <a className="btn btn-primary" href="#">
+                <a className="btn btn-light" href="#">
                   Submit a paper
                 </a>
               </Link>

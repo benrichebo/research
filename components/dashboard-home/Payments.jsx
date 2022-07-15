@@ -11,20 +11,16 @@ function Payments() {
       <div className="card">
         <div className="card-body">
           <h6 className="card-title">Payments</h6>
-          <ul class="list-unstyled">
-            <li class="list-item d-flex justify-content-between fw-bold mb-2">
-              <span>Date</span>
-              <span>$Amount</span>
-            </li>
-            {allData &&
-              allData?.length > 0 &&
-              allData.slice(0, 3).map((payment) => (
-                <li class="list-item d-flex justify-content-between mb-2" key={payment?.email}>
-                  <span>{payment?.email}</span>
-                  <span>{payment?.status}</span>
-                </li>
-              ))}
-          </ul>
+          {allData &&
+            allData?.length > 0 &&
+            allData.slice(0, 3).map((payment) => (
+              <p
+                class="list-item d-flex justify-content-between mb-0 card-text"
+                key={payment?.name}>
+                <span>{payment?.email}</span>
+                <span>{payment?.status}</span>
+              </p>
+            ))}
         </div>
       </div>
     </>

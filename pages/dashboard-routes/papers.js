@@ -23,8 +23,11 @@ function Papers() {
   }, [router.isReady]);
 
   const deletePaper = async (id) => {
-    console.log(id);
     await data.deleteData(`/api/papers/${id}`);
+  };
+
+  const handleApproval = async () => {
+    await data.updateData({ status: "Approved" }, `/api/papers/approve`);
   };
 
   return (
@@ -78,6 +81,7 @@ function Papers() {
                     </th>
                     <th>Publisher</th>
                     <th>Date</th>
+                    <th>Status</th>
                     <th>File</th>
                   </tr>
                 </thead>
@@ -116,6 +120,28 @@ function Papers() {
                         </td>
                         <td className="text-nowrap">{data?.publisher}</td>
                         <td className="text-nowrap">{data?.createdAt}</td>
+                        <td className="text-nowrap">
+                          {!data?.status && data?.role == "admin" ? (
+                            <>
+                              <span class="badge bg-secondary">
+                                {data?.status}
+                              </span>
+                              <a
+                                type="button"
+                                className="btn btn-light ms-3"
+                                disabled={postLoading}
+                                onClick={handleApproval}>
+                                {postLoading ? (
+                                  <Spinner className="ms-2" />
+                                ) : (
+                                  <span className="">Approve</span>
+                                )}
+                              </a>
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </td>
                         <td className="text-nowrap">
                           <a
                             href={`https://localhost:3000/papers/${data?._id}`}>

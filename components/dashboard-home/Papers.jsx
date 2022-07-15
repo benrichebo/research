@@ -20,28 +20,19 @@ function Papers({ id }) {
               </a>
             </Link>
           </div>
-          <p className="card-text text-muted">Recently uploaded papers</p>
           {allData?.length == 0 && (
-            <p className="my-3">There are no published papers</p>
+            <p className="mb-3">There are no published papers</p>
           )}
-          {allData?.length > 0 && (
-            <ul class="list-unstyled">
-              <li class="list-item d-flex justify-content-between fw-bold mb-2">
-                <span>Title</span>
-                <span>Status</span>
-              </li>
-              {allData &&
-                allData?.length > 0 &&
-                allData.slice(0, 3).map((paper) => (
-                  <li
-                    class="list-item d-flex justify-content-between mb-2"
-                    key={paper?.title}>
-                    <span>{paper?.title}</span>
-                    <span>{paper?.status}</span>
-                  </li>
-                ))}
-            </ul>
-          )}
+
+          {allData?.length > 0 &&
+            allData.slice(0, 3).map((paper) => (
+              <p
+                class="list-item d-flex justify-content-between mb-0 card-text"
+                key={paper?.title}>
+                <span>{paper?.title}</span>
+                <span>{payment?.status}</span>
+              </p>
+            ))}
         </div>
       </div>
     </>
