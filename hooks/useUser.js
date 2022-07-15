@@ -27,7 +27,7 @@ export const useUser = (type) => {
         setUserData(user || initializedUser);
         setLoading(false);
       } else {
-        router?.push("/login")
+        router?.push("/login");
         this.getCurrentUser();
       }
     },
@@ -108,6 +108,7 @@ export const useUser = (type) => {
         if (data?.authToken) {
           sessionStorage.setItem("authToken", data?.authToken);
           sessionStorage.setItem("initial-user", data);
+          setPostLoading(false);
           this.getCurrentUser();
           setMessage("success");
         } else {

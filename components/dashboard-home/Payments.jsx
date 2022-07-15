@@ -11,7 +11,6 @@ function Payments() {
       <div className="card">
         <div className="card-body">
           <h6 className="card-title">Payments</h6>
-          <p className="card-text">Recently payed accounts</p>
           <ul class="list-unstyled">
             <li class="list-item d-flex justify-content-between fw-bold mb-2">
               <span>Date</span>

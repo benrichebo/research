@@ -21,7 +21,7 @@ export default authenticate(async (req, res) => {
             limit: 5,
           });
 
-          console.log("stripe payment list", payments)
+          console.log("stripe payment list", payments);
 
           for (let i = 0; i < payments?.data?.length; i++) {
             const payment = payments?.data[i];
@@ -31,13 +31,18 @@ export default authenticate(async (req, res) => {
             //fetch members with data?.email
             let user = await db
               .collection("members")
-              .findOne({ email: customer_details?.email });
+              .findOne(
+                { email: customer_details?.email },
+                { projection: { email: 1, verified: 1, role: 1 } }
+              );
 
             if (user?.email) {
               if (payment_status == "paid") {
                 members.push({
+                  verified: user?.verified,
                   userId,
                   id,
+                  role: user?.role,
                   email: customer_details?.email,
                   status: payment_status,
                   amount: amount_total,
@@ -69,8 +74,17 @@ export default authenticate(async (req, res) => {
 
             const { id, customer_details, payment_status, amount_total } =
               payment;
+            let user = await db
+              .collection("members")
+              .findOne(
+                { email: customer_details?.email },
+                { projection: { verified: 1, role: 1 } }
+              );
+
             if (payment_status == "paid") {
               payments.push({
+                verified: user?.verified,
+                role: user?.role,
                 userId,
                 id,
                 email: customer_details?.email,

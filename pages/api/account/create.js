@@ -11,7 +11,7 @@ import { createJwt } from "../jwt";
 
 export default async (req, res) => {
   const { name, email, city, password, agree } = JSON.parse(req.body);
-  console.log(name, email, city, password, agree);
+
 
   //1. check for method
   //if method does not exist
@@ -49,7 +49,7 @@ export default async (req, res) => {
 
       const response = await db.collection("members").insertOne(userData);
 
-      console.log("response", response);
+    
       //fetch user after signup
       if (response.acknowledged === true) {
         const results = await db

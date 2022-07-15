@@ -22,12 +22,10 @@ export default async (req, res) => {
 
     const results = await db.collection("members").findOne({ email });
 
-    console.log(results);
-
     if (results?.password) {
       const match = await compare(password, results?.password);
       if (match) {
-        const { _id, role, email, name } = results;
+        const { _id, role, email, name, verified } = results;
         const jwt = createJwt({
           userId: _id,
           role,
@@ -40,6 +38,7 @@ export default async (req, res) => {
           email,
           name,
           id: _id,
+          verified,
         };
 
         res.status(200).json(data);

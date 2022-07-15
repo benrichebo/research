@@ -31,7 +31,7 @@ function Settings() {
   return (
     <div className="col-md-9 col-lg-7">
       {postError && <p className="text-danger">{postError}</p>}
-      {message && <p className="text-danger">{message}</p>}
+      {message && <p className="text-success">{message}</p>}
       <form className="row" onSubmit={handleSubmit}>
         <div className="form-group mb-4">
           <label htmlFor="name" className="mb-2">

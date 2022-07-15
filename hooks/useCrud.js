@@ -24,7 +24,7 @@ export const useCrud = (type, url) => {
         const data = await GET(url);
         setLoading(false);
         console.log("data", data);
-        if (data?.msg) {
+        if (data?.msg && !data?.msg.includes("There are no")) {
           setError(data.msg);
         } else {
           sessionStorage.clearItem(type);
@@ -104,7 +104,7 @@ export const useCrud = (type, url) => {
 
     async updateData(body, url) {
       setPostLoading(true);
-      setError(null);
+      setPostError(null);
       try {
         const data = await PUT(body, url);
         setPostLoading(false);

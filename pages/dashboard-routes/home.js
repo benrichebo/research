@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
 import AllData from "../../components/dashboard-home/AllData";
 import Categories from "../../components/dashboard-home/Categories";
+import Papers from "../../components/dashboard-home/Papers";
 import Payments from "../../components/dashboard-home/Payments";
+import { useUser } from "../../hooks/useUser";
 
 function Home() {
+  const { userData } = useUser("user");
   const [routeId, setRouteId] = useState(null);
 
   const router = useRouter();
@@ -31,27 +33,36 @@ function Home() {
                 Available get started links. you can make a post or post a
                 conference
               </p>
-              <Link href={`/dashboard/add-article/${routeId}`}>
-                <a className="btn btn-primary" href="#">
-                  Post an article
-                </a>
-              </Link>
+              {userData?.role == "admin" && (
+                <Link href={`/dashboard/add-article/${routeId}`}>
+                  <a className="btn btn-primary me-3" href="#">
+                    Post an article
+                  </a>
+                </Link>
+              )}
               <Link href={`/dashboard/add-paper/${routeId}`}>
-                <a className="btn btn-primary ms-3" href="#">
+                <a className="btn btn-primary" href="#">
                   Submit a paper
                 </a>
               </Link>
             </div>
           </div>
         </div>
-        <div className="col-sm-12 col-md-6 mb-4">
-        <AllData />
-        </div>
+        {userData?.role == "admin" && (
+          <div className="col-sm-12 col-md-6 mb-4">
+            <AllData />
+          </div>
+        )}
         <div className="col-sm-12 col-md-6">
           <Payments />
         </div>
+        {userData?.role == "admin" && (
+          <div className="col-sm-12 col-md-6">
+            <Categories id={routeId} />
+          </div>
+        )}
         <div className="col-sm-12 col-md-6">
-          <Categories id={routeId} />
+          <Papers id={routeId} />
         </div>
       </div>
     </>

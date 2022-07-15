@@ -1,41 +1,41 @@
-import Link from "next/link";
 import React from "react";
-import { MdAdd } from "react-icons/md";
+import Link from "next/link";
 import { useCrud } from "../../hooks/useCrud";
+import { MdAdd } from "react-icons/md";
 
-function Categories({ id }) {
+function Papers({ id }) {
   const { allData, error, loading, message } = useCrud(
-    "all-categories",
-    "/api/categories"
+    "all-papers",
+    "/api/papers"
   );
   return (
     <>
       <div className="card">
         <div className="card-body">
           <div className="d-flex justify-content-between">
-            <h6 className="card-title">Categories</h6>
-            <Link href={`/dashboard/add-category/${id}`}>
+            <h6 className="card-title">Papers</h6>
+            <Link href={`/dashboard/add-paper/${id}`}>
               <a className="text-decoration-none" href="#">
-                <MdAdd /> Add category
+                <MdAdd /> Add paper
               </a>
             </Link>
           </div>
-          <p className="card-text mb-3">Added categories</p>
+          <p className="card-text">Recently uploaded papers</p>
           {allData?.length == 0 && (
             <p className="my-3">There are no published papers</p>
           )}
           {allData?.length > 0 && (
             <ul class="list-unstyled">
               <li class="list-item d-flex justify-content-between fw-bold mb-2">
-                <span>Category</span>
-                <span>Type</span>
+                <span>Title</span>
+                <span>Status</span>
               </li>
               {allData &&
                 allData?.length > 0 &&
-                allData.slice(0, 3).map((category) => (
+                allData.slice(0, 3).map((paper) => (
                   <li class="list-item d-flex justify-content-between mb-2">
-                    <span>{category?.name}</span>
-                    <span>{category?.type}</span>
+                    <span>{paper?.title}</span>
+                    <span>{paper?.status}</span>
                   </li>
                 ))}
             </ul>
@@ -46,4 +46,4 @@ function Categories({ id }) {
   );
 }
 
-export default Categories;
+export default Papers;

@@ -43,9 +43,10 @@ const Aside = ({ router, user, signOut }) => {
                       user?._id
                     }`}>
                     <a
-                      className={`text-white-50 text-decoration-none d-flex justify-content-start align-items-center${
-                        router?.query?.page == route.name.toLocaleLowerCase() &&
-                        "fw-bold text-white"
+                      className={`text-white text-decoration-none d-flex justify-content-start align-items-center text-white-50 ${
+                        router?.query?.page == route.name.toLocaleLowerCase()
+                          ? "fw-bold text-white"
+                          : "text-white-50"
                       }`}
                       href="#">
                       {route?.icon}

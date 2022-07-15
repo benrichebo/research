@@ -10,7 +10,6 @@ export default authenticate(async (req, res) => {
     const { db } = await connectToDatabase();
 
     const { id } = req.query;
-    console.log("id", id);
 
     if (req.method == "GET") {
       const article = await db
@@ -26,12 +25,11 @@ export default authenticate(async (req, res) => {
 
     if (req.method == "PUT") {
       const body = JSON.parse(req.body);
-      console.log("put body", body);
 
       const response = await db
         .collection("articles")
         .updateOne({ _id: ObjectId(id) }, { $set: { ...body } });
-      console.log("response", response);
+    
       if (response?.acknowledged) {
         res.status(200).json({ msg: "article updated successfully" });
       } else {
@@ -40,7 +38,6 @@ export default authenticate(async (req, res) => {
     }
 
     if (req.method == "DELETE") {
-      console.log("delete body", req.body);
       const response = await db
         .collection("articles")
         .deleteOne({ _id: ObjectId(id) });

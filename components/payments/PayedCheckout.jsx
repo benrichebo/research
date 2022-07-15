@@ -4,12 +4,16 @@ import { useCrud } from "../../hooks/useCrud";
 import { MdRefresh, MdPayments } from "react-icons/md";
 
 function PayedCheckout() {
-  const { data, loading, allData, error } = useCrud(
+  const { data, loading, allData, error, postError, postLoading } = useCrud(
     "all-payments",
     "/api/payments/stripe/payments"
   );
 
   console.log(allData, error);
+
+  const handleApproval = async () => {
+    await data.updateData({ verified: true }, `/api/payments/approve`);
+  };
 
   return (
     <>
@@ -39,6 +43,7 @@ function PayedCheckout() {
       )}
       {!error && allData?.length > 0 && (
         <div class="row">
+          {postError && <p className="text-danger">{postError}</p>}
           <div class="col-12 d-flex justify-content-between align-items-center mb-3">
             <h4>Payments</h4>
             <input
@@ -57,15 +62,37 @@ function PayedCheckout() {
                     <th>Status</th>
                     <th>Amount</th>
                     <th>Email</th>
+                    {data?.role == "admin" && <th>Approval status</th>}
                   </tr>
                 </thead>
                 <tbody>
                   {allData?.map((data) => (
                     <tr>
-                      <td>{data?.id}</td>
+                      <td>{data?.id.slice(0, 12)}</td>
                       <td>{data?.status}</td>
                       <td>${data?.amount / 100}</td>
                       <td>{data?.email}</td>
+                      <td className="text-nowrap">
+                        {!data?.verified && data?.role == "admin" ? (
+                          <>
+                            <span class="badge bg-secondary">Unapproved</span>
+                            <a
+                              type="button"
+                              className="btn btn-light ms-3"
+                              disabled={postLoading}
+                              onClick={handleApproval}>
+                              {postLoading ? (
+                                <Spinner className="ms-2" />
+                              ) : (
+                                <span className="">Approve</span>
+                              )}
+                            </a>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </td>
+                      <td></td>
                     </tr>
                   ))}
                 </tbody>
