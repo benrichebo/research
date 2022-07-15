@@ -42,9 +42,19 @@ function Register() {
                 Join us
               </h1>
               <h5 className="fw-normal">
-                Be a member and be part of professionals in the filled of built
-                environment
+                ONE Registration Fee Includes the following for the Registered
+                members:
               </h5>
+              <ol className="">
+                <li>Welcome reception</li>
+                <li>Printed Name Card</li>
+                <li>Conference Folder or Bag</li>
+                <li>Participation in the technical program</li>
+                <li>Printed Participation & presentation Certificate</li>
+                <li>Printed Proceedings</li>
+                <li>Coffee breaks on the presentation day</li>
+                <li>Lunch</li>
+              </ol>
             </div>
             <div className="col-md-8 d-flex justify-content-center align-items-center pt-3 pt-lg-5 px-lg-5">
               <form

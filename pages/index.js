@@ -75,16 +75,33 @@ function Home() {
               <div className="col-md-7 d-flex align-items-center pt-1 pt-lg-3">
                 <div className="mt-md-1 mt-lg-2">
                   <p className="fs-5 fw-light pulse animated">
-                    We are a research real estate agency&nbsp; who are made of
-                    professionals from the build environment, specifically,
-                    architects, contractors, surveyors, interior designers etc.
+                    Association For Scientific And Academic Research(ASAR) is
+                    India's largest Non-profitable professional association
+                    registered under India Trust Act(1882) meant for research
+                    development and promotion in the field of engineering and
+                    technology. ASAR is a paramount body which has brought
+                    technical revolution and sustainable development of science
+                    and technology. The ASAR-forum constitutes of professional
+                    wizards and overseas technical leaders who have left no
+                    stones unturned to reinforce the field of science,
+                    engineering and technology. The Institute conduct technical
+                    conferences, seminars and workshop at different parts of
+                    country to reduce the gap between curriculum and their
+                    practical implementation among students and research
+                    scholars. Today IIERD is one of the leading publisher of
+                    research papers in its high quality peer reviewed journals,
+                    proceeding and research magazine. The Institute provides a
+                    brilliant scope of research and development to geniuses and
+                    wizards working in the field of engineering by providing
+                    financial aids by which economic constraints won't retaliate
+                    the technical growth and research development.
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <div className="container-fluid py-4 py-xl-5 mb-5" id="articles">
+        <div className="container-fluid pb-4 pb-xl-5 mb-5" id="articles">
           <div className="card-group row my-5">
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
               <div className="card-body p-md-1 p-xxl-3">
@@ -92,7 +109,9 @@ function Home() {
                 <h6 className="">
                   ESG Investment and private real estate returns
                 </h6>
-                <h6 className="text-muted my-2 small">Publisher: Michael Gates</h6>
+                <h6 className="text-muted my-2 small">
+                  Publisher: Michael Gates
+                </h6>
                 <p className="card-text d-none d-lg-block pb-2">
                   International conference on business management and social
                   innovation
@@ -105,7 +124,9 @@ function Home() {
                 <h6 className="">
                   ESG Investment and private real estate returns
                 </h6>
-                <h6 className="text-muted my-2 small">Publisher: Michael Gates</h6>
+                <h6 className="text-muted my-2 small">
+                  Publisher: Michael Gates
+                </h6>
                 <p className="card-text d-none d-lg-block pb-2">
                   International conference on business management and social
                   innovation
@@ -118,7 +139,9 @@ function Home() {
                 <h6 className="">
                   ESG Investment and private real estate returns
                 </h6>
-                <h6 className="text-muted my-2 small">Publisher: Michael Gates</h6>
+                <h6 className="text-muted my-2 small">
+                  Publisher: Michael Gates
+                </h6>
                 <p className="card-text d-none d-lg-block">
                   International conference on business management and social
                   innovation
@@ -131,7 +154,9 @@ function Home() {
                 <h6 className="">
                   ESG Investment and private real estate returns
                 </h6>
-                <h6 className="text-muted my-2 small">Publisher: Michael Gates</h6>
+                <h6 className="text-muted my-2 small">
+                  Publisher: Michael Gates
+                </h6>
                 <p className="card-text d-none d-lg-block">
                   International conference on business management and social
                   innovation
@@ -242,7 +267,9 @@ function Home() {
                                 24th July 2022
                               </span>
                             </div>
-                            <p className="d-none d-lg-block my-2 small">Albania</p>
+                            <p className="d-none d-lg-block my-2 small">
+                              Albania
+                            </p>
                             <p className="fs-6 d-none d-lg-block mb-2">
                               International conference on business management
                               and social innovation

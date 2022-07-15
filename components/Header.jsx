@@ -10,9 +10,7 @@ function Header() {
             <span className="d-none d-md-block">
               Association of researches and planners
             </span>
-            <span className="d-md-none">
-              Logo
-            </span>
+            <span className="d-md-none">Logo</span>
           </a>
         </Link>
         <button
@@ -25,6 +23,16 @@ function Header() {
         <div className="collapse navbar-collapse" id="navcol-1">
           <ul className="navbar-nav d-flex mx-auto ms-auto list-group-horizontal-md">
             <li className="nav-item">
+              <Link href="/aboutus">
+                <a className="nav-link fs-6">About us</a>
+              </Link>
+            </li>
+            <li className="nav-item ms-md-4">
+              <Link href="/contactus">
+                <a className="nav-link fs-6">Contact us</a>
+              </Link>
+            </li>
+            <li className="nav-item ms-md-4">
               <Link href="/register">
                 <a className="nav-link fs-6">Register as a member</a>
               </Link>
@@ -32,6 +40,11 @@ function Header() {
             <li className="nav-item ms-md-4">
               <Link href="/login">
                 <a className="nav-link fs-6">Login</a>
+              </Link>
+            </li>
+            <li className="nav-item ms-md-4">
+              <Link href="/membership">
+                <a className="nav-link fs-6">Membership</a>
               </Link>
             </li>
             <li className="nav-item ms-md-4">

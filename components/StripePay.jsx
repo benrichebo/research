@@ -42,10 +42,21 @@ const CheckoutForm = () => {
 
   return (
     <>
-      {message && <p className="my-3 text-info">{message.includes("stripe") ? "There was an error, try again": message}</p>}
+      {message && (
+        <p className="my-3 text-info">
+          {message.includes("stripe")
+            ? "There was an error, try again"
+            : message}
+        </p>
+      )}
       {error && <p className="my-3 text-danger">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <h3>Members are suppose to pay a 150 USD membership fee</h3>
+        <h3 className="fw-light">
+          ASAR members are engaged in various research development activities
+          and are playing a pioneer role to review the research papers and to
+          make the technical events and conference successful. Making a $150 fee
+          payment will help us organize these conferences
+        </h3>
         <button type="submit" className="btn btn-primary btn-lg my-4">
           {loading ? <Spinner /> : " Pay membership fee"}
         </button>
