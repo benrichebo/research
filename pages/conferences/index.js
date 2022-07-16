@@ -8,32 +8,28 @@ function Conferences() {
     <>
       <Layout title="Conferences">
         <Header />
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
-            <div className="col-md-7 d-flex align-items-center pt-3 pb-1 pb-md-3">
-              <div className="col-md-12 col-lg-10 col-xl-9 mx-auto">
-                <p className="mb-4 small">CONFERENCES</p>
-                <h1 className="display-6 fs-3 pulse animated">
-                  Monthly and yearly conferences organized for our members
-                </h1>
+            <div className="col-md-6 d-flex align-items-center pt-3 pb-1 pb-md-3">
+              <div className="col-sm-10 col-xl-9">
+                <div className="">
+                  <p className="mb-2 small">CONFERENCES</p>
+                  <h1 className="display-6 fs-3 pulse animated">
+                    Monthly and yearly conferences organized for our members
+                  </h1>
+                </div>
               </div>
             </div>
-            <div className="col-md-5 px-0">
+            <div className="col-md-6 px-0 px-sm-3">
               <div>
                 <img className="img-fluid" src="/images/conference.jpg" />
               </div>
             </div>
           </div>
         </div>
-        <div className="container-fluid py-4 py-xl-5">
-          <div className="row gy-4 gy-md-0">
-            <div className="col px-0">
-              <div className="card rounded-0 border-0"></div>
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <div className="card-group row my-5">
+
+        <div className="container my-5 py-5">
+          <div className="card-group row">
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
               <div className="card-body p-md-1 p-xl-2 p-xxl-3">
                 <h6 className="text-primary card-title pb-2">01</h6>

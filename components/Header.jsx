@@ -22,7 +22,7 @@ function Header() {
         </button>
         <div className="collapse navbar-collapse" id="navcol-1">
           <ul className="navbar-nav d-flex mx-auto ms-auto list-group-horizontal-md">
-            <li className="nav-item ms-md-4">
+            <li className="nav-item">
               <Link href="/contactus">
                 <a className="nav-link fs-6">Contact us</a>
               </Link>

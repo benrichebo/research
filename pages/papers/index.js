@@ -30,14 +30,7 @@ function Papers() {
             </div>
           </div>
         </div>
-        <div className="container-fluid py-5">
-          <div className="row gy-4 gy-md-0">
-            <div className="col px-0">
-              <div className="card rounded-0 border-0"></div>
-            </div>
-          </div>
-        </div>
-        <div className="container mb-5 pb-5">
+        <div className="container my-5 py-5">
           <div className="row">
             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
               <div className="card mb-0 rounded-0">

@@ -17,7 +17,7 @@ function Articles() {
                   <h3
                     className="display-6 fs-3 pulse animated"
                     data-bss-disabled-mobile="true">
-                    Articles from our us
+                    Articles
                   </h3>
                 </div>
               </div>
@@ -41,11 +41,11 @@ function Articles() {
                 />
 
                 <div className="my-3">
-                  <span className="fs-6 my-3 small">ARCHITECTURE</span>
+                  <span className="my-3 small">ARCHITECTURE</span>
                   <div className="d-lg-flex justify-content-lg-between">
                     <h5 className="my-2">Built environment conference</h5>
                   </div>
-                  <span className="fs-6 text-muted my-3 my-lg-0 small">
+                  <span className="text-muted my-3 my-lg-0 small">
                     24th July 2022
                   </span>
                 </div>
@@ -60,11 +60,11 @@ function Articles() {
                 />
 
                 <div className="my-3">
-                  <span className="fs-6 my-3 small">ARCHITECTURE</span>
+                  <span className="my-3 small">ARCHITECTURE</span>
                   <div className="d-lg-flex justify-content-lg-between">
                     <h5 className="my-2">Built environment conference</h5>
                   </div>
-                  <span className="fs-6 text-muted my-3 my-lg-0 small">
+                  <span className="text-muted my-3 my-lg-0 small">
                     24th July 2022
                   </span>
                 </div>
@@ -79,11 +79,11 @@ function Articles() {
                 />
 
                 <div className="my-3">
-                  <span className="fs-6 my-3 small">ARCHITECTURE</span>
+                  <span className="my-3 small">ARCHITECTURE</span>
                   <div className="d-lg-flex justify-content-lg-between">
                     <h5 className="my-2">Built environment conference</h5>
                   </div>
-                  <span className="fs-6 text-muted my-3 my-lg-0 small">
+                  <span className="text-muted my-3 my-lg-0 small">
                     24th July 2022
                   </span>
                 </div>
