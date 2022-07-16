@@ -45,14 +45,14 @@ function Home() {
             </div>
           </div>
         </div>
-        <div class="card bg-primary rounded-0 border-0">
+        <div className="card bg-primary rounded-0 border-0">
           <img
             className="img-fluid card-img w-100 d-block hero-image"
             src="/images/arlington-research-Kz8nHVg_tGI-unsplash.jpg"
             style={{ objectFit: "cover" }}
             loading="lazy"
           />
-          <div class="card-img-overlay container">
+          <div className="card-img-overlay container">
             <a
               href="#fields"
               className="d-flex justify-content-start align-items-center mt-2 text-decoration-none">
@@ -75,26 +75,21 @@ function Home() {
               <div className="col-md-7 d-flex align-items-center pt-1 pt-lg-3">
                 <div className="mt-md-1 mt-lg-2">
                   <p className="fs-5 fw-light pulse animated">
-                    Association For Scientific And Academic Research(ASAR) is
-                    India's largest Non-profitable professional association
-                    registered under India Trust Act(1882) meant for research
-                    development and promotion in the field of engineering and
-                    technology. ASAR is a paramount body which has brought
-                    technical revolution and sustainable development of science
-                    and technology. The ASAR-forum constitutes of professional
-                    wizards and overseas technical leaders who have left no
-                    stones unturned to reinforce the field of science,
-                    engineering and technology. The Institute conduct technical
-                    conferences, seminars and workshop at different parts of
-                    country to reduce the gap between curriculum and their
-                    practical implementation among students and research
-                    scholars. Today IIERD is one of the leading publisher of
-                    research papers in its high quality peer reviewed journals,
-                    proceeding and research magazine. The Institute provides a
-                    brilliant scope of research and development to geniuses and
-                    wizards working in the field of engineering by providing
-                    financial aids by which economic constraints won't retaliate
-                    the technical growth and research development.
+                    Association of researches and planners is US largest
+                    Non-profitable professional association registered under
+                    India Trust Act(1882) meant for research development and
+                    promotion in the field of engineering and technology. ASAR
+                    is a paramount body which has brought technical revolution
+                    and sustainable development of science and technology. The
+                    ASAR-forum constitutes of professional wizards and overseas
+                    technical leaders who have left no stones unturned to
+                    reinforce the field of science, engineering and technology.
+                    The Institute conduct technical conferences, seminars and
+                    workshop at different parts of country to reduce the gap
+                    between curriculum and their practical implementation among
+                    students and research scholars. Today IIERD is one of the
+                    leading publisher of research papers in its high quality
+                    peer reviewed journals, proceeding and research magazine.
                   </p>
                 </div>
               </div>
@@ -186,22 +181,22 @@ function Home() {
                   <h6 className="text-white my-4">OUR EXPERTISE</h6>
                   <ul className="list-unstyled">
                     <li
-                      className="fs-4 fw-light text-white-50 mb-2"
+                      className="fs-4 fw-light text-white-50 mb-2 mb-lg-4"
                       data-bss-hover-animate="pulse">
                       Architecture
                     </li>
                     <li
-                      className="fs-4 fw-light text-white-50 mb-2"
+                      className="fs-4 fw-light text-white-50 mb-2 mb-lg-4"
                       data-bss-hover-animate="pulse">
                       Real Estate
                     </li>
                     <li
-                      className="fs-4 fw-light text-white-50 mb-2"
+                      className="fs-4 fw-light text-white-50 mb-2 mb-lg-4"
                       data-bss-hover-animate="pulse">
                       Interior design
                     </li>
                     <li
-                      className="fs-4 fw-light text-white-50 mb-2"
+                      className="fs-4 fw-light text-white-50 mb-2 mb-lg-4"
                       data-bss-hover-animate="pulse">
                       Surveying
                     </li>
@@ -255,7 +250,7 @@ function Home() {
                       <div className="bg-light">
                         <div className="card bg-light border-0 rounded-0">
                           <img
-                            className="img-fluid card-img-top w-100 d-block w-100"
+                            className="img-fluid card-img-top d-block w-100"
                             src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
                           />
                           <div className="p-3">
@@ -263,14 +258,14 @@ function Home() {
                               <h6 className="mb-0">
                                 Built environment conference
                               </h6>
-                              <span className="fs-6 text-muted my-2 my-lg-0 small">
-                                24th July 2022
-                              </span>
+                              <h6 className="text-muted mb-0">
+                                24th July, 2022
+                              </h6>
                             </div>
-                            <p className="d-none d-lg-block my-2 small">
+                            <p className="d-none d-lg-block small mb-0">
                               Albania
                             </p>
-                            <p className="fs-6 d-none d-lg-block mb-2">
+                            <p className="d-none d-lg-block mb-2">
                               International conference on business management
                               and social innovation
                             </p>
@@ -315,11 +310,11 @@ function Home() {
                               <h5 className="mb-0">
                                 Built environment conference
                               </h5>
-                              <span className="fs-6 text-muted my-3 my-lg-0">
+                              <span className="fs-6 text-muted my-2 my-lg-0">
                                 24th July 2022
                               </span>
                             </div>
-                            <p className="d-none d-lg-block my-2">Albania</p>
+                            <p className="d-none d-lg-block">Albania</p>
                             <p className="fs-6 d-none d-lg-block mb-4">
                               International conference on business management
                               and social innovation
@@ -375,21 +370,20 @@ function Home() {
               </a>
             </div>
             <div className="row py-1 py-lg-3">
-              <div className="col-md-4">
-                <div className="bg-light">
-                  <div>
-                    <img
-                      className="img-fluid w-100"
-                      src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
-                      style={{ objectFit: "scale-down" }}
-                    />
-                  </div>
-                  <div className="p-2 p-lg-3">
-                    <span className="fs-6 my-3 my-lg-0">ARCHITECTURE</span>
+              <div className="col-6 col-md-4 mb-3">
+                <div className="">
+                  <img
+                    className="img-fluid card-img-top w-100 d-block w-100"
+                    src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
+                    style={{ objectFit: "scale-down" }}
+                  />
+
+                  <div className="my-3">
+                    <span className="fs-6 my-3 small">ARCHITECTURE</span>
                     <div className="d-lg-flex justify-content-lg-between">
-                      <h4 className="my-2">Built environment conference</h4>
+                      <h5 className="my-2">Built environment conference</h5>
                     </div>
-                    <span className="fs-6 text-muted my-1 my-lg-0">
+                    <span className="fs-6 text-muted my-3 my-lg-0 small">
                       24th July 2022
                     </span>
                   </div>

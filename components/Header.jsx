@@ -6,7 +6,7 @@ function Header() {
     <nav className="navbar navbar-light bg-white py-3 border-bottom">
       <div className="container">
         <Link href="/">
-          <a className="navbar-brand fs-6" href="#">
+          <a className="navbar-brand fs-5" href="#">
             <span className="d-none d-md-block">
               Association of researches and planners
             </span>
@@ -22,11 +22,6 @@ function Header() {
         </button>
         <div className="collapse navbar-collapse" id="navcol-1">
           <ul className="navbar-nav d-flex mx-auto ms-auto list-group-horizontal-md">
-            <li className="nav-item">
-              <Link href="/aboutus">
-                <a className="nav-link fs-6">About us</a>
-              </Link>
-            </li>
             <li className="nav-item ms-md-4">
               <Link href="/contactus">
                 <a className="nav-link fs-6">Contact us</a>
