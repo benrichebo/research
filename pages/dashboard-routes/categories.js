@@ -45,7 +45,7 @@ function Categories() {
   const deleteCategory = async (id) => {
     setAction(true)
     console.log(id);
-    await data.deleteData(`/api/category/${id}`);
+    await data.deleteData(`/api/categories/${id}`);
   };
 
   return (

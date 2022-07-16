@@ -15,7 +15,7 @@ export default authenticate(async (req, res) => {
 
     if (req.method == "GET") {
       const category = await db
-        .collection("categorys")
+        .collection("categories")
         .findOne({ _id: ObjectId(id) });
 
       console.log("category found", category);
@@ -31,7 +31,7 @@ export default authenticate(async (req, res) => {
       const body = JSON.parse(req.body);
 
       const response = await db
-        .collection("categorys")
+        .collection("categories")
         .updateOne({ _id: ObjectId(id) }, { $set: { ...body } });
       console.log("response", response);
       if (response?.acknowledged) {
@@ -44,7 +44,7 @@ export default authenticate(async (req, res) => {
     if (method == "DELETE") {
       console.log("delete category");
       const response = await db
-        .collection("categorys")
+        .collection("categories")
         .deleteOne({ _id: ObjectId(id) });
 
       if (response.deletedCount === 1) {

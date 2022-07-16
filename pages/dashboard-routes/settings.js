@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../../components/ui/Spinner";
-import { useStorage } from "../../hooks/useStorage";
 import { useUser } from "../../hooks/useUser";
 
 function Settings() {
   //1. get user
-  const { user, loading, error, postError, postLoading, message } = useUser("user");
-
-  const { sessionStorage } = useStorage();
-
-  //2.fetch user in session
-  const userData = sessionStorage.getItem("user");
+  const { user, loading, error, postError, postLoading, message, userData } = useUser("user");
 
   const [name, setName] = useState(userData?.name || "");
 
@@ -18,10 +12,21 @@ function Settings() {
 
   const [city, setCity] = useState(userData?.city || "");
 
-  //3. update user
+  useEffect(() => {
+    setName(userData?.name);
+    setEmail(userData?.email)
+    setCity(userData?.city)
+  }, [userData]);
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await user.updateUser({name, email, city})
+  };
+
+  const deleteAccount = async (e) => {
+    e.preventDefault();
+    await user.updateUser({ name, email, city });
   };
 
   if (loading) return "loading...";

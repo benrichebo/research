@@ -17,9 +17,9 @@ const routes = [
   { name: "Articles", icon: <MdLibraryBooks className="fs-5" /> },
   { name: "Conferences", icon: <MdReceiptLong className="fs-5" /> },
   { name: "Payments", icon: <MdPayments className="fs-5" /> },
-  { name: "Settings", icon: <MdPerson className="fs-5" /> },
   { name: "Categories", icon: <MdCategory className="fs-5" /> },
   { name: "Media", icon: <MdOutlinePermMedia className="fs-5" /> },
+  { name: "Settings", icon: <MdPerson className="fs-5" /> },
 ];
 
 const memberRoutes = [
