@@ -130,7 +130,7 @@ function ContactUs() {
           <div className="container px-md-0 py-3 py-md-5">
             <div className="row">
               <div className="col-md-4">
-                <h1 className="display-5 fs-3 pulse animated border-top border-3 border-primary pt-3">
+                <h1 className="display-5 fs-3 pulse animated border-top border-3 border-primary py-3">
                   Heads
                 </h1>
                 <CategorySelect category={category} setCategory={setCategory} />

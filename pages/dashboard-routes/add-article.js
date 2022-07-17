@@ -1,23 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCrud } from "../../hooks/useCrud";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
 import CategorySelect from "../../components/ui/CategorySelect";
+import TextEditor from "../../components/Editor";
 
 function AddArticle({ article }) {
-  const { data, loading, postLoading, postError, message } = useCrud(
+  const { data, postLoading, postError, message } = useCrud(
     "all-articles",
     "/api/articles"
   );
 
   const [title, setTitle] = useState(article?.title || "");
   const [author, setAuthor] = useState(article?.author || "");
-  const [content, setContent] = useState(article?.content || "");
+  const [textContent, setTextContent] = useState(article?.textContent || "");
   const [category, setCategory] = useState(article?.category || "");
   const [status, setStatus] = useState(article?.status || "");
 
   const [image, setImage] = useState(article?.image);
+
+  useEffect(() => {
+    console.log(title, author, textContent, category, status, image);
+  }, [title, author, textContent, category, status, image]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +31,7 @@ function AddArticle({ article }) {
       title,
       author,
       image,
-      content,
+      textContent,
       category,
       status,
     };
@@ -35,6 +41,7 @@ function AddArticle({ article }) {
       : await data.addData(body, "/api/articles/create");
   };
 
+  console.log(article);
   return (
     <>
       <h5>{article?.title ? "Edit article" : "Add article"}</h5>
@@ -71,12 +78,13 @@ function AddArticle({ article }) {
                   />
                 </div>
                 <div className="col-12 mb-4">
-                  <label className="form-label">Content</label>
-                  <textarea
-                    className="form-control form-control-lg rounded-0"
-                    rows="4"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}></textarea>
+                  <label className="form-label" htmlFor="content">
+                    Content
+                  </label>
+                  <TextEditor
+                    content={textContent}
+                    setContent={setTextContent}
+                  />
                 </div>
                 <div className="my-3 d-grid">
                   <button
@@ -85,7 +93,7 @@ function AddArticle({ article }) {
                     disabled={
                       postLoading ||
                       !title ||
-                      !content ||
+                      !textContent ||
                       !category ||
                       !status ||
                       !image ||

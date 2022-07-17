@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import TextEditor from "../../components/Editor";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
@@ -9,7 +10,7 @@ function AddPaper({ paper }) {
     "/api/papers"
   );
 
-  const [title, setTitle] = useState(paper?.title || "");
+  const [abstract, setAbstract] = useState(paper?.abstract || "");
   const [publisher, setPublisher] = useState(paper?.publisher || "");
   const [fileToUpload, setFileToUpload] = useState(paper?.file || "");
   const [description, setDescription] = useState(paper?.description || "");
@@ -28,20 +29,20 @@ function AddPaper({ paper }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
-      title,
+      abstract,
       publisher,
       file: fileToUpload,
       description,
     };
 
-    paper?.title
+    paper?.abstract
       ? await data.updateData(body, `/api/papers/${paper?._id}`)
       : await data.addData(body, "/api/papers/create");
   };
 
   return (
     <>
-      <h5>{paper?.title ? "Edit paper" : "Add paper"}</h5>
+      <h5>{paper?.abstract ? "Edit paper" : "Add paper"}</h5>
 
       <div className="mb-4">
         {message && <p className="text-success">{message}</p>}
@@ -49,14 +50,14 @@ function AddPaper({ paper }) {
         {fileTypeError && <p className="text-danger">{fileTypeError}</p>}
         <form className="row" onSubmit={handleSubmit}>
           <div className="col-12 mb-4">
-            <label className="form-label" htmlFor="title">
-              Title
+            <label className="form-label" htmlFor="abstract">
+              Abstract
             </label>
             <input
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              id="title"
+              value={abstract}
+              onChange={(e) => setAbstract(e.target.value)}
+              id="abstract"
               className="form-control form-control-lg rounded-0"
             />
           </div>
@@ -94,12 +95,7 @@ function AddPaper({ paper }) {
                 <label className="form-label" htmlFor="description">
                   Description
                 </label>
-                <textarea
-                  className="form-control form-control-lg  rounded-0"
-                  rows="4"
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}></textarea>
+                <TextEditor content={description} setContent={setDescription} />
               </div>
               <div className="my-3 d-grid">
                 <button
@@ -107,7 +103,7 @@ function AddPaper({ paper }) {
                   type="submit"
                   disabled={
                     postLoading ||
-                    !title ||
+                    !abstract ||
                     !publisher ||
                     !description ||
                     !fileToUpload ||
@@ -118,7 +114,7 @@ function AddPaper({ paper }) {
                   ) : (
                     <span className="">
                       {" "}
-                      {paper?.title ? "Save paper" : "Add paper"}
+                      {paper?.abstract ? "Save paper" : "Add paper"}
                     </span>
                   )}
                 </button>

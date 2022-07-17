@@ -8,7 +8,7 @@ import { useStorage } from "./useStorage";
 export const useMedia = (type) => {
   const { sessionStorage } = useStorage("session");
 
-  let [medias, setMedias] = useState(null);
+  const [medias, setMedias] = useState(null);
   const [mediaData, setMediaData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [uploadLoading, setUploadLoading] = useState(false);
@@ -26,12 +26,11 @@ export const useMedia = (type) => {
         if (data?.msg) {
           setError(data.msg);
         } else {
-          sessionStorage.clearItem("medias");
           if (data?.length > 0) {
             sessionStorage.setItem("medias", data);
             setMedias(data);
           } else {
-            setMedias([])
+            setMedias([]);
           }
         }
       } catch (error) {
@@ -63,15 +62,11 @@ export const useMedia = (type) => {
       try {
         const data = await POST(credentials, "/api/media/images/create");
         setUploadLoading(false);
-        if (data.url) {
-          sessionStorage.clearItem(type);
 
-          if (data?.length > 0) {
-            this.getMedias();
-            return data?.url;
-          }
-        } else {
+        if (!data.url) {
           setUploadError(data.msg);
+        } else {
+          this.getMedias();
         }
       } catch (error) {
         setUploadLoading(false);

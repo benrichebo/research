@@ -118,7 +118,7 @@ function Conferences() {
                             <span className="ms-3">
                               <Link
                                 href={`/dashboard/edit-conference/${routeId}/${data?._id}`}>
-                                {" "}
+                                
                                 <a className="">
                                   <MdEdit size={20} className="text-muted" />
                                 </a>

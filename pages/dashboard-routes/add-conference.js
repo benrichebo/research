@@ -3,6 +3,7 @@ import { useCrud } from "../../hooks/useCrud";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
+import TextEditor from "../../components/Editor";
 
 function AddConference({ conference }) {
   const { data, postLoading, postError, message } = useCrud(
@@ -11,10 +12,19 @@ function AddConference({ conference }) {
   );
 
   const [title, setTitle] = useState(conference?.title || "");
+  const [overview, setOverView] = useState(
+    conference?.overview || ""
+  );
+  const [objective, setObjective] = useState(
+    conference?.objective || ""
+  );
+  const [whyAttend, setWhyAttend] = useState(
+    conference?.whyAttend || ""
+  );
   const [startDate, setStartDate] = useState(conference?.startDate || "");
   const [endDate, setEndDate] = useState(conference?.endDate || "");
   const [country, setCountry] = useState(conference?.country || "");
-  const [description, setDescription] = useState(conference?.description || "");
+  const [venue, setVenue] = useState(conference?.venue || "");
 
   const [image, setImage] = useState(conference?.image || "");
 
@@ -23,11 +33,15 @@ function AddConference({ conference }) {
     const body = {
       title,
       image,
-      description,
+      whyAttend,
       country,
+      overview,
+      venue,
+      objective,
       startDate,
       endDate,
     };
+    console.log(body)
     conference?.title
       ? await data.updateData(body, `/api/conferences/${conference?._id}`)
       : await data.addData(body, "/api/conferences/create");
@@ -90,15 +104,35 @@ function AddConference({ conference }) {
                   onChange={(e) => setCountry(e.target.value)}
                 />
               </div>
+              <div className="col-12 col-md-6 mb-4">
+                <label className="form-label" htmlFor="venue">
+                  Venue
+                </label>
+                <input
+                  className="form-control form-control-lg rounded-0"
+                  type="text"
+                  id="venue"
+                  value={venue}
+                  onChange={(e) => setVenue(e.target.value)}
+                />
+              </div>{" "}
+              <div className="col-12 mb-4">
+                <label className="form-label" htmlFor="overview">
+                  Conference overview
+                </label>
+                <TextEditor content={overview} setContent={setOverView} />
+              </div>
+              <div className="col-12 mb-4">
+                <label className="form-label" htmlFor="objective">
+                  Conference objective
+                </label>
+                <TextEditor content={objective} setContent={setObjective} />
+              </div>
               <div className="col-12 mb-4">
                 <label className="form-label" htmlFor="description">
-                  Description
+                  Why attend
                 </label>
-                <textarea
-                  className="form-control form-control-lg rounded-0"
-                  rows="4"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}></textarea>
+                <TextEditor content={whyAttend} setContent={setWhyAttend} />
               </div>
               <div className="my-3 d-grid">
                 <button
@@ -109,7 +143,9 @@ function AddConference({ conference }) {
                     !title ||
                     !startDate ||
                     !endDate ||
-                    !description ||
+                    !overview ||
+                    !whyAttend ||
+                    !venue ||
                     !image ||
                     !country
                   }>
@@ -118,9 +154,7 @@ function AddConference({ conference }) {
                   ) : (
                     <span className="">
                       {" "}
-                      {conference?.title
-                        ? "Save conference"
-                        : "Add conference"}
+                      {conference?.title ? "Save conference" : "Add conference"}
                     </span>
                   )}
                 </button>
@@ -137,16 +171,16 @@ function AddConference({ conference }) {
             data-bs-toggle="modal"
             type="button">
             <div
-              className="card d-flex justify-content-center align-items-center bg-light"
-              style={{ height: 200, border: "1px dashed #b5b4b4" }}>
+              className="card d-flex justify-content-center align-items-center bg-light p-2"
+              style={{ height: 250, border: "1px dashed #b5b4b4" }}>
               {image?.name && (
                 <img
                   src={image?.url}
                   alt={image?.name}
-                  width="100"
-                  height="100"
+                  width="300"
+                  height="200"
                   className="img-fluid"
-                  style={{ objectFit: "contain" }}
+                  style={{ objectFit: "fit" }}
                 />
               )}
               {!image?.name && (

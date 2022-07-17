@@ -28,8 +28,8 @@ const Conferences = () => {
 
 const Papers = () => {
   const { oneData, error, loading, message } = useCount(
-    "one-count-conferences",
-    "/api/count/conferences"
+    "one-count-papers",
+    "/api/count/papers"
   );
   return (
     <>

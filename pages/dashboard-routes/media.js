@@ -4,10 +4,10 @@ import { MdDelete, MdGroup, MdRefresh } from "react-icons/md";
 import { useMedia } from "../../hooks/useMedia";
 import { useRouter } from "next/router";
 import { MdInsertDriveFile } from "react-icons/md";
+import Uploader from "../../components/media/Uploader";
 
 function Media() {
-  const { loading, medias, media, uploadError, error, uploadLoading } =
-    useMedia("medias");
+  const { loading, medias, media, uploadError, uploadLoading, error } = useMedia("medias");
   const [show, setShow] = useState();
   const [routeId, setRouteId] = useState();
 
@@ -30,12 +30,17 @@ function Media() {
     <>
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h5>Media</h5>
-        <div>
+        <div className="d-flex justify-content-start align-items-center">
           <button
-            className="btn btn-light my-3 ms-3"
+            className="btn btn-light my-3 me-3"
             onClick={() => media.getMedias()}>
             <MdRefresh />
           </button>
+          <Uploader
+            media={media}
+            uploadError={uploadError}
+            uploadLoading={uploadLoading}
+          />
         </div>
       </div>
       {loading && (
@@ -56,16 +61,9 @@ function Media() {
         </div>
       )}
       {uploadError && <p className="text-danger">{uploadError}</p>}
+      
       {medias?.length > 0 && (
         <div className="row">
-          <div className="col-12 d-flex justify-content-end align-items-center mb-3">
-            <input
-              type="search"
-              className="form-control w-auto"
-              placeholder="Search for an item"
-              autocomplete="on"
-            />
-          </div>
           <div className="col">
             <div className="table-responsive">
               <table className="table">
@@ -103,9 +101,9 @@ function Media() {
                                 <MdInsertDriveFile size={30} className="ms-3" />
                               ) : (
                                 <img
-                                  className="img-fluid ms-4"
+                                  className="ms-4"
                                   src={data?.url}
-                                  width="70"
+                                  width="50"
                                   height="50"
                                   style={{ objectFit: "cover" }}
                                   alt={data?.name}
@@ -141,7 +139,11 @@ function Media() {
                               className="ms-3 text-decoration-none text-danger"
                               type="button"
                               onClick={() => deleteMedia(data?._id)}>
-                              Delete
+                              {uploadLoading ? (
+                                <Spinner className="ms-2" />
+                              ) : (
+                                <span className="">Delete</span>
+                              )}
                             </a>
                           </td>
                           <td></td>

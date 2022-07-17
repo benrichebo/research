@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import Resizer from "react-image-file-resizer";
-import { useMedia } from "../../hooks/useMedia";
 import { MdInfo } from "react-icons/md";
 import Spinner from "../ui/Spinner";
 
-function Uploader({ setMediaUploaded }) {
+function Uploader({ media, uploadLoading, uploadError }) {
   const [file, setFile] = useState("");
   const fileInputRef = useRef();
   const [size, setSize] = useState("");
-  const { media, uploadLoading, uploadError, medias } = useMedia("medias");
 
   const [msg, setMsg] = useState("");
 
@@ -21,12 +19,8 @@ function Uploader({ setMediaUploaded }) {
       type: "image",
     };
 
-    const response = await media.addMedia(data);
-
-    if (response?.url) {
-      //push the image to medias
-      setMediaUploaded(response);
-    }
+    await media.addMedia(data);
+    await media.getMedias();
   };
 
   const handleDocumentUpload = async (uri) => {
@@ -36,17 +30,13 @@ function Uploader({ setMediaUploaded }) {
       type: "document",
     };
 
-    const response = await media.addMedia(fileData);
-
-    if (response?.url) {
-      //push the image to medias
-      setMediaUploaded(response);
-    }
+    await media.addMedia(fileData);
+    await media.getMedias();
   };
 
   useEffect(() => {
+    console.log(file);
     if (file) {
-      console.log("file", file);
       const reader = new FileReader();
       reader.onloadstart = () => {
         //setMsg("uploadLoading start...");
@@ -55,10 +45,15 @@ function Uploader({ setMediaUploaded }) {
         //setMsg("uploadLoading in progress...");
       };
       reader.onerror = () => {
-        setMsg("error upuploadLoading image");
+        setMsg("error uploading image");
       };
       reader.onloadend = async () => {
         //setMsg("uploadLoading done");
+
+        if (file?.size > 1000000) {
+          setMsg(`The file size ${file?.size / 1000000} MB should not be more than 1MB`);
+          return;
+        }
 
         if (file.type.substr(0, 5) === "image") {
           var image = new Image();
@@ -88,15 +83,9 @@ function Uploader({ setMediaUploaded }) {
     }
   }, [file]);
 
-  if (medias?.length >= 0)
-    return (
+  return (
+    <>
       <div>
-        {uploadError ||
-          (msg && (
-            <span className="me-2">
-              <MdInfo className={`text-${msg ? "info" : "danger"}`} />
-            </span>
-          ))}
         <label className="btn btn-light px-3">
           <input
             type="file"
@@ -107,14 +96,16 @@ function Uploader({ setMediaUploaded }) {
             onChange={(e) => setFile(e.target?.files[0])}
             hidden
           />
-          {uploadLoading ? (
+          {file && uploadLoading ? (
             <Spinner className="ms-2" />
           ) : (
             <span className="">Import image</span>
           )}
         </label>
       </div>
-    );
+      
+    </>
+  );
 }
 
 export default Uploader;

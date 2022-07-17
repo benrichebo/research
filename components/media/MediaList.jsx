@@ -3,16 +3,8 @@ import { MdInsertDriveFile } from "react-icons/md";
 import { useMedia } from "../../hooks/useMedia";
 import Spinner from "../ui/Spinner";
 
-function MediaList({ mediaUploaded, setSelectedImage }) {
-  const { loading, error, media, medias } = useMedia("medias");
-
-  //push media uploaded to media
-  useEffect(() => {
-    if (mediaUploaded?.url) {
-      medias.push(mediaUploaded);
-      console.log("mediaUploaded", mediaUploaded);
-    }
-  }, [mediaUploaded]);
+function MediaList({ setSelectedImage }) {
+  let { loading, error, media, medias } = useMedia("medias");
 
   return (
     <div className="row mb-2 mb-md-5">
@@ -40,7 +32,7 @@ function MediaList({ mediaUploaded, setSelectedImage }) {
       )}
       {medias?.length > 0 &&
         medias?.map((media) => (
-          <div className="col-4 col-md-3 col-lg-2 mb-3" key={media?.url}>
+          <div className="col-4 col-md-4 col-lg-3 mb-3" key={media?.url}>
             <input
               className="form-check-input"
               type="radio"
@@ -50,25 +42,27 @@ function MediaList({ mediaUploaded, setSelectedImage }) {
               hidden
             />
             <label
-              className="card d-flex justify-content-center align-items-center pt-0 pb-0 px-2"
+              className="card d-flex justify-content-center align-items-center pt-2"
               style={{ cursor: "pointer" }}
               htmlFor={media?.name}
               onClick={() => setSelectedImage(media)}>
-              <div className="px-2 uploadedImage">
-                {media?.type == "document" ? (
-                  <MdInsertDriveFile />
-                ) : (
-                  <img
-                    className="img-fluid h-100 my-3"
-                    src={media?.url}
-                    style={{ objectFit: "contain" }}
-                    alt={media?.name}
-                  />
-                )}
-              </div>
-              <div className="card-body pb-2 mt-2 d-none d-md-block">
-                <h5 className="mb-0 text-truncate">{media?.name}</h5>
-                <h6 className="mb-0">
+              {media?.type == "document" ? (
+                <MdInsertDriveFile />
+              ) : (
+                <img
+                  className=""
+                  src={media?.url}
+                  style={{ objectFit: "cover" }}
+                  alt={media?.name}
+                  width="200"
+                  height="200"
+                />
+              )}
+              <div className="d-none d-md-block pt-2">
+                <h5 className="mb-0 text-truncate small mb-0">
+                  {media?.name.slice(30)}
+                </h5>
+                <h6 className="mb-0 small">
                   {media?.width} X {media?.width}
                 </h6>
               </div>

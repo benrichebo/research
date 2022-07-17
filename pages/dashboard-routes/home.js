@@ -36,19 +36,19 @@ function Home() {
               {userData?.role == "admin" && (
                 <>
                   <Link href={`/dashboard/add-article/${routeId}`}>
-                    <a className="btn btn-secondary me-3" href="#">
+                    <a className="btn btn-secondary me-3 mb-3" href="#">
                       Post an article
                     </a>
                   </Link>
                   <Link href={`/dashboard/add-conference/${routeId}`}>
-                    <a className="btn btn-info me-3" href="#">
+                    <a className="btn btn-info me-3 mb-3" href="#">
                       Add a conference
                     </a>
                   </Link>
                 </>
               )}
               <Link href={`/dashboard/add-paper/${routeId}`}>
-                <a className="btn btn-light" href="#">
+                <a className="btn btn-light mb-3" href="#">
                   Submit a paper
                 </a>
               </Link>
