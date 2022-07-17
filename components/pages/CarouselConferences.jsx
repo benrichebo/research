@@ -19,33 +19,37 @@ function CarouselConferencesComponent() {
         )}
 
         <div
-          className="carousel slide col-lg-9"
+          className="carousel slide col-lg-9 mx-auto"
           data-bs-ride="carousel"
           id="carousel-1">
           <div className="carousel-inner">
             {allData?.length > 0 &&
               allData?.slice(0, 20).map((conference) => (
-                <div className="carousel-item active">
-                  <div className="bg-light">
-                    <div className="card bg-light border-0 rounded-0">
-                      <img
-                        className="img-fluid card-img-top d-block w-100"
-                        src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
-                      />
-                      <div className="p-3">
-                        <div className="d-lg-flex justify-content-lg-between">
-                          <h6 className="mb-0">{conference?.title}</h6>
-                          <h6 className="text-muted mb-0">
-                            {conference?.startDate}
-                          </h6>
+                <Link href={`/conference/${conference?._id}`}>
+                  <a
+                    className="carousel-item active text-decoration-none"
+                    key={conference?._id}>
+                    <div className="bg-light">
+                      <div className="card bg-light border-0 rounded-0">
+                        <img
+                          className="img-fluid card-img-top d-block w-100"
+                          src={conference?.image?.url}
+                        />
+                        <div className="p-3">
+                          <div className="d-lg-flex justify-content-lg-between">
+                            <h6 className="mb-0">{conference?.title}</h6>
+                            <h6 className="text-muted mb-0">
+                              {conference?.startDate}
+                            </h6>
+                          </div>
+                          <p className="d-none d-lg-block small mb-0">
+                            {conference?.country}
+                          </p>
                         </div>
-                        <p className="d-none d-lg-block small mb-0">
-                          {conference?.country}
-                        </p>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </a>
+                </Link>
               ))}
           </div>
           <div>

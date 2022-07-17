@@ -2,52 +2,44 @@ import React from "react";
 import { MdFileDownload } from "react-icons/md";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
+import { renderMarkup } from "react-render-markup";
+import { connectToDatabase } from "../../lib/mongodb";
+import { ObjectID } from "bson";
 
-function Paper() {
+function Paper({ paper }) {
   return (
     <>
       <Layout title="Paper">
         <Header />
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 d-flex align-items-center pt-5 pb-3 pb-md-5">
-              <div class="col-md-12 col-lg-10 col-xl-9 mx-auto">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 d-flex align-items-center pt-5 pb-3 pb-md-5">
+              <div className="col-md-12 col-lg-10 col-xl-9 mx-md-auto">
                 <p className="small">PAPER</p>
                 <h1
-                  class="display-5 fs-3 pulse animated mb-3"
+                  className="display-5 fs-3 pulse animated mb-3"
                   data-bss-disabled-mobile="true">
-                  ESG Investment and private real estate returns
+                  {paper?.title}
                 </h1>
-                <h6>PUBLISHER: JASON MASON</h6>
+                <h6>PUBLISHER: {paper?.publisher}</h6>
               </div>
+            </div>
+            <div className="col-lg-2 col-xl-3 my-3">
             </div>
           </div>
         </div>
-        <div class="container py-4 py-xl-5">
-          <div class="d-flex justify-content-center">
-            <div class="col-md-10">
-              <div class="mb-5">
-                <p class="lead fs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Pellentesque dapibus felis et libero scelerisque, sed aliquet
-                  nulla tincidunt. Quisque lorem nisl, semper vitae mattis nec,
-                  vestibulum nec risus. Sed ut volutpat tortor, ut sodales diam.
-                  Integer at tristique turpis. Integer orci leo, fringilla ac
-                  aliquet vitae, condimentum non lorem. Duis velit ex, aliquam
-                  vel pellentesque et, dictum vitae mauris. Vestibulum commodo
-                  luctus tortor eu ultrices. Fusce commodo enim non eros
-                  consectetur maximus. Donec venenatis dolor ut vestibulum
-                  fermentum. Aliquam malesuada sit amet nulla id imperdiet.
-                  Suspendisse maximus purus et ligula maximus, a luctus ante
-                  fringilla.
-                </p>
+        <div className="container py-4 py-xl-5">
+          <div className="d-flex justify-content-center">
+            <div className="col-md-10">
+              <div className="fs-4 lead mb-5">
+                {renderMarkup(paper?.abstract)}
               </div>
-              <div class="my-5">
+              <div className="my-5">
                 <a
-                  class="btn btn-outline-primary rounded-0 btn-lg px-4"
-                  href="#"
-                  type="submit">
-                  <span class="d-flex justify-content-center align-items-center">
+                  href={paper?.file?.url}
+                  download={paper?.file?.name}
+                  className="btn btn-outline-primary rounded-0 btn-lg px-4">
+                  <span className="d-flex justify-content-center align-items-center">
                     <span>Download</span>
                     <MdFileDownload className="ms-3" />
                   </span>
@@ -56,32 +48,32 @@ function Paper() {
             </div>
           </div>
         </div>
-        <div class="container-fluid pt-4 pt-xl-5">
-          <div class="card-group row">
-            <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-              <div class="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 class="text-primary card-title pb-4">ABOUT</h6>
-                <div class="d-flex justify-content-between align-items-center">
+        <div className="container-fluid pt-4 pt-xl-5">
+          <div className="card-group row">
+            <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
+              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
+                <h6 className="text-primary card-title pb-4">ABOUT</h6>
+                <div className="d-flex justify-content-between align-items-center">
                   <h5>More about our company</h5>
-                  <i class="material-icons ms-3">arrow_forward</i>
+                  <i className="material-icons ms-3">arrow_forward</i>
                 </div>
               </div>
             </div>
-            <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-              <div class="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 class="text-primary card-title pb-4">PAPERS</h6>
-                <div class="d-flex justify-content-between align-items-center">
+            <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
+              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
+                <h6 className="text-primary card-title pb-4">PAPERS</h6>
+                <div className="d-flex justify-content-between align-items-center">
                   <h5>Papers we have published</h5>
-                  <i class="material-icons ms-3">arrow_forward</i>
+                  <i className="material-icons ms-3">arrow_forward</i>
                 </div>
               </div>
             </div>
-            <div class="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-              <div class="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 class="text-primary card-title pb-4">CONTACT</h6>
-                <div class="d-flex justify-content-between align-items-center">
+            <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
+              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
+                <h6 className="text-primary card-title pb-4">CONTACT</h6>
+                <div className="d-flex justify-content-between align-items-center">
                   <h5>Get in touch with us</h5>
-                  <i class="material-icons ms-3">arrow_forward</i>
+                  <i className="material-icons ms-3">arrow_forward</i>
                 </div>
               </div>
             </div>
@@ -91,5 +83,29 @@ function Paper() {
     </>
   );
 }
+
+export const getServerSideProps = async (context) => {
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
+  try {
+    const { db } = await connectToDatabase();
+    const paper = await db
+      .collection("papers")
+      .findOne({ _id: ObjectID(context.params.id) });
+
+    console.log("paper", paper);
+    const data = JSON.stringify(paper);
+    return {
+      props: { paper: JSON.parse(data) },
+    };
+  } catch (error) {
+    console.log(error.message);
+    return {
+      notFound: true,
+    };
+  }
+};
 
 export default Paper;

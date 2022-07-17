@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
-import { MdInsertDriveFile } from "react-icons/md";
+import PapersComponent from "../../components/pages/Papers";
 
 function Papers() {
   return (
@@ -31,60 +31,7 @@ function Papers() {
           </div>
         </div>
         <div className="container my-5 py-5">
-          <div className="row">
-            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
-              <div className="card mb-0 rounded-0">
-                <div className="card-body p-md-2 p-xl-1 p-xxl-3">
-                  <MdInsertDriveFile className="text-muted mb-2" />
-                  <h5 className="card-title">
-                    ESG Investment and private real estate returns
-                  </h5>
-                  <h6 className="text-muted card-subtitle my-3">
-                    Publisher: Michael Gates
-                  </h6>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
-              <div className="card mb-0 rounded-0">
-                <div className="card-body p-md-2 p-xl-1 p-xxl-3">
-                  <MdInsertDriveFile className="text-muted mb-2" />
-                  <h5 className="card-title">
-                    ESG Investment and private real estate returns
-                  </h5>
-                  <h6 className="text-muted card-subtitle my-3">
-                    Publisher: Michael Gates
-                  </h6>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
-              <div className="card mb-0 rounded-0">
-                <div className="card-body p-md-2 p-xl-1 p-xxl-3">
-                  <MdInsertDriveFile className="text-muted mb-2" />
-                  <h5 className="card-title">
-                    ESG Investment and private real estate returns
-                  </h5>
-                  <h6 className="text-muted card-subtitle my-3">
-                    Publisher: Michael Gates
-                  </h6>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
-              <div className="card mb-0 rounded-0">
-                <div className="card-body p-md-2 p-xl-1 p-xxl-3">
-                  <MdInsertDriveFile className="text-muted mb-2" />
-                  <h5 className="card-title">
-                    ESG Investment and private real estate returns
-                  </h5>
-                  <h6 className="text-muted card-subtitle my-3">
-                    Publisher: Michael Gates
-                  </h6>
-                </div>
-              </div>
-            </div>
-          </div>
+          <PapersComponent limit={20} />
         </div>
         <div className="container mb-5 pb-5">
           <h4 className="text-primary"> White Papers and Reports </h4>

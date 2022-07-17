@@ -32,7 +32,7 @@ function Conferences() {
         </div>
 
         <div className="container my-5 py-5">
-          <ConferencesComponent />
+          <ConferencesComponent limit={20} />
         </div>
         <Footer />
       </Layout>

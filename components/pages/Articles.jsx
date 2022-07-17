@@ -3,7 +3,7 @@ import { useCrud } from '../../hooks/useCrud';
 import Spinner from '../ui/Spinner';
 import Link from "next/link";
 
-function ArticlesComponent() {
+function ArticlesComponent({limit}) {
   const { allData, error, loading } = useCrud("all-articles", "/api/articles");
   console.log(allData);
   return (
@@ -15,7 +15,7 @@ function ArticlesComponent() {
           </div>
         )}
         {allData?.length > 0 &&
-          allData?.slice(0, 20).map((article) => (
+          allData?.slice(0, limit).map((article) => (
             <div className="col-6 col-md-4 mb-3" key={article?._id}>
               <Link href={`/article/${article?._id}`}>
                 <a className="text-decoration-none">

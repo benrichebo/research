@@ -19,7 +19,7 @@ function Articles() {
                   <h3
                     className="display-6 fs-3 pulse animated"
                     data-bss-disabled-mobile="true">
-                    Articles
+                    Weekly Articles
                   </h3>
                 </div>
               </div>
@@ -33,7 +33,7 @@ function Articles() {
         </div>
 
         <div className="container my-5 py-5">
-          <ArticlesComponent />
+          <ArticlesComponent limit={20} />
         </div>
         <Footer />
       </Layout>

@@ -1,10 +1,12 @@
 import React from "react";
 import { MdArrowForward, MdArrowDownward } from "react-icons/md";
+import Link from "next/link";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ArticlesComponent from "../components/pages/Articles";
 import CarouselConferencesComponent from "../components/pages/CarouselConferences";
+import PapersComponent from "../components/pages/Papers";
 
 function Home() {
   return (
@@ -98,68 +100,24 @@ function Home() {
             </div>
           </div>
         </section>
-        <div className="container-fluid pb-4 pb-xl-5 mb-5" id="articles">
-          <div className="card-group row my-5">
-            <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-1 p-xxl-3">
-                <h6 className="text-primary py-2">01</h6>
-                <h6 className="">
-                  ESG Investment and private real estate returns
-                </h6>
-                <h6 className="text-muted my-2 small">
-                  Publisher: Michael Gates
-                </h6>
-                <p className="card-text d-none d-lg-block pb-2">
-                  International conference on business management and social
-                  innovation
-                </p>
-              </div>
-            </div>
-            <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-1 p-xxl-3">
-                <h6 className="text-primary py-2">01</h6>
-                <h6 className="">
-                  ESG Investment and private real estate returns
-                </h6>
-                <h6 className="text-muted my-2 small">
-                  Publisher: Michael Gates
-                </h6>
-                <p className="card-text d-none d-lg-block pb-2">
-                  International conference on business management and social
-                  innovation
-                </p>
-              </div>
-            </div>
-            <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-1 p-xxl-3">
-                <h6 className="text-primary py-2">01</h6>
-                <h6 className="">
-                  ESG Investment and private real estate returns
-                </h6>
-                <h6 className="text-muted my-2 small">
-                  Publisher: Michael Gates
-                </h6>
-                <p className="card-text d-none d-lg-block">
-                  International conference on business management and social
-                  innovation
-                </p>
-              </div>
-            </div>
-            <div className="card col-sm-6 col-md-3 mb-0 rounded-0">
-              <div className="card-body p-md-1 p-xxl-3">
-                <h6 className="text-primary py-2">01</h6>
-                <h6 className="">
-                  ESG Investment and private real estate returns
-                </h6>
-                <h6 className="text-muted my-2 small">
-                  Publisher: Michael Gates
-                </h6>
-                <p className="card-text d-none d-lg-block">
-                  International conference on business management and social
-                  innovation
-                </p>
-              </div>
-            </div>
+        <div className="container pb-4 pb-xl-5 my-5" id="papers">
+          <div className="d-md-flex justify-content-md-between align-items-baseline">
+            <h1 className="display-6 fs-3 pulse animated border-top border-3 border-primary w-25 pt-3 heading">
+              Papers
+            </h1>
+            <Link href="/papers">
+              <a
+                data-bss-hover-animate="pulse"
+                className="btn btn-outline-primary rounded-0 h-100 my-3 my-lg-0">
+                <span className="d-flex align-items-center">
+                  <span>View all papers</span>
+                  <MdArrowForward className="ms-3" />
+                </span>
+              </a>
+            </Link>
+          </div>
+          <div className="py-1 py-lg-3 mt-5">
+            <PapersComponent limit={4} />
           </div>
         </div>
         <div className="container mb-5" id="fields">
@@ -223,7 +181,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <section className="py-3">
+        <section className="py-3 mt-4">
           <div className="container px-md-0 py-1 py-md-3">
             <div className="row py-1 py-lg-3">
               <div className="col-md-5">
@@ -231,39 +189,41 @@ function Home() {
                   <h1 className="display-6 fs-3 pulse animated border-top border-3 border-primary w-50 pt-3 heading">
                     Upcoming conferences
                   </h1>
-                  <a
-                    data-bss-hover-animate="pulse"
-                    className="btn btn-outline-primary rounded-0 my-1 mt-lg-3"
-                    href="#">
-                    <span className="d-flex align-items-center">
-                      <span>View all conferences</span>
-                      <MdArrowForward className="ms-3" />
-                    </span>
-                  </a>
+                  <Link href="/conferences">
+                    <a
+                      data-bss-hover-animate="pulse"
+                      className="btn btn-outline-primary rounded-0 my-1 mt-lg-3">
+                      <span className="d-flex align-items-center">
+                        <span>View all conferences</span>
+                        <MdArrowForward className="ms-3" />
+                      </span>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-7 d-flex justify-content-center">
-               <CarouselConferencesComponent />
+                <CarouselConferencesComponent />
               </div>
             </div>
           </div>
-          <div className="container px-md-0 py-1 py-md-3">
+          <div className="container px-md-0 py-1 py-md-3 my-5">
             <div className="d-md-flex justify-content-md-between align-items-baseline">
               <h1 className="display-6 fs-3 pulse animated border-top border-3 border-primary w-25 pt-3 heading">
                 Latest Articles
               </h1>
-              <a
-                data-bss-hover-animate="pulse"
-                className="btn btn-outline-primary rounded-0 h-100 my-3 my-lg-0"
-                href="#">
-                <span className="d-flex align-items-center">
-                  <span>View all articles</span>
-                  <MdArrowForward className="ms-3" />
-                </span>
-              </a>
+              <Link href="/articles">
+                <a
+                  data-bss-hover-animate="pulse"
+                  className="btn btn-outline-primary rounded-0 h-100 my-3 my-lg-0">
+                  <span className="d-flex align-items-center">
+                    <span>View all articles</span>
+                    <MdArrowForward className="ms-3" />
+                  </span>
+                </a>
+              </Link>
             </div>
-            <div className="py-1 py-lg-3">
-              <ArticlesComponent />
+            <div className="py-1 py-lg-3 mt-5">
+              <ArticlesComponent limit={4} />
             </div>
           </div>
         </section>

@@ -3,7 +3,7 @@ import Spinner from '../ui/Spinner';
 import Link from "next/link";
 import { useCrud } from '../../hooks/useCrud';
 
-function ConferencesComponent() {
+function ConferencesComponent({limit}) {
    const { allData, error, loading } = useCrud(
      "all-conferences",
      "/api/conferences"
@@ -19,7 +19,7 @@ function ConferencesComponent() {
         )}
 
         {allData?.length > 0 &&
-          allData?.slice(0, 20).map((conference) => (
+          allData?.slice(0, limit).map((conference) => (
             <div className="col-sm-6 col-md-4 mb-0" key={conference?._id}>
               <Link href={`/conference/${conference?._id}`}>
                 <a className="card rounded-0 text-decoration-none">

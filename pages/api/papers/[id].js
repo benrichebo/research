@@ -19,7 +19,7 @@ export default authenticate(async (req, res) => {
       if (paper?._id) {
         res.status(200).json(paper);
       } else {
-        res.status(400).json({ msg: "There is no papers" });
+        res.status(400).json({ msg: "There is no paper" });
       }
     }
 
