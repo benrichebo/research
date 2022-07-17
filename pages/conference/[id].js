@@ -1,8 +1,13 @@
 import React from "react";
+import { ObjectID } from "bson";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
+import { connectToDatabase } from "../../lib/mongodb";
+import { renderMarkup } from "react-render-markup";
 
-function Conference() {
+function Conference({ conference }) {
+  console.log(conference);
+
   return (
     <>
       <Layout title="Conferences">
@@ -11,62 +16,44 @@ function Conference() {
           <div class="row">
             <div class="col-md-8 d-flex align-items-center pt-5 pb-3 pb-md-5">
               <div class="col-md-12 col-lg-10 col-xl-9 mx-auto">
-                <p className="small">ARTICLE</p>
+                <h6>CONFERENCE</h6>
                 <h1
-                  class="display-5 fs-3 pulse animated my-3"
+                  class="display-5 pulse animated my-3"
                   data-bss-disabled-mobile="true">
-                  Energy efficiency and its benefits
+                  {conference?.title}
                 </h1>
-                <h6>AUTHOR: JASON MASON</h6>
+                <h5>Country: {conference?.country}</h5>
+                <h5>Venue: {conference?.venue}</h5>
+                <div className="d-flex justify-content-start">
+                  <h5 class="text-muted">
+                    Start date: {conference?.startDate}
+                  </h5>
+                  <h5 class="text-muted ms-3">
+                    End date: {conference?.endDate}
+                  </h5>
+                </div>
               </div>
             </div>
             <div class="col-md-4 d-flex align-items-center pt-5 pb-3 pb-md-5">
-              <img class="img-fluid" src="/images/wind.jpg" />
+              <img class="img-fluid" src={conference?.image?.url} />
             </div>
           </div>
         </div>
         <div class="container py-4 py-xl-5">
           <div class="d-flex justify-content-center">
             <div class="col-md-10">
-              <p class="lead fs-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque dapibus felis et libero scelerisque, sed aliquet
-                nulla tincidunt. Quisque lorem nisl, semper vitae mattis nec,
-                vestibulum nec risus. Sed ut volutpat tortor, ut sodales diam.
-                Integer at tristique turpis. Integer orci leo, fringilla ac
-                aliquet vitae, condimentum non lorem. Duis velit ex, aliquam vel
-                pellentesque et, dictum vitae mauris. Vestibulum commodo luctus
-                tortor eu ultrices. Fusce commodo enim non eros consectetur
-                maximus. Donec venenatis dolor ut vestibulum fermentum. Aliquam
-                malesuada sit amet nulla id imperdiet. Suspendisse maximus purus
-                et ligula maximus, a luctus ante fringilla.
-              </p>
-              <div class="my-4">
-                <img src="/images/energy-effeciency.jpg" />
+              <h3>Overview</h3>
+              <div className="fs-4 lead mb-4">
+                {renderMarkup(conference?.overview)}
               </div>
-              <p class="lead fs-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque dapibus felis et libero scelerisque, sed aliquet
-                nulla tincidunt. Quisque lorem nisl, semper vitae mattis nec,
-                vestibulum nec risus. Sed ut volutpat tortor, ut sodales diam.
-                Integer at tristique turpis. Integer orci leo, fringilla ac
-                aliquet vitae, condimentum non lorem. Duis velit ex, aliquam vel
-                pellentesque et, dictum vitae mauris. Vestibulum commodo luctus
-                tortor eu ultrices. Fusce commodo enim non eros consectetur
-                maximus. Donec venenatis dolor ut vestibulum fermentum. Aliquam
-                malesuada sit amet nulla id imperdiet. Suspendisse maximus purus
-                et ligula maximus, a luctus ante fringilla.In vitae velit risus.
-                Cum sociis natoque penatibus et magnis dis parturient montes,
-                nascetur ridiculus mus. Phasellus tincidunt venenatis mi quis
-                congue. Cras eu leo nisi. Ut ornare nisi eget sapien dapibus, eu
-                ornare dolor egestas. Donec venenatis neque lacus, nec mollis
-                odio fermentum a. Maecenas at elit sed diam elementum varius
-                mollis vel arcu. Praesent ornare nisl mi, et posuere purus
-                viverra sed. Sed a lacus nec lorem tincidunt condimentum. Nulla
-                eu tellus pulvinar, tristique metus a, sodales nibh. Ut magna
-                nisi, laoreet id lacus non, cursus bibendum tortor. Sed pretium
-                elit erat. In non pretium nulla.
-              </p>
+              <h3>Objective</h3>
+              <div className="fs-4 lead mb-4">
+                {renderMarkup(conference?.objective)}
+              </div>
+              <h3>Why attend</h3>
+              <div className="fs-4 lead mb-4">
+                {renderMarkup(conference?.whyAttend)}
+              </div>
             </div>
           </div>
         </div>
@@ -74,5 +61,29 @@ function Conference() {
     </>
   );
 }
+
+export const getServerSideProps = async (context) => {
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
+  try {
+    const { db } = await connectToDatabase();
+    const conference = await db
+      .collection("conferences")
+      .findOne({ _id: ObjectID(context.params.id) });
+
+    console.log("conference", conference);
+    const data = JSON.stringify(conference);
+    return {
+      props: { conference: JSON.parse(data) },
+    };
+  } catch (error) {
+    console.log(error.message);
+    return {
+      notFound: true,
+    };
+  }
+};
 
 export default Conference;

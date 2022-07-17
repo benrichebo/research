@@ -1,8 +1,12 @@
 import React from "react";
+import { ObjectID } from "bson";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
+import { connectToDatabase } from "../../lib/mongodb";
+import { renderMarkup } from "react-render-markup";
 
-function Article() {
+function Article({ article }) {
+  console.log(article);
   return (
     <>
       <Layout title="Articles">
@@ -11,40 +15,24 @@ function Article() {
           <div class="row">
             <div class="col-md-8 d-flex align-items-center pt-5 pb-3 pb-md-5">
               <div class="col-md-12 col-lg-10 col-xl-9 mx-auto">
-                <h6>CONFERENCE</h6>
+                <p className="small"> {article?.category}</p>
                 <h1
-                  class="display-5 pulse animated my-3"
+                  class="display-5 fs-3 pulse animated my-3"
                   data-bss-disabled-mobile="true">
-                  Investment in real estate
+                  {article?.title}
                 </h1>
-                <h5>COUNTRY: JASON MASON</h5>
-                <h5 class="text-muted">DATE: 20TH JULY 2022</h5>
+                <h6>AUTHOR: {article?.author}</h6>
               </div>
             </div>
             <div class="col-md-4 d-flex align-items-center pt-5 pb-3 pb-md-5">
-              <img
-                class="img-fluid"
-                src="/images/sincerely-media-dGxOgeXAXm8-unsplash.jpg"
-              />
+              <img class="img-fluid" src={article?.image?.url} />
             </div>
           </div>
         </div>
         <div class="container py-4 py-xl-5">
           <div class="d-flex justify-content-center">
             <div class="col-md-10">
-              <p class="lead fs-3">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque dapibus felis et libero scelerisque, sed aliquet
-                nulla tincidunt. Quisque lorem nisl, semper vitae mattis nec,
-                vestibulum nec risus. Sed ut volutpat tortor, ut sodales diam.
-                Integer at tristique turpis. Integer orci leo, fringilla ac
-                aliquet vitae, condimentum non lorem. Duis velit ex, aliquam vel
-                pellentesque et, dictum vitae mauris. Vestibulum commodo luctus
-                tortor eu ultrices. Fusce commodo enim non eros consectetur
-                maximus. Donec venenatis dolor ut vestibulum fermentum. Aliquam
-                malesuada sit amet nulla id imperdiet. Suspendisse maximus purus
-                et ligula maximus, a luctus ante fringilla
-              </p>
+              <p class="lead fs-5">{renderMarkup(article?.textContent)}</p>
             </div>
           </div>
         </div>
@@ -52,5 +40,29 @@ function Article() {
     </>
   );
 }
+
+export const getServerSideProps = async (context) => {
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
+  try {
+    const { db } = await connectToDatabase();
+    const article = await db
+      .collection("articles")
+      .findOne({ _id: ObjectID(context.params.id) });
+
+    console.log("article", article);
+    const data = JSON.stringify(article);
+    return {
+      props: { article: JSON.parse(data) },
+    };
+  } catch (error) {
+    console.log(error.message);
+    return {
+      notFound: true,
+    };
+  }
+};
 
 export default Article;

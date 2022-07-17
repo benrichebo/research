@@ -5,7 +5,10 @@ export default async (req, res) => {
     try {
       const { db } = await connectToDatabase();
 
-      const conferences = await db.collection("conferences").find().toArray();
+      const conferences = await db
+        .collection("conferences")
+        .find({}, { title: 1, startDate: 1, country: 1 })
+        .toArray();
 
       console.log("conferences", conferences);
 
