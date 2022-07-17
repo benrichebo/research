@@ -3,6 +3,8 @@ import { MdArrowForward, MdArrowDownward } from "react-icons/md";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import ArticlesComponent from "../components/pages/Articles";
+import CarouselConferencesComponent from "../components/pages/CarouselConferences";
 
 function Home() {
   return (
@@ -241,116 +243,7 @@ function Home() {
                 </div>
               </div>
               <div className="col-md-7 d-flex justify-content-center">
-                <div
-                  className="carousel slide col-lg-9"
-                  data-bs-ride="carousel"
-                  id="carousel-1">
-                  <div className="carousel-inner">
-                    <div className="carousel-item active">
-                      <div className="bg-light">
-                        <div className="card bg-light border-0 rounded-0">
-                          <img
-                            className="img-fluid card-img-top d-block w-100"
-                            src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
-                          />
-                          <div className="p-3">
-                            <div className="d-lg-flex justify-content-lg-between">
-                              <h6 className="mb-0">
-                                Built environment conference
-                              </h6>
-                              <h6 className="text-muted mb-0">
-                                24th July, 2022
-                              </h6>
-                            </div>
-                            <p className="d-none d-lg-block small mb-0">
-                              Albania
-                            </p>
-                            <p className="d-none d-lg-block mb-2">
-                              International conference on business management
-                              and social innovation
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="carousel-item">
-                      <div className="bg-light">
-                        <div className="card bg-light  border-0 rounded-0">
-                          <img
-                            className="img-fluid card-img-top w-100 d-block w-100"
-                            src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
-                          />
-                          <div className="p-4">
-                            <div className="d-lg-flex justify-content-lg-between">
-                              <h5 className="mb-0">
-                                Built environment conference
-                              </h5>
-                              <span className="fs-6 text-muted my-3 my-lg-0">
-                                24th July 2022
-                              </span>
-                            </div>
-                            <p className="d-none d-lg-block my-2">Albania</p>
-                            <p className="fs-6 d-none d-lg-block mb-4">
-                              International conference on business management
-                              and social innovation
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="carousel-item">
-                      <div className="bg-light">
-                        <div className="card bg-light border-0 rounded-0">
-                          <img
-                            className="img-fluid card-img-top w-100 d-block w-100"
-                            src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
-                          />
-                          <div className="p-4">
-                            <div className="d-lg-flex justify-content-lg-between">
-                              <h5 className="mb-0">
-                                Built environment conference
-                              </h5>
-                              <span className="fs-6 text-muted my-2 my-lg-0">
-                                24th July 2022
-                              </span>
-                            </div>
-                            <p className="d-none d-lg-block">Albania</p>
-                            <p className="fs-6 d-none d-lg-block mb-4">
-                              International conference on business management
-                              and social innovation
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <a
-                      className="carousel-control-prev"
-                      href="#carousel-1"
-                      role="button"
-                      data-bs-slide="prev">
-                      <span className="carousel-control-prev-icon"></span>
-                      <span className="visually-hidden">Previous</span>
-                    </a>
-                    <a
-                      className="carousel-control-next"
-                      href="#carousel-1"
-                      role="button"
-                      data-bs-slide="next">
-                      <span className="carousel-control-next-icon"></span>
-                      <span className="visually-hidden">Next</span>
-                    </a>
-                  </div>
-                  <ol className="carousel-indicators">
-                    <li
-                      data-bs-target="#carousel-1"
-                      data-bs-slide-to="0"
-                      className="active"></li>
-                    <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
-                  </ol>
-                </div>
+               <CarouselConferencesComponent />
               </div>
             </div>
           </div>
@@ -369,26 +262,8 @@ function Home() {
                 </span>
               </a>
             </div>
-            <div className="row py-1 py-lg-3">
-              <div className="col-6 col-md-4 mb-3">
-                <div className="">
-                  <img
-                    className="img-fluid card-img-top w-100 d-block w-100"
-                    src="/images/s-o-c-i-a-l-c-u-t-r0saAQNjEjQ-unsplash.jpg"
-                    style={{ objectFit: "scale-down" }}
-                  />
-
-                  <div className="my-3">
-                    <span className="fs-6 my-3 small">ARCHITECTURE</span>
-                    <div className="d-lg-flex justify-content-lg-between">
-                      <h5 className="my-2">Built environment conference</h5>
-                    </div>
-                    <span className="fs-6 text-muted my-3 my-lg-0 small">
-                      24th July 2022
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <div className="py-1 py-lg-3">
+              <ArticlesComponent />
             </div>
           </div>
         </section>
