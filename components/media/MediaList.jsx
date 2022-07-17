@@ -32,7 +32,7 @@ function MediaList({ setSelectedImage }) {
       )}
       {medias?.length > 0 &&
         medias?.map((media) => (
-          <div className="col-4 col-md-4 col-lg-3 mb-3" key={media?.url}>
+          <div className="col-6 col-lg-4 col-xl-3 mb-3" key={media?.url}>
             <input
               className="form-check-input"
               type="radio"
@@ -47,25 +47,38 @@ function MediaList({ setSelectedImage }) {
               htmlFor={media?.name}
               onClick={() => setSelectedImage(media)}>
               {media?.type == "document" ? (
-                <MdInsertDriveFile />
+                <>
+                  <MdInsertDriveFile size={150} />
+                  <div className="d-none d-md-block pt-2 text-center">
+                    <h5 className="mb-0 text-truncate small mb-0">
+                      {media?.name?.length > 15
+                        ? media?.name.slice(0, 20)
+                        : media?.name}
+                    </h5>
+                  </div>
+                </>
               ) : (
-                <img
-                  className=""
-                  src={media?.url}
-                  style={{ objectFit: "cover" }}
-                  alt={media?.name}
-                  width="200"
-                  height="200"
-                />
+                <>
+                  <img
+                    className=""
+                    src={media?.url}
+                    style={{ objectFit: "cover" }}
+                    alt={media?.name}
+                    width="150"
+                    height="150"
+                  />
+                  <div className="pt-2 text-center">
+                    <h5 className="mb-0 text-truncate small mb-0">
+                      {media?.name?.length > 15
+                        ? media?.name.slice(0, 20)
+                        : media?.name}
+                    </h5>
+                    <h6 className="mb-0 small">
+                      {media?.width} X {media?.width}
+                    </h6>
+                  </div>
+                </>
               )}
-              <div className="d-none d-md-block pt-2">
-                <h5 className="mb-0 text-truncate small mb-0">
-                  {media?.name.slice(30)}
-                </h5>
-                <h6 className="mb-0 small">
-                  {media?.width} X {media?.width}
-                </h6>
-              </div>
             </label>
           </div>
         ))}

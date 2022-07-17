@@ -12,6 +12,8 @@ export const useMedia = (type) => {
   const [mediaData, setMediaData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [uploadLoading, setUploadLoading] = useState(false);
+  const [imageUploadLoading, setImageUploadLoading] = useState(false);
+  const [imageUploadError, setImageUploadError] = useState(false);
   const [error, setError] = useState(false);
   const [uploadError, setUploadError] = useState(false);
   const [message, setMessage] = useState(null);
@@ -57,20 +59,20 @@ export const useMedia = (type) => {
     },
 
     async addMedia(credentials) {
-      setUploadError("");
-      setUploadLoading(true);
+      setImageUploadError("");
+      setImageUploadLoading(true);
       try {
         const data = await POST(credentials, "/api/media/images/create");
-        setUploadLoading(false);
+        setImageUploadLoading(false);
 
         if (!data.url) {
-          setUploadError(data.msg);
+          setImageUploadError(data.msg);
         } else {
           this.getMedias();
         }
       } catch (error) {
-        setUploadLoading(false);
-        setUploadError("there was an error");
+        setImageUploadLoading(false);
+        setImageUploadError("there was an error");
       }
     },
 
@@ -154,6 +156,8 @@ export const useMedia = (type) => {
     error,
     uploadError,
     uploadLoading,
+    imageUploadLoading,
+    imageUploadError,
     message,
     clear,
   };

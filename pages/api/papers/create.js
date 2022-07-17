@@ -32,7 +32,7 @@ export default authenticate(async (req, res) => {
     const result = await db.collection("papers").insertOne(paper);
 
     if (result.acknowledged) {
-      res.status(201).json({ msg: "papers added successfully" });
+      res.status(201).json({ msg: "Paper added successfully" });
     } else {
       res.status(201).json({ msg: "adding papers failed" });
     }

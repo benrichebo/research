@@ -7,7 +7,8 @@ import { MdInsertDriveFile } from "react-icons/md";
 import Uploader from "../../components/media/Uploader";
 
 function Media() {
-  const { loading, medias, media, uploadError, uploadLoading, error } = useMedia("medias");
+  const { loading, medias, media, uploadError, uploadLoading, imageUploadLoading, imageUploadError, error } =
+    useMedia("medias");
   const [show, setShow] = useState();
   const [routeId, setRouteId] = useState();
 
@@ -38,8 +39,8 @@ function Media() {
           </button>
           <Uploader
             media={media}
-            uploadError={uploadError}
-            uploadLoading={uploadLoading}
+            imageUploadError={imageUploadError}
+            imageUploadLoading={imageUploadLoading}
           />
         </div>
       </div>
@@ -61,7 +62,7 @@ function Media() {
         </div>
       )}
       {uploadError && <p className="text-danger">{uploadError}</p>}
-      
+
       {medias?.length > 0 && (
         <div className="row">
           <div className="col">
@@ -98,7 +99,7 @@ function Media() {
                               className="form-check-label"
                               htmlFor={data?.name}>
                               {data?.type == "document" ? (
-                                <MdInsertDriveFile size={30} className="ms-3" />
+                                <MdInsertDriveFile size={30} className="ms-4" />
                               ) : (
                                 <img
                                   className="ms-4"

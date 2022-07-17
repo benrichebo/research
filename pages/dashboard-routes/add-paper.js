@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import TextEditor from "../../components/Editor";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
@@ -10,12 +9,16 @@ function AddPaper({ paper }) {
     "/api/papers"
   );
 
+  const [title, setTitle] = useState(paper?.title || "");
   const [abstract, setAbstract] = useState(paper?.abstract || "");
   const [publisher, setPublisher] = useState(paper?.publisher || "");
   const [fileToUpload, setFileToUpload] = useState(paper?.file || "");
-  const [description, setDescription] = useState(paper?.description || "");
 
-  const [fileTypeError, setFileTypeError] = useState(null);
+  const [fileTypeError, setFileTypeError] = useState("");
+
+    useEffect(() => {
+      console.log(title, abstract, publisher, fileToUpload);
+    }, [title, abstract, publisher, fileToUpload]);
 
   useEffect(() => {
     console.log(fileToUpload);
@@ -32,7 +35,7 @@ function AddPaper({ paper }) {
       abstract,
       publisher,
       file: fileToUpload,
-      description,
+      title,
     };
 
     paper?.abstract
@@ -51,12 +54,12 @@ function AddPaper({ paper }) {
         <form className="row" onSubmit={handleSubmit}>
           <div className="col-12 mb-4">
             <label className="form-label" htmlFor="abstract">
-              Abstract
+              Title
             </label>
             <input
               type="text"
-              value={abstract}
-              onChange={(e) => setAbstract(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               id="abstract"
               className="form-control form-control-lg rounded-0"
             />
@@ -92,10 +95,16 @@ function AddPaper({ paper }) {
                 </div>
               </div>
               <div className="col-12 mb-4">
-                <label className="form-label" htmlFor="description">
-                  Description
+                <label className="form-label" htmlFor="abstract">
+                  Abstract
                 </label>
-                <TextEditor content={description} setContent={setDescription} />
+                <textarea
+                  className="form-control rounded-0"
+                  name="abstract"
+                  id="abstract"
+                  rows="6"
+                  value={abstract}
+                  onChange={(e) => setAbstract(e.target.value)}></textarea>
               </div>
               <div className="my-3 d-grid">
                 <button
@@ -103,9 +112,9 @@ function AddPaper({ paper }) {
                   type="submit"
                   disabled={
                     postLoading ||
+                    !title ||
                     !abstract ||
                     !publisher ||
-                    !description ||
                     !fileToUpload ||
                     fileTypeError
                   }>

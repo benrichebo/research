@@ -3,6 +3,14 @@ import { authenticate } from "../../authentication";
 import { verifyUser } from "../../verification";
 import { connectToDatabase } from "../../../../lib/mongodb";
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb",
+    },
+  },
+};
+
 export default authenticate(async (req, res) => {
   //verify user
   const { userId } = await verifyUser(req);
@@ -12,7 +20,7 @@ export default authenticate(async (req, res) => {
   //1. get method
   const method = req.method;
 
-  const { name, width, height, uri, type } = JSON.parse(req.body);
+  const { name, width, height, uri, type, size } = JSON.parse(req.body);
 
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
@@ -36,25 +44,33 @@ export default authenticate(async (req, res) => {
     const { public_id, url } = response;
 
     if (public_id) {
-      const data = {
-        name,
-        width,
-        height,
-        public_id,
-        url,
-        type
-      };
+      let data = {};
+
+      type == "image"
+        ? (data = {
+            name,
+            width,
+            height,
+            public_id,
+            url,
+            type,
+          })
+        : (data = {
+            name,
+            public_id,
+            url,
+            type,
+            size,
+          });
 
       //push to media
       //5. insert data into company collection
-      const response = await db
-        .collection("media")
-        .insertOne(data);
+      const response = await db.collection("media").insertOne(data);
 
-        console.log("media-response", response);
+      console.log("media-response", response);
 
       if (response.acknowledged) {
-        res.status(200).json({ name, width, height, public_id, url, type });
+        res.status(200).json(data);
       } else {
         res.status(400).json({ msg: "Uploading to your media folder failed" });
       }
@@ -63,5 +79,5 @@ export default authenticate(async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ msg: error.message });
-  } 
+  }
 });

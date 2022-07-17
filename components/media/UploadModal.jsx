@@ -16,9 +16,9 @@ function UploadModal({ selectedImage, setSelectedImage }) {
   return (
     <>
       <div className="modal" tabIndex="-1" id="mediaModal">
-        <div className="modal-dialog modal-xl modal-dialog-scrollable">
+        <div className="modal-dialog modal-fullscreen modal-dialog-scrollable">
           <div className="modal-content">
-            <div className="modal-header border-0 px-md-3 px-md-5">
+            <div className="modal-header border-0 px-3 px-lg-5">
               <h5 className="modal-title">Choose an image</h5>
               <button
                 type="button"
@@ -26,7 +26,7 @@ function UploadModal({ selectedImage, setSelectedImage }) {
                 data-bs-dismiss="modal"
                 aria-label="Close"></button>
             </div>
-            <div className="modal-body px-md-3 px-md-5">
+            <div className="modal-body px-3 px-lg-5">
               <div className="input-group mb-3">
                 <input
                   className="form-control"

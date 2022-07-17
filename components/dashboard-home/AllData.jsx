@@ -21,7 +21,7 @@ const Conferences = () => {
   );
   return (
     <>
-      <h1 className="display-5 mt-3">{oneData?.length || 0}</h1>
+      <h1 className="display-5 mt-3">{oneData?.count || 0}</h1>
     </>
   );
 };

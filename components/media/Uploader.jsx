@@ -3,7 +3,7 @@ import Resizer from "react-image-file-resizer";
 import { MdInfo } from "react-icons/md";
 import Spinner from "../ui/Spinner";
 
-function Uploader({ media, uploadLoading, uploadError }) {
+function Uploader({ media, imageUploadLoading, imageUploadError }) {
   const [file, setFile] = useState("");
   const fileInputRef = useRef();
   const [size, setSize] = useState("");
@@ -27,6 +27,7 @@ function Uploader({ media, uploadLoading, uploadError }) {
     const fileData = {
       name: file?.name,
       uri,
+      size: file?.size,
       type: "document",
     };
 
@@ -50,8 +51,12 @@ function Uploader({ media, uploadLoading, uploadError }) {
       reader.onloadend = async () => {
         //setMsg("uploadLoading done");
 
-        if (file?.size > 1000000) {
-          setMsg(`The file size ${file?.size / 1000000} MB should not be more than 1MB`);
+        if (file?.size > 10000000) {
+          setMsg(
+            `The file size ${
+              file?.size / 1000000
+            } MB should not be more than 10MB`
+          );
           return;
         }
 
@@ -84,27 +89,31 @@ function Uploader({ media, uploadLoading, uploadError }) {
   }, [file]);
 
   return (
-    <>
-      <div>
-        <label className="btn btn-light px-3">
-          <input
-            type="file"
-            placeholder=""
-            className="custom-file-input"
-            aria-describedby="fileHelpId"
-            ref={fileInputRef}
-            onChange={(e) => setFile(e.target?.files[0])}
-            hidden
-          />
-          {file && uploadLoading ? (
-            <Spinner className="ms-2" />
-          ) : (
-            <span className="">Import image</span>
-          )}
-        </label>
-      </div>
-      
-    </>
+    <div>
+      {(file && imageUploadError) ||
+        (msg && (
+          <span className="me-2">
+            <MdInfo className={`text-${msg ? "info" : "danger"}`} />
+            {msg}
+          </span>
+        ))}
+      <label className="btn btn-light px-3">
+        <input
+          type="file"
+          placeholder=""
+          className="custom-file-input"
+          aria-describedby="fileHelpId"
+          ref={fileInputRef}
+          onChange={(e) => setFile(e.target?.files[0])}
+          hidden
+        />
+        {file && imageUploadLoading ? (
+          <Spinner className="ms-2" />
+        ) : (
+          <span className="">Import image</span>
+        )}
+      </label>
+    </div>
   );
 }
 
