@@ -6,7 +6,7 @@ function TertiaryHeader() {
     <>
       <nav className="navbar navbar-light navbar-expand-lg fixed-top bg-white border-bottom">
         <div className="container">
-          <a className="navbar-brand fs-5" href="#">
+          <a className="navbar-brand " href="#">
             Mason Research Institute
           </a>
           <button

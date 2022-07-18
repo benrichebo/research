@@ -19,7 +19,6 @@ function AddArticle({ article }) {
   const [status, setStatus] = useState(article?.status || "");
 
   const [image, setImage] = useState(article?.image);
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,7 +111,10 @@ function AddArticle({ article }) {
               <label className="form-label" htmlFor="category">
                 Category
               </label>
-              <CategorySelect setCategory={setCategory} categoryExist={category} />
+              <CategorySelect
+                setCategory={setCategory}
+                categoryExist={category}
+              />
             </div>
             <div className="col-12 mb-4">
               <p className="form-label" htmlFor="draft">
@@ -167,7 +169,7 @@ function AddArticle({ article }) {
                   />
                 )}
                 {!image?.name && (
-                  <MdOutlineInsertPhoto className="fs-1 text-muted" />
+                  <MdOutlineInsertPhoto className="text-muted" />
                 )}
               </div>
             </a>

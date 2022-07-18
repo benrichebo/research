@@ -26,15 +26,13 @@ function Login() {
         <div className="container px-md-0 py-md-3">
           <div className="row">
             <div className="col-md-4">
-              <h1 className="display-6 fs-3 pulse animated border-top border-3 border-primary pt-3 heading">
+              <h3 className="pulse animated border-top border-3 border-primary pt-3 heading">
                 Welcome back
-              </h1>
+              </h3>
               <h5 className="fw-normal">Login</h5>
             </div>
             <div className="col-md-6 col-lg-5 pulse animated d-flex align-items-center pt-3 pt-lg-5 px-lg-5 mx-auto">
-              <form
-                className="row mt-md-4 mt-lg-5"
-                onSubmit={handleSubmit}>
+              <form className="row mt-md-4 mt-lg-5" onSubmit={handleSubmit}>
                 <div className="col-md-12 mb-3">
                   <label className="form-label" htmlFor="email">
                     Email

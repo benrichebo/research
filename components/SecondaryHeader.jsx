@@ -11,29 +11,29 @@ import {
 } from "react-icons/md";
 
 const routes = [
-  { name: "Home", icon: <MdDashboard className="fs-5" /> },
-  { name: "Papers", icon: <MdPictureAsPdf className="fs-5" /> },
-  { name: "Articles", icon: <MdLibraryBooks className="fs-5" /> },
-  { name: "Conferences", icon: <MdReceiptLong className="fs-5" /> },
-  { name: "Payments", icon: <MdPayments className="fs-5" /> },
-  { name: "Settings", icon: <MdPerson className="fs-5" /> },
-  { name: "Media", icon: <MdOutlinePermMedia className="fs-5" /> },
+  { name: "Home", icon: <MdDashboard className="" /> },
+  { name: "Papers", icon: <MdPictureAsPdf className="" /> },
+  { name: "Articles", icon: <MdLibraryBooks className="" /> },
+  { name: "Conferences", icon: <MdReceiptLong className="" /> },
+  { name: "Payments", icon: <MdPayments className="" /> },
+  { name: "Settings", icon: <MdPerson className="" /> },
+  { name: "Media", icon: <MdOutlinePermMedia className="" /> },
 ];
 
 const memberRoutes = [
-  { name: "Home", icon: <MdDashboard className="fs-5" /> },
-  { name: "Papers", icon: <MdPictureAsPdf className="fs-5" /> },
-  { name: "Payments", icon: <MdPayments className="fs-5" /> },
-  { name: "Settings", icon: <MdPerson className="fs-5" /> },
+  { name: "Home", icon: <MdDashboard className="" /> },
+  { name: "Papers", icon: <MdPictureAsPdf className="" /> },
+  { name: "Payments", icon: <MdPayments className="" /> },
+  { name: "Settings", icon: <MdPerson className="" /> },
 ];
 
-function SecondaryHeader({user}) {
+function SecondaryHeader({ user }) {
   return (
     <>
       <nav className="navbar navbar-light bg-white py-3 border-bottom">
         <div className="container-fluid">
           <Link href="/">
-            <a className="navbar-brand fs-6" href="#">
+            <a className="navbar-brand " href="#">
               <span className="d-none d-md-block">
                 Association of researches and planners
               </span>
@@ -57,7 +57,7 @@ function SecondaryHeader({user}) {
                         href={`/dashboard/${route?.name?.toLocaleLowerCase()}/${
                           user?.id
                         }`}>
-                        <a className="nav-link fs-6">{route?.name}</a>
+                        <a className="nav-link ">{route?.name}</a>
                       </Link>
                     </li>
                   ))}
@@ -71,7 +71,7 @@ function SecondaryHeader({user}) {
                         href={`/dashboard/${route?.name?.toLocaleLowerCase()}/${
                           user?.id
                         }`}>
-                        <a className="nav-link fs-6">{route?.name}</a>
+                        <a className="nav-link ">{route?.name}</a>
                       </Link>
                     </li>
                   ))}

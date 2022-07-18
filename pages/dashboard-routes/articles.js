@@ -79,9 +79,7 @@ function Articles() {
                       <span className="fw-normal">Bulk Actions</span>
                       <select className="form-select-sm form-select w-auto ms-3">
                         <option value="">--select--</option>
-                        <option value="delete">
-                          Delete
-                        </option>
+                        <option value="delete">Delete</option>
                       </select>
                     </th>
                     <th>Title</th>
@@ -175,7 +173,7 @@ function Articles() {
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>
             <div className="text-center">
-              <MdArticle className="fs-1 text-muted" />
+              <MdArticle className="text-muted" />
               <p>There is no article</p>
             </div>
           </div>

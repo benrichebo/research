@@ -38,9 +38,8 @@ const heads = [
   },
 ];
 
-
 function ContactUs() {
-  const [category, setCategory] = useState()
+  const [category, setCategory] = useState();
   return (
     <>
       <Layout title="Contact Us">
@@ -50,7 +49,7 @@ function ContactUs() {
             <div className="col-md-10 col-lg-8 col-xl-7">
               <p className="mb-2 small">CONTACT US</p>
               <h3
-                className="display-s fs-3 pulse animated fw-normal"
+                className="display-s  pulse animated fw-normal"
                 data-bss-disabled-mobile="true">
                 We are here to help, Lets talk
               </h3>
@@ -130,9 +129,9 @@ function ContactUs() {
           <div className="container px-md-0 py-3 py-md-5">
             <div className="row">
               <div className="col-md-4">
-                <h1 className="display-5 fs-3 pulse animated border-top border-3 border-primary py-3">
+                <h3 className="pulse animated border-top border-3 border-primary py-3">
                   Heads
-                </h1>
+                </h3>
                 <CategorySelect
                   categoryExist={category}
                   setCategory={setCategory}

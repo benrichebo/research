@@ -6,7 +6,7 @@ function Header() {
     <nav className="navbar navbar-light bg-white py-3 border-bottom">
       <div className="container">
         <Link href="/">
-          <a className="navbar-brand fs-5" href="#">
+          <a className="navbar-brand " href="#">
             <span className="d-none d-md-block">
               Association of researches and planners
             </span>
@@ -24,39 +24,39 @@ function Header() {
           <ul className="navbar-nav d-flex mx-auto ms-auto list-group-horizontal-md">
             <li className="nav-item">
               <Link href="/contactus">
-                <a className="nav-link fs-6">Contact us</a>
+                <a className="nav-link p">Contact us</a>
               </Link>
             </li>
             <li className="nav-item ms-md-4">
               <Link href="/register">
-                <a className="nav-link fs-6">Register as a member</a>
+                <a className="nav-link p">Register as a member</a>
               </Link>
             </li>
             <li className="nav-item ms-md-4">
               <Link href="/login">
-                <a className="nav-link fs-6">Login</a>
+                <a className="nav-link p">Login</a>
               </Link>
             </li>
             <li className="nav-item ms-md-4">
               <Link href="/membership">
-                <a className="nav-link fs-6">Membership</a>
+                <a className="nav-link p">Membership</a>
               </Link>
             </li>
             <li className="nav-item ms-md-4">
               <Link href="/papers">
-                <a className="nav-link fs-6">Papers</a>
+                <a className="nav-link p">Papers</a>
               </Link>
             </li>
             <li className="nav-item ms-md-4">
               <Link href="/conferences">
-                <a className="nav-link fs-6" href="#">
+                <a className="nav-link p" href="#">
                   Conferences
                 </a>
               </Link>
             </li>
             <li className="nav-item ms-md-4">
               <Link href="/articles">
-                <a className="nav-link fs-6" href="#">
+                <a className="nav-link p" href="#">
                   Articles
                 </a>
               </Link>

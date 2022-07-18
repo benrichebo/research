@@ -17,7 +17,7 @@ function Members() {
                 <div className="">
                   <p className="mb-2 small">Members</p>
                   <h3
-                    className="display-6 fs-3 pulse animated mb-3"
+                    className="pulse animated mb-3"
                     data-bss-disabled-mobile="true">
                     Become a Member
                   </h3>
@@ -46,7 +46,7 @@ function Members() {
         <div className="container mb-5 py-5">
           <h4 className="text-primary">Who we are</h4>
           <article className="mb-4">
-            <p class="lead fs-5">
+            <p class="">
               Association For Scientific And Academic Research (ASAR) its South
               Asia largest professional association registered under Indian
               Trust Act (1882) meet for research development and promotion in
@@ -66,7 +66,7 @@ function Members() {
           </article>
           <h4 className="text-primary">What members do</h4>
           <article className="mb-4">
-            <p class="lead fs-5">
+            <p class="">
               ASAR members are playing a active role by being in the organizing
               committee of its conferences and events. The professionals having
               ASAR professional membership have extended full support to the

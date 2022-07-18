@@ -7,8 +7,16 @@ import { MdInsertDriveFile } from "react-icons/md";
 import Uploader from "../../components/media/Uploader";
 
 function Media() {
-  const { loading, medias, media, uploadError, uploadLoading, imageUploadLoading, imageUploadError, error } =
-    useMedia("medias");
+  const {
+    loading,
+    medias,
+    media,
+    uploadError,
+    uploadLoading,
+    imageUploadLoading,
+    imageUploadError,
+    error,
+  } = useMedia("medias");
   const [show, setShow] = useState();
   const [routeId, setRouteId] = useState();
 
@@ -161,7 +169,7 @@ function Media() {
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>
             <div className="text-center">
-              <MdGroup className="fs-1 text-muted" />
+              <MdGroup className="text-muted" />
               <p>There is no media</p>
             </div>
           </div>

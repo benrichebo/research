@@ -17,7 +17,7 @@ function Articles() {
                 <div className="">
                   <p className="mb-2 small">ARTICLES</p>
                   <h3
-                    className="display-6 fs-3 pulse animated"
+                    className=" pulse animated"
                     data-bss-disabled-mobile="true">
                     Weekly Articles
                   </h3>

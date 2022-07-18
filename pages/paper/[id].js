@@ -5,6 +5,7 @@ import Layout from "../../components/Layout";
 import { renderMarkup } from "react-render-markup";
 import { connectToDatabase } from "../../lib/mongodb";
 import { ObjectID } from "bson";
+import Footer from "../../components/Footer";
 
 function Paper({ paper }) {
   return (
@@ -16,11 +17,11 @@ function Paper({ paper }) {
             <div className="col-md-8 d-flex align-items-center pt-5 pb-3 pb-md-5">
               <div className="col-md-12 col-lg-10 col-xl-9 mx-md-auto">
                 <p className="small">PAPER</p>
-                <h1
-                  className="display-5 fs-3 pulse animated mb-3"
+                <h3
+                  className="pulse animated mb-3"
                   data-bss-disabled-mobile="true">
                   {paper?.title}
-                </h1>
+                </h3>
                 <h6>PUBLISHER: {paper?.publisher}</h6>
               </div>
             </div>
@@ -30,9 +31,7 @@ function Paper({ paper }) {
         <div className="container py-4 py-xl-5">
           <div className="d-flex justify-content-center">
             <div className="col-md-10">
-              <div className="fs-4 lead mb-5">
-                {renderMarkup(paper?.abstract)}
-              </div>
+              <div className="mb-5">{renderMarkup(paper?.abstract)}</div>
               <div className="my-5">
                 <a
                   href={paper?.file?.name}
@@ -47,37 +46,7 @@ function Paper({ paper }) {
             </div>
           </div>
         </div>
-        <div className="container-fluid pt-4 pt-xl-5">
-          <div className="card-group row">
-            <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-4">ABOUT</h6>
-                <div className="d-flex justify-content-between align-items-center">
-                  <h5>More about our company</h5>
-                  <i className="material-icons ms-3">arrow_forward</i>
-                </div>
-              </div>
-            </div>
-            <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-4">PAPERS</h6>
-                <div className="d-flex justify-content-between align-items-center">
-                  <h5>Papers we have published</h5>
-                  <i className="material-icons ms-3">arrow_forward</i>
-                </div>
-              </div>
-            </div>
-            <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2 py-xl-4">
-              <div className="card-body p-md-2 p-xl-3 p-xxl-5">
-                <h6 className="text-primary card-title pb-4">CONTACT</h6>
-                <div className="d-flex justify-content-between align-items-center">
-                  <h5>Get in touch with us</h5>
-                  <i className="material-icons ms-3">arrow_forward</i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Footer />
       </Layout>
     </>
   );

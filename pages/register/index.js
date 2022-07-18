@@ -38,9 +38,9 @@ function Register() {
         <div className="container px-md-0 py-3">
           <div className="row">
             <div className="col-md-4">
-              <h1 className="display-5 fs-3 pulse animated border-top border-3 border-primary pt-3">
+              <h3 className="pulse animated border-top border-3 border-primary pt-3">
                 Join us
-              </h1>
+              </h3>
               <h5 className="fw-normal">
                 ONE Registration Fee Includes the following for the Registered
                 members:
@@ -97,7 +97,7 @@ function Register() {
                 </div>
                 {error && <p className="text-danger my-2">{error}</p>}
                 <div className="d-xl-flex justify-content-xl-between py-3 d-grid">
-                  <div className="form-check fs-5 mb-3">
+                  <div className="form-check  mb-3">
                     <input
                       className="form-check-input"
                       type="checkbox"

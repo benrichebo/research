@@ -12,15 +12,9 @@ function AddConference({ conference }) {
   );
 
   const [title, setTitle] = useState(conference?.title || "");
-  const [overview, setOverView] = useState(
-    conference?.overview || ""
-  );
-  const [objective, setObjective] = useState(
-    conference?.objective || ""
-  );
-  const [whyAttend, setWhyAttend] = useState(
-    conference?.whyAttend || ""
-  );
+  const [overview, setOverView] = useState(conference?.overview || "");
+  const [objective, setObjective] = useState(conference?.objective || "");
+  const [whyAttend, setWhyAttend] = useState(conference?.whyAttend || "");
   const [startDate, setStartDate] = useState(conference?.startDate || "");
   const [endDate, setEndDate] = useState(conference?.endDate || "");
   const [country, setCountry] = useState(conference?.country || "");
@@ -41,7 +35,7 @@ function AddConference({ conference }) {
       startDate,
       endDate,
     };
-    console.log(body)
+    console.log(body);
     conference?.title
       ? await data.updateData(body, `/api/conferences/${conference?._id}`)
       : await data.addData(body, "/api/conferences/create");
@@ -183,9 +177,7 @@ function AddConference({ conference }) {
                   style={{ objectFit: "fit" }}
                 />
               )}
-              {!image?.name && (
-                <MdOutlineInsertPhoto className="fs-1 text-muted" />
-              )}
+              {!image?.name && <MdOutlineInsertPhoto className="text-muted" />}
             </div>
           </a>
         </div>

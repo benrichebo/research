@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useUser } from "../../hooks/useUser";
 
 function Papers() {
-   const { userData } = useUser("user");
+  const { userData } = useUser("user");
   const { data, loading, postLoading, allData, error } = useCrud(
     "all-papers",
     "/api/papers"
@@ -76,9 +76,7 @@ function Papers() {
                       <span class="fw-normal">Bulk Actions</span>
                       <select class="form-select-sm form-select w-auto ms-3">
                         <option value="">--select--</option>
-                        <option value="delete">
-                          Delete
-                        </option>
+                        <option value="delete">Delete</option>
                       </select>
                     </th>
                     <th>Publisher</th>
@@ -195,7 +193,7 @@ function Papers() {
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>
             <div className="text-center">
-              <MdPictureAsPdf className="fs-1 text-muted" />
+              <MdPictureAsPdf className="text-muted" />
               <p>There is no paper</p>
             </div>
           </div>

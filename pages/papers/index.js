@@ -16,7 +16,7 @@ function Papers() {
                 <div className="">
                   <p className="mb-2 small">PAPERS</p>
                   <h3
-                    className="display-6 fs-3 pulse animated"
+                    className="pulse animated"
                     data-bss-disabled-mobile="true">
                     Research Papers&nbsp;
                   </h3>
@@ -36,7 +36,7 @@ function Papers() {
         <div className="container mb-5 pb-5">
           <h4 className="text-primary"> White Papers and Reports </h4>
           <article className="mb-4">
-            <p class="lead fs-5">
+            <p class="">
               Email Print Cite Share This Page A number of white papers,
               position statements, reports from ACRL and ALA units, and the like
               have been produced over the years and published online. Below is a
@@ -48,7 +48,7 @@ function Papers() {
           </article>
           <h4 className="text-primary">Intellectual Freedom</h4>
           <article className="mb-4">
-            <p class="lead fs-5">
+            <p class="">
               Intellectual Freedom Principles for Academic Libraries: An
               Interpretation of the Library Bill of Rights (June 1999) This
               statement was created to provide an interpretation of general
@@ -61,7 +61,7 @@ function Papers() {
             Scholarly Communication and Copyright
           </h4>
           <article className="mb-4">
-            <p class="lead fs-5">
+            <p class="">
               Open and Equitable Scholarly Communications: Creating a More
               Inclusive Future (June 2019) On June 12, 2019, ACRL released “Open
               and Equitable Scholarly Communications: Creating a More Inclusive

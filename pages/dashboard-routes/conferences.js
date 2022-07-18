@@ -167,7 +167,7 @@ function Conferences() {
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>
             <div className="text-center">
-              <MdGroup className="fs-1 text-muted" />
+              <MdGroup className="text-muted" />
               <p>There is no conference</p>
             </div>
           </div>

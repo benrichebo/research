@@ -5,7 +5,7 @@ import { MdRefresh, MdPayments } from "react-icons/md";
 import { useUser } from "../../hooks/useUser";
 
 function PayedCheckout() {
-  const {userData} = useUser("user")
+  const { userData } = useUser("user");
   const { data, loading, allData, error, postError, postLoading } = useCrud(
     "all-payments",
     "/api/payments/stripe/payments"
@@ -117,7 +117,7 @@ function PayedCheckout() {
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>
             <div className="text-center">
-              <MdPayments className="fs-1 text-muted" />
+              <MdPayments className="text-muted" />
               <p>There is no payments</p>
             </div>
           </div>

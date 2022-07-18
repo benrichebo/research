@@ -6,10 +6,10 @@ const Members = () => {
     "one-count-members",
     "/api/count/members"
   );
-  console.log("members", oneData)
+  console.log("members", oneData);
   return (
     <>
-      <h1 className="display-5 mt-3">{oneData?.count || 0}</h1>
+      <h1 className=" mt-3">{oneData?.count || 0}</h1>
     </>
   );
 };
@@ -21,7 +21,7 @@ const Conferences = () => {
   );
   return (
     <>
-      <h1 className="display-5 mt-3">{oneData?.count || 0}</h1>
+      <h1 className=" mt-3">{oneData?.count || 0}</h1>
     </>
   );
 };
@@ -33,7 +33,7 @@ const Papers = () => {
   );
   return (
     <>
-      <h1 className="display-5 mt-3">{oneData?.count || 0}</h1>
+      <h1 className=" mt-3">{oneData?.count || 0}</h1>
     </>
   );
 };

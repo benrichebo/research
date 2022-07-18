@@ -57,9 +57,7 @@ function PaymentAttempts() {
               <table className="table">
                 <thead>
                   <tr>
-                    <th>
-                      # ID
-                    </th>
+                    <th># ID</th>
                     <th>Payment Status</th>
                     <th>Amount</th>
                     <th>User</th>
@@ -68,7 +66,9 @@ function PaymentAttempts() {
                 <tbody>
                   {allData?.map((data) => (
                     <tr>
-                      <td className="text-truncate">{data?.id.slice(0, 12)}...</td>
+                      <td className="text-truncate">
+                        {data?.id.slice(0, 12)}...
+                      </td>
                       <td>{data?.paymentStatus}</td>
                       <td>{data?.amount}</td>
                       <td>
@@ -90,7 +90,7 @@ function PaymentAttempts() {
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>
             <div className="text-center">
-              <MdPayments className="fs-1 text-muted" />
+              <MdPayments className="text-muted" />
               <p>There is no payments</p>
             </div>
           </div>

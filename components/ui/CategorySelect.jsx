@@ -7,7 +7,7 @@ function CategorySelect({ setCategory, categoryExist }) {
   return (
     <>
       <select
-        className="form-select form-select-lg rounded-0"
+        className="form-select rounded-0"
         onChange={(e) => setCategory(e.target.value)}
         id="category">
         <option value="">--select category--</option>
