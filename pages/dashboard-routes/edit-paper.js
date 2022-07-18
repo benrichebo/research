@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Spinner from "../../components/ui/Spinner";
 import { useFindOne } from "../../hooks/useFindOne";
 import AddPaper from "./add-paper";

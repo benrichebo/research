@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Spinner from "../../components/ui/Spinner";
-import { useCrud } from "../../hooks/useCrud";
-import { useRouter } from "next/router";
+import { useFindOne } from "../../hooks/useFindOne";
 import AddConference from "./add-conference";
 
 function EditConference() {
- const router = useRouter();
-
-  const [routeId, setRouteId] = useState(null);
-
-  const { data, loading, error, oneData } = useCrud(
+  const { data, loading, error, oneData, id } = useFindOne(
     "one-conference",
-    `/api/conferences/${(router?.query && routeId) || null}`
+    `/api/conferences`
   );
-
-  useEffect(() => {
-    if (router.isReady) {
-      setRouteId(router?.query && router?.query?.slug[1]);
-    }
-  }, [router.isReady]);
 
   return (
     <>
@@ -35,13 +24,7 @@ function EditConference() {
             </h6>
             <button
               className="btn btn-primary my-3"
-              onClick={() =>
-                data.getOneData(
-                  `/api/conferences/${
-                    (router?.query && router?.query?.slug[1]) || null
-                  }`
-                )
-              }>
+              onClick={() => data.getOneData(`/api/conferences/${id}`)}>
               Reload
             </button>
           </div>
