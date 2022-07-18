@@ -46,7 +46,7 @@ function Footer() {
         <div className="container py-1 py-lg-3 mt-4 mt-mlg-3">
           <div className="row justify-content-center">
             <div className="col-6 col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item mb-3">
-              <h5 className="text-white-50">Services</h5>
+              <h6 className="text-white-50 fw-bold">Services</h6>
               <ul className="list-unstyled">
                 <li className="mb-1">
                   <Link href="/conferences">
@@ -72,10 +72,12 @@ function Footer() {
               </ul>
             </div>
             <div className="col-6 col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item mb-3">
-              <h5 className="text-white-50">About</h5>
+              <h6 className="text-white-50 fw-bold">About</h6>
               <ul className="list-unstyled">
                 <li className="mb-1">
-                  <a className="text-decoration-none text-white-50 fs-6" href="#">
+                  <a
+                    className="text-decoration-none text-white-50 fs-6"
+                    href="#">
                     Company
                   </a>
                 </li>
@@ -96,10 +98,12 @@ function Footer() {
               </ul>
             </div>
             <div className="col-6 col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-              <h5 className="text-white-50">001 (555) 4658 4758</h5>
+              <h6 className="text-white-50 fw-bold">001 (555) 4658 4758</h6>
               <ul className="list-unstyled">
                 <li>
-                  <a className="text-decoration-none text-white-50 fs-6" href="#">
+                  <a
+                    className="text-decoration-none text-white-50 fs-6"
+                    href="#">
                     info@company.com
                   </a>
                 </li>
@@ -141,9 +145,9 @@ function Footer() {
               </ul>
             </div>
             <div className="col-lg-3 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last item social pb-3">
-              <h5 className="fw-normal text-white-50 mb-3">
+              <h6 className="fw-bold text-white-50 mb-3">
                 Subscribe to our news letter
-              </h5>
+              </h6>
               <div className="fw-bold d-flex align-items-center mb-2">
                 <div className="input-group">
                   <input
@@ -160,10 +164,8 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-between align-items-center my-2 my-md-3">
-            <p className="mb-0 text-white-50 fs-6">Copyright © 2022 Brand</p>
-          </div>
-          <div className="d-flex justify-content-end" style={{ right: 20 }}>
+          <div className="d-flex justify-content-between align-items-center my-4" style={{ right: 20 }}>
+            <p className="mb-0 text-white-50 small">Copyright © 2022 Brand</p>
             <a
               className="border rounded-circle p-1 px-2 border-2 border-light"
               href="#"
