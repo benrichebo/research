@@ -16,7 +16,7 @@ function EditArticle() {
 
   useEffect(() => {
     if (router.isReady) {
-      setRouteId(router?.query && router?.query?.slug[0]);
+      setRouteId(router?.query && router?.query?.slug[1]);
     }
   }, [router.isReady]);
 
