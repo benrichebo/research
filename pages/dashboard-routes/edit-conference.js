@@ -9,19 +9,24 @@ import { connectToDatabase } from "../../lib/mongodb";
 function EditConference() {
   const router = useRouter();
 
-  const { data, loading, error, oneData } = useCrud(
+  const [routeId, setRouteId] = useState(router?.query?.slug[1]);
+
+  const { data, error, oneData } = useCrud(
     "one-conference",
-    `/api/conferences/${router?.query?.slug[1]}`
+    `/api/conferences/${(router?.query && routeId) || null}`
   );
 
   useEffect(() => {
     if (router.isReady) {
+      setRouteId(router?.query && router?.query?.slug[1]);
     }
   }, [router.isReady]);
 
+  if (routeId == "") return "error here";
+
   return (
     <>
-      {loading && (
+      {!oneData && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
         </div>
