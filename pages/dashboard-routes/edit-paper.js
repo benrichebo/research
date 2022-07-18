@@ -7,7 +7,7 @@ import AddPaper from "./add-paper";
 function EditPaper() {
   const router = useRouter();
 
-  const [routeId, setRouteId] = useState(router?.query?.slug[1]);
+  const [routeId, setRouteId] = useState(null);
 
   const { data, loading, error, oneData } = useCrud(
     "one-paper",

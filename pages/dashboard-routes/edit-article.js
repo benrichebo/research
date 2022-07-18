@@ -20,7 +20,6 @@ function EditArticle() {
     }
   }, [router.isReady]);
 
-   if (router.isReady && routeId)
      return (
        <>
          {loading && (

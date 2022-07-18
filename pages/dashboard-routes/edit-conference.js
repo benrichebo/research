@@ -3,15 +3,13 @@ import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { useRouter } from "next/router";
 import AddConference from "./add-conference";
-import { ObjectID } from "bson";
-import { connectToDatabase } from "../../lib/mongodb";
 
 function EditConference() {
-  const router = useRouter();
+ const router = useRouter();
 
-  const [routeId, setRouteId] = useState(router?.query?.slug[1]);
+  const [routeId, setRouteId] = useState(null);
 
-  const { data, error, oneData } = useCrud(
+  const { data, loading, error, oneData } = useCrud(
     "one-conference",
     `/api/conferences/${(router?.query && routeId) || null}`
   );
@@ -22,11 +20,9 @@ function EditConference() {
     }
   }, [router.isReady]);
 
-  if (routeId == "") return "error here";
-
   return (
     <>
-      {!oneData && (
+      {loading && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
         </div>
@@ -55,29 +51,5 @@ function EditConference() {
     </>
   );
 }
-
-export const getServerSideProps = async (context) => {
-  context.res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=10, stale-while-revalidate=59"
-  );
-  try {
-    const { db } = await connectToDatabase();
-    const conference = await db
-      .collection("conferences")
-      .findOne({ _id: ObjectID(context.params.id) });
-
-    console.log("conference", conference);
-    const data = JSON.stringify(conference);
-    return {
-      props: { conference: JSON.parse(data) },
-    };
-  } catch (error) {
-    console.log(error.message);
-    return {
-      notFound: true,
-    };
-  }
-};
 
 export default EditConference;
