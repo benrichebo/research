@@ -12,8 +12,8 @@ function Footer() {
               <div className="card-body p-md-1 p-xxl-2">
                 <p className="text-primary card-title pb-1">ABOUT</p>
                 <div className="d-flex justify-content-between align-items-center text-black">
-                  <h6>More about our company</h6>
-                  <MdArrowForward size={24} className="ms-3" />
+                  <h6 className="mb-0">More about our company</h6>
+                  <MdArrowForward size={22} className="ms-3" />
                 </div>
               </div>
             </a>
@@ -23,8 +23,8 @@ function Footer() {
               <div className="card-body p-md-1 p-xxl-2">
                 <p className="text-primary card-title pb-1">PAPERS</p>
                 <div className="d-flex justify-content-between align-items-center text-black">
-                  <h6>Papers we have published</h6>
-                  <MdArrowForward size={24} className="ms-3" />
+                  <h6 className="mb-0">Papers we have published</h6>
+                  <MdArrowForward size={22} className="ms-3" />
                 </div>
               </div>
             </a>
@@ -34,8 +34,8 @@ function Footer() {
               <div className="card-body p-md-1 p-xxl-2">
                 <p className="text-primary card-title pb-1">CONTACT</p>
                 <div className="d-flex justify-content-between align-items-center text-black">
-                  <h6>Get in touch with us</h6>
-                  <MdArrowForward size={24} className="ms-3" />
+                  <h6 className="mb-0">Get in touch with us</h6>
+                  <MdArrowForward size={22} className="ms-3" />
                 </div>
               </div>
             </a>
@@ -164,13 +164,15 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-between align-items-center my-4" style={{ right: 20 }}>
+          <div
+            className="d-flex justify-content-between align-items-center my-4"
+            style={{ right: 20 }}>
             <p className="mb-0 text-white-50 small">Copyright © 2022 Brand</p>
             <a
               className="border rounded-circle p-1 px-2 border-2 border-light"
               href="#"
               target="_top">
-              <MdArrowUpward className=" text-white-50" />
+              <MdArrowUpward className="text-white-50" />
             </a>
           </div>
         </div>

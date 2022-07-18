@@ -15,7 +15,7 @@ function Header() {
         </Link>
         <button
           data-bs-toggle="collapse"
-          className="navbar-toggler border-0"
+          className="navbar-toggler border-0 p-0"
           data-bs-target="#navcol-1">
           <span className="visually-hidden">Toggle navigation</span>
           <span className="navbar-toggler-icon text-white"></span>
