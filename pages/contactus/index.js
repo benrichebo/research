@@ -49,7 +49,7 @@ function ContactUs() {
             <div className="col-md-10 col-lg-8 col-xl-7">
               <p className="mb-2 small">CONTACT US</p>
               <h3
-                className="display-s  pulse animated fw-normal"
+                className="pulse animated fw-normal"
                 data-bss-disabled-mobile="true">
                 We are here to help, Lets talk
               </h3>
