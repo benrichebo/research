@@ -133,7 +133,10 @@ function ContactUs() {
                 <h1 className="display-5 fs-3 pulse animated border-top border-3 border-primary py-3">
                   Heads
                 </h1>
-                <CategorySelect category={category} setCategory={setCategory} />
+                <CategorySelect
+                  categoryExist={category}
+                  setCategory={setCategory}
+                />
               </div>
               <div className="col-md-8 d-flex align-items-center pt-1 px-lg-3">
                 <div className="mt-md-4 mt-lg-5 row w-100">

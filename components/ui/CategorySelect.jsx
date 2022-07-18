@@ -1,9 +1,9 @@
 import React from "react";
 import { useCrud } from "../../hooks/useCrud";
 
-function CategorySelect({setCategory, category}) {
-  const { allData, postLoading, postError, error, loading, message } =
-    useCrud("all-categories", "/api/categories");
+function CategorySelect({ setCategory, categoryExist }) {
+  const { allData } = useCrud("all-categories", "/api/categories");
+
   return (
     <>
       <select
@@ -11,10 +11,14 @@ function CategorySelect({setCategory, category}) {
         onChange={(e) => setCategory(e.target.value)}
         id="category">
         <option value="">--select category--</option>
-        {category && <option value={category?.name}>{category?.name}</option>}
+
         {allData &&
           allData?.map((category) => (
-            <option value={category?.name}>{category?.name}</option>
+            <option
+              value={category?.name}
+              selected={categoryExist == category.name}>
+              {category?.name}
+            </option>
           ))}
       </select>
     </>

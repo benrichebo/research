@@ -112,7 +112,7 @@ function AddArticle({ article }) {
               <label className="form-label" htmlFor="category">
                 Category
               </label>
-              <CategorySelect setCategory={setCategory} category={category} />
+              <CategorySelect setCategory={setCategory} categoryExist={category} />
             </div>
             <div className="col-12 mb-4">
               <p className="form-label" htmlFor="draft">
