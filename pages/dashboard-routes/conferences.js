@@ -89,14 +89,13 @@ function Conferences() {
                     <th>Title</th>
                     <th>Country</th>
                     <th>Date</th>
-                    <th>Url</th>
                   </tr>
                 </thead>
                 <tbody>
                   {allData?.map((data) => (
                     <>
                       <tr>
-                        <td className="text-nowrap">
+                        <td className="text-nowrap align-middle">
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -118,7 +117,6 @@ function Conferences() {
                             <span className="ms-3">
                               <Link
                                 href={`/dashboard/edit-conference/${routeId}/${data?._id}`}>
-                                
                                 <a className="">
                                   <MdEdit size={20} className="text-muted" />
                                 </a>
@@ -149,16 +147,14 @@ function Conferences() {
                             </div>
                           )}
                         </td>
-                        <td className="text-nowrap">{data?.title}</td>
-                        <td className="text-nowrap">{data?.country}</td>
-                        <td className="text-nowrap">
-                          {data?.startDate} - {data?.endDate}
+                        <td className="text-nowrap align-middle">
+                          {data?.title}
                         </td>
-                        <td className="text-nowrap">
-                          <a
-                            href={`https://localhost:3000/conferences/${data?._id}`}>
-                            https://localhost:3000/conferences/{data?._id}
-                          </a>
+                        <td className="text-nowrap align-middle">
+                          {data?.country}
+                        </td>
+                        <td className="text-nowrap align-middle">
+                          {data?.startDate} - {data?.endDate}
                         </td>
                       </tr>
                     </>

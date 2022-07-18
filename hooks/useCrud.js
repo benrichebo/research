@@ -42,12 +42,12 @@ export const useCrud = (type, url) => {
       }
     },
 
-    async getOneData(url) {
+    async getOneData() {
       setLoading(true);
       setError(null);
       try {
         const data = await GET(url);
-        setLoading(false);
+
         if (data.msg) {
           setError(data.msg);
         } else {
@@ -56,6 +56,7 @@ export const useCrud = (type, url) => {
             sessionStorage.setItem(type, data);
           }
         }
+        setLoading(false);
       } catch (error) {
         setLoading(false);
         setError(error.message);
@@ -133,7 +134,7 @@ export const useCrud = (type, url) => {
         } else {
           setPostError(data.msg);
         }
-      } catch(error) {
+      } catch (error) {
         setPostLoading(false);
         setPostError(error.message);
       }
@@ -159,7 +160,7 @@ export const useCrud = (type, url) => {
     }
 
     if (type?.includes("one")) {
-      data.getOneData(url);
+      data.getOneData();
     }
 
     if (type?.includes("one-in-session")) {

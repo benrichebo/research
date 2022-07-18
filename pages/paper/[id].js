@@ -24,8 +24,7 @@ function Paper({ paper }) {
                 <h6>PUBLISHER: {paper?.publisher}</h6>
               </div>
             </div>
-            <div className="col-lg-2 col-xl-3 my-3">
-            </div>
+            <div className="col-lg-2 col-xl-3 my-3"></div>
           </div>
         </div>
         <div className="container py-4 py-xl-5">
@@ -36,8 +35,8 @@ function Paper({ paper }) {
               </div>
               <div className="my-5">
                 <a
-                  href={paper?.file?.url}
-                  download={paper?.file?.name}
+                  href={paper?.file?.name}
+                  download
                   className="btn btn-outline-primary rounded-0 btn-lg px-4">
                   <span className="d-flex justify-content-center align-items-center">
                     <span>Download</span>

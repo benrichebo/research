@@ -30,7 +30,7 @@ function Papers({ id }) {
                 class="list-item d-flex justify-content-between mb-0 card-text"
                 key={paper?.title}>
                 <span>{paper?.title}</span>
-                <span>{payment?.status}</span>
+                <span>{paper?.status}</span>
               </p>
             ))}
         </div>

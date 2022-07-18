@@ -87,14 +87,13 @@ function Articles() {
                     <th>Title</th>
                     <th>Category</th>
                     <th>Date</th>
-                    <th>Url</th>
                   </tr>
                 </thead>
                 <tbody>
                   {allData?.map((data) => (
                     <>
                       <tr className="post" key={data?._id}>
-                        <td className="text-nowrap">
+                        <td className="text-nowrap align-middle">
                           <div className="form-check d-flex align-items-center">
                             <input
                               className="form-check-input"
@@ -137,12 +136,6 @@ function Articles() {
                         </td>
                         <td className="text-nowrap align-middle">
                           {data?.createdAt}
-                        </td>
-                        <td className="text-nowrap align-middle">
-                          <a
-                            href={`https://localhost:3000/articles/${data?._id}`}>
-                            https://localhost:3000/articles/{data?._id}
-                          </a>
                         </td>
                       </tr>
                       {show == data?._id && (

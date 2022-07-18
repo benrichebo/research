@@ -4,9 +4,11 @@ import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdPictureAsPdf, MdEdit, MdDelete } from "react-icons/md";
 import { useRouter } from "next/router";
+import { useUser } from "../../hooks/useUser";
 
 function Papers() {
-  const { data, loading, allData, error } = useCrud(
+   const { userData } = useUser("user");
+  const { data, loading, postLoading, allData, error } = useCrud(
     "all-papers",
     "/api/papers"
   );
@@ -89,7 +91,7 @@ function Papers() {
                   {allData?.map((data) => (
                     <>
                       <tr>
-                        <td className="text-nowrap">
+                        <td className="text-nowrap align-middle">
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -118,17 +120,22 @@ function Papers() {
                             </span>
                           </div>
                         </td>
-                        <td className="text-nowrap">{data?.publisher}</td>
-                        <td className="text-nowrap">{data?.createdAt}</td>
-                        <td className="text-nowrap">
-                          {!data?.status && data?.role == "admin" ? (
+                        <td className="text-nowrap align-middle">
+                          {data?.publisher}
+                        </td>
+                        <td className="text-nowrap align-middle">
+                          {data?.createdAt}
+                        </td>
+                        <td className="text-nowrap align-middle">
+                          {data?.status != "approved" &&
+                          userData?.role == "admin" ? (
                             <>
                               <span class="badge bg-secondary">
                                 {data?.status}
                               </span>
                               <a
                                 type="button"
-                                className="btn btn-light ms-3"
+                                className="btn btn-light btn-sm ms-3"
                                 disabled={postLoading}
                                 onClick={handleApproval}>
                                 {postLoading ? (
@@ -142,10 +149,12 @@ function Papers() {
                             ""
                           )}
                         </td>
-                        <td className="text-nowrap">
+                        <td className="text-nowrap align-middle">
                           <a
-                            href={`https://localhost:3000/papers/${data?._id}`}>
-                            https://localhost:3000/papers/{data?._id}
+                            href={data?.file?.name}
+                            download
+                            className="text-decoration-none">
+                            Download
                           </a>
                         </td>
                       </tr>

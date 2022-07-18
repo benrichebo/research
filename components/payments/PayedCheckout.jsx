@@ -2,8 +2,10 @@ import React from "react";
 import Spinner from "../ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdRefresh, MdPayments } from "react-icons/md";
+import { useUser } from "../../hooks/useUser";
 
 function PayedCheckout() {
+  const {userData} = useUser("user")
   const { data, loading, allData, error, postError, postLoading } = useCrud(
     "all-payments",
     "/api/payments/stripe/payments"
@@ -62,23 +64,31 @@ function PayedCheckout() {
                     <th>Status</th>
                     <th>Amount</th>
                     <th>Email</th>
-                    {data?.role == "admin" && <th>Approval status</th>}
+                    {userData?.role == "admin" && <th>Approval status</th>}
                   </tr>
                 </thead>
                 <tbody>
                   {allData?.map((data) => (
                     <tr>
-                      <td>{data?.id.slice(0, 12)}</td>
-                      <td>{data?.status}</td>
-                      <td>${data?.amount / 100}</td>
-                      <td>{data?.email}</td>
-                      <td className="text-nowrap">
-                        {!data?.verified && data?.role == "admin" ? (
+                      <td className="align-middle text-nowrap">
+                        {data?.id.slice(0, 12)}
+                      </td>
+                      <td className="align-middle text-nowrap">
+                        {data?.status}
+                      </td>
+                      <td className="align-middle text-nowrap">
+                        ${data?.amount / 100}
+                      </td>
+                      <td className="align-middle text-nowrap">
+                        {data?.email}
+                      </td>
+                      <td className="text-nowrap align-middle">
+                        {!data?.verified && userData?.role == "admin" ? (
                           <>
                             <span class="badge bg-secondary">Unapproved</span>
                             <a
                               type="button"
-                              className="btn btn-light ms-3"
+                              className="btn btn-light btn-sm ms-3"
                               disabled={postLoading}
                               onClick={handleApproval}>
                               {postLoading ? (
@@ -92,7 +102,7 @@ function PayedCheckout() {
                           ""
                         )}
                       </td>
-                      <td></td>
+                      <td className="align-middle text-nowrap"></td>
                     </tr>
                   ))}
                 </tbody>
