@@ -11,7 +11,7 @@ function CategorySelect({setCategory, category}) {
         onChange={(e) => setCategory(e.target.value)}
         id="category">
         <option value="">--select category--</option>
-        {category && <option value={category?.name}>={category?.name}</option>}
+        {category && <option value={category?.name}>{category?.name}</option>}
         {allData &&
           allData?.map((category) => (
             <option value={category?.name}>{category?.name}</option>

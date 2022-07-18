@@ -19,10 +19,6 @@ function AddArticle({ article }) {
   const [status, setStatus] = useState(article?.status || "");
 
   const [image, setImage] = useState(article?.image);
-
-  useEffect(() => {
-    console.log(title, author, textContent, category, status, image);
-  }, [title, author, textContent, category, status, image]);
   
 
   const handleSubmit = async (e) => {
