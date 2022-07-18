@@ -60,7 +60,7 @@ function ContactUs() {
           <div className="card-group row">
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2">
               <div className="card-body p-md-2 p-xl-3">
-                <h6 className="text-primary card-title pb-2">ADDRESS</h6>
+                <h6 className="text-primary card-title mb-2">ADDRESS</h6>
                 <div className="d-flex justify-content-between align-items-center">
                   <h6 className="fw-normal">ABC 24 STREET MANHATAN</h6>
                 </div>
@@ -70,7 +70,7 @@ function ContactUs() {
               <div className="card-body p-md-2 p-xl-3">
                 <h6 className="text-dark card-title pb-0">PHONE AND EMAIL</h6>
                 <a
-                  className="d-flex justify-content-between align-items-center text-decoration-none"
+                  className="d-flex justify-content-between align-items-center text-decoration-none mb-2"
                   href="#">
                   <h6 className="fw-normal mb-0">info@company.com</h6>
                   <MdArrowForward size={20} className="ms-3" />
@@ -86,22 +86,20 @@ function ContactUs() {
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2">
               <div className="card-body p-md-2 p-xxl-3">
                 <h6 className="text-primary card-title pb-0">SOCIALS</h6>
-                <div className="d-flex justify-content-between align-items-center">
-                  <a
-                    className="d-flex justify-content-between align-items-center text-decoration-none"
-                    href="#">
-                    <h6 className="fw-normal mb-0">LinkedIn&nbsp;</h6>
-                    <MdArrowForward size={20} className="ms-3" />
-                  </a>
-                </div>
-                <div className="d-flex justify-content-between align-items-center">
-                  <a
-                    className="d-flex justify-content-between align-items-center text-decoration-none"
-                    href="#">
-                    <h6 className="fw-normal mb-0">facebook</h6>
-                    <MdArrowForward size={20} className="ms-3" />
-                  </a>
-                </div>
+
+                <a
+                  className="d-flex justify-content-between align-items-center text-decoration-none mb-2"
+                  href="#">
+                  <h6 className="fw-normal mb-0">LinkedIn&nbsp;</h6>
+                  <MdArrowForward size={20} className="ms-3" />
+                </a>
+
+                <a
+                  className="d-flex justify-content-between align-items-center text-decoration-none"
+                  href="#">
+                  <h6 className="fw-normal mb-0">Facebook</h6>
+                  <MdArrowForward size={20} className="ms-3" />
+                </a>
               </div>
             </div>
           </div>
@@ -132,15 +130,17 @@ function ContactUs() {
                 <h3 className="pulse animated border-top border-3 border-primary py-3">
                   Heads
                 </h3>
-                <CategorySelect
-                  categoryExist={category}
-                  setCategory={setCategory}
-                />
+                <div className="mb-4">
+                  <CategorySelect
+                    categoryExist={category}
+                    setCategory={setCategory}
+                  />
+                </div>
               </div>
               <div className="col-md-8 d-flex align-items-center pt-1 px-lg-3">
                 <div className="mt-md-4 mt-lg-5 row w-100">
                   {heads?.map((head) => (
-                    <div className="col-md-6 d-flex justify-content-start align-items-center mb-5">
+                    <div className="col-md-6 d-flex justify-content-start align-items-top mb-5">
                       <div>
                         <img
                           className="img-fluid"
@@ -149,8 +149,8 @@ function ContactUs() {
                         />
                       </div>
                       <div className="ms-4">
-                        <h5 className="mb-0">{head?.name}</h5>
-                        <h6 className="fw-normal text-primary mb-0">
+                        <h6 className="mb-0">{head?.name}</h6>
+                        <h6 className="fw-normal text-muted mb-0">
                           {head?.phone}
                         </h6>
                         <h6 className="fw-normal text-primary">
