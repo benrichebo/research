@@ -162,7 +162,7 @@ function Categories() {
                         <tbody>
                           {allData?.map((data) => (
                             <>
-                              <tr>
+                              <tr key={data?._id}>
                                 <td className="text-nowrap">{data?.name}</td>
                                 <td className="text-nowrap">{data?.type}</td>
                                 <td className="text-nowrap">{data?.parent}</td>

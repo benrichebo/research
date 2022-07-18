@@ -64,7 +64,7 @@ function Papers() {
               type="search"
               class="form-control w-auto"
               placeholder="Search for an item"
-              autocomplete="on"
+              autoComplete="on"
             />
           </div>
           <div class="col">
@@ -75,8 +75,8 @@ function Papers() {
                     <th class="d-flex justify-content-start align-items-center text-nowrap">
                       <span class="fw-normal">Bulk Actions</span>
                       <select class="form-select-sm form-select w-auto ms-3">
-                        <option value="delete">--select--</option>
-                        <option value="delete" selected="">
+                        <option value="">--select--</option>
+                        <option value="delete">
                           Delete
                         </option>
                       </select>
@@ -90,7 +90,7 @@ function Papers() {
                 <tbody>
                   {allData?.map((data) => (
                     <>
-                      <tr>
+                      <tr key={data?._id}>
                         <td className="text-nowrap align-middle">
                           <div class="form-check">
                             <input

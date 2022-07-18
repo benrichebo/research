@@ -67,7 +67,7 @@ function Articles() {
               type="search"
               className="form-control w-auto"
               placeholder="Search for an item"
-              autocomplete="on"
+              autoComplete="on"
             />
           </div>
           <div className="col">
@@ -78,8 +78,8 @@ function Articles() {
                     <th className="d-flex justify-content-start align-items-center text-nowrap">
                       <span className="fw-normal">Bulk Actions</span>
                       <select className="form-select-sm form-select w-auto ms-3">
-                        <option value="delete">--select--</option>
-                        <option value="delete" selected="">
+                        <option value="">--select--</option>
+                        <option value="delete">
                           Delete
                         </option>
                       </select>

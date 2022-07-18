@@ -46,17 +46,21 @@ export const useCrud = (type, url) => {
       setLoading(true);
       setError(null);
       try {
-        const data = await GET(url);
+        if (url) {
+          const data = await GET(url);
 
-        if (data.msg) {
-          setError(data.msg);
-        } else {
-          if (data?._id) {
-            setOneData(data);
-            sessionStorage.setItem(type, data);
+          if (data.msg) {
+            setError(data.msg);
+          } else {
+            if (data?._id) {
+              setOneData(data);
+              sessionStorage.setItem(type, data);
+            }
           }
+          setLoading(false);
+        } else {
+          console.log("no url")
         }
-        setLoading(false);
       } catch (error) {
         setLoading(false);
         setError(error.message);

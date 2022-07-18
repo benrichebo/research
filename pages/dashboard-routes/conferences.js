@@ -63,27 +63,25 @@ function Conferences() {
         </div>
       )}
       {allData?.length > 0 && (
-        <div class="row">
-          <div class="col-12 d-flex justify-content-end align-items-center mb-3">
+        <div className="row">
+          <div className="col-12 d-flex justify-content-end align-items-center mb-3">
             <input
               type="search"
-              class="form-control w-auto"
+              className="form-control w-auto"
               placeholder="Search for an item"
-              autocomplete="on"
+              autoComplete="on"
             />
           </div>
-          <div class="col">
-            <div class="table-responsive">
-              <table class="table">
+          <div className="col">
+            <div className="table-responsive">
+              <table className="table">
                 <thead>
                   <tr>
-                    <th class="d-flex justify-content-start align-items-center text-nowrap">
-                      <span class="fw-normal">Bulk Actions</span>
-                      <select class="form-select-sm form-select w-auto ms-3">
-                        <option value="delete">--select--</option>
-                        <option value="delete" selected="">
-                          Delete
-                        </option>
+                    <th className="d-flex justify-content-start align-items-center text-nowrap">
+                      <span className="fw-normal">Bulk Actions</span>
+                      <select className="form-select-sm form-select w-auto ms-3">
+                        <option value="">--select--</option>
+                        <option value="delete">Delete</option>
                       </select>
                     </th>
                     <th>Title</th>
@@ -93,71 +91,69 @@ function Conferences() {
                 </thead>
                 <tbody>
                   {allData?.map((data) => (
-                    <>
-                      <tr>
-                        <td className="text-nowrap align-middle">
-                          <div class="form-check">
-                            <input
-                              class="form-check-input"
-                              type="checkbox"
-                              id={data?.title}
-                              value={data?._id}
+                    <tr key={data?._id}>
+                      <td className="text-nowrap align-middle">
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id={data?.title}
+                            value={data?._id}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={data?.title}>
+                            <img
+                              className="ms-4"
+                              width="70"
+                              height="50"
+                              style={{ objectFit: "cover" }}
+                              src={data?.image?.url}
                             />
-                            <label
-                              class="form-check-label"
-                              htmlFor={data?.title}>
-                              <img
-                                class="ms-4"
-                                width="70"
-                                height="50"
-                                style={{ objectFit: "cover" }}
-                                src={data?.image?.url}
-                              />
-                            </label>
-                            <span className="ms-3">
-                              <Link
-                                href={`/dashboard/edit-conference/${routeId}/${data?._id}`}>
-                                <a className="">
-                                  <MdEdit size={20} className="text-muted" />
-                                </a>
-                              </Link>
+                          </label>
+                          <span className="ms-3">
+                            <Link
+                              href={`/dashboard/edit-conference/${routeId}/${data?._id}`}>
+                              <a className="">
+                                <MdEdit size={20} className="text-muted" />
+                              </a>
+                            </Link>
 
-                              <a
-                                className="ms-4"
-                                type="button"
-                                onClick={() => setShow(data?._id)}>
-                                <MdDelete size={20} className="text-muted" />
-                              </a>
-                            </span>
+                            <a
+                              className="ms-4"
+                              type="button"
+                              onClick={() => setShow(data?._id)}>
+                              <MdDelete size={20} className="text-muted" />
+                            </a>
+                          </span>
+                        </div>
+                        {show && (
+                          <div className="mt-3">
+                            <a
+                              href="#"
+                              onClick={() => setShow()}
+                              className="btn btn-light btn-sm">
+                              Edit
+                            </a>
+                            <a
+                              className="btn btn-light btn-sm"
+                              href="#"
+                              onClick={() => deleteConference(data?._id)}>
+                              Delete
+                            </a>
                           </div>
-                          {show && (
-                            <div class="mt-3">
-                              <a
-                                href="#"
-                                onClick={() => setShow()}
-                                className="btn btn-light btn-sm">
-                                Edit
-                              </a>
-                              <a
-                                className="btn btn-light btn-sm"
-                                href="#"
-                                onClick={() => deleteConference(data?._id)}>
-                                Delete
-                              </a>
-                            </div>
-                          )}
-                        </td>
-                        <td className="text-nowrap align-middle">
-                          {data?.title}
-                        </td>
-                        <td className="text-nowrap align-middle">
-                          {data?.country}
-                        </td>
-                        <td className="text-nowrap align-middle">
-                          {data?.startDate} - {data?.endDate}
-                        </td>
-                      </tr>
-                    </>
+                        )}
+                      </td>
+                      <td className="text-nowrap align-middle">
+                        {data?.title}
+                      </td>
+                      <td className="text-nowrap align-middle">
+                        {data?.country}
+                      </td>
+                      <td className="text-nowrap align-middle">
+                        {data?.startDate} - {data?.endDate}
+                      </td>
+                    </tr>
                   ))}
                 </tbody>
               </table>

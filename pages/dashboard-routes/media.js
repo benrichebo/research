@@ -73,21 +73,18 @@ function Media() {
                     <th className="d-flex justify-content-start align-items-center text-nowrap">
                       <span className="fw-normal">Bulk Actions</span>
                       <select className="form-select-sm form-select w-auto ms-3">
-                        <option value="delete">--select--</option>
-                        <option value="delete" selected="">
-                          Delete
-                        </option>
+                        <option value="">--select--</option>
+                        <option value="delete">Delete</option>
                       </select>
                     </th>
                     <th>Name</th>
-                    <th>Url</th>
                   </tr>
                 </thead>
                 <tbody>
                   {medias?.map((data) => (
                     <>
-                      <tr>
-                        <td className="text-nowrap">
+                      <tr key={data?._id}>
+                        <td className="text-nowrap align-middle">
                           <div className="form-check">
                             <input
                               className="form-check-input"
@@ -121,14 +118,13 @@ function Media() {
                             </span>
                           </div>
                         </td>
-                        <td className="text-nowrap">{data?.name}</td>
-                        <td className="text-nowrap">
-                          <a href="#">{data?.url}</a>
+                        <td className="text-nowrap align-middle">
+                          {data?.name}
                         </td>
                       </tr>
                       {show == data?._id && (
                         <tr className="mt-3 bg-light">
-                          <td className="text-nowrap">
+                          <td className="text-nowrap align-middle">
                             <span>Are you sure</span>
                             <a
                               className="text-decoration-none ms-3"
