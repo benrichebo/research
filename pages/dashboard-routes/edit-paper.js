@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { useRouter } from "next/router";
@@ -7,13 +7,16 @@ import AddPaper from "./add-paper";
 function EditPaper() {
   const router = useRouter();
 
+  const [routeId, setRouteId] = useState(router?.query?.slug[1]);
+
   const { data, loading, error, oneData } = useCrud(
     "one-paper",
-    `/api/papers/${router?.query?.slug[1]}`
+    `/api/papers/${(router?.query && routeId) || null}`
   );
 
   useEffect(() => {
     if (router.isReady) {
+      setRouteId(router?.query && router?.query?.slug[1]);
     }
   }, [router.isReady]);
 
