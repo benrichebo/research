@@ -1,24 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../../components/ui/Spinner";
-import { useCrud } from "../../hooks/useCrud";
-import { useRouter } from "next/router";
+import { useFindOne } from "../../hooks/useFindOne";
 import AddPaper from "./add-paper";
 
 function EditPaper() {
-  const router = useRouter();
-
-  const [routeId, setRouteId] = useState(null);
-
-  const { data, loading, error, oneData } = useCrud(
+  const { data, loading, error, oneData, id } = useFindOne(
     "one-paper",
-    `/api/papers/${(router?.query && routeId) || null}`
+    `/api/papers`
   );
-
-  useEffect(() => {
-    if (router.isReady) {
-      setRouteId(router?.query && router?.query?.slug[1]);
-    }
-  }, [router.isReady]);
 
   return (
     <>
@@ -33,13 +22,7 @@ function EditPaper() {
             <h6 className="text-muted">There was an error loading paper</h6>
             <button
               className="btn btn-primary my-3"
-              onClick={() =>
-                data.getOneData(
-                  `/api/papers/${
-                    (router?.query && router?.query?.slug[1]) || null
-                  }`
-                )
-              }>
+              onClick={() => data.getOneData(`/api/papers/${id}`)}>
               Reload
             </button>
           </div>
