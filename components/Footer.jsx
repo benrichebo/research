@@ -165,7 +165,7 @@ function Footer() {
           </div>
           <div className="d-flex justify-content-end" style={{ right: 20 }}>
             <a
-              className="border rounded-circle p-1 p-md-2 border-2 border-light"
+              className="border rounded-circle p-1 px-2 border-2 border-light"
               href="#"
               target="_top">
               <MdArrowUpward className=" text-white-50" />

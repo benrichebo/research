@@ -26,7 +26,7 @@ function PapersComponent({limit}) {
                 <a className="card mb-0 rounded-0 text-decoration-none">
                   <div className="card-body p-md-2 p-xl-1 p-xxl-3">
                     <MdInsertDriveFile className="text-muted mb-2" />
-                    <h5 className="card-title">{paper?.title}</h5>
+                    <h5 className="card-title mb-0">{paper?.title}</h5>
                     <h6 className="text-muted card-subtitle my-3">
                       Publisher: {paper?.publisher}
                     </h6>

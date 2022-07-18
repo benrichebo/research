@@ -60,7 +60,7 @@ function Home() {
             <a
               href="#fields"
               className="d-flex justify-content-start align-items-center mt-2 text-decoration-none">
-              <span className="border rounded-circle p-1 p-md-2 border-2 border-dark">
+              <span className="border rounded-circle p-1 px-2 border-2 border-dark">
                 <MdArrowDownward className=" text-dark" />
               </span>
               <h6 className="ms-2 mb-0 text-dark">LEARN MORE</h6>

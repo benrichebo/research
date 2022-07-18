@@ -1,9 +1,9 @@
-import React from 'react'
-import { useCrud } from '../../hooks/useCrud';
-import Spinner from '../ui/Spinner';
+import React from "react";
+import { useCrud } from "../../hooks/useCrud";
+import Spinner from "../ui/Spinner";
 import Link from "next/link";
 
-function ArticlesComponent({limit}) {
+function ArticlesComponent({ limit }) {
   const { allData, error, loading } = useCrud("all-articles", "/api/articles");
   console.log(allData);
   return (
@@ -26,10 +26,10 @@ function ArticlesComponent({limit}) {
                     style={{ objectFit: "fit" }}
                   />
 
-                  <div className="my-3">
-                    <span className="my-3 small">{article?.category}</span>
-                    <div className="d-lg-flex justify-content-lg-between">
-                      <h5 className="my-2">{article?.title}</h5>
+                  <div className="my-2">
+                    <span className="small">{article?.category}</span>
+                    <div className="d-lg-flex justify-content-lg-between my-2">
+                      <h6 className="mb-0">{article?.title}</h6>
                     </div>
                     <span className="text-muted my-3 my-lg-0 small">
                       {article?.createdAt}

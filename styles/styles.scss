@@ -24,10 +24,12 @@
   height: 180px !important;
 }
 
-.hero-image {
-  object-fit: "cover" !important;
-  width: 100% !important;
-  height: 650px;
+@media (min-width: 768px) {
+  .hero-image {
+    object-fit: "cover" !important;
+    width: 100% !important;
+    height: 650px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1090px) {
@@ -99,14 +101,18 @@ input[type="radio"]:checked + label {
   color: red;
 }
 
-p,
 h1,
 h2,
 h3,
 h4,
 h5,
-h6, li {
-  line-height: 2rem;
+h6 {
+  line-height: 1.3rem;
+}
+
+p,
+li {
+  line-height: 1.5rem;
 }
 
 li {
