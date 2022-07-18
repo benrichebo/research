@@ -11,6 +11,8 @@ export const useFindOne = (type, url) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  let routeId = "";
+
   const data = {
     async getOneData(id) {
       setLoading(true);
@@ -42,6 +44,7 @@ export const useFindOne = (type, url) => {
     if (type?.includes("one")) {
       if (router.isReady) {
         const id = router?.query?.slug[1];
+        routeId = id;
         data.getOneData(id);
       }
     }
@@ -52,6 +55,6 @@ export const useFindOne = (type, url) => {
     loading,
     oneData,
     error,
-    id: router?.query?.slug[1],
+    id: routeId,
   };
 };
