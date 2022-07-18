@@ -12,12 +12,12 @@ export const useFindOne = (type, url) => {
   const [error, setError] = useState(null);
 
   const data = {
-    async getOneData() {
+    async getOneData(id) {
       setLoading(true);
       setError(null);
       try {
         if (url) {
-          const data = await GET(url + "/" + router?.query?.slug[1]);
+          const data = await GET(url + "/" + id);
 
           if (data.msg) {
             setError(data.msg);
@@ -40,9 +40,12 @@ export const useFindOne = (type, url) => {
 
   useEffect(() => {
     if (type?.includes("one")) {
-      data.getOneData();
+      if (router.isReady) {
+        const id = router?.query?.slug[1];
+        data.getOneData(id);
+      }
     }
-  }, []);
+  }, [router.isReady]);
 
   return {
     data,
