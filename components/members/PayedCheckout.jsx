@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Spinner from "../ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdRefresh, MdPayments } from "react-icons/md";
@@ -6,6 +6,7 @@ import { useUser } from "../../hooks/useUser";
 
 function PayedCheckout() {
   const { userData } = useUser("user");
+  const [show, setShow] = useState();
   const { data, loading, allData, error, postError, postLoading } = useCrud(
     "all-payments",
     "/api/payments/stripe/payments"
@@ -13,8 +14,8 @@ function PayedCheckout() {
 
   console.log(allData, error);
 
-  const handleApproval = async () => {
-    await data.updateData({ verified: true }, `/api/payments/approve`);
+  const handleApproval = async (id) => {
+    await data.updateData({ verified: true }, `/api/payments/approve/${id}`);
   };
 
   return (
@@ -48,13 +49,13 @@ function PayedCheckout() {
                 placeholder="Search for an item"
                 autoComplete="on"
               />
-                <button
-                  className="btn btn-light ms-3"
-                  onClick={() =>
-                    data.getAllData("/api/payments/stripe/payments")
-                  }>
-                  <MdRefresh />
-                </button>
+              <button
+                className="btn btn-light ms-3"
+                onClick={() =>
+                  data.getAllData("/api/payments/stripe/payments")
+                }>
+                <MdRefresh />
+              </button>
             </div>
           </div>
           <div className="col-12">
@@ -71,41 +72,72 @@ function PayedCheckout() {
                 </thead>
                 <tbody>
                   {allData?.map((data) => (
-                    <tr>
-                      <td className="align-middle text-nowrap">{data?.name}</td>
-                      <td className="align-middle text-nowrap">
-                        {data?.status}
-                      </td>
-                      <td className="align-middle text-nowrap">
-                        ${data?.amount / 100}
-                      </td>
-                      <td className="align-middle text-nowrap">
-                        {data?.email}
-                      </td>
-                      <td className="text-nowrap align-middle">
-                        {!data?.verified && userData?.role == "admin" ? (
-                          <>
-                            <span className="badge bg-secondary">
-                              Unapproved
-                            </span>
+                    <>
+                      <tr>
+                        <td className="align-middle text-nowrap">
+                          {data?.name}
+                        </td>
+                        <td className="align-middle text-nowrap">
+                          {data?.status}
+                        </td>
+                        <td className="align-middle text-nowrap">
+                          ${data?.amount / 100}
+                        </td>
+                        <td className="align-middle text-nowrap">
+                          {data?.email}
+                        </td>
+                        <td className="text-nowrap align-middle">
+                          {!data?.verified && userData?.role == "admin" ? (
+                            <>
+                              <span className="badge bg-secondary">
+                                Unapproved
+                              </span>
+                              <a
+                                type="button"
+                                className="btn btn-light btn-sm ms-3"
+                                onClick={() => setShow(data?.id)}>
+                                {data?.userId && postLoading ? (
+                                  <Spinner className="ms-2" />
+                                ) : (
+                                  <span className="">Approve</span>
+                                )}
+                              </a>
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </td>
+                        <td className="align-middle text-nowrap"></td>
+                      </tr>
+                      {show == data?.id && (
+                        <tr className="mt-3 bg-light">
+                          <td className="text-nowrap align-middle">
+                            <span>Are you sure</span>
                             <a
+                              className="text-decoration-none ms-3"
                               type="button"
-                              className="btn btn-light btn-sm ms-3"
+                              onClick={() => setShow()}>
+                              No
+                            </a>
+                            <a
+                              className="ms-3 text-decoration-none text-danger"
+                              type="button"
                               disabled={postLoading}
-                              onClick={handleApproval}>
+                              onClick={() => handleApproval(data?.id)}>
                               {postLoading ? (
                                 <Spinner className="ms-2" />
                               ) : (
-                                <span className="">Approve</span>
+                                <span className="">Yes</span>
                               )}
                             </a>
-                          </>
-                        ) : (
-                          ""
-                        )}
-                      </td>
-                      <td className="align-middle text-nowrap"></td>
-                    </tr>
+                          </td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      )}
+                    </>
                   ))}
                 </tbody>
               </table>

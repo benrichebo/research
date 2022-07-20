@@ -40,8 +40,7 @@ export default authenticate(async (req, res) => {
               if (payment_status == "paid") {
                 members.push({
                   verified: user?.verified,
-                  userId,
-                  id,
+                  id: user?._id,
                   role: user?.role,
                   name: user?.name,
                   email: customer_details?.email,

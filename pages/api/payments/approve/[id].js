@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
-import { authenticate } from "../authentication";
-import { connectToDatabase } from "../../../lib/mongodb";
-import { verifyUser } from "../verification";
+import { authenticate } from "../../authentication";
+import { connectToDatabase } from "../../../../lib/mongodb";
+import { verifyUser } from "../../verification";
 
 export default authenticate(async (req, res) => {
   const method = req.method;
@@ -9,6 +9,8 @@ export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
 
   const { verified } = JSON.parse(req.body);
+
+  const { id } = req.query;
 
   try {
     //2. check for method
@@ -22,7 +24,7 @@ export default authenticate(async (req, res) => {
 
     const result = await db
       .collection("members")
-      .updateOne({ _id: ObjectId(userId) }, { $set: { verified: verified } });
+      .updateOne({ _id: ObjectId(id) }, { $set: { verified: verified } });
 
     if (result.acknowledged) {
       res.status(201).json({ msg: "Account verified successfully" });
