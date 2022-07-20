@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UploadModal from "../../components/media/UploadModal";
 import Spinner from "../../components/ui/Spinner";
+import TextEditor from "../../components/Editor";
 import { useCrud } from "../../hooks/useCrud";
 
 function AddPaper({ paper }) {
@@ -98,13 +99,7 @@ function AddPaper({ paper }) {
                 <label className="form-label" htmlFor="abstract">
                   Abstract
                 </label>
-                <textarea
-                  className="form-control rounded-0"
-                  name="abstract"
-                  id="abstract"
-                  rows="6"
-                  value={abstract}
-                  onChange={(e) => setAbstract(e.target.value)}></textarea>
+                <TextEditor content={abstract} setContent={setAbstract} />
               </div>
               <div className="my-3 d-grid">
                 <button
