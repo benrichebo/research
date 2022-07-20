@@ -28,17 +28,25 @@ function Articles() {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-md-flex justify-content-md-between align-items-md-center mb-4">
         <h5>Articles</h5>
         <div>
-          <Link href={`/dashboard/add-article/${routeId}`}>
-            <a className="btn btn-primary">Add article</a>
-          </Link>
-          <button
-            className="btn btn-light my-3 ms-3"
-            onClick={() => data.getAllData("/api/articles")}>
-            <MdRefresh />
-          </button>
+          <div className="d-sm-flex justify-content-sm-start align-items-sm-center">
+            <input
+              type="search"
+              className="form-control w-auto h-100"
+              placeholder="Search for an item"
+              autocomplete="on"
+            />
+            <Link href={`/dashboard/add-article/${routeId}`}>
+              <a className="btn btn-primary ms-sm-3">Add article</a>
+            </Link>
+            <button
+              className="btn btn-light my-3 ms-3"
+              onClick={() => data.getAllData("/api/articles")}>
+              <MdRefresh />
+            </button>
+          </div>
         </div>
       </div>
       {loading && (
@@ -62,14 +70,6 @@ function Articles() {
       )}
       {allData?.length > 0 && (
         <div className="row">
-          <div className="col-12 d-flex justify-content-end align-items-center mb-3">
-            <input
-              type="search"
-              className="form-control w-auto"
-              placeholder="Search for an item"
-              autoComplete="on"
-            />
-          </div>
           <div className="col">
             <div className="table-responsive">
               <table className="table">

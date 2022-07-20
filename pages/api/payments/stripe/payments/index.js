@@ -33,7 +33,7 @@ export default authenticate(async (req, res) => {
               .collection("members")
               .findOne(
                 { email: customer_details?.email },
-                { projection: { email: 1, verified: 1, role: 1 } }
+                { projection: { email: 1, verified: 1, role: 1, name: 1 } }
               );
 
             if (user?.email) {
@@ -43,6 +43,7 @@ export default authenticate(async (req, res) => {
                   userId,
                   id,
                   role: user?.role,
+                  name: user?.name,
                   email: customer_details?.email,
                   status: payment_status,
                   amount: amount_total,
@@ -78,7 +79,7 @@ export default authenticate(async (req, res) => {
               .collection("members")
               .findOne(
                 { email: customer_details?.email },
-                { projection: { verified: 1, role: 1 } }
+                { projection: { verified: 1, role: 1, name: 1 } }
               );
 
             if (payment_status == "paid") {
@@ -87,13 +88,14 @@ export default authenticate(async (req, res) => {
                 role: user?.role,
                 userId,
                 id,
+                name: user?.name,
                 email: customer_details?.email,
                 status: payment_status,
                 amount: amount_total,
               });
             }
           }
-
+console.log(payments);
           if (payments?.length > 0) {
             res.status(200).json(payments);
           } else {

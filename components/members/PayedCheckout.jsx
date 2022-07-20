@@ -19,13 +19,6 @@ function PayedCheckout() {
 
   return (
     <>
-      <div className="d-flex justify-content-end align-items-center">
-        <button
-          className="btn btn-light my-3 ms-3"
-          onClick={() => data.getAllData("/api/payments/stripe/payments")}>
-          <MdRefresh />
-        </button>
-      </div>
       {loading && !error && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
@@ -44,23 +37,32 @@ function PayedCheckout() {
         </div>
       )}
       {!error && allData?.length > 0 && (
-        <div class="row">
+        <div className="row">
           {postError && <p className="text-danger">{postError}</p>}
-          <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-            <h4>Payments</h4>
-            <input
-              type="search"
-              class="form-control w-auto"
-              placeholder="Search for an item"
-              autocomplete="on"
-            />
+          <div className="col-12 d-md-flex justify-content-md-between align-items-md-center mb-3">
+            <h4 className="mb-lg-0">Members</h4>
+            <div className="d-flex justify-content-start align-items-center">
+              <input
+                type="search"
+                className="form-control w-auto h-100"
+                placeholder="Search for an item"
+                autoComplete="on"
+              />
+                <button
+                  className="btn btn-light ms-3"
+                  onClick={() =>
+                    data.getAllData("/api/payments/stripe/payments")
+                  }>
+                  <MdRefresh />
+                </button>
+            </div>
           </div>
-          <div class="col">
-            <div class="table-responsive">
-              <table class="table">
+          <div className="col-12">
+            <div className="table-responsive">
+              <table className="table">
                 <thead>
                   <tr>
-                    <th># ID</th>
+                    <th>Member</th>
                     <th>Status</th>
                     <th>Amount</th>
                     <th>Email</th>
@@ -70,9 +72,7 @@ function PayedCheckout() {
                 <tbody>
                   {allData?.map((data) => (
                     <tr>
-                      <td className="align-middle text-nowrap">
-                        {data?.id.slice(0, 12)}
-                      </td>
+                      <td className="align-middle text-nowrap">{data?.name}</td>
                       <td className="align-middle text-nowrap">
                         {data?.status}
                       </td>
@@ -85,7 +85,9 @@ function PayedCheckout() {
                       <td className="text-nowrap align-middle">
                         {!data?.verified && userData?.role == "admin" ? (
                           <>
-                            <span class="badge bg-secondary">Unapproved</span>
+                            <span className="badge bg-secondary">
+                              Unapproved
+                            </span>
                             <a
                               type="button"
                               className="btn btn-light btn-sm ms-3"

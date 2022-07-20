@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PayedCheckout from "../../components/payments/PayedCheckout";
+import PayedCheckout from "../../components/members/PayedCheckout";
 
-function Payments() {
+function Members() {
   return (
     <>
       <div className="row mb-4">
@@ -11,4 +11,4 @@ function Payments() {
   );
 }
 
-export default Payments;
+export default Members;
