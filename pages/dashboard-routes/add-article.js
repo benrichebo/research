@@ -36,6 +36,10 @@ function AddArticle({ article }) {
       : await data.addData(body, "/api/articles/create");
   };
 
+  useEffect(() => {
+    console.log(textContent);
+  }, [textContent]);
+
   console.log(article);
   return (
     <>

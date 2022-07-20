@@ -15,8 +15,9 @@ function CategorySelect({ setCategory, categoryExist }) {
         {allData &&
           allData?.map((category) => (
             <option
+              key={category?._id}
               value={category?.name}
-              selected={categoryExist == category.name}>
+              defaultValue={categoryExist == category.name}>
               {category?.name}
             </option>
           ))}
