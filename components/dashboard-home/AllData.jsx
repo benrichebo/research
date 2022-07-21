@@ -1,21 +1,21 @@
 import React from "react";
 import { useCount } from "../../hooks/useCount";
+import { useCrud } from "../../hooks/useCrud";
 
 const Members = () => {
-  const { oneData, error, loading, message } = useCount(
-    "all-payments",
-    "/api/payments/stripe/payments"
-  );
-  console.log("members", oneData);
+   const { allData } = useCrud(
+     "all-payments",
+     "/api/payments/stripe/payments"
+   );
   return (
     <>
-      <h1 className=" mt-3">{oneData?.count || 0}</h1>
+      <h1 className=" mt-3">{allData?.length || 0}</h1>
     </>
   );
 };
 
 const Conferences = () => {
-  const { oneData, error, loading, message } = useCount(
+  const { oneData } = useCount(
     "one-count-conferences",
     "/api/count/conferences"
   );
@@ -27,7 +27,7 @@ const Conferences = () => {
 };
 
 const Papers = () => {
-  const { oneData, error, loading, message } = useCount(
+  const { oneData } = useCount(
     "one-count-papers",
     "/api/count/papers"
   );

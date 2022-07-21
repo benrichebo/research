@@ -27,7 +27,7 @@ const memberRoutes = [
   { name: "Settings", icon: <MdPerson className="" /> },
 ];
 
-function SecondaryHeader({ user }) {
+function SecondaryHeader({ user, signOut }) {
   return (
     <>
       <nav className="navbar navbar-light bg-white py-3 border-bottom">
@@ -77,6 +77,11 @@ function SecondaryHeader({ user }) {
                   ))}
                 </>
               )}
+              <li className="nav-item">
+                <a className="nav-link" type="button" onClick={signOut}>
+                  Logout
+                </a>
+              </li>
             </ul>
           </div>
         </div>

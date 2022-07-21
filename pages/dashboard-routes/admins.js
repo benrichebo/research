@@ -204,14 +204,14 @@ function Admins() {
                                     href="#"
                                     onClick={() => setAdmin(data)}
                                     className="text-decoration-none">
-                                    <MdEdit size={20} className="text-muted" />
+                                    <MdEdit size={16} className="text-muted" />
                                   </a>
                                   <a
                                     className="ms-4"
                                     type="button"
                                     onClick={() => setShow(data?._id)}>
                                     <MdDelete
-                                      size={20}
+                                      size={16}
                                       className="text-muted"
                                     />
                                   </a>

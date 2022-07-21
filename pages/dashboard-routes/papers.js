@@ -85,7 +85,6 @@ function Papers() {
                       </select>
                     </th>
                     <th>Publisher</th>
-                    <th>Date</th>
                     <th>Status</th>
                     <th>File</th>
                   </tr>
@@ -111,14 +110,14 @@ function Papers() {
                               <Link
                                 href={`/dashboard/edit-paper/${routeId}/${data?._id}`}>
                                 <a className="">
-                                  <MdEdit size={20} className="text-muted" />
+                                  <MdEdit size={16} className="text-muted" />
                                 </a>
                               </Link>
                               <a
-                                className="ms-4"
+                                className="ms-3"
                                 type="button"
                                 onClick={() => setShow(data?._id)}>
-                                <MdDelete size={20} className="text-muted" />
+                                <MdDelete size={16} className="text-muted" />
                               </a>
                             </span>
                           </div>
@@ -127,16 +126,20 @@ function Papers() {
                           {data?.publisher}
                         </td>
                         <td className="text-nowrap align-middle">
-                          {data?.createdAt}
-                        </td>
-                        <td className="text-nowrap align-middle">
                           {(data?.status != "approved" &&
                             userData?.role == "admin") ||
                           userData?.role == "manager" ? (
                             <>
-                              <span class="badge bg-secondary">
-                                {data?.status}
-                              </span>
+                              {data?.status != "Approved" ? (
+                                <span class="badge badge-sm bg-secondary">
+                                  {data?.status}
+                                </span>
+                              ) : (
+                                <span class="badge badge-sm bg-success">
+                                  {data?.status}
+                                </span>
+                              )}
+
                               {data?.status != "Approved" && (
                                 <a
                                   type="button"
@@ -169,14 +172,14 @@ function Papers() {
                           <td className="text-nowrap">
                             <span>Are you sure</span>
                             <a
-                              className="text-decoration-none ms-3"
+                              className="text-decoration-none ms-4"
                               type="button"
                               onClick={() => setShow()}>
                               Cancel
                             </a>
-                            {data?.status != "approved" && (
+                            {show == data?._id && data?.status != "Approved" && (
                               <a
-                                className="ms-3 text-decoration-none text-success"
+                                className="ms-4 text-decoration-none text-success"
                                 type="button"
                                 onClick={() => handleApproval(data?._id)}>
                                 Approve
@@ -184,13 +187,12 @@ function Papers() {
                             )}
 
                             <a
-                              className="ms-3 text-decoration-none text-danger"
+                              className="ms-4 text-decoration-none text-danger"
                               type="button"
                               onClick={() => deletePaper(data?._id)}>
                               Delete
                             </a>
                           </td>
-                          <td></td>
                           <td></td>
                           <td></td>
                           <td></td>

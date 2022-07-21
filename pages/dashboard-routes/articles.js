@@ -114,20 +114,20 @@ function Articles() {
                               <Link
                                 href={`/dashboard/edit-article/${routeId}/${data?._id}`}>
                                 <a className="">
-                                  <MdEdit size={20} className="text-muted" />
+                                  <MdEdit size={16} className="text-muted" />
                                 </a>
                               </Link>
                               <a
                                 className="ms-4"
                                 type="button"
                                 onClick={() => setShow(data?._id)}>
-                                <MdDelete size={20} className="text-muted" />
+                                <MdDelete size={16} className="text-muted" />
                               </a>
                             </span>
                           </div>
                         </td>
                         <td className="text-nowrap align-middle">
-                          {data?.title}
+                          {data?.title?.slice(0, 30)}
                         </td>
                         <td className="text-nowrap align-middle">
                           Architecture

@@ -21,8 +21,6 @@ export default authenticate(async (req, res) => {
             limit: 5,
           });
 
-          console.log("stripe payment list", payments);
-
           for (let i = 0; i < payments?.data?.length; i++) {
             const payment = payments?.data[i];
 
@@ -51,7 +49,6 @@ export default authenticate(async (req, res) => {
             }
           }
 
-          console.log("database user list", members);
 
           if (members?.length >= 0) {
             res.status(200).json(members);

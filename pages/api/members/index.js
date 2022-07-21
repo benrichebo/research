@@ -5,7 +5,7 @@ import { connectToDatabase } from "../../../lib/mongodb";
 export default authenticate(async (req, res) => {
   const { userId, role } = await verifyUser(req);
 
-  if (userId && role == "admin") {
+  if (userId && role == "admin" || role == "manager") {
     if (req.method == "GET") {
       try {
         const { db } = await connectToDatabase();

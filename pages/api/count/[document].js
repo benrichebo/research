@@ -12,16 +12,18 @@ export default authenticate(async (req, res) => {
       return;
     }
 
+    console.log("role", role);
+
     if (role == "admin" || role == "manager") {
+      const { db } = await connectToDatabase();
+      const response = await db.collection(document).countDocuments();
+
+      console.log(response);
+      res.status(200).json({ count: response });
+    } else {
       res.status(400).json({ msg: "You are not allowed to access this data" });
       return;
     }
-
-    const { db } = await connectToDatabase();
-    const response = await db.collection(document).countDocuments();
-
-    console.log(response);
-    res.status(200).json({ count: response });
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

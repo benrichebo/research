@@ -11,15 +11,15 @@ function Papers({ id }) {
   return (
     <>
       <div className="card">
+        <div className="card-header bg-white border-0 pb-0 d-flex justify-content-between">
+          <h6 className="card-title">Papers</h6>
+          <Link href={`/dashboard/add-paper/${id}`}>
+            <a className="text-decoration-none text-info" href="#">
+              <MdAdd /> Add paper
+            </a>
+          </Link>
+        </div>
         <div className="card-body">
-          <div className="d-flex justify-content-between">
-            <h6 className="card-title">Papers</h6>
-            <Link href={`/dashboard/add-paper/${id}`}>
-              <a className="text-decoration-none" href="#">
-                <MdAdd /> Add paper
-              </a>
-            </Link>
-          </div>
           {allData?.length == 0 && (
             <p className="mb-3">There are no published papers</p>
           )}

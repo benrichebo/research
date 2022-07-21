@@ -104,7 +104,13 @@ function PayedCheckout() {
                               </a>
                             </>
                           ) : (
-                            ""
+                            <>
+                              {data?.verified && (
+                                <span className="badge bg-success">
+                                  Approved
+                                </span>
+                              )}
+                            </>
                           )}
                         </td>
                         <td className="align-middle text-nowrap"></td>

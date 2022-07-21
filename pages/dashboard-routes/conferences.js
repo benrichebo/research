@@ -93,7 +93,7 @@ function Conferences() {
                   {allData?.map((data) => (
                     <tr key={data?._id}>
                       <td className="text-nowrap align-middle">
-                        <div className="form-check">
+                        <div className="form-check d-flex align-items-center">
                           <input
                             className="form-check-input"
                             type="checkbox"
@@ -115,7 +115,7 @@ function Conferences() {
                             <Link
                               href={`/dashboard/edit-conference/${routeId}/${data?._id}`}>
                               <a className="">
-                                <MdEdit size={20} className="text-muted" />
+                                <MdEdit size={16} className="text-muted" />
                               </a>
                             </Link>
 
@@ -123,7 +123,7 @@ function Conferences() {
                               className="ms-4"
                               type="button"
                               onClick={() => setShow(data?._id)}>
-                              <MdDelete size={20} className="text-muted" />
+                              <MdDelete size={16} className="text-muted" />
                             </a>
                           </span>
                         </div>
@@ -145,7 +145,7 @@ function Conferences() {
                         )}
                       </td>
                       <td className="text-nowrap align-middle">
-                        {data?.title}
+                        {data?.title?.slice(0, 40)}
                       </td>
                       <td className="text-nowrap align-middle">
                         {data?.country}

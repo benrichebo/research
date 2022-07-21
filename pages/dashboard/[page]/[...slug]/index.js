@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Home from "../../../dashboard-routes/home";
 import Layout from "../../../../components/Layout";
@@ -19,7 +19,6 @@ import EditConference from "../../../dashboard-routes/edit-conference";
 import EditPaper from "../../../dashboard-routes/edit-paper";
 import Media from "../../../dashboard-routes/media";
 import Categories from "../../../dashboard-routes/categories";
-import { useStorage } from "../../../../hooks/useStorage";
 import Admins from "../../../dashboard-routes/admins";
 
 const routes = [
@@ -42,16 +41,7 @@ const routes = [
 
 function DashBoard() {
   const router = useRouter();
-  const { sessionStorage } = useStorage();
   const { userData, user } = useUser("user");
-
-  useEffect(() => {
-    const user = sessionStorage.getItem("user");
-    if (user?.email) {
-      //router.push("/login");
-      console.log(userData);
-    }
-  }, []);
 
   return (
     <Layout>
@@ -67,7 +57,7 @@ function DashBoard() {
             <Aside router={router} user={userData} signOut={user?.signOut} />
           </div>
           <div className="col-md-9 col-lg-10 px-0">
-            <SecondaryHeader user={userData} />
+            <SecondaryHeader user={userData} signOut={user?.signOut} />
             <div className="px-4 mt-3">
               {routes.map((route) => (
                 <div key={route?.name}>

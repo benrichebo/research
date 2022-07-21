@@ -11,15 +11,15 @@ function Categories({ id }) {
   return (
     <>
       <div className="card">
+        <div className="card-header border-0 bg-white d-flex justify-content-between pb-0">
+          <h6 className="card-title">Categories</h6>
+          <Link href={`/dashboard/categories/${id}`}>
+            <a className="text-decoration-none text-info" href="#">
+              <MdAdd /> Add category
+            </a>
+          </Link>
+        </div>
         <div className="card-body">
-          <div className="d-flex justify-content-between">
-            <h6 className="card-title">Categories</h6>
-            <Link href={`/dashboard/categories/${id}`}>
-              <a className="text-decoration-none" href="#">
-                <MdAdd /> Add category
-              </a>
-            </Link>
-          </div>
           {allData?.length == 0 && (
             <p className="my-3">There are no published categories</p>
           )}
