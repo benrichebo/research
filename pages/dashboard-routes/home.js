@@ -33,8 +33,7 @@ function Home() {
                 Available get started links. you can make a post or post a
                 conference
               </p>
-              {userData?.role == "admin" ||
-                (userData?.role == "manager" && (
+              {(userData?.role == "admin" || "manager") && (
                   <>
                     <Link href={`/dashboard/add-article/${routeId}`}>
                       <a className="btn btn-secondary me-3 mb-3" href="#">
@@ -47,7 +46,7 @@ function Home() {
                       </a>
                     </Link>
                   </>
-                ))}
+                )}
               <Link href={`/dashboard/add-paper/${routeId}`}>
                 <a className="btn btn-light mb-3" href="#">
                   Submit a paper
@@ -56,21 +55,19 @@ function Home() {
             </div>
           </div>
         </div>
-        {userData?.role == "admin" ||
-          (userData?.role == "manager" && (
+        {(userData?.role == "admin" || "manager")  && (
             <div className="col-sm-12 col-md-6 mb-4">
               <AllData />
             </div>
-          ))}
+          )}
         <div className="col-sm-12 col-md-6 mb-4">
           <Payments />
         </div>
-        {userData?.role == "admin" ||
-          (userData?.role == "manager" && (
+        {(userData?.role == "admin" || "manager")  && (
             <div className="col-sm-12 col-md-6 mb-4">
               <Categories id={routeId} />
             </div>
-          ))}
+          )}
         <div className="col-sm-12 col-md-6 mb-4">
           <Papers id={routeId} />
         </div>

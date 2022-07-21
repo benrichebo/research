@@ -3,8 +3,8 @@ import { useCount } from "../../hooks/useCount";
 
 const Members = () => {
   const { oneData, error, loading, message } = useCount(
-    "one-count-members",
-    "/api/count/members"
+    "all-payments",
+    "/api/payments/stripe/payments"
   );
   console.log("members", oneData);
   return (
