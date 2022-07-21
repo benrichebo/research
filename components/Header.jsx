@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import { useUser } from "../hooks/useUser";
 
 function Header() {
+  const { userData } = useUser("user");
   return (
     <nav className="navbar navbar-light bg-white py-3 border-bottom">
       <div className="container">
@@ -24,19 +26,26 @@ function Header() {
           <ul className="navbar-nav d-flex mx-auto ms-auto list-group-horizontal-md">
             <li className="nav-item">
               <Link href="/contactus">
-                <a className="nav-link p">Contact us</a>
+                <a className="nav-link p text-nowrap">Contact us</a>
               </Link>
             </li>
-            <li className="nav-item ms-md-4">
-              <Link href="/register">
-                <a className="nav-link p">Register as a member</a>
-              </Link>
-            </li>
-            <li className="nav-item ms-md-4">
-              <Link href="/login">
-                <a className="nav-link p">Login</a>
-              </Link>
-            </li>
+            {!userData?.id && (
+              <>
+                <li className="nav-item ms-md-4">
+                  <Link href="/register">
+                    <a className="nav-link p text-nowrap">
+                      Register as a member
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item ms-md-4">
+                  <Link href="/login">
+                    <a className="nav-link p">Login</a>
+                  </Link>
+                </li>
+              </>
+            )}
+
             <li className="nav-item ms-md-4">
               <Link href="/membership">
                 <a className="nav-link p">Membership</a>
@@ -61,6 +70,15 @@ function Header() {
                 </a>
               </Link>
             </li>
+            {userData?.id && (
+              <li className="nav-item ms-md-4">
+                <Link href={`/dashboard/home/${userData?.id}`}>
+                  <a className="nav-link p bg-light p-1 rounded" href="#">
+                    Account
+                  </a>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

@@ -27,8 +27,11 @@ export const useUser = (type) => {
         setUserData(user || initializedUser);
         setLoading(false);
       } else {
-        router?.push("/login");
-        this.getCurrentUser();
+        console.log(router);
+        if (router?.asPath?.includes("dashboard")) {
+          router?.push("/login");
+          this.getCurrentUser();
+        }
       }
     },
 

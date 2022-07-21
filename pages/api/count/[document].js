@@ -12,7 +12,7 @@ export default authenticate(async (req, res) => {
       return;
     }
 
-    if (role !== "admin") {
+    if (role == "admin" || role == "manager") {
       res.status(400).json({ msg: "You are not allowed to access this data" });
       return;
     }
