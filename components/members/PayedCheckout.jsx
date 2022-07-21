@@ -3,6 +3,7 @@ import Spinner from "../ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdRefresh, MdPayments } from "react-icons/md";
 import { useUser } from "../../hooks/useUser";
+import Search from "../ui/Search";
 
 function PayedCheckout() {
   const { userData } = useUser("user");
@@ -11,6 +12,7 @@ function PayedCheckout() {
     "all-payments",
     "/api/payments/stripe/payments"
   );
+   const [keyword, setKeyword] = useState("");
 
   console.log(allData, error);
 
@@ -43,11 +45,10 @@ function PayedCheckout() {
           <div className="col-12 d-md-flex justify-content-md-between align-items-md-center mb-3">
             <h4 className="mb-lg-0">Members</h4>
             <div className="d-flex justify-content-start align-items-center">
-              <input
-                type="search"
-                className="form-control w-auto h-100"
-                placeholder="Search for an item"
-                autoComplete="on"
+              <Search
+                items={allData}
+                keyword={keyword}
+                setKeyword={setKeyword}
               />
               <button
                 className="btn btn-light ms-3"

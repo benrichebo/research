@@ -62,7 +62,7 @@ function Papers() {
           <div class="col-12 d-flex justify-content-end align-items-center mb-3">
             <input
               type="search"
-              class="form-control w-auto"
+              class="form-control w-auto d-none"
               placeholder="Search for an item"
               autoComplete="on"
             />

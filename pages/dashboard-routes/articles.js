@@ -34,7 +34,7 @@ function Articles() {
           <div className="d-sm-flex justify-content-sm-start align-items-sm-center">
             <input
               type="search"
-              className="form-control w-auto h-100"
+              className="form-control w-auto h-100 d-none"
               placeholder="Search for an item"
               autocomplete="on"
             />

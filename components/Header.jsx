@@ -73,7 +73,7 @@ function Header() {
             {userData?.id && (
               <li className="nav-item ms-md-4">
                 <Link href={`/dashboard/home/${userData?.id}`}>
-                  <a className="nav-link p bg-light p-1 rounded" href="#">
+                  <a className="nav-link bg-light px-3 py-1" href="#">
                     Account
                   </a>
                 </Link>
