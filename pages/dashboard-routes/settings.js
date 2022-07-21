@@ -34,65 +34,68 @@ function Settings() {
   if (error) return "There is an error";
 
   return (
-    <div className="col-md-9 col-lg-7">
-      {postError && <p className="text-danger">{postError}</p>}
-      {message && <p className="text-success">{message}</p>}
-      <form className="row" onSubmit={handleSubmit}>
-        <div className="form-group mb-4">
-          <label htmlFor="name" className="mb-2">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control rounded-0"
-            name="email"
-            id="email"
-            aria-describedby="helpId"
-            placeholder=""
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="form-group mb-4">
-          <label htmlFor="email" className="mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control rounded-0"
-            name="email"
-            id="email"
-            aria-describedby="helpId"
-            placeholder=""
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="form-group mb-4">
-          <label htmlFor="city" className="mb-2">
-            City
-          </label>
-          <input
-            type="text"
-            className="form-control rounded-0"
-            name="city"
-            id="city"
-            aria-describedby="helpId"
-            placeholder=""
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </div>
-        <div className="d-grid my-3">
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={postLoading || !email || !name || !city}>
-            {postLoading ? <Spinner /> : <span className="ms-3">Save</span>}
-          </button>
-        </div>
-      </form>
-    </div>
+    <>
+    
+      <div className="col-md-9 col-lg-7">
+        {postError && <p className="text-danger">{postError}</p>}
+        {message && <p className="text-success">{message}</p>}
+        <form className="row" onSubmit={handleSubmit}>
+          <div className="form-group mb-4">
+            <label htmlFor="name" className="mb-2">
+              Name
+            </label>
+            <input
+              type="text"
+              className="form-control rounded-0"
+              name="name"
+              id="name"
+              aria-describedby="helpId"
+              placeholder=""
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="form-group mb-4">
+            <label htmlFor="email" className="mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              className="form-control rounded-0"
+              name="email"
+              id="email"
+              aria-describedby="helpId"
+              placeholder=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="form-group mb-4">
+            <label htmlFor="city" className="mb-2">
+              City
+            </label>
+            <input
+              type="text"
+              className="form-control rounded-0"
+              name="city"
+              id="city"
+              aria-describedby="helpId"
+              placeholder=""
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
+          <div className="d-grid my-3">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={postLoading || !email || !name || !city}>
+              {postLoading ? <Spinner /> : <span className="ms-3">Save</span>}
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

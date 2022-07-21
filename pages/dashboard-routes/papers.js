@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
-import { MdPictureAsPdf, MdEdit, MdDelete } from "react-icons/md";
+import { MdPictureAsPdf, MdEdit, MdDelete, MdRefresh } from "react-icons/md";
 import { useRouter } from "next/router";
 import { useUser } from "../../hooks/useUser";
 
@@ -28,8 +28,8 @@ function Papers() {
     await data.deleteData(`/api/papers/${id}`);
   };
 
-  const handleApproval = async () => {
-    await data.updateData({ status: "Approved" }, `/api/papers/approve`);
+  const handleApproval = async (id) => {
+    await data.updateData({ status: "Approved" }, `/api/papers/${id}`);
   };
 
   return (
@@ -66,6 +66,11 @@ function Papers() {
               placeholder="Search for an item"
               autoComplete="on"
             />
+            <button
+              className="btn btn-light ms-3"
+              onClick={() => data.getAllData("/api/papers")}>
+              <MdRefresh />
+            </button>
           </div>
           <div class="col">
             <div class="table-responsive">
@@ -125,23 +130,26 @@ function Papers() {
                           {data?.createdAt}
                         </td>
                         <td className="text-nowrap align-middle">
-                          {data?.status != "approved" &&
-                          userData?.role == "admin" ? (
+                          {(data?.status != "approved" &&
+                            userData?.role == "admin") ||
+                          userData?.role == "manager" ? (
                             <>
                               <span class="badge bg-secondary">
                                 {data?.status}
                               </span>
-                              <a
-                                type="button"
-                                className="btn btn-light btn-sm ms-3"
-                                disabled={postLoading}
-                                onClick={handleApproval}>
-                                {postLoading ? (
-                                  <Spinner className="ms-2" />
-                                ) : (
-                                  <span className="">Approve</span>
-                                )}
-                              </a>
+                              {data?.status != "Approved" && (
+                                <a
+                                  type="button"
+                                  className="btn btn-light btn-sm ms-3"
+                                  disabled={postLoading}
+                                  onClick={() => setShow(data?._id)}>
+                                  {show == data?._id && postLoading ? (
+                                    <Spinner className="ms-2" />
+                                  ) : (
+                                    <span className="">Approve</span>
+                                  )}
+                                </a>
+                              )}
                             </>
                           ) : (
                             ""
@@ -157,7 +165,7 @@ function Papers() {
                         </td>
                       </tr>
                       {show == data?._id && (
-                        <tr className="mt-3 bg-light">
+                        <tr className="mt-3 bg-light small">
                           <td className="text-nowrap">
                             <span>Are you sure</span>
                             <a
@@ -166,6 +174,15 @@ function Papers() {
                               onClick={() => setShow()}>
                               Cancel
                             </a>
+                            {data?.status != "approved" && (
+                              <a
+                                className="ms-3 text-decoration-none text-success"
+                                type="button"
+                                onClick={() => handleApproval(data?._id)}>
+                                Approve
+                              </a>
+                            )}
+
                             <a
                               className="ms-3 text-decoration-none text-danger"
                               type="button"

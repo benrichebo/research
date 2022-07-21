@@ -20,6 +20,7 @@ import EditPaper from "../../../dashboard-routes/edit-paper";
 import Media from "../../../dashboard-routes/media";
 import Categories from "../../../dashboard-routes/categories";
 import { useStorage } from "../../../../hooks/useStorage";
+import Admins from "../../../dashboard-routes/admins";
 
 const routes = [
   { name: "home", page: <Home /> },
@@ -29,6 +30,7 @@ const routes = [
   { name: "articles", page: <Articles /> },
   { name: "settings", page: <Settings /> },
   { name: "members", page: <Members /> },
+  { name: "admins", page: <Admins /> },
   { name: "add-conference", page: <AddConference /> },
   { name: "edit-conference", page: <EditConference /> },
   { name: "add-paper", page: <AddPaper /> },
@@ -60,7 +62,7 @@ function DashBoard() {
             style={{ position: "sticky", top: 0 }}>
             <div className="text-white-50 my-3 ms-lg-3">
               <h6>{userData?.name}</h6>
-              <h6>{userData?.role}</h6>
+              <h6>Role: {userData?.role}</h6>
             </div>
             <Aside router={router} user={userData} signOut={user?.signOut} />
           </div>

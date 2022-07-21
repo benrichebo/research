@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
-import { authenticate } from "../authentication";
-import { connectToDatabase } from "../../../lib/mongodb";
-import { verifyUser } from "../verification";
+import { authenticate } from "../../authentication";
+import { connectToDatabase } from "../../../../lib/mongodb";
+import { verifyUser } from "../../verification";
 
 export default authenticate(async (req, res) => {
   const method = req.method;

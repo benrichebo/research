@@ -5,6 +5,7 @@ import { connectToDatabase } from "../../../lib/mongodb";
 
 export default authenticate(async (req, res) => {
   const { userId, role } = await verifyUser(req);
+  console.log("role", role);
 
   if (userId) {
     if (req.method == "GET") {
@@ -12,7 +13,7 @@ export default authenticate(async (req, res) => {
         const { db } = await connectToDatabase();
 
         let papers = [];
-        if (role == "admin") {
+        if (role == "admin" || role == "manager") {
           papers = await db.collection("papers").find().toArray();
         } else {
           papers = await db.collection("papers").find({ userId });

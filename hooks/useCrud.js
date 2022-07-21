@@ -25,7 +25,10 @@ export const useCrud = (type, url) => {
         setLoading(false);
         console.log("data", data);
         if (data?.msg && !data?.msg.includes("There are no")) {
-          setError(data.msg);
+
+          //check if there is a session
+          const data = sessionStorage.getItem(type);
+          if (data?.length == 0) setError(data.msg);
         } else {
           sessionStorage.clearItem(type);
           if (data?.length > 0) {
@@ -59,7 +62,7 @@ export const useCrud = (type, url) => {
           }
           setLoading(false);
         } else {
-          console.log("no url")
+          console.log("no url");
         }
       } catch (error) {
         setLoading(false);

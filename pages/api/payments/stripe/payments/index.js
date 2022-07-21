@@ -15,7 +15,7 @@ export default authenticate(async (req, res) => {
     if (req.method == "GET") {
       try {
         let members = [];
-        if (role == "admin") {
+        if (role == "admin" || role == "manager") {
           //fetch customers from stripe api
           let payments = await stripe.checkout.sessions.list({
             limit: 5,
@@ -51,7 +51,7 @@ export default authenticate(async (req, res) => {
             }
           }
 
-          console.log("database user list", payments);
+          console.log("database user list", members);
 
           if (members?.length >= 0) {
             res.status(200).json(members);
@@ -94,7 +94,7 @@ export default authenticate(async (req, res) => {
               });
             }
           }
-console.log(payments);
+          console.log(payments);
           if (payments?.length > 0) {
             res.status(200).json(payments);
           } else {

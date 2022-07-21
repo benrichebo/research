@@ -10,7 +10,7 @@ function Payments() {
     <>
       <div className="card">
         <div className="card-body">
-          <h6 className="card-title">Payments</h6>
+          <h6 className="card-title">Registered members</h6>
           {allData &&
             allData?.length > 0 &&
             allData.slice(0, 3).map((payment) => (
