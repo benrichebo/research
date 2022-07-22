@@ -6,7 +6,7 @@ import Spinner from "./ui/Spinner";
 const CheckoutForm = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
-   const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const [id, setId] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -34,7 +34,7 @@ const CheckoutForm = () => {
         sessionId: id,
       });
 
-      setError(error.message);
+      if (error?.message) setError(error.message);
     } catch (err) {
       setMessage(err.message);
     }

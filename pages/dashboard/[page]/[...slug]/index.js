@@ -20,6 +20,7 @@ import EditPaper from "../../../dashboard-routes/edit-paper";
 import Media from "../../../dashboard-routes/media";
 import Categories from "../../../dashboard-routes/categories";
 import Admins from "../../../dashboard-routes/admins";
+import Link from "next/link";
 
 const routes = [
   { name: "home", page: <Home /> },
@@ -47,6 +48,18 @@ function DashBoard() {
     <Layout>
       <div className="container-fluid">
         <div className="row">
+          {!userData?.verified && (
+            <div className="bg-warning container-md py-2 d-md-flex justify-content-start">
+              <p className="mb-1 mb-md-0">
+                You haven't made the membership payment
+              </p>
+              <Link href="/make-payment">
+                <a className="btn btn-primary btn-sm ms-md-4 bg-opacity-50">
+                  make payment
+                </a>
+              </Link>
+            </div>
+          )}
           <div
             className="col-md-3 col-lg-2 d-none d-md-block vh-100 bg-dark "
             style={{ position: "sticky", top: 0 }}>
@@ -58,6 +71,7 @@ function DashBoard() {
           </div>
           <div className="col-md-9 col-lg-10 px-0">
             <SecondaryHeader user={userData} signOut={user?.signOut} />
+
             <div className="px-4 mt-3">
               {routes.map((route) => (
                 <div key={route?.name}>

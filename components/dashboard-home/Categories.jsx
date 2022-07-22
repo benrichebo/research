@@ -12,7 +12,7 @@ function Categories({ id }) {
     <>
       <div className="card">
         <div className="card-header border-0 bg-white d-flex justify-content-between pb-0">
-          <h6 className="card-title">Categories</h6>
+          <h6 className="card-title fw-bold">Categories</h6>
           <Link href={`/dashboard/categories/${id}`}>
             <a className="text-decoration-none text-info" href="#">
               <MdAdd /> Add category

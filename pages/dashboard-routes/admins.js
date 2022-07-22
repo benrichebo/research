@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCrud } from "../../hooks/useCrud";
 import Spinner from "../../components/ui/Spinner";
 import { MdDelete, MdEdit, MdRefresh } from "react-icons/md";
+import { useStorage } from "../../hooks/useStorage";
 
 const roles = ["admin", "manager"];
 
@@ -9,47 +10,42 @@ function Admins() {
   const { data, allData, postLoading, postError, error, loading, message } =
     useCrud("all-admins", "/api/admins");
 
-  const [admin, setAdmin] = useState(null);
+  const [members, setMembers] = useState([]);
+
+  const { sessionStorage } = useStorage();
+
+  //get members
+  useEffect(() => {
+    const mems = sessionStorage.getItem("all-payments");
+    console.log(mems);
+    if (mems) {
+      setMembers(mems);
+    }
+  }, []);
 
   const [show, setShow] = useState();
   const [action, setAction] = useState(false); //set to prevent form spinner on delete
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [admin, setAdmin] = useState(null);
+  const [id, setId] = useState("");
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    console.log(admin);
-    if (admin?.name) {
-      setName(admin?.name);
-      setEmail(admin?.email);
+    if (admin?.id) {
+      setId(admin?.id);
       setRole(admin?.role);
-    } else {
-      setName("");
-      setEmail("");
-      setPassword("");
-      setRole();
     }
   }, [admin]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let body;
-    if (admin?.name) {
-      body = {
-        name,
-        email,
-        role
-      };
-    } else {
-      body = {
-        name,
-        email,
-        role,
-        password,
-      };
-    }
+
+    const body = {
+      id,
+      role,
+    };
+
+    console.log(body);
 
     admin?.name
       ? await data.updateData(body, `/api/admins/${admin?._id}`)
@@ -64,61 +60,29 @@ function Admins() {
 
   return (
     <>
-      <h5>{admin?.title ? "Edit admin" : "Add admin"}</h5>
+      <h5>{admin?.id ? "Edit admin" : "Add admin"}</h5>
       {message && <p className="text-success">{message}</p>}
       {postError && <p className="text-danger">{postError}</p>}
       <div className="row">
         <div className="col-lg-5">
           <form className="row mb-4" onSubmit={handleSubmit}>
             <div className="">
-              <div className="form-group mb-4">
-                <label htmlFor="name" className="mb-2" id="name">
-                  Name
+              <div className="mb-3">
+                <label htmlFor="role" className="mb-2" id="role">
+                  Members
                 </label>
-                <input
-                  email="text"
-                  className="form-control rounded-0"
-                  name="text"
-                  id="name"
-                  aria-describedBy="helpId"
-                  placeholder=""
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+                <select
+                  className="form-select rounded-0"
+                  name="member"
+                  id="member"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}>
+                  <option value="">--Select member--</option>
+                  {members?.map((member) => (
+                    <option value={member?.id}>{member?.name}</option>
+                  ))}
+                </select>
               </div>
-              <div className="form-group mb-4">
-                <label htmlFor="email" className="mb-2" id="email">
-                  email
-                </label>
-                <input
-                  type="email"
-                  className="form-control rounded-0"
-                  name="email"
-                  id="email"
-                  aria-describedBy="helpId"
-                  placeholder=""
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              {!admin?.role && (
-                <div className="form-group mb-4">
-                  <label htmlFor="password" className="mb-2" id="password">
-                    Password
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control rounded-0"
-                    name="password"
-                    id="password"
-                    aria-describedBy="helpId"
-                    placeholder=""
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-              )}
-
               <div>
                 <label htmlFor="role" className="mb-2" id="role">
                   Role
@@ -136,7 +100,7 @@ function Admins() {
                 </select>
               </div>
               <div className="my-3 mt-4 d-flex justify-content-between">
-                {admin?.name && (
+                {admin?.id && (
                   <button
                     className="btn btn-light"
                     onClick={() => setAdmin(null)}>
@@ -147,12 +111,12 @@ function Admins() {
                 <button
                   className="btn btn-primary"
                   type="submit"
-                  disabled={postLoading || !name || !email || !role}>
+                  disabled={postLoading || !id || !role}>
                   {postLoading && !action ? (
                     <Spinner className="ms-2" />
                   ) : (
                     <span className="">
-                      {admin?.name ? "Save admin" : "Add admin"}
+                      {admin?.id ? "Save admin" : "Add admin"}
                     </span>
                   )}
                 </button>
@@ -184,8 +148,6 @@ function Admins() {
                         <thead>
                           <tr>
                             <th>Name</th>
-                            <th>email</th>
-                            <th>password</th>
                             <th>Role</th>
                           </tr>
                         </thead>
@@ -194,15 +156,11 @@ function Admins() {
                             <>
                               <tr key={data?._id}>
                                 <td className="text-nowrap">{data?.name}</td>
-                                <td className="text-nowrap">{data?.email}</td>
-                                <td className="text-nowrap">
-                                  {data?.revealed_password}
-                                </td>
                                 <td className="text-nowrap">{data?.role}</td>
                                 <td className="text-nowrap">
                                   <a
                                     href="#"
-                                    onClick={() => setAdmin(data)}
+                                    onClick={() => setMember(data)}
                                     className="text-decoration-none">
                                     <MdEdit size={16} className="text-muted" />
                                   </a>

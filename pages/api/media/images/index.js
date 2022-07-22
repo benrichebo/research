@@ -3,16 +3,23 @@ import { authenticate } from "../../authentication";
 import { verifyUser } from "../../verification";
 
 export default authenticate(async (req, res) => {
-  const { userId } = await verifyUser(req);
+  const { userId, role } = await verifyUser(req);
 
   if (userId) {
     if (req.method == "GET") {
       try {
         const { db } = await connectToDatabase();
 
-        const media = await db.collection("media").find().toArray();
+        let media = [];
 
-        console.log("media", media);
+        if (role == "member") {
+          media = await db.collection("media").find().toArray();
+           console.log("media", media);
+        } else {
+          media = await db.collection("media").find().toArray();
+        }
+
+       
 
         if (media?.length >= 0) {
           res.status(200).json(media);

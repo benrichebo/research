@@ -6,7 +6,6 @@ import {
   MdLibraryBooks,
   MdPerson,
   MdPictureAsPdf,
-  MdPayments,
   MdOutlinePermMedia,
   MdCategory,
   MdGroup,
@@ -43,7 +42,7 @@ const Aside = ({ router, user, signOut }) => {
               </a>
             </Link>
           </li>
-          {(user?.role == "admin" || "manager") && (
+          {(user?.role == "admin" || user?.role == "manager") && (
             <>
               <li className="mb-4">
                 <Link href={`/dashboard/articles/${user?._id}`}>

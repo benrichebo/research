@@ -13,7 +13,7 @@ export const config = {
 
 export default authenticate(async (req, res) => {
   //verify user
-  const { userId } = await verifyUser(req);
+  const { userId, role } = await verifyUser(req);
 
   const { db } = await connectToDatabase();
 
@@ -48,6 +48,7 @@ export default authenticate(async (req, res) => {
 
       type == "image"
         ? (data = {
+          userId,
             name,
             width,
             height,
@@ -56,12 +57,14 @@ export default authenticate(async (req, res) => {
             type,
           })
         : (data = {
+          userId,
             name,
             public_id,
             url,
             type,
             size,
           });
+
 
       //push to media
       //5. insert data into company collection

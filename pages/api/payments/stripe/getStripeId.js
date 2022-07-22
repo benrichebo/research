@@ -30,7 +30,7 @@ export const getStripeId = async (req) => {
       ],
       customer_email: email,
       mode: "payment", //it can be "subscription" for recurring payments only
-      success_url: `${req.headers.origin}/dashboard/payments/${userId}`,
+      success_url: `${req.headers.origin}/dashboard/members/${userId}`,
       cancel_url: `${req.headers.origin}/make-payment`,
     });
 

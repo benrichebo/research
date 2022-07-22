@@ -30,9 +30,11 @@ export default authenticate(async (req, res) => {
     if (req.method == "PUT") {
       const body = JSON.parse(req.body);
 
+      const { role } = body;
+
       const response = await db
         .collection("members")
-        .updateOne({ _id: ObjectId(id) }, { $set: { ...body } });
+        .updateOne({ _id: ObjectId(id) }, { $set: { role } });
       console.log("response", response);
       if (response?.acknowledged) {
         res.status(200).json({ msg: "admin updated successfully" });

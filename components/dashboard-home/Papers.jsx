@@ -12,7 +12,7 @@ function Papers({ id }) {
     <>
       <div className="card">
         <div className="card-header bg-white border-0 pb-0 d-flex justify-content-between">
-          <h6 className="card-title">Papers</h6>
+          <h6 className="card-title fw-bold">Papers</h6>
           <Link href={`/dashboard/add-paper/${id}`}>
             <a className="text-decoration-none text-info" href="#">
               <MdAdd /> Add paper

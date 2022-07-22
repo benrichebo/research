@@ -11,7 +11,7 @@ function Payments({user}) {
     <>
       <div className="card">
         <div className="card-header d-flex justify-content-between border-0 bg-white pb-0">
-          <h6 className="card-title mb-0">Members</h6>
+          <h6 className="card-title mb-0 fw-bold">Members</h6>
           <Link href={`/dashboard/members/${user?.id}`}>
             <a className="text-decoration-none text-info" href="#">
               See more

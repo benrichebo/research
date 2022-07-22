@@ -45,15 +45,15 @@ function AllData() {
         <div className="card-body">
           <div className="row">
             <div className="col-6 col-sm-4">
-              <h6 className="text-muted">Members</h6>
+              <h6 className="text-muted fw-bold">Members</h6>
               <Members />
             </div>
             <div className="col-6 col-sm-4">
-              <h6 className="text-muted">Conference</h6>
+              <h6 className="text-muted fw-bold">Conference</h6>
               <Conferences />
             </div>
             <div className="col-6 col-sm-4">
-              <h6 className="text-muted">Papers</h6>
+              <h6 className="text-muted fw-bold">Papers</h6>
               <Papers />
             </div>
           </div>
