@@ -49,9 +49,9 @@ function DashBoard() {
       <div className="container-fluid">
         <div className="row">
           {!userData?.verified && (
-            <div className="bg-warning container-md py-2 d-md-flex justify-content-start">
-              <p className="mb-1 mb-md-0">
-                You haven't made the membership payment
+            <div className="bg-warning container-md py-2 d-md-flex justify-content-center align-items-center">
+              <p className="mb-1 mb-sm-0">
+                You haven't made the membership payment / you have not been approved. Approval will not take more than 24hrs
               </p>
               <Link href="/make-payment">
                 <a className="btn btn-primary btn-sm ms-md-4 bg-opacity-50">
