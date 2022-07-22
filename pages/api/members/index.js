@@ -5,14 +5,17 @@ import { connectToDatabase } from "../../../lib/mongodb";
 export default authenticate(async (req, res) => {
   const { userId, role } = await verifyUser(req);
 
-  if (userId && role == "admin" || role == "manager") {
+  if ((userId && role == "admin") || role == "manager") {
     if (req.method == "GET") {
       try {
         const { db } = await connectToDatabase();
 
-        const members = await db.collection("members").find().toArray();
+        const members = await db
+          .collection("members")
+          .find({}, { projection: { name: 1, status: 1, email: 1 } })
+          .toArray();
 
-        console.log("members", members)
+        console.log("members", members);
 
         if (members?.length >= 0) {
           res.status(200).json(members);

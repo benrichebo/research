@@ -21,6 +21,7 @@ import Media from "../../../dashboard-routes/media";
 import Categories from "../../../dashboard-routes/categories";
 import Admins from "../../../dashboard-routes/admins";
 import Link from "next/link";
+import Payments from "../../../dashboard-routes/payments";
 
 const routes = [
   { name: "home", page: <Home /> },
@@ -30,6 +31,7 @@ const routes = [
   { name: "articles", page: <Articles /> },
   { name: "settings", page: <Settings /> },
   { name: "members", page: <Members /> },
+  { name: "payments", page: <Payments /> },
   { name: "admins", page: <Admins /> },
   { name: "add-conference", page: <AddConference /> },
   { name: "edit-conference", page: <EditConference /> },
@@ -48,18 +50,6 @@ function DashBoard() {
     <Layout>
       <div className="container-fluid">
         <div className="row">
-          {!userData?.verified && (
-            <div className="bg-warning container-md py-2 d-md-flex justify-content-center align-items-center">
-              <p className="mb-1 mb-sm-0">
-                You haven't made the membership payment / you have not been approved. Approval will not take more than 24hrs
-              </p>
-              <Link href="/make-payment">
-                <a className="btn btn-primary btn-sm ms-md-4 bg-opacity-50">
-                  make payment
-                </a>
-              </Link>
-            </div>
-          )}
           <div
             className="col-md-3 col-lg-2 d-none d-md-block vh-100 bg-dark "
             style={{ position: "sticky", top: 0 }}>

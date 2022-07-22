@@ -1,10 +1,60 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Spinner from "../../components/ui/Spinner";
+import { useCrud } from "../../hooks/useCrud";
 import { useUser } from "../../hooks/useUser";
+
+const Payment = ({ userData }) => {
+  const { data, loading, oneData, error } = useCrud(
+    "one-payment",
+    `/api/payments/stripe/payments/${userData?.id}`
+  );
+
+  return (
+    <>
+      <h4>Payment</h4>
+      {loading && !error && (
+        <div className="d-flex justify-content-center align-items-center my-5">
+          <Spinner />
+        </div>
+      )}
+
+      {error && !loading && (
+        <div className="d-flex justify-content-center align-items-center my-5">
+          <div className="text-center">
+            <h6 className="text-muted">There was an error loading payment details</h6>
+            <button
+              className="btn btn-primary my-3"
+              onClick={() =>
+                data.getOneData(`/api/payments/stripe/payments/${userData?.id}`)
+              }>
+              Reload
+            </button>
+          </div>
+        </div>
+      )}
+      {oneData && oneData?.status != "paid" && (
+        <>
+          <p>You have not payed your dues</p>
+          <Link href="/make-payment">
+            <a className="btn btn-primary my-3">Make payment</a>
+          </Link>
+        </>
+      )}
+      {oneData && oneData?.status == "paid" && (
+        <>
+          <p>You have payed your dues</p>
+          <p>{oneData?.amount}</p>
+        </>
+      )}
+    </>
+  );
+};
 
 function Settings() {
   //1. get user
-  const { user, loading, error, postError, postLoading, message, userData } = useUser("user");
+  const { user, loading, error, postError, postLoading, message, userData } =
+    useUser("user");
 
   const [name, setName] = useState(userData?.name || "");
 
@@ -14,14 +64,13 @@ function Settings() {
 
   useEffect(() => {
     setName(userData?.name);
-    setEmail(userData?.email)
-    setCity(userData?.city)
+    setEmail(userData?.email);
+    setCity(userData?.city);
   }, [userData]);
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await user.updateUser({name, email, city})
+    await user.updateUser({ name, email, city });
   };
 
   const deleteAccount = async (e) => {
@@ -35,11 +84,11 @@ function Settings() {
 
   return (
     <>
-    
       <div className="col-md-9 col-lg-7">
+        <h4>Account</h4>
         {postError && <p className="text-danger">{postError}</p>}
         {message && <p className="text-success">{message}</p>}
-        <form className="row" onSubmit={handleSubmit}>
+        <form className="row mb-4" onSubmit={handleSubmit}>
           <div className="form-group mb-4">
             <label htmlFor="name" className="mb-2">
               Name
@@ -94,6 +143,7 @@ function Settings() {
             </button>
           </div>
         </form>
+        {userData?.id && <Payment userData={userData} />}
       </div>
     </>
   );

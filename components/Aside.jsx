@@ -9,6 +9,7 @@ import {
   MdOutlinePermMedia,
   MdCategory,
   MdGroup,
+  MdPayments,
 } from "react-icons/md";
 
 const Aside = ({ router, user, signOut }) => {
@@ -84,6 +85,7 @@ const Aside = ({ router, user, signOut }) => {
                 </Link>
               </li>
               {user?.role == "admin" && (
+                <>
                 <li className="mb-4">
                   <Link href={`/dashboard/admins/${user?._id}`}>
                     <a
@@ -97,6 +99,20 @@ const Aside = ({ router, user, signOut }) => {
                     </a>
                   </Link>
                 </li>
+                 <li className="mb-4">
+                  <Link href={`/dashboard/payments/${user?._id}`}>
+                    <a
+                      className={`text-decoration-none d-flex justify-content-start align-items-center ${
+                        router?.query?.page == "payments"
+                          ? "fw-bold text-white"
+                          : "text-white-50"
+                      }`}>
+                      <MdPayments className="" />
+                      <span className="ms-3">Payments</span>
+                    </a>
+                  </Link>
+                </li>
+                </>
               )}
 
               <li className="mb-4">
