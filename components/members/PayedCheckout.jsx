@@ -42,7 +42,7 @@ function PayedCheckout() {
       {!error && allData?.length > 0 && (
         <div className="row">
           {postError && <p className="text-danger">{postError}</p>}
-          <div className="col-12 d-md-flex justify-content-md-between align-items-md-center mb-3">
+          <div className="col-12 d-flex justify-content-between align-items-center mb-3">
             <h4 className="mb-lg-0">Members</h4>
             <div className="d-flex justify-content-start align-items-center">
               <Search

@@ -15,7 +15,7 @@ const routes = [
   { name: "Papers", icon: <MdPictureAsPdf className="" /> },
   { name: "Articles", icon: <MdLibraryBooks className="" /> },
   { name: "Conferences", icon: <MdReceiptLong className="" /> },
-  { name: "Payments", icon: <MdPayments className="" /> },
+  { name: "Members", icon: <MdPayments className="" /> },
   { name: "Settings", icon: <MdPerson className="" /> },
   { name: "Media", icon: <MdOutlinePermMedia className="" /> },
 ];
@@ -23,7 +23,7 @@ const routes = [
 const memberRoutes = [
   { name: "Home", icon: <MdDashboard className="" /> },
   { name: "Papers", icon: <MdPictureAsPdf className="" /> },
-  { name: "Payments", icon: <MdPayments className="" /> },
+  { name: "Members", icon: <MdPayments className="" /> },
   { name: "Settings", icon: <MdPerson className="" /> },
 ];
 

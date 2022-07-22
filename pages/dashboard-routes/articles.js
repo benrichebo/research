@@ -28,8 +28,8 @@ function Articles() {
 
   return (
     <>
-      <div className="d-md-flex justify-content-md-between align-items-md-center mb-4">
-        <h5>Articles</h5>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h5 className="mb-0">Articles</h5>
         <div>
           <div className="d-sm-flex justify-content-sm-start align-items-sm-center">
             <input
@@ -39,7 +39,7 @@ function Articles() {
               autocomplete="on"
             />
             <Link href={`/dashboard/add-article/${routeId}`}>
-              <a className="btn btn-primary ms-sm-3">Add article</a>
+              <a className="btn btn-primary">Add article</a>
             </Link>
             <button
               className="btn btn-light my-3 ms-3"
@@ -75,12 +75,13 @@ function Articles() {
               <table className="table">
                 <thead>
                   <tr>
-                    <th className="d-flex justify-content-start align-items-center text-nowrap">
-                      <span className="fw-normal">Bulk Actions</span>
+                    <th className="">
+                      {/* <span className="fw-normal">Bulk Actions</span>
                       <select className="form-select-sm form-select w-auto ms-3">
                         <option value="">--select--</option>
                         <option value="delete">Delete</option>
-                      </select>
+                      </select> */}
+                      #
                     </th>
                     <th>Title</th>
                     <th>Category</th>

@@ -121,7 +121,7 @@ function Media() {
                                 className="ms-4"
                                 type="button"
                                 onClick={() => setShow(data?._id)}>
-                                <MdDelete size={20} className="text-muted" />
+                                <MdDelete size={16} className="text-muted" />
                               </a>
                             </span>
                           </div>

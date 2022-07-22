@@ -34,11 +34,18 @@ function Papers() {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h5>Papers</h5>
-        <Link href={`/dashboard/add-paper/${routeId}`}>
-          <a className="btn btn-primary">Add paper</a>
-        </Link>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h5 className="mb-0">Papers</h5>
+        <div>
+          <Link href={`/dashboard/add-paper/${routeId}`}>
+            <a className="btn btn-primary">Add paper</a>
+          </Link>
+          <button
+            className="btn btn-light ms-3"
+            onClick={() => data.getAllData("/api/papers")}>
+            <MdRefresh />
+          </button>
+        </div>
       </div>
       {loading && (
         <div className="d-flex justify-content-center align-items-center my-5">
@@ -66,11 +73,6 @@ function Papers() {
               placeholder="Search for an item"
               autoComplete="on"
             />
-            <button
-              className="btn btn-light ms-3"
-              onClick={() => data.getAllData("/api/papers")}>
-              <MdRefresh />
-            </button>
           </div>
           <div class="col">
             <div class="table-responsive">
@@ -78,11 +80,12 @@ function Papers() {
                 <thead>
                   <tr>
                     <th class="d-flex justify-content-start align-items-center text-nowrap">
-                      <span class="fw-normal">Bulk Actions</span>
+                     {/*  <span class="fw-normal">Bulk Actions</span>
                       <select class="form-select-sm form-select w-auto ms-3">
                         <option value="">--select--</option>
                         <option value="delete">Delete</option>
-                      </select>
+                      </select> */}
+                      #
                     </th>
                     <th>Publisher</th>
                     <th>Status</th>
