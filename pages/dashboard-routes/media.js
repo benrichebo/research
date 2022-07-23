@@ -68,20 +68,23 @@ function Media() {
       {uploadError && !uploadError?.includes("prefixed") && (
         <p className="text-danger">{uploadError}</p>
       )}
-      <div className="card mb-4">
-        <div className="card-body">
-          <h5>Document's info</h5>
-          <p className="mb-0">
-            Name the documents with suffix like Samuel-jackson's
-            <b>_CV</b> or Renewable-Energy-Efficiency<b>_paper</b> or
-            My-document<b>_other</b>
-          </p>
-          <p className="mb-0">
-            It's important to do this for verification of your documents
-          </p>
-          <p className="mb-0">This applies to only .pdfs and .docx</p>
+      {!loading && (
+        <div className="card mb-4">
+          <div className="card-body">
+            <h5>Document's info</h5>
+            <p className="mb-0">
+              Name the documents with suffixes like Samuel-jackson's
+              <b>_CV</b> or Renewable-Energy-Efficiency<b>_paper</b> or
+              My-document<b>_other</b>
+            </p>
+            <p className="mb-0">
+              It's important to do this for verification of your documents
+            </p>
+            <p className="mb-0">This applies to only .pdfs and .docx</p>
+          </div>
         </div>
-      </div>
+      )}
+
       {medias?.length > 0 && (
         <div className="table-responsive">
           <table className="table">
@@ -114,7 +117,7 @@ function Media() {
                           className="form-check-label"
                           htmlFor={data?.name}>
                           {data?.type == "document" ? (
-                            <MdInsertDriveFile size={30} className="" />
+                            <MdInsertDriveFile size={50} className="" />
                           ) : (
                             <img
                               className=""
@@ -171,8 +174,8 @@ function Media() {
           </table>
         </div>
       )}
-      {medias?.length == 0 && (
-        <div className="row mb-4">
+      {medias?.length == 0 && !loading && (
+        <div className="mb-4">
           <div
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>

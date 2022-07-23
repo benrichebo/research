@@ -4,7 +4,7 @@ import { MdInfo } from "react-icons/md";
 import Spinner from "../ui/Spinner";
 
 function Uploader({ media, imageUploadLoading }) {
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
   const fileInputRef = useRef();
   const [size, setSize] = useState("");
 
@@ -38,6 +38,7 @@ function Uploader({ media, imageUploadLoading }) {
   useEffect(() => {
     console.log(file);
     if (file) {
+      setMsg("");
       const reader = new FileReader();
       reader.onloadstart = () => {
         //setMsg("uploadLoading start...");
@@ -81,15 +82,36 @@ function Uploader({ media, imageUploadLoading }) {
             );
           };
         } else {
+          let suffixes = ["_paper", "_CV", "_other"];
+          let fileContains = false;
+
+          //check if suffixes is included in the file
+          for (let i = 0; i < suffixes.length; i++) {
+            const element = suffixes[i];
+            const checkFile = file?.name?.includes(element);
+
+            switch (checkFile) {
+              case checkFile:
+                true;
+                fileContains = true;
+                break;
+
+              default:
+                false;
+                break;
+            }
+          }
+
           //check for file names which doesn't include the prefixes
-          if (!file?.name.includes("_CV" || "_paper" || "_other")) {
+          if (fileContains) {
+            console.log(fileContains);
+            await handleDocumentUpload(reader.result);
+            setFile(null);
+          } else {
             setMsg(
               "The file should be prefixed with _CV or _paper or _other. Read the note on upload of documents"
             );
-            return;
           }
-
-          await handleDocumentUpload(reader.result);
         }
       };
 
@@ -117,12 +139,12 @@ function Uploader({ media, imageUploadLoading }) {
           )}
         </label>
         {msg && msg?.includes("prefixed") ? (
-          <p className="me-2">
+          <p className="ms-2 mb-0">
             <MdInfo className="text-danger" />
-            Error: read note
+            Error: read document info
           </p>
         ) : (
-          <p>{msg}</p>
+          <p className="ms-2 mb-0 text-danger">{msg}</p>
         )}
       </div>
     </>

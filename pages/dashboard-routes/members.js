@@ -48,10 +48,10 @@ function Members() {
         </div>
       )}
       {!error && allData?.length > 0 && (
-        <div className="row">
+        <>
           {postError && <p className="text-danger">{postError}</p>}
           <div className="col-12 d-flex justify-content-between align-items-center mb-3">
-            <h4 className="mb-lg-0">Members</h4>
+            <h5 className="mb-lg-0">Members</h5>
             <div className="d-flex justify-content-start align-items-center">
               <Search
                 items={allData}
@@ -65,46 +65,41 @@ function Members() {
               </button>
             </div>
           </div>
-          <div className="col-12">
-            <div className="table-responsive">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Member</th>
-                    <th>Status</th>
-                    <th>Email</th>
+          <div className="table-responsive">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Member</th>
+                  <th>Status</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {allData?.map((data) => (
+                  <tr key={data?.id}>
+                    <td className="align-middle text-nowrap">{data?.name}</td>
+                    <td className="align-middle text-nowrap">
+                      {data?.verified ? (
+                        <span className="badge bg-success">Approved</span>
+                      ) : (
+                        <span className="badge bg-secondary">Unapproved</span>
+                      )}
+                    </td>
+                    <td className="align-middle text-nowrap">{data?.email}</td>
+                    <td className="align-middle text-nowrap">
+                      <Link href={`/dashboard/member/${routeId}/${data?._id}`}>
+                        <a className="text-decoration-none">View</a>
+                      </Link>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {allData?.map((data) => (
-                    <tr key={data?.id}>
-                      <td className="align-middle text-nowrap">{data?.name}</td>
-                      <td className="align-middle text-nowrap">
-                        {data?.verified ? (
-                          <span className="badge bg-success">Approved</span>
-                        ) : (
-                          <span className="badge bg-secondary">Unapproved</span>
-                        )}
-                      </td>
-                      <td className="align-middle text-nowrap">
-                        {data?.email}
-                      </td>
-                      <td className="align-middle text-nowrap">
-                        <Link
-                          href={`/dashboard/member/${routeId}/${data?._id}`}>
-                          <a className="text-decoration-none">View</a>
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </div>
+        </>
       )}
-      {allData?.length == 0 && (
-        <div className="row mb-4">
+      {allData?.length == 0 && !loading && (
+        <div className="mb-4">
           <div
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>

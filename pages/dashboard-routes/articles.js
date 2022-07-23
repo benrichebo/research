@@ -168,8 +168,8 @@ function Articles() {
           </div>
         </div>
       )}
-      {allData?.length == 0 && (
-        <div className="row mb-4">
+      {allData?.length == 0 && !loading && (
+        <div className="mb-4">
           <div
             className="col d-flex justify-content-center align-items-center bg-light"
             style={{ height: 300 }}>

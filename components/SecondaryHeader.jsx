@@ -30,7 +30,7 @@ const memberRoutes = [
 function SecondaryHeader({ user, signOut }) {
   return (
     <>
-      <nav className="navbar navbar-light bg-white py-3 border-bottom">
+      <nav className="navbar navbar-light bg-white py-2 border-bottom">
         <div className="container-fluid">
           <Link href="/">
             <a className="navbar-brand " href="#">
