@@ -12,7 +12,7 @@ export default authenticate(async (req, res) => {
 
         const members = await db
           .collection("members")
-          .find({}, { projection: { name: 1, status: 1, email: 1 } })
+          .find({}, { projection: { name: 1, verified: 1, email: 1 } })
           .toArray();
 
         console.log("members", members);

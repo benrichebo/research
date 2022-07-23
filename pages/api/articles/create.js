@@ -17,11 +17,11 @@ export default authenticate(async (req, res) => {
 
     const { db } = await connectToDatabase();
 
-    const date = new Date();
+    //const date = new Date();
 
     const article = {
       ...body,
-      createdAt: moment(date).format("lll"),
+      createdAt: moment().format(),
     };
 
     const result = await db.collection("articles").insertOne(article);

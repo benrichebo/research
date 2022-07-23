@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import { connectToDatabase } from "../../lib/mongodb";
 import { renderMarkup } from "react-render-markup";
+import moment from "moment";
 
 function Article({ article }) {
   console.log(article);
@@ -52,8 +53,12 @@ export const getServerSideProps = async (context) => {
       .collection("articles")
       .findOne({ _id: ObjectID(context.params.id) });
 
+    //calculate posted at
+    const date = article?.startDate?.split("-");
+    const fromNow = moment(date, "YYYYMMDD").fromNow();
+
     console.log("article", article);
-    const data = JSON.stringify(article);
+    const data = JSON.stringify({ ...article, fromNow });
     return {
       props: { article: JSON.parse(data) },
     };

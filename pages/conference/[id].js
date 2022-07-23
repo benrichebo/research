@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import { connectToDatabase } from "../../lib/mongodb";
 import { renderMarkup } from "react-render-markup";
+import moment from "moment";
 
 function Conference({ conference }) {
   return (
@@ -63,8 +64,12 @@ export const getServerSideProps = async (context) => {
       .collection("conferences")
       .findOne({ _id: ObjectID(context.params.id) });
 
+    //calculate posted at
+    const date = conference?.createdAt?.slice(0, 10).split("-");
+    const fromNow = moment(date, "YYYYMMDD").fromNow();
+
     console.log("conference", conference);
-    const data = JSON.stringify(conference);
+    const data = JSON.stringify({ ...conference, fromNow });
     return {
       props: { conference: JSON.parse(data) },
     };

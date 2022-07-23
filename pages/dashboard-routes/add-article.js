@@ -12,6 +12,8 @@ function AddArticle({ article }) {
     "/api/articles"
   );
 
+  console.log(article);
+
   const [title, setTitle] = useState(article?.title || "");
   const [author, setAuthor] = useState(article?.author || "");
   const [textContent, setTextContent] = useState(article?.textContent || "");

@@ -1,15 +1,17 @@
+import Link from "next/link";
 import React from "react";
 import { useCount } from "../../hooks/useCount";
 import { useCrud } from "../../hooks/useCrud";
 
 const Members = () => {
-   const { allData } = useCrud(
-     "all-payments",
-     "/api/payments/stripe/payments"
-   );
+  const { allData } = useCrud("all-payments", "/api/payments/stripe/payments");
   return (
     <>
-      <h1 className=" mt-3">{allData?.length || 0}</h1>
+      <Link href={`/membership`}>
+          <a className="text-decoration-none text-info h1">
+            {allData?.length || 0}
+          </a>
+      </Link>
     </>
   );
 };
@@ -21,19 +23,24 @@ const Conferences = () => {
   );
   return (
     <>
-      <h1 className=" mt-3">{oneData?.count || 0}</h1>
+      <Link href={`/conferences`}>
+        <a className="text-decoration-none text-info h1">
+          {oneData?.count || 0}
+        </a>
+      </Link>
     </>
   );
 };
 
 const Papers = () => {
-  const { oneData } = useCount(
-    "one-count-papers",
-    "/api/count/papers"
-  );
+  const { oneData } = useCount("one-count-papers", "/api/count/papers");
   return (
     <>
-      <h1 className=" mt-3">{oneData?.count || 0}</h1>
+        <Link href={`/papers`}>
+          <a className="text-decoration-none text-info h1">
+            {oneData?.count || 0}
+          </a>
+        </Link>
     </>
   );
 };

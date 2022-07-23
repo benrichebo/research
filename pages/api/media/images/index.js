@@ -13,13 +13,10 @@ export default authenticate(async (req, res) => {
         let media = [];
 
         if (role == "member") {
-          media = await db.collection("media").find().toArray();
-           console.log("media", media);
+          media = await db.collection("media").find({ userId }).toArray();
         } else {
           media = await db.collection("media").find().toArray();
         }
-
-       
 
         if (media?.length >= 0) {
           res.status(200).json(media);

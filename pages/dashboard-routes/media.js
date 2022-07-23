@@ -5,6 +5,7 @@ import { useMedia } from "../../hooks/useMedia";
 import { useRouter } from "next/router";
 import { MdInsertDriveFile } from "react-icons/md";
 import Uploader from "../../components/media/Uploader";
+import { useUser } from "../../hooks/useUser";
 
 function Media() {
   const {
@@ -19,6 +20,7 @@ function Media() {
   } = useMedia("medias");
   const [show, setShow] = useState();
   const [routeId, setRouteId] = useState();
+  const { userData } = useUser("user");
 
   console.log(loading, medias, error);
 
@@ -72,19 +74,34 @@ function Media() {
       {uploadError && <p className="text-danger">{uploadError}</p>}
 
       {medias?.length > 0 && (
-        <div className="row">
+        <div className="">
+          {userData && userData?.role == "member" && (
+            <div className="card mb-4">
+              <div className="card-body">
+                <h5>Document's info</h5>
+                <p className="mb-0">
+                  Name the documents with prefixes like Samuel-jackson's
+                  <b>_CV</b> or Renewable-Energy-Efficiency<b>_paper</b>
+                </p>
+                <p className="mb-0">
+                  It's important to do this for verification of your documents
+                </p>
+              </div>
+            </div>
+          )}
           <div className="col">
             <div className="table-responsive">
               <table className="table">
                 <thead>
                   <tr>
-                    <th className="d-flex justify-content-start align-items-center text-nowrap">
+                    {/* <th className="d-flex justify-content-start align-items-center text-nowrap">
                       <span className="fw-normal">Bulk Actions</span>
                       <select className="form-select-sm form-select w-auto ms-3">
                         <option value="">--select--</option>
                         <option value="delete">Delete</option>
                       </select>
-                    </th>
+                    </th> */}
+                    <th>#</th>
                     <th>Name</th>
                   </tr>
                 </thead>
@@ -92,22 +109,22 @@ function Media() {
                   {medias?.map((data) => (
                     <>
                       <tr key={data?._id}>
-                        <td className="text-nowrap align-middle">
+                        <td className="text-nowrap">
                           <div className="form-check">
-                            <input
-                              className="form-check-input"
+                            {/* <input
+                              className="form-check-input d-none"
                               type="checkbox"
                               id={data?.name}
                               value={data?._id}
-                            />
+                            /> */}
                             <label
                               className="form-check-label"
                               htmlFor={data?.name}>
                               {data?.type == "document" ? (
-                                <MdInsertDriveFile size={30} className="ms-4" />
+                                <MdInsertDriveFile size={30} className="" />
                               ) : (
                                 <img
-                                  className="ms-4"
+                                  className=""
                                   src={data?.url}
                                   width="50"
                                   height="50"

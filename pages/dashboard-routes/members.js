@@ -14,6 +14,8 @@ function Members() {
   );
   const [keyword, setKeyword] = useState("");
 
+  console.log("allData", allData);
+
   return (
     <>
       {loading && !error && (
@@ -46,9 +48,7 @@ function Members() {
               />
               <button
                 className="btn btn-light ms-3"
-                onClick={() =>
-                  data.getAllData("/api/members")
-                }>
+                onClick={() => data.getAllData("/api/members")}>
                 <MdRefresh />
               </button>
             </div>
@@ -65,46 +65,20 @@ function Members() {
                 </thead>
                 <tbody>
                   {allData?.map((data) => (
-                    <>
-                      <tr>
-                        <td className="align-middle text-nowrap">
-                          {data?.name}
-                        </td>
-                        <td className="align-middle text-nowrap">
-                          {data?.status}
-                        </td>
-                        <td className="align-middle text-nowrap">
-                          {data?.email}
-                        </td>
-                        <td className="align-middle text-nowrap"></td>
-                      </tr>
-                      {show == data?.id && (
-                        <tr className="mt-3 bg-light">
-                          <td className="text-nowrap align-middle">
-                            <span>Are you sure</span>
-                            <a
-                              className="text-decoration-none ms-3"
-                              type="button"
-                              onClick={() => setShow()}>
-                              No
-                            </a>
-                            <a
-                              className="ms-3 text-decoration-none text-danger"
-                              type="button"
-                              disabled={postLoading}
-                              onClick={() => handleApproval(data?.id)}>
-                              {postLoading ? (
-                                <Spinner className="ms-2" />
-                              ) : (
-                                <span className="">Yes</span>
-                              )}
-                            </a>
-                          </td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                      )}
-                    </>
+                    <tr key={data?.id}>
+                      <td className="align-middle text-nowrap">{data?.name}</td>
+                      <td className="align-middle text-nowrap">
+                        {data?.verified ? (
+                          <span className="badge bg-success">Approved</span>
+                        ) : (
+                          <span className="badge bg-secondary">Unapproved</span>
+                        )}
+                      </td>
+                      <td className="align-middle text-nowrap">
+                        {data?.email}
+                      </td>
+                      <td className="align-middle text-nowrap"></td>
+                    </tr>
                   ))}
                 </tbody>
               </table>

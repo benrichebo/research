@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import { authenticate } from "../authentication";
 import { verifyUser } from "../verification";
 import { connectToDatabase } from "../../../lib/mongodb";
+import moment from "moment";
 
 export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
@@ -18,10 +19,14 @@ export default authenticate(async (req, res) => {
         .collection("conferences")
         .findOne({ _id: ObjectId(id) });
 
+      //calculate posted at
+      const date = conference?.createdAt?.slice(0, 10).split("-");
+      const fromNow = moment(date, "YYYYMMDD").fromNow();
+
       console.log("conference found", conference);
 
       if (conference?._id) {
-        res.status(200).json(conference);
+        res.status(200).json({ ...conference, fromNow });
       } else {
         res.status(400).json({ msg: "There is no conference" });
       }

@@ -48,16 +48,16 @@ export default authenticate(async (req, res) => {
           verified: user?.verified,
           role: user?.role,
           userId,
-          id: user?._id,
+          _id: user?._id,
           name: user?.name,
           email: customer_details?.email,
           status: payment_status,
-          amount: amount_total,
+          amount: amount_total / 100,
         };
       }
     }
     console.log(paymentData);
-    if (paymentData?.id) {
+    if (paymentData?._id) {
       res.status(200).json(paymentData);
     } else {
       res.status(400).json({ msg: "There is no payments" });

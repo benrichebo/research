@@ -65,23 +65,23 @@ function Papers() {
         </div>
       )}
       {allData?.length > 0 && (
-        <div class="row">
-          <div class="col-12 d-flex justify-content-end align-items-center mb-3">
+        <div className="">
+          <div className="col-12 d-flex justify-content-end align-items-center mb-3">
             <input
               type="search"
-              class="form-control w-auto d-none"
+              className="form-control w-auto d-none"
               placeholder="Search for an item"
               autoComplete="on"
             />
           </div>
-          <div class="col">
-            <div class="table-responsive">
-              <table class="table">
+          <div className="col">
+            <div className="table-responsive">
+              <table className="table">
                 <thead>
                   <tr>
-                    <th class="d-flex justify-content-start align-items-center text-nowrap">
-                     {/*  <span class="fw-normal">Bulk Actions</span>
-                      <select class="form-select-sm form-select w-auto ms-3">
+                    <th className="d-flex justify-content-start align-items-center text-nowrap">
+                     {/*  <span className="fw-normal">Bulk Actions</span>
+                      <select className="form-select-sm form-select w-auto ms-3">
                         <option value="">--select--</option>
                         <option value="delete">Delete</option>
                       </select> */}
@@ -97,15 +97,15 @@ function Papers() {
                     <>
                       <tr key={data?._id}>
                         <td className="text-nowrap align-middle">
-                          <div class="form-check">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               id={data?.title}
                               value={data?._id}
                             />
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               htmlFor={data?.title}>
                               {data?.title}
                             </label>
@@ -134,11 +134,11 @@ function Papers() {
                           userData?.role == "manager" ? (
                             <>
                               {data?.status != "Approved" ? (
-                                <span class="badge badge-sm bg-secondary">
+                                <span className="badge badge-sm bg-secondary">
                                   {data?.status}
                                 </span>
                               ) : (
-                                <span class="badge badge-sm bg-success">
+                                <span className="badge badge-sm bg-success">
                                   {data?.status}
                                 </span>
                               )}

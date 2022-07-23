@@ -31,43 +31,42 @@ function Home() {
               <h6 className="mb-0 fw-bold">Getting started</h6>
             </div>
             <div className="card-body">
-              {(userData?.role == "admin" || userData?.role == "manager") ? (
-                  <>
-                    <p className="card-text">
-                      Get started links. you can make a post or post a
-                      conference
-                    </p>
-                    <Link href={`/dashboard/add-article/${routeId}`}>
-                      <a className="btn btn-secondary me-3 mb-3" href="#">
-                        Post an article
-                      </a>
-                    </Link>
-                    <Link href={`/dashboard/add-conference/${routeId}`}>
-                      <a className="btn btn-info me-3 mb-3" href="#">
-                        Add a conference
-                      </a>
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <p className="card-text">
-                      Get started links. You can submit a paper
-                    </p>
-                    <Link href={`/dashboard/add-paper/${routeId}`}>
-                      <a className="btn btn-light mb-3" href="#">
-                        Submit a paper
-                      </a>
-                    </Link>
-                  </>
-                )}
+              {userData?.role == "admin" || userData?.role == "manager" ? (
+                <>
+                  <p className="card-text">
+                    Get started links. you can make a post or post a conference
+                  </p>
+                  <Link href={`/dashboard/add-article/${routeId}`}>
+                    <a className="btn btn-secondary me-3 mb-3" href="#">
+                      Post an article
+                    </a>
+                  </Link>
+                  <Link href={`/dashboard/add-conference/${routeId}`}>
+                    <a className="btn btn-info me-3 mb-3" href="#">
+                      Add a conference
+                    </a>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <p className="card-text">
+                    Get started links. You can submit a paper
+                  </p>
+                  <Link href={`/dashboard/add-paper/${routeId}`}>
+                    <a className="btn btn-light mb-3" href="#">
+                      Submit a paper
+                    </a>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
+        <div className="col-sm-12 col-md-6 mb-4">
+          <AllData />
+        </div>
         {(userData?.role == "admin" || userData?.role == "manager") && (
           <>
-            <div className="col-sm-12 col-md-6 mb-4">
-              <AllData />
-            </div>
             <div className="col-sm-12 col-md-6 mb-4">
               <Payments user={userData} />
             </div>

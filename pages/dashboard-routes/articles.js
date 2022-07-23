@@ -85,7 +85,7 @@ function Articles() {
                     </th>
                     <th>Title</th>
                     <th>Category</th>
-                    <th>Date</th>
+                    <th>Posted</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -95,7 +95,7 @@ function Articles() {
                         <td className="text-nowrap align-middle">
                           <div className="form-check d-flex align-items-center">
                             <input
-                              className="form-check-input"
+                              className="form-check-input d-none"
                               type="checkbox"
                               id={data?.title}
                               value={data?._id}
@@ -104,7 +104,7 @@ function Articles() {
                               className="form-check-label"
                               htmlFor={data?.title}>
                               <img
-                                className="ms-4"
+                                className=""
                                 width="70"
                                 height="50"
                                 style={{ objectFit: "cover" }}

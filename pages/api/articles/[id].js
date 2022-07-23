@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import { authenticate } from "../authentication";
 import { verifyUser } from "../verification";
 import { connectToDatabase } from "../../../lib/mongodb";
+import moment from "moment";
 
 export default authenticate(async (req, res) => {
   const { userId } = await verifyUser(req);
@@ -11,13 +12,18 @@ export default authenticate(async (req, res) => {
 
     const { id } = req.query;
 
+
     if (req.method == "GET") {
       const article = await db
         .collection("articles")
         .findOne({ _id: ObjectId(id) });
 
+      //calculate posted at
+      const date = article?.startDate?.split("-");
+      const fromNow = moment(date, "YYYYMMDD").fromNow();
+
       if (article?._id) {
-        res.status(200).json(article);
+        res.status(200).json({ ...article, fromNow });
       } else {
         res.status(400).json({ msg: "There is no article" });
       }
@@ -29,7 +35,7 @@ export default authenticate(async (req, res) => {
       const response = await db
         .collection("articles")
         .updateOne({ _id: ObjectId(id) }, { $set: { ...body } });
-    
+
       if (response?.acknowledged) {
         res.status(200).json({ msg: "article updated successfully" });
       } else {
@@ -49,6 +55,6 @@ export default authenticate(async (req, res) => {
       }
     }
   } catch (error) {
-     res.status(500).json({ msg: "Internal server error" });
+    res.status(500).json({ msg: error.message });
   }
 });

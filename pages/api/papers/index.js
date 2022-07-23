@@ -14,9 +14,21 @@ export default authenticate(async (req, res) => {
 
         let papers = [];
         if (role == "admin" || role == "manager") {
-          papers = await db.collection("papers").find().toArray();
+          papers = await db
+            .collection("papers")
+            .find(
+              {},
+              { projection: { title: 1, publisher: 1, status: 1, file: 1 } }
+            )
+            .toArray();
         } else {
-          papers = await db.collection("papers").find({ userId }).toArray();
+          papers = await db
+            .collection("papers")
+            .find(
+              { userId },
+              { projection: { title: 1, publisher: 1, status: 1, file: 1 } }
+            )
+            .toArray();
         }
 
         if (papers?._id || papers?.length >= 0) {
