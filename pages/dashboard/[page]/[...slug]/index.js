@@ -14,13 +14,13 @@ import EditArticle from "../../../dashboard-routes/edit-article";
 import Canvas from "../../../../components/Canvas";
 import SecondaryHeader from "../../../../components/SecondaryHeader";
 import Members from "../../../dashboard-routes/members";
+import Member from "../../../dashboard-routes/member";
 import { useUser } from "../../../../hooks/useUser";
 import EditConference from "../../../dashboard-routes/edit-conference";
 import EditPaper from "../../../dashboard-routes/edit-paper";
 import Media from "../../../dashboard-routes/media";
 import Categories from "../../../dashboard-routes/categories";
 import Admins from "../../../dashboard-routes/admins";
-import Link from "next/link";
 import Payments from "../../../dashboard-routes/payments";
 
 const routes = [
@@ -31,6 +31,7 @@ const routes = [
   { name: "articles", page: <Articles /> },
   { name: "settings", page: <Settings /> },
   { name: "members", page: <Members /> },
+  { name: "member", page: <Member /> },
   { name: "payments", page: <Payments /> },
   { name: "admins", page: <Admins /> },
   { name: "add-conference", page: <AddConference /> },

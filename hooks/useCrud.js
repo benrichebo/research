@@ -24,11 +24,15 @@ export const useCrud = (type, url) => {
         const data = await GET(url);
         setLoading(false);
         console.log("data", data);
-        if (data?.msg && !data?.msg.includes("There are no")) {
+        //check for internal server error
 
+        //check for 
+        if (data?.msg && !data?.msg.includes("There are no")) {
           //check if there is a session
           const data = sessionStorage.getItem(type);
           if (data?.length == 0) setError(data.msg);
+        } else if (data?.msg && data?.msg.includes("server error")) {
+          setError(data.msg);
         } else {
           sessionStorage.clearItem(type);
           if (data?.length > 0) {

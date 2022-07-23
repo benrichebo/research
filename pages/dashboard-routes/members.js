@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../components/ui/Spinner";
 import { useCrud } from "../../hooks/useCrud";
 import { MdRefresh, MdGroup } from "react-icons/md";
 import { useUser } from "../../hooks/useUser";
 import Search from "../../components/ui/Search";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 function Members() {
   const { userData } = useUser("user");
@@ -14,7 +16,17 @@ function Members() {
   );
   const [keyword, setKeyword] = useState("");
 
-  console.log("allData", allData);
+  console.log("allData", error);
+
+  const [routeId, setRouteId] = useState(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.isReady) {
+      setRouteId(router?.query && router?.query?.slug[0]);
+    }
+  }, [router.isReady]);
 
   return (
     <>
@@ -77,7 +89,12 @@ function Members() {
                       <td className="align-middle text-nowrap">
                         {data?.email}
                       </td>
-                      <td className="align-middle text-nowrap"></td>
+                      <td className="align-middle text-nowrap">
+                        <Link
+                          href={`/dashboard/member/${routeId}/${data?._id}`}>
+                          <a className="text-decoration-none">View</a>
+                        </Link>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

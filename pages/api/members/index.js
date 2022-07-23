@@ -20,7 +20,7 @@ export default authenticate(async (req, res) => {
         if (members?.length >= 0) {
           res.status(200).json(members);
         } else {
-          res.status(400).json({ msg: "There are no members" });
+          res.status(400).json([]);
         }
       } catch (error) {
         res.status(500).json({ msg: "Internal server error" });

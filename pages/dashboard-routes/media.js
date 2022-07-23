@@ -15,17 +15,14 @@ function Media() {
     uploadError,
     uploadLoading,
     imageUploadLoading,
-    imageUploadError,
     error,
   } = useMedia("medias");
   const [show, setShow] = useState();
   const [routeId, setRouteId] = useState();
-
-  console.log(loading, medias, error);
-
+  
   const router = useRouter();
 
-  const {userData} = useUser("user")
+  const { userData } = useUser("user");
 
   useEffect(() => {
     if (router.isReady) {
