@@ -156,7 +156,7 @@ function Media() {
                         <a
                           className="ms-3 text-decoration-none text-danger"
                           type="button"
-                          onClick={() => deleteMedia(data?._id)}>
+                          onClick={() => deleteMedia(data?.public_id)}>
                           {uploadLoading ? (
                             <Spinner className="ms-2" />
                           ) : (
