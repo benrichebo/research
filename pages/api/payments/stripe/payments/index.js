@@ -48,6 +48,7 @@ export default authenticate(async (req, res) => {
                     amount: amount_total,
                   });
                 }
+                return //just return when paid status of a payment is found
               }
             }
 
