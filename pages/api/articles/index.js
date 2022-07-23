@@ -14,28 +14,30 @@ export default async (req, res) => {
         )
         .toArray();
 
-      console.log("articles", articles);
+      if (conferences?.length > 0) {
+        const date = moment(articles[0].createdAt, "YYYYMMDD").fromNow();
+        console.log(date);
 
-      const date = moment(articles[0].createdAt, "YYYYMMDD").fromNow();
-      console.log(date);
+        let finalArticles = [];
+        for (let i = 0; i < articles.length; i++) {
+          const article = articles[i];
 
-      let finalArticles = [];
-      for (let i = 0; i < articles.length; i++) {
-        const article = articles[i];
+          //calculate posted at
+          const date = article?.createdAt?.slice(0, 10).split("-");
+          const fromNow = moment(date, "YYYYMMDD").fromNow();
+          finalArticles.push({
+            ...article,
+            createdAt: fromNow,
+          });
+        }
 
-        //calculate posted at
-        const date = article?.createdAt?.slice(0, 10).split("-");
-        const fromNow = moment(date, "YYYYMMDD").fromNow();
-        finalArticles.push({
-          ...article,
-          createdAt: fromNow,
-        });
-      }
+        console.log(finalArticles);
 
-      console.log(finalArticles);
-
-      if (finalArticles?.length >= 0) {
-        res.status(200).json(finalArticles);
+        if (finalArticles?.length >= 0) {
+          res.status(200).json(finalArticles);
+        } else {
+          res.status(400).json({ msg: "There an error getting articles" });
+        }
       } else {
         res.status(400).json({ msg: "There are no articles" });
       }

@@ -186,7 +186,7 @@ function Conferences() {
             style={{ height: 300 }}>
             <div className="text-center">
               <MdGroup className="text-muted" />
-              <p>There is no conference</p>
+              <p>There is no conferences</p>
             </div>
           </div>
         </div>

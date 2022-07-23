@@ -21,38 +21,43 @@ export default authenticate(async (req, res) => {
             limit: 5,
           });
 
-          for (let i = 0; i < payments?.data?.length; i++) {
-            const payment = payments?.data[i];
+          if (payments?.length > 0) {
+            for (let i = 0; i < payments?.data?.length; i++) {
+              const payment = payments?.data[i];
 
-            const { id, customer_details, payment_status, amount_total } =
-              payment;
-            //fetch members with data?.email
-            let user = await db
-              .collection("members")
-              .findOne(
-                { email: customer_details?.email },
-                { projection: { email: 1, verified: 1, role: 1, name: 1 } }
-              );
+              const { id, customer_details, payment_status, amount_total } =
+                payment;
+              //fetch members with data?.email
+              let user = await db
+                .collection("members")
+                .findOne(
+                  { email: customer_details?.email },
+                  { projection: { email: 1, verified: 1, role: 1, name: 1 } }
+                );
 
-            if (user?.email) {
-              if (payment_status == "paid") {
-                members.push({
-                  verified: user?.verified,
-                  userId,
-                  id: user?._id,
-                  role: user?.role,
-                  name: user?.name,
-                  email: customer_details?.email,
-                  status: payment_status,
-                  amount: amount_total,
-                });
+              if (user?.email) {
+                if (payment_status == "paid") {
+                  members.push({
+                    verified: user?.verified,
+                    userId,
+                    id: user?._id,
+                    role: user?.role,
+                    name: user?.name,
+                    email: customer_details?.email,
+                    status: payment_status,
+                    amount: amount_total,
+                  });
+                }
               }
             }
-          }
 
-
-          if (members?.length >= 0) {
-            res.status(200).json(members);
+            if (members?.length >= 0) {
+              res.status(200).json(members);
+            } else {
+              res
+                .status(400)
+                .json({ msg: "There was an error getting payments" });
+            }
           } else {
             res.status(400).json({ msg: "There are no payments" });
           }
