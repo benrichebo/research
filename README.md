@@ -20,7 +20,6 @@ A website for a research organization with stripe payment system
 - register as a member
 - send payment request to stripe/paystack
 - place order after payment request
-- send email to user and organization after placing order
 
 ## APIS
 
@@ -48,7 +47,6 @@ A website for a research organization with stripe payment system
 - /api/v1/payments
 - /api/v1/payments/:id
 
-
 ## Technology
 
 - Languages - Javascript
@@ -59,9 +57,18 @@ A website for a research organization with stripe payment system
 - Database - MongoDB
 - Tools - webpack, sass
 
-
 # Register user
+
 - register-make-payment-dashboard
 
 # Stripe checkout
-- make-payment-StripePay-useStripe-/api/payments/stripe/checkOutSession-
+
+- makePayment - useStripe-/api/payments/stripe/getStripeId
+
+# Get member data
+
+- send id-get member data
+          get member files
+          get payment details
+
+- use useFetch hook

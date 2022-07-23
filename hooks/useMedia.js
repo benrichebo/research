@@ -127,6 +127,7 @@ export const useMedia = (type) => {
   };
 
   useEffect(() => {
+    console.log(type)
     if (type == "medias") {
       const data = sessionStorage.getItem("medias");
 
