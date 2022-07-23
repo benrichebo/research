@@ -28,9 +28,12 @@ export default async (req, res) => {
     });
 
     await cloudinary.uploader.destroy(id, async (err, result) => {
+      //delete from media too
       const response = await db
         .collection("media")
-        .deleteOne({ _id: ObjectId(id) });
+        .deleteOne({ public_id: id });
+
+      console.log(err, response);
 
       if (response.deletedCount === 1) {
         res.status(200).json({ msg: "media was successfully deleted" });

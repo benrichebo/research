@@ -3,7 +3,7 @@ import Resizer from "react-image-file-resizer";
 import { MdInfo } from "react-icons/md";
 import Spinner from "../ui/Spinner";
 
-function Uploader({ media, imageUploadLoading, imageUploadError }) {
+function Uploader({ media, imageUploadLoading }) {
   const [file, setFile] = useState("");
   const fileInputRef = useRef();
   const [size, setSize] = useState("");
@@ -47,6 +47,7 @@ function Uploader({ media, imageUploadLoading, imageUploadError }) {
       };
       reader.onerror = () => {
         setMsg("error uploading image");
+        return;
       };
       reader.onloadend = async () => {
         //setMsg("uploadLoading done");
@@ -80,6 +81,14 @@ function Uploader({ media, imageUploadLoading, imageUploadError }) {
             );
           };
         } else {
+          //check for file names which doesn't include the prefixes
+          if (!file?.name.includes("_CV" || "_paper" || "_other")) {
+            setMsg(
+              "The file should be prefixed with _CV or _paper or _other. Read the note on upload of documents"
+            );
+            return;
+          }
+
           await handleDocumentUpload(reader.result);
         }
       };
@@ -89,31 +98,34 @@ function Uploader({ media, imageUploadLoading, imageUploadError }) {
   }, [file]);
 
   return (
-    <div>
-      {(file && imageUploadError) ||
-        (msg && (
-          <span className="me-2">
-            <MdInfo className={`text-${msg ? "info" : "danger"}`} />
-            {msg}
-          </span>
-        ))}
-      <label className="btn btn-light px-3">
-        <input
-          type="file"
-          placeholder=""
-          className="custom-file-input"
-          aria-describedby="fileHelpId"
-          ref={fileInputRef}
-          onChange={(e) => setFile(e.target?.files[0])}
-          hidden
-        />
-        {file && imageUploadLoading ? (
-          <Spinner className="ms-2" />
+    <>
+      <div className="d-flex align-items-center">
+        <label className="btn btn-light px-3">
+          <input
+            type="file"
+            placeholder=""
+            className="custom-file-input"
+            aria-describedby="fileHelpId"
+            ref={fileInputRef}
+            onChange={(e) => setFile(e.target?.files[0])}
+            hidden
+          />
+          {file && imageUploadLoading ? (
+            <Spinner className="ms-2" />
+          ) : (
+            <span className="">Import image</span>
+          )}
+        </label>
+        {msg && msg?.includes("prefixed") ? (
+          <p className="me-2">
+            <MdInfo className="text-danger" />
+            Error: read note
+          </p>
         ) : (
-          <span className="">Import image</span>
+          <p>{msg}</p>
         )}
-      </label>
-    </div>
+      </div>
+    </>
   );
 }
 

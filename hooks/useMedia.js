@@ -79,6 +79,7 @@ export const useMedia = (type) => {
     async updateMedia(id, credentials) {
       setUploadError("");
       setUploadLoading(true);
+      setMessage("");
       try {
         const data = await PUT(credentials, `/api/media/images/${id}`);
         setUploadLoading(false);
@@ -96,6 +97,7 @@ export const useMedia = (type) => {
     async deleteMedia(id) {
       setUploadLoading(true);
       setUploadError("");
+      setMessage("")
       try {
         const data = await DELETE(`/api/media/images/${id}`);
         console.log("delete-data", data);
