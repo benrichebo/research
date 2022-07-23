@@ -9,9 +9,9 @@ export const getStripeId = async (req) => {
   try {
     //2. stripe payment integration
     const session = await stripe?.checkout?.sessions?.create({
-      //client_reference_id: "userId",
+      client_reference_id: "userId",
       billing_address_collection: "required",
-      submit_type: "auto",
+      submit_type: "donate",
       payment_method_types: ["card"], //pm_card_us,
       //payment_method_options: ["pm_card_amex"],
       line_items: [
@@ -21,16 +21,16 @@ export const getStripeId = async (req) => {
             // payment methods are used in the Checkout Session.
             currency: "usd",
             product_data: {
-              name: "Association of researches and planners membership fee payment",
+              name: "Association of Researches and Planners",
             },
-            unit_amount: 15000,
+            unit_amount: 5000,
           },
           quantity: 1,
         },
       ],
       customer_email: email,
       mode: "payment", //it can be "subscription" for recurring payments only
-      success_url: `${req.headers.origin}/dashboard/members/${userId}`,
+      success_url: `${req.headers.origin}/dashboard/home/${userId}`,
       cancel_url: `${req.headers.origin}/make-payment`,
     });
 

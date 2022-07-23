@@ -90,7 +90,7 @@ function Register() {
                     <div className="card-body">
                       <h5 className="fw-normal card-title">Payment</h5>
                       <p className="card-text">
-                        You need to make payment of $150 to become a member
+                        You need to make payment of $50 to become a member
                       </p>
                     </div>
                   </div>

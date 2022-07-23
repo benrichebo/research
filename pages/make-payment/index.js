@@ -17,7 +17,7 @@ const MakePayment = () => {
                   Make payment
                 </h3>
                 <h5 className="">
-                  To be a member, you need to make a USD 150
+                  To be a member, you need to make a USD 50
                 </h5>
               </div>
               <div className="col-md-8 d-flex justify-content-center align-items-center pt-3 pt-lg-5 px-lg-5">
