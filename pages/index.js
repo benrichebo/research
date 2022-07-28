@@ -133,30 +133,30 @@ function Home() {
             </a>
           </div>
         </div>
-        <div className="bg-dark">
+        <div className="bg-primary">
           <div className="container position-relative mt-5">
             <div className="row pb-5">
               <div className="col-md-5 py-3 py-lg">
                 <div>
-                  <h6 className="text-white my-4">OUR EXPERTISE</h6>
+                  <h6 className="my-4 fw-bold">OUR EXPERTISE</h6>
                   <ul className="list-unstyled">
                     <li
-                      className="text-white-50 mb-2 mb-lg-4"
+                      className="mb-2 mb-lg-4"
                       data-bss-hover-animate="pulse">
                       Architecture
                     </li>
                     <li
-                      className="text-white-50 mb-2 mb-lg-4"
+                      className="mb-2 mb-lg-4"
                       data-bss-hover-animate="pulse">
                       Real Estate
                     </li>
                     <li
-                      className="text-white-50 mb-2 mb-lg-4"
+                      className="mb-2 mb-lg-4"
                       data-bss-hover-animate="pulse">
                       Interior design
                     </li>
                     <li
-                      className="text-white-50 mb-2 mb-lg-4"
+                      className="mb-2 mb-lg-4"
                       data-bss-hover-animate="pulse">
                       Surveying
                     </li>
@@ -171,7 +171,7 @@ function Home() {
                     className="img-fluid pulse animated"
                     src="/images/annie-spratt-vGgn0xLdy8s-unsplash.jpg"
                   />
-                  <h6 className="text-white-50 swing animated border-top border-3 border-primary pt-3 text-white mt-3 px-3 px-md-0">
+                  <h6 className="swing animated border-top border-3 border-primary pt-3 mt-3 px-3 px-md-0">
                     Members are of different expertise in architecture, real
                     estate, interior design, surveying who contribute to the
                     built environment

@@ -5,7 +5,7 @@ import { useMedia } from "../../hooks/useMedia";
 
 function Documents() {
   const { loading, medias, media, error } = useMedia("medias");
-
+console.log(medias);
   return (
     <>
       {loading && (
@@ -28,7 +28,7 @@ function Documents() {
       {medias?.length > 0 && (
         <div className="my-3 row">
           {medias?.map((data) => (
-            <div className="col-md-3 mb-3">
+            <div className="col-md-3 mb-3" key={data?._id}>
               <a type="button" className="text-decoration-none" download>
                 {data?.type == "document" ? (
                   <MdInsertDriveFile size={70} className="" />

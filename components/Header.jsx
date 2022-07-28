@@ -5,14 +5,11 @@ import { useUser } from "../hooks/useUser";
 function Header() {
   const { userData } = useUser("user");
   return (
-    <nav className="navbar navbar-light bg-white py-3 border-bottom">
+    <nav className="navbar navbar-light bg-white border-bottom">
       <div className="container">
         <Link href="/">
           <a className="navbar-brand " href="#">
-            <span className="d-none d-md-block">
-              Association of researches and planners
-            </span>
-            <span className="d-md-none">Logo</span>
+            <img src="/images/logo.jpeg" width={150} alt="logo" className="img-fluid" />
           </a>
         </Link>
         <button

@@ -52,7 +52,7 @@ function DashBoard() {
       <div className="container-fluid">
         <div className="row">
           <div
-            className="col-md-3 col-lg-2 d-none d-md-block vh-100 bg-dark "
+            className="col-md-3 col-lg-2 d-none d-md-block vh-100 bg-primary-dark"
             style={{ position: "sticky", top: 0 }}>
             <div className="text-white-50 my-3 ms-lg-3">
               <h6>{userData?.name}</h6>
