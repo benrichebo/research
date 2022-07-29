@@ -6,12 +6,12 @@ function Layout({children, title}) {
   return (
     <>
       <Head>
-        <title>{title || "Research Institute"}</title>
+        <title>{title || "Association of researches and planners"}</title>
         <meta
           name="description"
-          content="An online POS system for retailers, shop owners and restaurants"
+          content="Research individuals and professionals in the built environment"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

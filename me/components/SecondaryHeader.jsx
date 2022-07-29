@@ -34,10 +34,12 @@ function SecondaryHeader({ user, signOut }) {
         <div className="container-fluid">
           <Link href="/">
             <a className="navbar-brand " href="#">
-              <span className="d-none d-md-block">
-                Association of researches and planners
-              </span>
-              <span className="d-md-none">Logo</span>
+              <img
+                src="/images/logo.jpeg"
+                width={100}
+                alt="logo"
+                className="img-fluid"
+              />
             </a>
           </Link>
           <button
