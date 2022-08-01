@@ -7,6 +7,7 @@ import Spinner from "../../components/ui/Spinner";
 import { useUser } from "../../hooks/useUser";
 import Footer from "../../components/Footer";
 import { MdArrowForward } from "react-icons/md";
+import Link from "next/link";
 
 function Register() {
   const [name, setName] = useState("");
@@ -41,20 +42,10 @@ function Register() {
               <h3 className="pulse animated border-top border-3 border-primary pt-3">
                 Join us
               </h3>
-              <h5 className="fw-normal">
-                ONE Registration Fee Includes the following for the Registered
-                members:
-              </h5>
-              <ol className="">
-                <li>Welcome reception</li>
-                <li>Printed Name Card</li>
-                <li>Conference Folder or Bag</li>
-                <li>Participation in the technical program</li>
-                <li>Printed Participation & presentation Certificate</li>
-                <li>Printed Proceedings</li>
-                <li>Coffee breaks on the presentation day</li>
-                <li>Lunch</li>
-              </ol>
+              <p>
+                Be part of the growing community of Research Intellectuals and
+                enjoy numerous advantages of an association <Link href="/"><a className="text-decoration-none">Read more...</a></Link>
+              </p>
             </div>
             <div className="col-md-8 d-flex justify-content-center align-items-center pt-3 pt-lg-5 px-lg-5">
               <form

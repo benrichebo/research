@@ -195,9 +195,11 @@ function Home() {
                     src="/images/annie-spratt-vGgn0xLdy8s-unsplash.jpg"
                   />
                   <h6 className="swing animated border-top border-3 border-primary pt-3 mt-3 px-3 px-md-0">
-                    Members are of different expertise in architecture, real
-                    estate, interior design, surveying who contribute to the
-                    built environment
+                    Our members perform in the multiplicity of many cultures and
+                    perspectives. We are supported by the exclusive talents and
+                    insights of our members who work collectively to offer
+                    intellectual, integrated information and an appropriate
+                    platform.
                   </h6>
                 </div>
               </div>
@@ -207,9 +209,9 @@ function Home() {
         <section className="py-3 mt-4">
           <div className="container px-md-0 py-1 py-md-3">
             <div className="row py-1 py-lg-3">
-              <div className="col-md-5">
+              <div className="col-md-6">
                 <div className="mb-4">
-                  <h3 className=" pulse animated border-top border-3 border-primary w-50 pt-3 heading">
+                  <h3 className="pulse animated border-top border-3 border-primary w-50 pt-3 heading">
                     Upcoming conferences
                   </h3>
                   <Link href="/conferences">
@@ -224,7 +226,7 @@ function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="col-md-7 d-flex justify-content-center">
+              <div className="col-md-6 d-flex justify-content-center">
                 <CarouselConferencesComponent />
               </div>
             </div>
