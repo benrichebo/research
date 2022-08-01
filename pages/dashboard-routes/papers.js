@@ -32,6 +32,8 @@ function Papers() {
     await data.updateData({ status: "Approved" }, `/api/papers/${id}`);
   };
 
+  console.log("error", error);
+
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -47,12 +49,12 @@ function Papers() {
           </button>
         </div>
       </div>
-      {loading && (
+      {loading && !error && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
         </div>
       )}
-      {error && (
+      {error && !loading && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <div className="text-center">
             <h6 className="text-muted">There was an error loading papers</h6>

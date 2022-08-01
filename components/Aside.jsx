@@ -22,8 +22,8 @@ const Aside = ({ router, user, signOut }) => {
               <a
                 className={`text-decoration-none d-flex justify-content-start align-items-center ${
                   router?.query?.page == "home"
-                    ? "fw-bold text-white"
-                    : "text-white-50"
+                    ? "fw-bold text-black"
+                    : "text-black-50"
                 }`}>
                 <MdDashboard className="" />
                 <span className="ms-3">Home</span>
@@ -35,8 +35,8 @@ const Aside = ({ router, user, signOut }) => {
               <a
                 className={`text-decoration-none d-flex justify-content-start align-items-center ${
                   router?.query?.page == "papers"
-                    ? "fw-bold text-white"
-                    : "text-white-50"
+                    ? "fw-bold text-black"
+                    : "text-black-50"
                 }`}>
                 <MdPictureAsPdf className="" />
                 <span className="ms-3">Papers</span>
@@ -50,8 +50,8 @@ const Aside = ({ router, user, signOut }) => {
                   <a
                     className={`text-decoration-none d-flex justify-content-start align-items-center ${
                       router?.query?.page == "articles"
-                        ? "fw-bold text-white"
-                        : "text-white-50"
+                        ? "fw-bold text-black"
+                        : "text-black-50"
                     }`}>
                     <MdLibraryBooks className="" />
                     <span className="ms-3">Articles</span>
@@ -63,8 +63,8 @@ const Aside = ({ router, user, signOut }) => {
                   <a
                     className={`text-decoration-none d-flex justify-content-start align-items-center ${
                       router?.query?.page == "conferences"
-                        ? "fw-bold text-white"
-                        : "text-white-50"
+                        ? "fw-bold text-black"
+                        : "text-black-50"
                     }`}>
                     <MdReceiptLong className="" />
                     <span className="ms-3">Conferences</span>
@@ -76,8 +76,8 @@ const Aside = ({ router, user, signOut }) => {
                   <a
                     className={`text-decoration-none d-flex justify-content-start align-items-center ${
                       router?.query?.page == "members"
-                        ? "fw-bold text-white"
-                        : "text-white-50"
+                        ? "fw-bold text-black"
+                        : "text-black-50"
                     }`}>
                     <MdGroup className="" />
                     <span className="ms-3">Members</span>
@@ -91,8 +91,8 @@ const Aside = ({ router, user, signOut }) => {
                     <a
                       className={`text-decoration-none d-flex justify-content-start align-items-center ${
                         router?.query?.page == "admins"
-                          ? "fw-bold text-white"
-                          : "text-white-50"
+                          ? "fw-bold text-black"
+                          : "text-black-50"
                       }`}>
                       <MdGroup className="" />
                       <span className="ms-3">Admins</span>
@@ -104,8 +104,8 @@ const Aside = ({ router, user, signOut }) => {
                     <a
                       className={`text-decoration-none d-flex justify-content-start align-items-center ${
                         router?.query?.page == "payments"
-                          ? "fw-bold text-white"
-                          : "text-white-50"
+                          ? "fw-bold text-black"
+                          : "text-black-50"
                       }`}>
                       <MdPayments className="" />
                       <span className="ms-3">Payments</span>
@@ -120,8 +120,8 @@ const Aside = ({ router, user, signOut }) => {
                   <a
                     className={`text-decoration-none d-flex justify-content-start align-items-center ${
                       router?.query?.page == "categories"
-                        ? "fw-bold text-white"
-                        : "text-white-50"
+                        ? "fw-bold text-black"
+                        : "text-black-50"
                     }`}>
                     <MdCategory className="" />
                     <span className="ms-3">Categories</span>
@@ -136,8 +136,8 @@ const Aside = ({ router, user, signOut }) => {
               <a
                 className={`text-decoration-none d-flex justify-content-start align-items-center ${
                   router?.query?.page == "media"
-                    ? "fw-bold text-white"
-                    : "text-white-50"
+                    ? "fw-bold text-black"
+                    : "text-black-50"
                 }`}>
                 <MdOutlinePermMedia className="" />
                 <span className="ms-3">Media</span>
@@ -149,8 +149,8 @@ const Aside = ({ router, user, signOut }) => {
               <a
                 className={`text-decoration-none d-flex justify-content-start align-items-center ${
                   router?.query?.page == "settings"
-                    ? "fw-bold text-white"
-                    : "text-white-50"
+                    ? "fw-bold text-black"
+                    : "text-black-50"
                 }`}>
                 <MdPerson className="" />
                 <span className="ms-3">Settings</span>
@@ -159,7 +159,7 @@ const Aside = ({ router, user, signOut }) => {
           </li>
           <li className=" mb-4">
             <a
-              className="text-white text-decoration-none d-flex justify-content-start align-items-center text-white-50 text-white-50"
+              className="text-black text-decoration-none d-flex justify-content-start align-items-center text-black-50"
               type="button"
               onClick={signOut}>
               Logout

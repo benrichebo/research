@@ -24,6 +24,7 @@ module.exports = {
 
     SMS_API_KEY: "V1ZNVExweWp5em9qdGJRRG1rYmY=",
     TINY_MCE: "85mw9cftsyryl2jkjosgvgrex99fiehbkjs9ck8keqwt1oyc",
+    PRICE: 10000
   } /* 
   basePath: "/home",
   rewrites: [{source: "/", destination: "/home"}], */,

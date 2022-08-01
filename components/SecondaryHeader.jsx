@@ -88,6 +88,18 @@ function SecondaryHeader({ user, signOut }) {
           </div>
         </div>
       </nav>
+      {!user?.verified && (
+        <div className="d-md-flex justify-content-md-center align-items-md--center bg-light px-4 py-1">
+          <div>
+            <p className="small mb-0">You haven't payed the membership fee</p>
+          </div>
+          <div>
+            <Link href={`/make-payment`}>
+              <a className="text-decoration-none small ms-md-2">Make payment</a>
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 }

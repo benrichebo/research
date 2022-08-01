@@ -48,12 +48,12 @@ function Media() {
           <Uploader media={media} imageUploadLoading={imageUploadLoading} />
         </div>
       </div>
-      {loading && (
+      {loading && !error && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
         </div>
       )}
-      {error && (
+      {error && !loading && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <div className="text-center">
             <h6 className="text-muted">There was an error loading medias</h6>
@@ -68,7 +68,7 @@ function Media() {
       {uploadError && !uploadError?.includes("prefixed") && (
         <p className="text-danger">{uploadError}</p>
       )}
-      {!loading && (
+      {!loading && !error && (
         <div className="card mb-4">
           <div className="card-body">
             <h5>Document's info</h5>

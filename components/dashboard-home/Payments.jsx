@@ -20,7 +20,7 @@ function Payments({user}) {
         </div>
         <div className="card-body">
           {allData &&
-            allData?.length > 0 &&
+            allData?.length > 0 ?
             allData.slice(0, 3).map((payment) => (
               <p
                 class="list-item d-flex justify-content-between mb-0 card-text"
@@ -28,7 +28,7 @@ function Payments({user}) {
                 <span>{payment?.email}</span>
                 <span>{payment?.status}</span>
               </p>
-            ))}
+            )) : "No member has made payment" }
         </div>
       </div>
     </>

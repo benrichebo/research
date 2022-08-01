@@ -21,6 +21,7 @@ function Settings() {
         <div className="list-inline ms-0 my-4">
           {headings.map((heading) => (
             <a
+            key={heading}
               onClick={() => setShow(heading)}
               href="#"
               className={`list-item text-decoration-none h5 me-4 ${

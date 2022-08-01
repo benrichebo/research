@@ -9,9 +9,9 @@ export const getStripeId = async (req) => {
   try {
     //2. stripe payment integration
     const session = await stripe?.checkout?.sessions?.create({
-      client_reference_id: "userId",
+      client_reference_id: userId,
       billing_address_collection: "required",
-      submit_type: "donate",
+      submit_type: "pay",
       payment_method_types: ["card"], //pm_card_us,
       //payment_method_options: ["pm_card_amex"],
       line_items: [
@@ -19,11 +19,11 @@ export const getStripeId = async (req) => {
           price_data: {
             // The currency parameter determines which
             // payment methods are used in the Checkout Session.
-            currency: "usd",
+            currency: "eur",
             product_data: {
-              name: "Association of Researches and Planners",
+              name: "Association for Researches and Planners",
             },
-            unit_amount: 5000,
+            unit_amount: process.env.PRICE,
           },
           quantity: 1,
         },

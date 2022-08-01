@@ -9,11 +9,23 @@ const Payment = ({ userData }) => {
     `/api/payments/stripe/payments/${userData?.id}`
   );
 
+  console.log("payments", oneData);
+
   return (
     <>
-      {loading && !error && (
+      {loading && (
         <div className="d-flex justify-content-center align-items-center my-5">
           <Spinner />
+        </div>
+      )}
+      {error && error?.includes("no payments") && !loading && (
+        <div className="d-flex justify-content-center align-items-center my-5">
+          <div className="text-center">
+            <h6 className="text-muted">{error}</h6>
+            <Link href={`/make-payment`}>
+              <a className="btn btn-primary my-3">Make fee payment</a>
+            </Link>
+          </div>
         </div>
       )}
 
@@ -33,15 +45,6 @@ const Payment = ({ userData }) => {
           </div>
         </div>
       )}
-      {(oneData?.msg.includes("There is no payments") ||
-        oneData?.status != "paid") && !loading && (
-          <>
-            <p>You have not payed your dues</p>
-            <Link href="/make-payment">
-              <a className="btn btn-primary mb-3">Make payment</a>
-            </Link>
-          </>
-        )}
       {oneData?.status && oneData?.status == "paid" && (
         <>
           <h5>You have payed your dues</h5>

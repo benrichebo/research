@@ -7,11 +7,11 @@ function Account() {
   const { user, loading, error, postError, postLoading, message, userData } =
     useUser("user");
 
-  const [name, setName] = useState(userData?.name || "");
+  const [name, setName] = useState("");
 
-  const [email, setEmail] = useState(userData?.email || "");
+  const [email, setEmail] = useState("");
 
-  const [city, setCity] = useState(userData?.city || "");
+  const [city, setCity] = useState("");
 
   useEffect(() => {
     setName(userData?.name);

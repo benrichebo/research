@@ -44,7 +44,10 @@ function Register() {
               </h3>
               <p>
                 Be part of the growing community of Research Intellectuals and
-                enjoy numerous advantages of an association <Link href="/"><a className="text-decoration-none">Read more...</a></Link>
+                enjoy numerous advantages of an association{" "}
+                <Link href="/">
+                  <a className="text-decoration-none">Read more...</a>
+                </Link>
               </p>
             </div>
             <div className="col-md-8 d-flex justify-content-center align-items-center pt-3 pt-lg-5 px-lg-5">
@@ -81,7 +84,8 @@ function Register() {
                     <div className="card-body">
                       <h5 className="fw-normal card-title">Payment</h5>
                       <p className="card-text">
-                        You need to make payment of $50 to become a member
+                        You need to make payment of &#8364; 100 to become a
+                        member
                       </p>
                     </div>
                   </div>
