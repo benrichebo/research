@@ -4,6 +4,7 @@ import { verifyUser } from "../../verification";
 
 export default authenticate(async (req, res) => {
   const { userId, role } = await verifyUser(req);
+  console.log("role", role)
 
   if (userId) {
     if (req.method == "GET") {
@@ -14,8 +15,10 @@ export default authenticate(async (req, res) => {
 
         if (role == "member") {
           media = await db.collection("media").find({ userId }).toArray();
+          console.log("media", media);
         } else {
           media = await db.collection("media").find().toArray();
+          console.log("media", media);
         }
 
         if (media?.length >= 0) {

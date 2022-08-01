@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Layout from "../../components/Layout";
 import Header from "../../components/Header";
 import Email from "../../components/ui/Email";
@@ -9,13 +9,36 @@ import Footer from "../../components/Footer";
 import { MdArrowForward } from "react-icons/md";
 import Link from "next/link";
 
+const checkPasswordLength = (password) => {
+  console.log(password);
+  //check lower case
+  const isLowercase = password.match(/[a-z]/g);
+  const isUppercase = password.match(/[A-Z]/g);
+  const isNumbers = password.match(/[0-9]/g);
+  const isLengthNotValid = password?.length >= 9;
+
+  if (isLowercase) {
+    console.log(true);
+  }
+
+  if (password?.length > 0)
+    if (isLengthNotValid || !isLowercase || !isUppercase || !isNumbers) {
+      return true;
+    }
+};
+
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [city, setCity] = useState("");
-  const [agree, setAgree] = useState("");
+  const [agree, setAgree] = useState("yes");
   const { user, loading, error } = useUser();
+
+  const isPasswordValid = useMemo(
+    () => checkPasswordLength(password),
+    [password]
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,8 +51,10 @@ function Register() {
       agree,
     };
 
+    console.log(data)
+
     //go to stripe
-    await user.signUpWithCredentials(data);
+    //await user.signUpWithCredentials(data);
   };
 
   return (
@@ -78,6 +103,12 @@ function Register() {
                     Password
                   </label>
                   <Text setText={setPassword} />
+                  {isPasswordValid && (
+                    <p className="small text-danger mt-2">
+                      Password should be 8 in characters with uppercase and lowercase
+                      letters and numbers
+                    </p>
+                  )}
                 </div>
                 <div className="my-4">
                   <div className="card bg-light border-0">
@@ -97,8 +128,8 @@ function Register() {
                       className="form-check-input"
                       type="checkbox"
                       id="agree"
-                      value="yes"
-                      onChange={(e) => setAgree(e.target.value)}
+                      checked={agree}
+                      onChange={(e) => setAgree(e.target.checked)}
                     />
                     <label className="form-check-label small" htmlFor="agree">
                       You agree to our terms and conditions

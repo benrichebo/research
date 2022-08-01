@@ -1,11 +1,15 @@
 import React from "react";
 import { MdGroup, MdInsertDriveFile } from "react-icons/md";
 import Spinner from "../../components/ui/Spinner";
-import { useMedia } from "../../hooks/useMedia";
+import { useCrud } from "../../hooks/useCrud";
 
 function Documents() {
-  const { loading, medias, media, error } = useMedia("medias");
-console.log(medias);
+  const { data, loading, oneData, error } = useCrud(
+    "one-documents",
+    `/api/documents/${userData?.id}`
+  );
+  
+  console.log(oneData);
   return (
     <>
       {loading && (
@@ -19,15 +23,15 @@ console.log(medias);
             <h6 className="text-muted">There was an error loading articles</h6>
             <button
               className="btn btn-primary my-3"
-              onClick={() => media.getOneData(`/api/medias/${id}`)}>
+              onClick={() => data.getOneData(`/api/medias/${id}`)}>
               Reload
             </button>
           </div>
         </div>
       )}
-      {medias?.length > 0 && (
+      {oneData?.length > 0 && (
         <div className="my-3 row">
-          {medias?.map((data) => (
+          {oneData?.map((data) => (
             <div className="col-md-3 mb-3" key={data?._id}>
               <a type="button" className="text-decoration-none" download>
                 {data?.type == "document" ? (
@@ -47,7 +51,7 @@ console.log(medias);
           ))}
         </div>
       )}
-      {medias?.length == 0 && (
+      {oneData?.length == 0 && (
         <div className="row mb-4">
           <div
             className="col d-flex justify-content-center align-items-center bg-light"

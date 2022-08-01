@@ -3,7 +3,7 @@ import { connectToDatabase } from "../../../lib/mongodb";
 import { verifyUser } from "../verification";
 
 export default async (req, res) => {
-  const { userId } = await verifyUser(req);
+  const { userId, role } = await verifyUser(req);
 
   const { id } = req.query;
 
@@ -13,15 +13,14 @@ export default async (req, res) => {
     const DOCUMENT = db.collection("documents");
 
     if (req.method == "GET") {
-      const document = await DOCUMENT.findOne({
-        _id: ObjectId(userId),
-        "documents.id": id,
-      });
+      const documents = await DOCUMENT.find({
+        userId: id,
+      }).toArray();
 
-      if (document?.id) {
-        res.status(200).json(document);
+      if (documents?.length > 0) {
+        res.status(200).json(documents);
       } else {
-        res.status(400).json({ info: "there is no invoice" });
+        res.status(400).json({ info: "there are no documents" });
       }
     }
 
