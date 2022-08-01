@@ -79,21 +79,21 @@ function Home() {
               <div className="col-md-7 d-flex align-items-center pt-1 pt-lg-3">
                 <div className="mt-md-1 mt-lg-2">
                   <p className="pulse animated">
-                    Association of researches and planners is US largest
-                    Non-profitable professional association registered under
-                    India Trust Act(1882) meant for research development and
-                    promotion in the field of engineering and technology. ASAR
-                    is a paramount body which has brought technical revolution
-                    and sustainable development of science and technology. The
-                    ASAR-forum constitutes of professional wizards and overseas
-                    technical leaders who have left no stones unturned to
-                    reinforce the field of science, engineering and technology.
-                    The Institute conduct technical conferences, seminars and
-                    workshop at different parts of country to reduce the gap
-                    between curriculum and their practical implementation among
-                    students and research scholars. Today IIERD is one of the
-                    leading publisher of research papers in its high quality
-                    peer reviewed journals, proceeding and research magazine.
+                    The Association for Researcher & Planners exists to nurture
+                    a community of researchers interested in advancing knowledge
+                    and teachable skills in matters relating to Health,
+                    Engineering and Information Communication Technologies. We
+                    provide the platform and singular voice of direction to
+                    enthusiastic intellectuals willing to change the world
+                    through research and findings. The association is strictly
+                    member-based, and each member focuses on original research
+                    and journal publications in our professional disciplines.
+                    Our yearly mega-meetings assemble hundreds of academics,
+                    researchers, graduates, students, industrial researchers and
+                    heads of organizations. Our conferences aim to facilitate
+                    inter-disciplinary research among participants and scholars
+                    and direct research energies with and in collaboration with
+                    Standards, Best practices of macrocosmic research globally.
                   </p>
                 </div>
               </div>
@@ -136,37 +136,60 @@ function Home() {
         <div className="bg-primary">
           <div className="container position-relative mt-5">
             <div className="row pb-5">
-              <div className="col-md-5 py-3 py-lg">
+              <div className="col-md-7 py-3 py-lg px-lg-3">
                 <div>
-                  <h6 className="my-4 fw-bold">OUR EXPERTISE</h6>
-                  <ul className="list-unstyled">
-                    <li
-                      className="mb-2 mb-lg-4"
-                      data-bss-hover-animate="pulse">
-                      Architecture
-                    </li>
-                    <li
-                      className="mb-2 mb-lg-4"
-                      data-bss-hover-animate="pulse">
-                      Real Estate
-                    </li>
-                    <li
-                      className="mb-2 mb-lg-4"
-                      data-bss-hover-animate="pulse">
-                      Interior design
-                    </li>
-                    <li
-                      className="mb-2 mb-lg-4"
-                      data-bss-hover-animate="pulse">
-                      Surveying
-                    </li>
-                  </ul>
+                  <h6 className="my-4 fw-bold">OUR GOALS AND ASSURANCE</h6>
+                  <div className="row">
+                    <div className="col-md-6 mb-2">
+                      <p className="fw-bold mb-0">Skills and development</p>
+                      <p>We commit to research and skills development</p>
+                    </div>
+                    <div className="col-md-6 mb-2">
+                      <p className="fw-bold mb-0">Market analyses</p>
+                      <p>
+                        We commit to engaging in market analysis and early-stage
+                        commercialization of innovative ideas.
+                      </p>
+                    </div>
+                    <div className="col-md-6 mb-2">
+                      <p className="fw-bold mb-0">Research partners</p>
+                      <p>
+                        We commit to bringing together research scientists and
+                        industry partners on projects with commercial potential
+                        to enhance livelihood
+                      </p>
+                    </div>
+                    <div className="col-md-6 mb-2">
+                      <p className="fw-bold mb-0">Improve businesses</p>
+                      <p>
+                        We seek to improve business and industrial performance
+                        and reliability and develop whole-life strategies,
+                        including recycling and reuse.
+                      </p>
+                    </div>
+                    <div className="col-md-6 mb-2">
+                      <p className="fw-bold mb-0">Conferences</p>
+                      <p>
+                        Every quarter, we select a minimum of five (5) committed
+                        members from African countries to represent the
+                        association in European scientific conferences to help
+                        them grow and better develop their careers in research
+                        while expanding their network of comrades
+                      </p>
+                    </div>
+                    <div className="col-md-6 mb-2">
+                      <p className="fw-bold mb-0">Career growth</p>
+                      <p>
+                        We recommend our members for various career improvement
+                        endeavors, e.g. research jobs, travels, and innovative
+                        business investments.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="col-md-7 order-first order-sm-first order-md-last d-flex justify-content-center px-0 px-md-3">
-                <div
-                  className="col-md-8 col-lg-7 col-xl-6"
-                  style={{ marginTop: -120 }}>
+              <div className="col-md-5 order-first order-sm-first order-md-last d-flex justify-content-start px-0 px-md-3">
+                <div className="col-md-9" style={{ marginTop: -120 }}>
                   <img
                     className="img-fluid pulse animated"
                     src="/images/annie-spratt-vGgn0xLdy8s-unsplash.jpg"

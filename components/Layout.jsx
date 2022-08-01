@@ -6,7 +6,7 @@ function Layout({children, title}) {
   return (
     <>
       <Head>
-        <title>{title || "Association of researches and planners"}</title>
+        <title>{title || "Association for researchers and planners"}</title>
         <meta
           name="description"
           content="Research individuals and professionals in the built environment"
