@@ -60,40 +60,41 @@ function ContactUs() {
           <div className="card-group row">
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2">
               <div className="card-body p-md-2 p-xl-3">
-                <h6 className="text-primary card-title mb-2">ADDRESS</h6>
-                <div className="d-flex justify-content-between align-items-center">
-                  <h6 className="fw-normal">ABC 24 STREET MANHATAN</h6>
+                <h6 className="card-title mb-2">ADDRESS</h6>
+                <div className="">
+                  <h6 className="fw-normal">Rosa Luxemburg</h6>
+                  <h6 className="fw-normal">Straat Amsterdam Netherlands</h6>
                 </div>
               </div>
             </div>
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2">
               <div className="card-body p-md-2 p-xl-3">
-                <h6 className="text-dark card-title pb-0">PHONE AND EMAIL</h6>
+                <h6 className="card-title pb-0">PHONE AND EMAIL</h6>
                 <a
                   className="d-flex justify-content-between align-items-center text-decoration-none mb-2"
-                  href="#">
-                  <h6 className="fw-normal mb-0">info@company.com</h6>
+                  href="mailto:info@researchandplanners.eu">
+                  <h6 className="fw-normal mb-0">
+                    info@researchandplanners.eu
+                  </h6>
                   <MdArrowForward size={20} className="ms-3" />
                 </a>
                 <a
                   className="d-flex justify-content-between align-items-center text-decoration-none"
-                  href="#">
-                  <h6 className="fw-normal mb-0">+1(505) 8576 857</h6>
+                  href="tel:+31685119357">
+                  <h6 className="fw-normal mb-0">+31685119357</h6>
                   <MdArrowForward size={20} className="ms-3" />
                 </a>
               </div>
             </div>
             <div className="card col-sm-6 col-md-3 mb-0 rounded-0 py-2">
-              <div className="card-body p-md-2 p-xxl-3">
-                <h6 className="text-primary card-title pb-0">SOCIALS</h6>
-
+              <div className="card-body p-md-2 p-xl-3">
+                <h6 className="card-title pb-0">SOCIALS</h6>
                 <a
                   className="d-flex justify-content-between align-items-center text-decoration-none mb-2"
                   href="#">
                   <h6 className="fw-normal mb-0">LinkedIn&nbsp;</h6>
                   <MdArrowForward size={20} className="ms-3" />
                 </a>
-
                 <a
                   className="d-flex justify-content-between align-items-center text-decoration-none"
                   href="#">

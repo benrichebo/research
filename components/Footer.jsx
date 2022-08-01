@@ -75,36 +75,25 @@ function Footer() {
               <h6 className="text-white fw-bold">About</h6>
               <ul className="list-unstyled">
                 <li className="mb-1">
-                  <a
-                    className="text-decoration-none text-white fs-6"
-                    href="#">
-                    Company
+                  <a className="text-decoration-none text-white fs-6" href="#">
+                    Contact us
                   </a>
                 </li>
                 <li className="mb-1">
                   <a
                     className="link-light text-decoration-none text-white fs-6"
                     href="#">
-                    Team
-                  </a>
-                </li>
-                <li className="mb-1">
-                  <a
-                    className="link-light text-decoration-none text-white fs-6"
-                    href="#">
-                    Legacy
+                    Membership
                   </a>
                 </li>
               </ul>
             </div>
             <div className="col-6 col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-              <h6 className="text-white fw-bold">001 (555) 4658 4758</h6>
+              <h6 className="text-white fw-bold">+31685119357</h6>
               <ul className="list-unstyled">
                 <li>
-                  <a
-                    className="text-decoration-none text-white fs-6"
-                    href="#">
-                    info@company.com
+                  <a className="text-decoration-none text-white fs-6" href="#">
+                    info@researchandplanners.eu
                   </a>
                 </li>
               </ul>

@@ -44,36 +44,49 @@ function Members() {
         </div>
 
         <div className="container mb-5 py-5">
-          <h4 className="text-primary">Who we are</h4>
+          <h4 className="text-primary">What ARP does</h4>
           <article className="mb-4">
             <p class="">
-              Association For Scientific And Academic Research (ASAR) its South
-              Asia largest professional association registered under Indian
-              Trust Act (1882) meet for research development and promotion in
-              the field of engineering and technology. The organisation welcomes
-              applications and professional cv's to be a part and members in its
-              committees,boardand professional societies . ASAR membership
-              offers access to technical innovations, cutting edge information
-              networking opportunities and exclusive membership benefits. Our
-              members supports ASAR to bring a revolution in research and
-              innovation in field of engineering and technology. Members have
-              left no stones unturned to build a platform for academic
-              achievement and research development of our students. ASAR members
-              are engaged in various research development activities and are
-              playing a pioneer role to review the research papers and to make
-              the technical events and conference successful.
+              We ensure ethical research, including opportunities to promote
+              integrity in your members' research and the association's
+              research. Thus our members' research;-
             </p>
+            <ul>
+              <li>Alignment with mission and strategy</li>
+              <li>Market demand for resources</li>
+              <li>Program benefits and liabilities</li>
+              <li>Existing resources provided by external sources</li>
+              <li>
+                Resource requirements (financial and staff resources, expertise,
+                information technology)
+              </li>
+            </ul>
           </article>
           <h4 className="text-primary">What members do</h4>
           <article className="mb-4">
             <p class="">
-              ASAR members are playing a active role by being in the organizing
-              committee of its conferences and events. The professionals having
-              ASAR professional membership have extended full support to the
-              organization by being a activist in the organising committees of
-              our international conferences. ASAR consist of an international
-              advisory board to render best support and guidance to make it an
-              successful and established organisation.
+              As data becomes easier to collect and share, businesses,
+              professionals, and consumers count on data-based research to
+              inform all kinds of decisions. But how can a research user know
+              whether it was performed responsibly and produced reliable
+              results? Education is key to good data management, and
+              associations are uniquely positioned to support that effort. Many
+              associations in the study created resources to address data
+              management issues, including guidelines, standards, and
+              educational programs that provide direct assistance to members
+            </p>
+          </article>
+          <h4 className="text-primary">Diversity</h4>
+          <article className="mb-4">
+            <p class="">
+              We aim to place it as a central concern to assist in publishing,
+              reviewing and quantifying members' performance. Our members
+              perform in the multiplicity of many cultures and perspectives. We
+              are supported by the exclusive talents and insights of our members
+              who work collectively to offer intellectual, integrated
+              information and an appropriate platform. We also consider
+              multiplicity a core driver for modern business systems and
+              research purposes.
             </p>
           </article>
         </div>
