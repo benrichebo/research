@@ -16,15 +16,15 @@ module.exports = {
     CLOUDINARY_API_SECRET: "Cc9w0mgYrq5616bnz3VLuT8ZPzg",
 
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
-      "pk_test_51KJ2r6GNtASg30ngItLdJq3MoLH1kOKIprhk7TcAnNVZGfaXNmwTclJhJ1Rion6VOhBE6aCkEKp3CZvBbqUjXrI900FOglfXRJ",
+      "pk_live_51LOegJHXnfnykrDde7lwFkwrYsgVdc0fHnPwgp7CQhBdowyBf0l0dRzboWofGii9ZsLSnpKQgXwdKi4oxV00ZCOz00YHviOllQ",
     STRIPE_SECRET:
-      "sk_test_51KJ2r6GNtASg30ngmbe3bP0ddONCOvMUBWwhr5j7PDWPE9xVFeMxPxtyMS7F4ZYrLBCU09HFq1LK64IZqE448Zpy00LZdvXeNC",
+      "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",
 
     SERVER_URL: "http://localhost:3000",
 
     SMS_API_KEY: "V1ZNVExweWp5em9qdGJRRG1rYmY=",
     TINY_MCE: "85mw9cftsyryl2jkjosgvgrex99fiehbkjs9ck8keqwt1oyc",
-    PRICE: 10000
+    PRICE: 10000,
   } /* 
   basePath: "/home",
   rewrites: [{source: "/", destination: "/home"}], */,
