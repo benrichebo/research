@@ -54,7 +54,7 @@ function Register() {
     console.log(data)
 
     //go to stripe
-    //await user.signUpWithCredentials(data);
+    await user.signUpWithCredentials(data);
   };
 
   return (
